@@ -1,0 +1,52 @@
+/* 
+    style1.css is created for the designing changes made in the Dashboard of Agency
+*/
+.header-navbar.navbar-semi-dark .navbar-header {
+    background: brown !important;
+}
+
+.main-menu.menu-dark {
+    color: #fff !important;
+    background: darkred !important;
+}
+
+.main-menu.menu-dark .main-menu-header .menu-search {
+    padding: 0.5rem 1rem !important;
+    color: white !important;
+    background: white !important;
+}
+
+.main-menu.menu-dark .navigation {
+    background: brown !important;
+}
+
+.main-menu.menu-dark .navigation > li.hover > a, .main-menu.menu-dark .navigation > li:hover > a, .main-menu.menu-dark .navigation > li.active > a {
+    color: #c3c3c3 !important;
+    background-color: #620000 !important;
+}
+.main-menu.menu-dark .navigation > li.open > a {
+    color: #c3c3c3;
+    background: brown !important;
+}
+
+.main-menu.menu-dark .navigation > li ul li > a {
+    background: #8f2525 !important;
+}
+
+.main-menu.menu-dark .navigation > li ul li > a:hover{
+    background: #620000 !important;
+}
+
+.main-menu.menu-dark .navigation > li > a {
+    padding: 14px 20px !important;
+    border-bottom: 1px solid darkred !important;
+}
+
+ul.nav.nav-pills {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #967adc;
+}
+
+.nav-pills .nav-link {
+    border: 1px solid;
+}
