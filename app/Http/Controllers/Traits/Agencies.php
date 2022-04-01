@@ -29,6 +29,7 @@ trait Agencies
             "entityType" => "required",
             "entityName" => "required",
         ]);
+        
         $agency = new Agency;
         $newID = new Param();
         $workflowInitiator = Workflow::where('WorkflowID', '4')->first();

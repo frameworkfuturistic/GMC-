@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUDA Advertisement Applications</title>
+    <base href="/">
     <!-- bootstrap css -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- google font anton -->
@@ -36,7 +37,11 @@
      <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button" style="background: #007050;height: 65px;">
                 <div class="container"><a class="navbar-brand" href="/">Government of Jharkhand</a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div id="navcol-1" class="collapse navbar-collapse">
-                        <ul class="navbar-nav me-auto"></ul><span class="navbar-text actions"><a class="btn btn-light action-button" role="button" href="{{ Route('login')}}"><i class="fa fa-sign-in fa-sm"></i> Login</a></span>
+                        <ul class="navbar-nav me-auto"></ul>
+                        <span class="navbar-text actions">
+                            <a class="btn btn-light action-button" role="button" href="{{ url('api/hoardingLogin')}}"><i class="fa fa-sign-in fa-sm"></i> Hoarding Survey</a>
+                            <a class="btn btn-light action-button" role="button" href="{{ Route('login')}}"><i class="fa fa-sign-in fa-sm"></i> Login</a>
+                        </span>
                     </div>
                 </div>
             </nav>

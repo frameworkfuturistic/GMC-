@@ -45,6 +45,7 @@ class Kernel extends HttpKernel
             //  for sectrum authenticate through API
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
         ],
     ];
 

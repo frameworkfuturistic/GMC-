@@ -331,6 +331,11 @@ p.card-text {
     color: #FFFFFF;
 }
 
+span#addon-wrapping {
+    background: #00ab80;
+    color: white;
+}
+
 /* desktop view css */
 @media only screen and (min-width: 768px) {
     .myform {
