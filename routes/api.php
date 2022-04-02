@@ -88,5 +88,12 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key']], function ()
     Route::post('checkLogin',[SurveyController::class,'checkLogin']);
 
     Route::post('AddSurveyHoarding',[SurveyController::class,'AddSurveyHoarding']);
+    Route::post('addSurveyShop',[SurveyController::class,'addSurveyShop']);
+
+    Route::get('getSurveyHoarding',[SurveyController::class,'getSurveyHoarding']);
+    Route::get('getSurveyShops',[SurveyController::class,'getSurveyShop']);
+
+    Route::post('updateSurveyHoarding',[SurveyController::class,'updateSurveyHoarding']);
+    Route::post('updateSurveyShop',[SurveyController::class,'updateSurveyShop']);
     // Hoarding Survey
 });

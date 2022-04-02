@@ -42,10 +42,12 @@ class Kernel extends HttpKernel
         'api' => [
             // For sectrum authenticate through API
              \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+             \Illuminate\Session\Middleware\StartSession::class,
+             \Laravel\Jetstream\Http\Middleware\AuthenticateSession::class,
+             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             //  for sectrum authenticate through API
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-
         ],
     ];
 
