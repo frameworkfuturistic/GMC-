@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\OTPController;
-use App\http\Controllers\AdminController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\BanquetController;
 use App\Http\Controllers\DharmasalaController;
 use App\Http\Controllers\HostelController;
-use App\http\Controllers\PrivateLandController;
+use App\Http\Controllers\PrivateLandController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 

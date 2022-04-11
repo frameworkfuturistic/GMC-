@@ -20,7 +20,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
     <!-- patue ones -->
     <!-- font awesome css -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <!-- font awesome css -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Latest compiled and minified CSS -->
@@ -28,24 +29,26 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- mycss -->
     @yield('mycss')
-    
+
 </head>
 
 <body>
     <!-- header -->
-     <!-- navbar  -->
-     <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button" style="background: #007050;height: 65px;">
-                <div class="container"><a class="navbar-brand" href="/">Government of Jharkhand</a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                    <div id="navcol-1" class="collapse navbar-collapse">
-                        <ul class="navbar-nav me-auto"></ul>
-                        <span class="navbar-text actions">
-                            <a class="btn btn-light action-button" role="button" href="{{ url('api/hoardingLogin')}}"><i class="fa fa-sign-in fa-sm"></i> Hoarding Survey</a>
-                            <a class="btn btn-light action-button" role="button" href="{{ Route('login')}}"><i class="fa fa-sign-in fa-sm"></i> Login</a>
-                        </span>
-                    </div>
-                </div>
-            </nav>
-            <!-- navbar -->
+    <!-- navbar  -->
+    <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button" style="background: #007050;height: 65px;">
+        <div class="container"><a class="navbar-brand" href="/">Government of Jharkhand</a><button
+                class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
+                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div id="navcol-1" class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto"></ul>
+                <span class="navbar-text actions">
+                    <a class="btn btn-light action-button" role="button" href="{{ Route('login')}}"><i
+                            class="fa fa-sign-in fa-sm"></i> Login</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar -->
     <div class="container header">
         <div>
             <div class="row">
@@ -55,7 +58,7 @@
 
                 <div class="col-md-10">
                     <h2 class="heading-text">
-                        Urban Development and Housing Department 
+                        Urban Development and Housing Department
                     </h2>
                 </div>
             </div>
@@ -129,4 +132,5 @@
 <!-- jquery select2 -->
 <!-- jquery cdn -->
 @yield('myscript')
+
 </html>

@@ -48,9 +48,11 @@ class SurveyController extends Controller
         $save = $user->save();
 
         if ($save) {
-            return back()->with('success', 'Please Login to Continue');
+            $response = ['status' => true, 'message' => 'Please Login to Continue'];
+            return response($response, 200);
         } else {
-            return back()->with('fail', 'Something went wrong, try again later');
+            $response = ['status' => false, 'message' => 'Something went wrong, try again later'];
+            return response($response, 500);
         }
     }
 
@@ -65,13 +67,17 @@ class SurveyController extends Controller
 
         $userinfo = surveyLogin::where('email', '=', $request->email)->first();
         if (!$userinfo) {
-            return back()->with('fail', 'We do not recognize your email address');
+            $response = ['status' => false, 'message' => 'Oops! Given email does not exist'];
+            return response($response, 401);
         } else {
             if (Hash::check($request->password, $userinfo->password)) {
                 $request->session()->put('LoggedUser', $userinfo->id);
-                return $userinfo->token;
+                $token = $userinfo->token;
+                $response = ['status' => true, 'message' => $token];
+                return response($response, 200);
             } else {
-                return back()->with('fail', 'Incorrect Password');
+                $response=['status'=>false,'message'=>'Incorrect Password'];
+                return response($response, 401);
             }
         }
     }
@@ -105,7 +111,7 @@ class SurveyController extends Controller
         $surveyHoarding->Length = $request->length;
         $surveyHoarding->Width = $request->width;
         $surveyHoarding->hoardingType = $request->hoardingType;
-        $surveyHoarding->UserID=$tokenID['LoggedUserInfo']['token'];
+        $surveyHoarding->UserID = $tokenID['LoggedUserInfo']['token'];
 
         // Upload Documents
 
@@ -181,14 +187,14 @@ class SurveyController extends Controller
     public function getSurveyHoarding()
     {
         $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = SurveyHoarding::where('UserID','=',$tokenID['LoggedUserInfo']['token'])->get();
+        $data = SurveyHoarding::where('UserID', '=', $tokenID['LoggedUserInfo']['token'])->get();
         return $data;
     }
 
     public function getSurveyShop()
     {
         $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::where('UserID','=',$tokenID['LoggedUserInfo']['token'])->get();
+        $data = surveyShop::where('UserID', '=', $tokenID['LoggedUserInfo']['token'])->get();
         return $data;
     }
 

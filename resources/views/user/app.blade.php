@@ -52,7 +52,6 @@
 
 <body data-open="click" data-menu="vertical-menu" data-col="2-columns"
     class="vertical-layout vertical-menu 2-columns  fixed-navbar">
-
     <!-- navbar-fixed-top-->
     <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
         <div class="navbar-wrapper">
@@ -61,15 +60,10 @@
                     <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a
                             class="nav-link nav-menu-main menu-toggle hidden-xs"><i
                                 class="icon-menu5 font-large-1"></i></a></li>
-                    <li class="nav-item"><a href="/dashboard" class="navbar-brand nav-link">
-                            <!-- <img src="img/RMC_LOGO.png" alt="" class="brand-logo"> -->
+                    <li class="nav-item"><a href="rnc/user/Dashboard" class="navbar-brand nav-link">
                             <h3 class="rmc_hoarding brand-logo">RMC</h3>
-                            <!-- <img alt="branding logo"
-                                src="admin_dash/app-assets/images/logo/robust-logo-light.png"
-                                data-expand="admin_dash/app-assets/images/logo/robust-logo-light.png"
-                                data-collapse="admin_dash/app-assets/images/logo/robust-logo-small.png"
-                                class="brand-logo"> -->
-                        </a></li>
+                        </a>
+                    </li>
                     <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse"
                             data-target="#navbar-mobile" class="nav-link open-navbar-container"><i
                                 class="icon-ellipsis pe-2x icon-icon-rotate-right-right"></i></a></li>
@@ -78,9 +72,16 @@
             <div class="navbar-container content container-fluid">
                 <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
                     <ul class="nav navbar-nav">
+                        <li class="nav-item hidden-sm-down">
+                            <a href="{{ url()->previous() }}" class="nav-link nav-link-expand">
+                                <i class="ficon icon-arrow-circle-left"></i>
+                            </a>
+                        </li>
                         <li class="nav-item hidden-sm-down"><a href="{{ url()->previous() }}"
-                                class="btn btn-success upgrade-to-pro">RANCHI MUNICIPAL CORPORATION, MARKETING
-                                SECTION</a></li>
+                                class="btn btn-success upgrade-to-pro">
+                                RANCHI MUNICIPAL CORPORATION, MARKETING
+                                SECTION</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav float-xs-right">
                         <li class="dropdown dropdown-user nav-item"><a href="#" data-toggle="dropdown"
