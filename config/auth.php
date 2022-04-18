@@ -40,9 +40,17 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'survey_logins',
+            'storage_key' => 'token',
+            'input_key' => 'token',
+            'hash' => false,
+        ],
     ],
 
-    /*
+    /* 
     |--------------------------------------------------------------------------
     | User Providers
     |--------------------------------------------------------------------------
@@ -63,6 +71,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'survey_logins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\surveyLogin::class,
         ],
 
         // 'users' => [

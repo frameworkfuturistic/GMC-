@@ -10,19 +10,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class SurveyController extends Controller
+
+class SurveyController extends controller
 {
-    public function login()
-    {
-        return view('hoardingSurvey.login');
-    }
 
-    public function register()
-    {
-        return view('hoardingSurvey.register');
-    }
-
-    public function save(Request $request)
+    public function saveSurveyUser(Request $request)
     {
         //dd($request->all());
 
@@ -71,10 +63,18 @@ class SurveyController extends Controller
             return response($response, 401);
         } else {
             if (Hash::check($request->password, $userinfo->password)) {
-                $request->session()->put('LoggedUser', $userinfo->id);
-                $token = $userinfo->token;
-                $response = ['status' => true, 'message' => $token];
-                return response($response, 200);
+                $generateToken=new surveyLogin;
+                //$token=$generateToken->tokenGenerate();
+                $token = $userinfo->createToken('my-app-token')->plainTextToken;
+               // $token = $request->user()->createToken($request->password);
+                // $token=$userinfo->createToken($request->password)->plainTextToken;
+                $userinfo->token=$token;
+                $userinfo->save();
+
+                // $response1 = $client->request('GET', '/api/addSurveyShop?token='.$token);
+
+                $response = ['status' => true, 'token' => $token];
+                return response($response, 201);
             } else {
                 $response=['status'=>false,'message'=>'Incorrect Password'];
                 return response($response, 401);
@@ -84,61 +84,70 @@ class SurveyController extends Controller
 
     public function AddSurveyHoarding(Request $request)
     {
+        if($request->bearerToken()==false){
+            return response()->json([
+                'status' => false,
+                'message' => 'No Bearer Token',
+             ], 400);
+        }
+        else{
         // dd($request->all());
         // Validation
-        $validator = Validator::make($request->all(), [
-            'hoardingLocation' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-            'image1' => 'required',
-            'image2' => 'required',
-            'length' => 'required',
-            'width' => 'required',
-            'hoardingType' => 'required',
-        ]);
+            $validator = Validator::make($request->all(), [
+                'hoardingLocation' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+                'image1' => 'required',
+                'image2' => 'required',
+                'length' => 'required',
+                'width' => 'required',
+                'hoardingType' => 'required',
+            ]);
 
-        if ($validator->fails()) {
-            $error = $validator->errors()->first();
-            $response = ['status' => false, 'message' => $error];
-            return response($response, 200);
-        }
-        $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
+            if ($validator->fails()) {
+                $error = $validator->errors()->first();
+                $response = ['status' => false, 'message' => $error];
+                return response($response, 200);
+            }
+            // $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
 
-        $surveyHoarding = new surveyHoarding;
-        $surveyHoarding->hoardingLocation = $request->hoardingLocation;
-        $surveyHoarding->Longitude = $request->longitude;
-        $surveyHoarding->Latitude = $request->latitude;
-        $surveyHoarding->Length = $request->length;
-        $surveyHoarding->Width = $request->width;
-        $surveyHoarding->hoardingType = $request->hoardingType;
-        $surveyHoarding->UserID = $tokenID['LoggedUserInfo']['token'];
+            $surveyHoarding = new surveyHoarding;
+            $surveyHoarding->hoardingLocation = $request->hoardingLocation;
+            $surveyHoarding->Longitude = $request->longitude;
+            $surveyHoarding->Latitude = $request->latitude;
+            $surveyHoarding->Length = $request->length;
+            $surveyHoarding->Width = $request->width;
+            $surveyHoarding->hoardingType = $request->hoardingType;
+            $surveyHoarding->UserID = auth()->user()->id;
 
-        // Upload Documents
+            // Upload Documents
 
-        $image1 = $request->image1;
-        if ($image1) {
-            $image1Name = time() . '.' . $image1->getClientOriginalName();
-            $request->image1->move('surveyFiles', $image1Name);
-            $surveyHoarding->Image1 = 'surveyFiles/' . $image1Name;
-        }
+            $image1 = $request->image1;
+            if ($image1) {
+                $image1Name = time() . '.' . $image1->getClientOriginalName();
+                $request->image1->move('surveyFiles', $image1Name);
+                $surveyHoarding->Image1 = 'surveyFiles/' . $image1Name;
+            }
 
-        $image2 = $request->image2;
-        if ($image2) {
-            $image2Name = time() . '.' . $image2->getClientOriginalName();
-            $request->image2->move('surveyFiles', $image2Name);
-            $surveyHoarding->Image2 = 'surveyFiles/' . $image2Name;
-        }
+            $image2 = $request->image2;
+            if ($image2) {
+                $image2Name = time() . '.' . $image2->getClientOriginalName();
+                $request->image2->move('surveyFiles', $image2Name);
+                $surveyHoarding->Image2 = 'surveyFiles/' . $image2Name;
+            }
 
-        // Upload Documents
-        $save = $surveyHoarding->save();
+            // Upload Documents
+            $save = $surveyHoarding->save();
 
-        if ($save) {
-            $response = ['status' => true, 'message' => 'Successfully Saved The Data'];
-            return response($response, 200);
-        } else {
-            $response = ['status' => false, 'message' => 'Oops! Something Went Wrong'];
-            return response($response, 200);
-        }
+            if ($save) {
+                $response = ['status' => true, 'message' => 'Successfully Saved The Data'];
+                return response($response, 200);
+            } else {
+                $response = ['status' => false, 'message' => 'Oops! Something Went Wrong'];
+                return response($response, 200);
+            }
+
+    }
     }
 
     public function addSurveyShop(Request $request)
@@ -146,14 +155,14 @@ class SurveyController extends Controller
         //dd($request->all());
 
         $shop = new surveyShop;
-        $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
         $shop->AreaName = $request->areaName;
         $shop->Landmark = $request->landmark;
         $shop->Address = $request->address;
         $shop->Owner = $request->owner;
         $shop->Latitude = $request->latitude;
-        $shop->Longitude = $request->longitude;
-        $shop->UserID = $tokenID['LoggedUserInfo']['token'];
+        $shop->Longitude = $request->longitude;      
+
+        $shop->UserID=auth()->user()->id;
 
         // Upload Documents
 
@@ -184,18 +193,69 @@ class SurveyController extends Controller
         }
     }
 
-    public function getSurveyHoarding()
+    public function getSurveyHoarding(Request $request)
     {
-        $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = SurveyHoarding::where('UserID', '=', $tokenID['LoggedUserInfo']['token'])->get();
-        return $data;
+            if($request->bearerToken()==false){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'No Bearer Token',
+                 ], 400);
+            }
+
+            else{
+                $data=SurveyHoarding::where('UserID','=',auth()->user()->id)->get();
+            
+                if($data){
+                    $response = ['status' => true, 'data' => $data];
+                    return response($response,200);
+                }
+                else{
+                    $response = ['status' => false, 'message' => 'No Data'];
+                    return response($response, 404);
+                }
+            }
+    }
+
+    public function getAllSurveyHoarding()
+    {
+        $data=SurveyHoarding::all();
+        
+        if($data){
+            $response = ['status' => true, 'data' => $data];
+            return response($response,200);
+        }
+        else{
+            $response = ['status' => false, 'message' => 'No Data'];
+            return response($response, 404);
+        }
     }
 
     public function getSurveyShop()
     {
-        $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::where('UserID', '=', $tokenID['LoggedUserInfo']['token'])->get();
-        return $data;
+        //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
+        $data = surveyShop::where('UserID','=',auth()->user()->id)->get();
+        if($data){
+            $response = ['status' => true, 'data' => $data];
+            return response($response,200);
+        }
+        else{
+            $response = ['status' => false, 'message' => 'No Data'];
+            return response($response, 404);
+        }
+    }
+
+    public function getAllSurveyShop()
+    {
+        //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
+        $data = surveyShop::all();
+        if($data){
+            $response = ['status' => true, 'data' => $data];
+            return response($response,200);
+        }
+        else{
+            $response = ['status' => false, 'message' => 'No Data'];
+            return response($response, 404);
+        }
     }
 
     // update Survey Hoarding
@@ -222,7 +282,7 @@ class SurveyController extends Controller
         }
 
         $surveyHoarding = surveyHoarding::find($request->id);
-        $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
+        // $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
 
         $surveyHoarding->hoardingLocation = $request->hoardingLocation;
         $surveyHoarding->Longitude = $request->longitude;
@@ -230,7 +290,7 @@ class SurveyController extends Controller
         $surveyHoarding->Length = $request->length;
         $surveyHoarding->Width = $request->width;
         $surveyHoarding->hoardingType = $request->hoardingType;
-        $surveyHoarding->UserID = $tokenID['LoggedUserInfo']['token'];
+        $surveyHoarding->UserID = auth()->user()->id;
         // return $tokenID->token;
 
         // Upload Documents
@@ -283,14 +343,14 @@ class SurveyController extends Controller
         }
 
         $shop = surveyShop::find($request->id);
-        $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
+        // $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
         $shop->AreaName = $request->areaName;
         $shop->Landmark = $request->landmark;
         $shop->Address = $request->address;
         $shop->Owner = $request->owner;
         $shop->Latitude = $request->latitude;
         $shop->Longitude = $request->longitude;
-        $shop->UserID = $tokenID['LoggedUserInfo']['token'];
+        $shop->UserID = auth()->user()->id;
 
         // Upload Documents
 

@@ -74,6 +74,14 @@ Route::get('rnc/updateadvetApproved/{id}', [AdminController::class, 'updateAdvet
 Route::get('rnc/advetRejected', [AdminController::class, 'advetRejected']);
 Route::get('rnc/updateadvetRejected/{id}', [AdminController::class, 'updateAdvetRejected']);
 // Self Advet
+// Self advet
+Route::post('rnc/addSelfAdvet', [AdminController::class, 'saveSelfAdvet']);
+Route::put('rnc/updateSelfAdvet/{id}', [AdminController::class, 'updateSelfAdvet']);
+Route::put('rnc/InboxWorkflow/{id}', [AdminController::class, 'SelfAdvetInboxWorkflow']);
+Route::post('rnc/inboxComment/{id}', [AdminController::class, 'addComment']);
+Route::put('rnc/updatePmt/{id}', [AdminController::class, 'updatePmt']);
+// Self Advet
+
 
 // Private Land
 Route::get('rnc/LandAdvetInbox', [PrivateLandController::class, 'LandAdvetInbox']);
@@ -88,6 +96,12 @@ Route::get('rnc/updateLandApproved/{id}', [PrivateLandController::class, 'update
 Route::get('rnc/landRejected', [PrivateLandController::class, 'landRejected']);
 Route::get('rnc/updateLandRejected/{id}', [PrivateLandController::class, 'updateLandRejected']);
 // Private Land
+ // Private Land
+ Route::post('rnc/addPrivateLand', [PrivateLandController::class, 'savePrivateLand']);
+ Route::put('rnc/updatePrivateLand/{id}', [PrivateLandController::class, 'UpdateLand']);
+ Route::put('rnc/PrivateLandWorkflow/{id}', [PrivateLandController::class, 'PrivateLandWorkflow']);
+ Route::post('rnc/LandInboxComment/{id}', [PrivateLandController::class, 'addComment']);
+ // Private Land
 
 // VEHICLE 
 Route::get('rnc/vehicleInbox', [VehicleController::class, 'vehicleInbox']);
@@ -98,6 +112,12 @@ Route::get('rnc/vehicleApproved', [VehicleController::class, 'vehicleApproved'])
 Route::get('rnc/updateVehicleApproved/{id}', [VehicleController::class, 'updateVehicleApproved']);
 Route::get('rnc/vehicleRejected', [VehicleController::class, 'vehicleRejected']);
 Route::get('rnc/updateVehicleRejected/{id}', [VehicleController::class, 'updateVehicleRejected']);
+// VEHICLE
+// VEHICLE
+Route::post('rnc/addVehicleAdvet', [VehicleController::class, 'saveVehicleAdvet']);
+Route::put('rnc/updateVehicle/{id}', [VehicleController::class, 'UpdateVehicle']);
+Route::put('rnc/vehicleWorkflow/{id}', [VehicleController::class, 'vehicleWorkflow']);
+Route::post('rnc/VehicleInboxComment/{id}', [VehicleController::class, 'addComment']);
 // VEHICLE
 
 // MARRIAGE/ BANQUET HALL
@@ -110,6 +130,12 @@ Route::get('rnc/updateBanquetApproved/{id}', [BanquetController::class, 'updateB
 Route::get('rnc/banquetRejected', [BanquetController::class, 'banquetRejected']);
 Route::get('rnc/updateBanquetRejected/{id}', [BanquetController::class, 'updateBanquetRejected']);
 // MARRIAGE/BANQUET HALL
+ // MARRIGE/ BANQUET HALL
+ Route::post('rnc/addBanquet', [BanquetController::class, 'saveBanquet']);
+ Route::put('rnc/updateBanquet/{id}', [BanquetController::class, 'updateBanquet']);
+ Route::put('rnc/banquetWorkflow/{id}', [BanquetController::class, 'banquetWorkflow']);
+ Route::post('rnc/banquetInboxComment/{id}', [BanquetController::class, 'addComment']);
+ // MARRIAGE/ BANQUET HALL
 
 // HOSTEL
 Route::get('rnc/hostelInbox', [HostelController::class, 'hostelInbox']);
@@ -121,6 +147,12 @@ Route::get('rnc/updateHostelApproved/{id}', [HostelController::class, 'updateHos
 Route::get('rnc/hostelRejected', [HostelController::class, 'hostelRejected']);
 Route::get('rnc/updateHostelRejected/{id}', [HostelController::class, 'updateHostelRejected']);
 // HOSTEL
+// HOSTEL/LODGE
+Route::post('rnc/addHostel', [HostelController::class, 'saveHostel']);
+Route::put('rnc/updatehostel/{id}', [HostelController::class, 'updateHostel']);
+Route::put('rnc/hostelWorkflow/{id}', [HostelController::class, 'hostelWorkflow']);
+Route::post('rnc/hostelInboxComment/{id}', [HostelController::class, 'addComment']);
+// HOSTEL/LODGE
 
 // DHARMSALA
 Route::get('rnc/dharmasalaInbox', [DharmasalaController::class, 'dharmasalaInbox']);
@@ -132,6 +164,12 @@ Route::get('rnc/updateDharmasalaApproved/{id}', [DharmasalaController::class, 'u
 Route::get('rnc/dharmasalaRejected', [DharmasalaController::class, 'dharmasalaRejected']);
 Route::get('rnc/updateDharmasalaRejected/{id}', [DharmasalaController::class, 'updateDharmasalaRejected']);
 // DHARMSALA
+// DHARMASALA
+Route::post('rnc/addDharmasala', [DharmasalaController::class, 'saveDharmasala']);
+Route::put('rnc/updatedharmasala/{id}', [DharmasalaController::class, 'updateDharmasala']);
+Route::put('rnc/dharmasalaWorkflow/{id}', [DharmasalaController::class, 'dharmasalaWorkflow']);
+Route::post('rnc/dharmasalaInboxComment/{id}', [DharmasalaController::class, 'addComment']);
+// DHARMASALA
 
 // AGENCY
 Route::get('rnc/agencyInbox', [AgencyController::class, 'Inbox']);
@@ -142,6 +180,12 @@ Route::get('rnc/agencyApproved',[AgencyController::class,'agencyApproved']);
 Route::get('rnc/updateApproved/{id}',[AgencyController::class,'updateApproved']);
 Route::get('rnc/agencyRejected',[AgencyController::class,'agencyRejected']);
 Route::get('rnc/updateRejected/{id}',[AgencyController::class,'updateRejected']);
+// AGENCY
+// AGENCY
+Route::post('rnc/addAgency', [AgencyController::class, 'addAgency']);
+Route::put('rnc/updateAgency/{id}',[AgencyController::class,'updateAgency']);
+Route::post('rnc/agencyInboxComment/{id}',[AgencyController::class,'addComment']);
+Route::put('rnc/agencyWorkflow/{id}',[AgencyController::class,'agencyWorkflow']);
 // AGENCY
 
 
