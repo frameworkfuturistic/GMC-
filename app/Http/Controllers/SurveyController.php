@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Param;
 use App\Models\surveyHoarding;
 use App\Models\surveyLogin;
 use App\Models\surveyShop;
@@ -9,42 +10,49 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
-
-class SurveyController extends controller
+class SurveyController extends Controller
 {
 
     public function saveSurveyUser(Request $request)
     {
         //dd($request->all());
-
+        $allowUser = Param::select('AllowCreateUser')
+                    ->get()->first();
+        //return $allowUser;
         // validate requests
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:survey_logins',
-            'password' => 'required|min:5',
-        ]);
+        if ($allowUser->AllowCreateUser == "1") {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email|unique:survey_logins',
+                'password' => 'required|min:5',
+            ]);
 
-        if ($validator->fails()) {
-            $error = $validator->errors()->first();
-            $response = ['status' => false, 'message' => $error];
-            return response($response, 200);
-        }
+            if ($validator->fails()) {
+                $error = $validator->errors()->first();
+                $response = ['status' => false, 'message' => $error];
+                return response($response, 200);
+            }
+            $user = new surveyLogin;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $token = Str::random(80);
+            // $token = $user->createToken('my-app-token')->plainTextToken;
+            $user->token = $token;
+            $save = $user->save();
 
-        $user = new surveyLogin;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $token = Str::random(80);
-        $user->token = $token;
-        $save = $user->save();
-
-        if ($save) {
-            $response = ['status' => true, 'message' => 'Please Login to Continue'];
-            return response($response, 200);
+            if ($save) {
+                $response = ['status' => true, 'message' => 'Please Login to Continue'];
+                return response($response, 200);
+            } else {
+                $response = ['status' => false, 'message' => 'Something went wrong, try again later'];
+                return response($response, 500);
+            }
         } else {
-            $response = ['status' => false, 'message' => 'Something went wrong, try again later'];
-            return response($response, 500);
+            $response = ['status' => false, 'message' => 'UnAuthorized'];
+            return response($response, 401);
         }
     }
 
@@ -63,20 +71,14 @@ class SurveyController extends controller
             return response($response, 401);
         } else {
             if (Hash::check($request->password, $userinfo->password)) {
-                $generateToken=new surveyLogin;
-                //$token=$generateToken->tokenGenerate();
                 $token = $userinfo->createToken('my-app-token')->plainTextToken;
-               // $token = $request->user()->createToken($request->password);
-                // $token=$userinfo->createToken($request->password)->plainTextToken;
-                $userinfo->token=$token;
+                $userinfo->token = $token;
                 $userinfo->save();
-
-                // $response1 = $client->request('GET', '/api/addSurveyShop?token='.$token);
 
                 $response = ['status' => true, 'token' => $token];
                 return response($response, 201);
             } else {
-                $response=['status'=>false,'message'=>'Incorrect Password'];
+                $response = ['status' => false, 'message' => 'Incorrect Password'];
                 return response($response, 401);
             }
         }
@@ -84,15 +86,14 @@ class SurveyController extends controller
 
     public function AddSurveyHoarding(Request $request)
     {
-        if($request->bearerToken()==false){
+        if ($request->bearerToken() == false) {
             return response()->json([
                 'status' => false,
                 'message' => 'No Bearer Token',
-             ], 400);
-        }
-        else{
-        // dd($request->all());
-        // Validation
+            ], 400);
+        } else {
+            // dd($request->all());
+            // Validation
             $validator = Validator::make($request->all(), [
                 'hoardingLocation' => 'required',
                 'longitude' => 'required',
@@ -147,7 +148,7 @@ class SurveyController extends controller
                 return response($response, 200);
             }
 
-    }
+        }
     }
 
     public function addSurveyShop(Request $request)
@@ -160,9 +161,9 @@ class SurveyController extends controller
         $shop->Address = $request->address;
         $shop->Owner = $request->owner;
         $shop->Latitude = $request->latitude;
-        $shop->Longitude = $request->longitude;      
+        $shop->Longitude = $request->longitude;
 
-        $shop->UserID=auth()->user()->id;
+        $shop->UserID = auth()->user()->id;
 
         // Upload Documents
 
@@ -195,36 +196,49 @@ class SurveyController extends controller
 
     public function getSurveyHoarding(Request $request)
     {
-            if($request->bearerToken()==false){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'No Bearer Token',
-                 ], 400);
-            }
+        if ($request->bearerToken() == false) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No Bearer Token',
+            ], 400);
+        } else {
+            $data = SurveyHoarding::where('UserID', '=', auth()->user()->id)->get()->first();
 
-            else{
-                $data=SurveyHoarding::where('UserID','=',auth()->user()->id)->get();
-            
-                if($data){
-                    $response = ['status' => true, 'data' => $data];
-                    return response($response,200);
-                }
-                else{
-                    $response = ['status' => false, 'message' => 'No Data'];
-                    return response($response, 404);
-                }
+            if ($data) {
+                $data->Image1=url('/').'/'.$data->Image1;
+                $data->Image2=url('/').'/'.$data->Image2;
+                $response = ['status' => true, 'data' => $data];
+                return response($response, 200);
+            } else {
+                $response = ['status' => false, 'message' => 'No Data'];
+                return response($response, 404);
             }
+        }
+    }
+
+    public function getSurveyHoardingByID(Request $request){
+        $data=SurveyHoarding::where('id','=',$request->id)->get()->first();
+        if ($data) {
+            $data->Image1=url('/').'/'.$data->Image1;
+            $data->Image2=url('/').'/'.$data->Image2;
+            $response = ['status' => true, 'data' => $data];
+            return response($response, 200);
+        } else {
+            $response = ['status' => false, 'message' => 'No Data'];
+            return response($response, 404);
+        }
     }
 
     public function getAllSurveyHoarding()
     {
-        $data=SurveyHoarding::all();
-        
-        if($data){
+        $data = SurveyHoarding::all()->first();
+
+        if ($data) {
+            $data->Image1=url('/').'/'.$data->Image1;
+            $data->Image2=url('/').'/'.$data->Image2;
             $response = ['status' => true, 'data' => $data];
-            return response($response,200);
-        }
-        else{
+            return response($response, 200);
+        } else {
             $response = ['status' => false, 'message' => 'No Data'];
             return response($response, 404);
         }
@@ -233,12 +247,26 @@ class SurveyController extends controller
     public function getSurveyShop()
     {
         //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::where('UserID','=',auth()->user()->id)->get();
-        if($data){
+        $data = surveyShop::where('UserID', '=', auth()->user()->id)->get()->first();
+        if ($data) {
+            $data->Image1=url('/').'/'.$data->Image1;
+            $data->Image2=url('/').'/'.$data->Image2;
             $response = ['status' => true, 'data' => $data];
-            return response($response,200);
+            return response($response, 200);
+        } else {
+            $response = ['status' => false, 'message' => 'No Data'];
+            return response($response, 404);
         }
-        else{
+    }
+
+    public function getSurveyShopByID(Request $request){
+        $data=surveyShop::where('id','=',$request->id)->get()->first();
+        if ($data) {
+            $data->Image1=url('/').'/'.$data->Image1;
+            $data->Image2=url('/').'/'.$data->Image2;
+            $response = ['status' => true, 'data' => $data];
+            return response($response, 200);
+        } else {
             $response = ['status' => false, 'message' => 'No Data'];
             return response($response, 404);
         }
@@ -247,12 +275,14 @@ class SurveyController extends controller
     public function getAllSurveyShop()
     {
         //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::all();
-        if($data){
+        $data = surveyShop::select('id','AreaName','Landmark','Address','Owner','Latitude','Longitude','Image1','Image2','UserID')
+                            ->get()->first();
+        if ($data) {
+            $data->Image1=url('/').'/'.$data->Image1;
+            $data->Image2=url('/').'/'.$data->Image2;
             $response = ['status' => true, 'data' => $data];
-            return response($response,200);
-        }
-        else{
+            return response($response, 200);
+        } else {
             $response = ['status' => false, 'message' => 'No Data'];
             return response($response, 404);
         }

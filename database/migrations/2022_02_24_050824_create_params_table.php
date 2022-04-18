@@ -63,6 +63,7 @@ class CreateParamsTable extends Migration
             $table->mediumText('HoardingSignPath')->nullable();
             $table->mediumText('DharamshalaSignPath')->nullable();
             $table->mediumText('CurrentFinancialYear')->nullable();
+            $table->mediumText('AllowCreateUser')->nullable();
             $table->timestamps();
         });
     }

@@ -19,8 +19,4 @@ class surveyLogin extends Authenticatable
         'password'
     ];
 
-    public function tokenGenerate(){
-        $token = Str::random(80);
-        return $token;
-    }
 }
