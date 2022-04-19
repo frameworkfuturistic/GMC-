@@ -75,7 +75,7 @@ class SurveyController extends Controller
                 $userinfo->save();
 
                 $response = ['status' => true, 'token' => $token];
-                return response($response, 201);
+                return response($response, 200);
             } else {
                 $response = ['status' => false, 'message' => 'Incorrect Password'];
                 return response($response, 401);
@@ -153,6 +153,22 @@ class SurveyController extends Controller
     public function addSurveyShop(Request $request)
     {
         //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'areaName' => 'required',
+            'landmark' => 'required',
+            'address' => 'required',
+            'owner' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'image1' =>'required',
+            'image2'=>'required',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            $response = ['status' => false, 'message' => $error];
+            return response($response, 200);
+        }
 
         $shop = new surveyShop;
         $shop->AreaName = $request->areaName;
