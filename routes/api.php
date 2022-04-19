@@ -46,5 +46,12 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key','auth:sanctum'
 
     Route::post('updateSurveyHoarding',[SurveyController::class,'updateSurveyHoarding']);
     Route::post('updateSurveyShop',[SurveyController::class,'updateSurveyShop']);
+
+    // Shop Attributes
+    Route::get('getCircleList',[SurveyController::class,'getCircleList']);
+    Route::get('getBuildingType',[SurveyController::class,'getBuildingType']);
+    Route::get('getFloor',[SurveyController::class,'getFloor']);
+    // Shop Attributes
+
     // Hoarding Survey
 });

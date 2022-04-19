@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Param;
+use App\Models\ParamString;
 use App\Models\surveyHoarding;
 use App\Models\surveyLogin;
 use App\Models\surveyShop;
@@ -154,14 +155,28 @@ class SurveyController extends Controller
     {
         //dd($request->all());
         $validator = Validator::make($request->all(), [
-            'areaName' => 'required',
-            'landmark' => 'required',
+            'circle' => 'required',
+            'interviewee' => 'required',
+            'relation' => 'required',
+            'licenseeName' => 'required',
+            'licenseeFather' => 'required',
             'address' => 'required',
-            'owner' => 'required',
+            'locality' => 'required',
+            'allotmentNo' => 'required',
+            'allotmentDate' => 'required',
+            'shopName' => 'required',
+            'shopNo' => 'required',
+            'plotNo' => 'required',
+            'holdingNo' => 'required',
+            'buildingType' => 'required',
+            'floor' => 'required',
+            'areaName' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
-            'image1' =>'required',
-            'image2'=>'required',
+            'email' => 'required|email',
+            'gst' => 'required|min:15|max:15',
+            'image1' => 'required',
+            'image2' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -171,12 +186,26 @@ class SurveyController extends Controller
         }
 
         $shop = new surveyShop;
-        $shop->AreaName = $request->areaName;
-        $shop->Landmark = $request->landmark;
+        $shop->Circle = $request->circle;
+        $shop->Interviewee = $request->interviewee;
+        $shop->Relation = $request->relation;
+        $shop->LicenseeName = $request->licenseeName;
+        $shop->LicenseeFather = $request->licenseeFather;
         $shop->Address = $request->address;
-        $shop->Owner = $request->owner;
+        $shop->Locality = $request->locality;
+        $shop->AllotmentNo = $request->allotmentNo;
+        $shop->AllotmentDate = $request->allotmentDate;
+        $shop->ShopName = $request->shopName;
+        $shop->ShopNo = $request->shopNo;
+        $shop->PlotNo = $request->plotNo;
+        $shop->HoldingNo = $request->holdingNo;
+        $shop->BuildingType = $request->buildingType;
+        $shop->Floor = $request->floor;
+        $shop->AreaName = $request->areaName;
         $shop->Latitude = $request->latitude;
         $shop->Longitude = $request->longitude;
+        $shop->Email = $request->email;
+        $shop->GST = $request->gst;
 
         $shop->UserID = auth()->user()->id;
 
@@ -298,12 +327,26 @@ class SurveyController extends Controller
         $arr = array();
         foreach ($data as $datas) {
             $val['id'] = $datas->id;
-            $val['AreaName'] = $datas->AreaName;
-            $val['Landmark'] = $datas->Landmark;
+            $val['Circle'] = $datas->Circle;
+            $val['Interviewee'] = $datas->Interviewee;
+            $val['Relation'] = $datas->Relation;
+            $val['LicenseeName'] = $datas->LicenseeName;
+            $val['LicenseeFather'] = $datas->LicenseeFather;
             $val['Address'] = $datas->Address;
-            $val['Owner'] = $datas->Owner;
+            $val['Locality'] = $datas->Locality;
+            $val['AllotmentNo'] = $datas->AllotmentNo;
+            $val['AllotmentDate'] = $datas->AllotmentDate;
+            $val['ShopName'] = $datas->ShopName;
+            $val['ShopNo'] = $datas->ShopNo;
+            $val['PlotNo'] = $datas->PlotNo;
+            $val['HoldingNo'] = $datas->HoldingNo;
+            $val['BuildingType'] = $datas->BuildingType;
+            $val['Floor'] = $datas->Floor;
+            $val['AreaName'] = $datas->AreaName;
             $val['Latitude'] = $datas->Latitude;
             $val['Longitude'] = $datas->Longitude;
+            $val['Email'] = $datas->Email;
+            $val['GST'] = $datas->GST;
             $val['Image1'] = url('/') . '/' . $datas->Image1;
             $val['Image2'] = url('/') . '/' . $datas->Image2;
             $val['UserID'] = $datas->UserID;
@@ -334,17 +377,30 @@ class SurveyController extends Controller
     public function getAllSurveyShop()
     {
         //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::select('id', 'AreaName', 'Landmark', 'Address', 'Owner', 'Latitude', 'Longitude', 'Image1', 'Image2', 'UserID')
-            ->get();
+        $data = surveyShop::all();
         $arr = array();
         foreach ($data as $datas) {
             $val['id'] = $datas->id;
-            $val['AreaName'] = $datas->AreaName;
-            $val['Landmark'] = $datas->Landmark;
+            $val['Circle'] = $datas->Circle;
+            $val['Interviewee'] = $datas->Interviewee;
+            $val['Relation'] = $datas->Relation;
+            $val['LicenseeName'] = $datas->LicenseeName;
+            $val['LicenseeFather'] = $datas->LicenseeFather;
             $val['Address'] = $datas->Address;
-            $val['Owner'] = $datas->Owner;
+            $val['Locality'] = $datas->Locality;
+            $val['AllotmentNo'] = $datas->AllotmentNo;
+            $val['AllotmentDate'] = $datas->AllotmentDate;
+            $val['ShopName'] = $datas->ShopName;
+            $val['ShopNo'] = $datas->ShopNo;
+            $val['PlotNo'] = $datas->PlotNo;
+            $val['HoldingNo'] = $datas->HoldingNo;
+            $val['BuildingType'] = $datas->BuildingType;
+            $val['Floor'] = $datas->Floor;
+            $val['AreaName'] = $datas->AreaName;
             $val['Latitude'] = $datas->Latitude;
             $val['Longitude'] = $datas->Longitude;
+            $val['Email'] = $datas->Email;
+            $val['GST'] = $datas->GST;
             $val['Image1'] = url('/') . '/' . $datas->Image1;
             $val['Image2'] = url('/') . '/' . $datas->Image2;
             $val['UserID'] = $datas->UserID;
@@ -365,7 +421,7 @@ class SurveyController extends Controller
         //dd($request->all());
         // Validation
         $validator = Validator::make($request->all(), [
-            'id'=>'required',
+            'id' => 'required',
             'hoardingLocation' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
@@ -427,13 +483,27 @@ class SurveyController extends Controller
     public function updateSurveyShop(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id'=>'required',
-            'areaName' => 'required',
-            'landmark' => 'required',
+            'id' => 'required',
+            'circle' => 'required',
+            'interviewee' => 'required',
+            'relation' => 'required',
+            'licenseeName' => 'required',
+            'licenseeFather' => 'required',
             'address' => 'required',
-            'owner' => 'required',
+            'locality' => 'required',
+            'allotmentNo' => 'required',
+            'allotmentDate' => 'required',
+            'shopName' => 'required',
+            'shopNo' => 'required',
+            'plotNo' => 'required',
+            'holdingNo' => 'required',
+            'buildingType' => 'required',
+            'floor' => 'required',
+            'areaName' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
+            'email' => 'required|email',
+            'gst' => 'required|min:15|max:15',
             'image1' => 'required',
             'image2' => 'required',
         ]);
@@ -445,13 +515,27 @@ class SurveyController extends Controller
         }
 
         $shop = surveyShop::find($request->id);
-        // $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $shop->AreaName = $request->areaName;
-        $shop->Landmark = $request->landmark;
+        $shop->Circle = $request->circle;
+        $shop->Interviewee = $request->interviewee;
+        $shop->Relation = $request->relation;
+        $shop->LicenseeName = $request->licenseeName;
+        $shop->LicenseeFather = $request->licenseeFather;
         $shop->Address = $request->address;
-        $shop->Owner = $request->owner;
+        $shop->Locality = $request->locality;
+        $shop->AllotmentNo = $request->allotmentNo;
+        $shop->AllotmentDate = $request->allotmentDate;
+        $shop->ShopName = $request->shopName;
+        $shop->ShopNo = $request->shopNo;
+        $shop->PlotNo = $request->plotNo;
+        $shop->HoldingNo = $request->holdingNo;
+        $shop->BuildingType = $request->buildingType;
+        $shop->Floor = $request->floor;
+        $shop->AreaName = $request->areaName;
         $shop->Latitude = $request->latitude;
         $shop->Longitude = $request->longitude;
+        $shop->Email = $request->email;
+        $shop->GST = $request->gst;
+
         $shop->UserID = auth()->user()->id;
 
         // Upload Documents
@@ -483,4 +567,56 @@ class SurveyController extends Controller
         }
     }
     // update survey shop
+
+    // Circle List
+    public function getCircleList()
+    {
+        $circle = ParamString::where('ParamCategoryID', '=', '3001')->get();  //PARAM CATEGORY ID FOR CIRCLE (3001)
+        $arr=array();
+        foreach($circle as $circles){
+            $val['circle']=$circles->StringParameter;
+            array_push($arr,$val);
+        }
+
+        $response = ['status' => true,
+            'message' => 'Data Fetched',
+            'data' => $arr,
+        ];
+
+        return response($response, 200);
+    }
+
+    public function getBuildingType()
+    {
+        $building = ParamString::where('ParamCategoryID', '=', '3002')->get(); //Param Category ID FOR BUILDING TYPE (3002)
+        $arr=array();
+        foreach($building as $buildings){
+            $val['building']=$buildings->StringParameter;
+            array_push($arr,$val);
+        }
+
+        $response = ['status' => true,
+            'message' => 'Data Fetched',
+            'data' => $arr,
+        ];
+
+        return response($response, 200);
+    }
+
+    public function getFloor()
+    {
+        $floor = ParamString::where('ParamCategoryID', '=', '3003')->get();  // PARAM CATEOGY ID FOR FLOOR (3003)
+        $arr = array();
+        foreach ($floor as $floors) {
+            $val['Floor'] = $floors->StringParameter;
+            array_push($arr, $val);
+        }
+
+        $response = ['status' => true,
+            'message' => 'Data Fetched',
+            'data' => $arr,
+        ];
+
+        return response($response, 200);
+    }
 }

@@ -15,14 +15,28 @@ class CreateSurveyShopsTable extends Migration
     {
         Schema::create('survey_shops', function (Blueprint $table) {
             $table->id();
-            $table->string('AreaName');
-            $table->string('Landmark');
-            $table->string('Address');
-            $table->string('Owner');
-            $table->string('Latitude');
-            $table->string('Longitude');
-            $table->string('Image1');
-            $table->string('Image2');
+            $table->string('Circle')->nullable();
+            $table->string('Interviewee')->nullable();
+            $table->string('Relation')->nullable();
+            $table->string('LicenseeName')->nullable();
+            $table->string('LicenseeFather')->nullable();
+            $table->string('Address')->nullable();
+            $table->string('Locality')->nullable();
+            $table->string('AllotmentNo')->nullable();
+            $table->string('AllotmentDate')->nullable();
+            $table->string('ShopName')->nullable();
+            $table->string('ShopNo')->nullable();
+            $table->string('PlotNo')->nullable();
+            $table->string('HoldingNo')->nullable();
+            $table->string('BuildingType')->nullable();
+            $table->string('Floor')->nullable();
+            $table->string('AreaName')->nullable();
+            $table->string('Latitude')->nullable();
+            $table->string('Longitude')->nullable();
+            $table->string('Image1')->nullable();
+            $table->string('Image2')->nullable();
+            $table->string('Email')->nullable();
+            $table->string('GST')->nullable();
             $table->string('UserID');
             $table->timestamps();
         });
