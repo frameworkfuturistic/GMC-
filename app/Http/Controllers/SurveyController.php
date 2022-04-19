@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class SurveyController extends Controller
 {
@@ -19,7 +18,7 @@ class SurveyController extends Controller
     {
         //dd($request->all());
         $allowUser = Param::select('AllowCreateUser')
-                    ->get()->first();
+            ->get()->first();
         //return $allowUser;
         // validate requests
         if ($allowUser->AllowCreateUser == "1") {
@@ -202,25 +201,41 @@ class SurveyController extends Controller
                 'message' => 'No Bearer Token',
             ], 400);
         } else {
-            $data = SurveyHoarding::where('UserID', '=', auth()->user()->id)->get()->first();
+            $data = SurveyHoarding::where('UserID', '=', auth()->user()->id)->get();
 
-            if ($data) {
-                $data->Image1=url('/').'/'.$data->Image1;
-                $data->Image2=url('/').'/'.$data->Image2;
-                $response = ['status' => true, 'data' => $data];
-                return response($response, 200);
-            } else {
-                $response = ['status' => false, 'message' => 'No Data'];
-                return response($response, 404);
+            $arr = array();
+            foreach ($data as $datas) {
+                $val['id'] = $datas->id;
+                $val['hoardingLocation'] = $datas->hoardingLocation;
+                $val['Longitude'] = $datas->Longitude;
+                $val['Latitude'] = $datas->Latitude;
+                $val['Longitude'] = $datas->Longitude;
+                // Images
+                $val['Image1'] = url('/') . '/' . $datas->Image1;
+                $val['Image2'] = url('/') . '/' . $datas->Image2;
+                // Images
+                $val['Length'] = $datas->Length;
+                $val['Width'] = $datas->Width;
+                $val['hoardingType'] = $datas->hoardingType;
+                $val['UserID'] = $datas->UserID;
+                array_push($arr, $val);
             }
+
+            $response = ['status' => true,
+                'message' => 'Data Fetched',
+                'data' => $arr,
+            ];
+
+            return response($response, 200);
         }
     }
 
-    public function getSurveyHoardingByID(Request $request){
-        $data=SurveyHoarding::where('id','=',$request->id)->get()->first();
+    public function getSurveyHoardingByID(Request $request)
+    {
+        $data = SurveyHoarding::where('id', '=', $request->id)->get()->first();
         if ($data) {
-            $data->Image1=url('/').'/'.$data->Image1;
-            $data->Image2=url('/').'/'.$data->Image2;
+            $data->Image1 = url('/') . '/' . $data->Image1;
+            $data->Image2 = url('/') . '/' . $data->Image2;
             $response = ['status' => true, 'data' => $data];
             return response($response, 200);
         } else {
@@ -232,53 +247,66 @@ class SurveyController extends Controller
     public function getAllSurveyHoarding()
     {
         $data = SurveyHoarding::all();
-        $arr=array();
-        foreach($data as $datas){
-            $val['id']=$datas->id;
-            $val['hoardingLocation']=$datas->hoardingLocation;
-            $val['Longitude']=$datas->Longitude;
-            $val['Latitude']=$datas->Latitude;
-            $val['Longitude']=$datas->Longitude;
+        $arr = array();
+        foreach ($data as $datas) {
+            $val['id'] = $datas->id;
+            $val['hoardingLocation'] = $datas->hoardingLocation;
+            $val['Longitude'] = $datas->Longitude;
+            $val['Latitude'] = $datas->Latitude;
+            $val['Longitude'] = $datas->Longitude;
             // Images
-            $val['Image1']=url('/').'/'.$datas->Image1;
-            $val['Image2']=url('/').'/'.$datas->Image2;
+            $val['Image1'] = url('/') . '/' . $datas->Image1;
+            $val['Image2'] = url('/') . '/' . $datas->Image2;
             // Images
-            $val['Length']=$datas->Length;
-            $val['Width']=$datas->Width;
-            $val['hoardingType']=$datas->hoardingType;
-            $val['UserID']=$datas->UserID;
-            array_push($arr,$val);
+            $val['Length'] = $datas->Length;
+            $val['Width'] = $datas->Width;
+            $val['hoardingType'] = $datas->hoardingType;
+            $val['UserID'] = $datas->UserID;
+            array_push($arr, $val);
         }
 
         $response = ['status' => true,
             'message' => 'Data Fetched',
-            'data' => $arr
-            ];
+            'data' => $arr,
+        ];
 
         return response($response, 200);
-        
+
     }
 
     public function getSurveyShop()
     {
         //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::where('UserID', '=', auth()->user()->id)->get()->first();
-        if ($data) {
-            $data->Image1=url('/').'/'.$data->Image1;
-            $data->Image2=url('/').'/'.$data->Image2;
-            $response = ['status' => true, 'data' => $data];
-            return response($response, 200);
-        } else {
-            $response = ['status' => false, 'message' => 'No Data'];
-            return response($response, 404);
+        $data = surveyShop::where('UserID', '=', auth()->user()->id)->get();
+
+        $arr = array();
+        foreach ($data as $datas) {
+            $val['id'] = $datas->id;
+            $val['AreaName'] = $datas->AreaName;
+            $val['Landmark'] = $datas->Landmark;
+            $val['Address'] = $datas->Address;
+            $val['Owner'] = $datas->Owner;
+            $val['Latitude'] = $datas->Latitude;
+            $val['Longitude'] = $datas->Longitude;
+            $val['Image1'] = url('/') . '/' . $datas->Image1;
+            $val['Image2'] = url('/') . '/' . $datas->Image2;
+            $val['UserID'] = $datas->UserID;
+            array_push($arr, $val);
         }
+        $response = ['status' => true,
+            'message' => 'Data Fetched',
+            'data' => $arr,
+        ];
+
+        return response($response, 200);
     }
 
-    public function getSurveyShopByID(Request $request){
-        $data=surveyShop::where('id','=',$request->id)->get()->first();
+    public function getSurveyShopByID(Request $request)
+    {
+        $data = surveyShop::where('id', '=', $request->id)->get()->first();
         if ($data) {
-            $data->Image1=url('/').'/'.$data->Image1;
-            $data->Image2=url('/').'/'.$data->Image2;
+            $data->Image1 = url('/') . '/' . $data->Image1;
+            $data->Image2 = url('/') . '/' . $data->Image2;
             $response = ['status' => true, 'data' => $data];
             return response($response, 200);
         } else {
@@ -290,26 +318,26 @@ class SurveyController extends Controller
     public function getAllSurveyShop()
     {
         //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::select('id','AreaName','Landmark','Address','Owner','Latitude','Longitude','Image1','Image2','UserID')
-                            ->get();
-        $arr=array();
-        foreach($data as $datas){
-            $val['id']=$datas->id;
-            $val['AreaName']=$datas->AreaName;
-            $val['Landmark']=$datas->Landmark;
-            $val['Address']=$datas->Address;
-            $val['Owner']=$datas->Owner;
-            $val['Latitude']=$datas->Latitude;
-            $val['Longitude']=$datas->Longitude;
-            $val['Image1']=url('/').'/'.$datas->Image1;
-            $val['Image2']=url('/').'/'.$datas->Image2;
-            $val['UserID']=$datas->UserID;
-            array_push($arr,$val);
+        $data = surveyShop::select('id', 'AreaName', 'Landmark', 'Address', 'Owner', 'Latitude', 'Longitude', 'Image1', 'Image2', 'UserID')
+            ->get();
+        $arr = array();
+        foreach ($data as $datas) {
+            $val['id'] = $datas->id;
+            $val['AreaName'] = $datas->AreaName;
+            $val['Landmark'] = $datas->Landmark;
+            $val['Address'] = $datas->Address;
+            $val['Owner'] = $datas->Owner;
+            $val['Latitude'] = $datas->Latitude;
+            $val['Longitude'] = $datas->Longitude;
+            $val['Image1'] = url('/') . '/' . $datas->Image1;
+            $val['Image2'] = url('/') . '/' . $datas->Image2;
+            $val['UserID'] = $datas->UserID;
+            array_push($arr, $val);
         }
-         $response = ['status' => true,
+        $response = ['status' => true,
             'message' => 'Data Fetched',
-            'data' => $arr
-            ];
+            'data' => $arr,
+        ];
 
         return response($response, 200);
     }
