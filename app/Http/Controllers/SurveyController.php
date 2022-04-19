@@ -231,17 +231,32 @@ class SurveyController extends Controller
 
     public function getAllSurveyHoarding()
     {
-        $data = SurveyHoarding::all()->first();
-
-        if ($data) {
-            $data->Image1=url('/').'/'.$data->Image1;
-            $data->Image2=url('/').'/'.$data->Image2;
-            $response = ['status' => true, 'data' => $data];
-            return response($response, 200);
-        } else {
-            $response = ['status' => false, 'message' => 'No Data'];
-            return response($response, 404);
+        $data = SurveyHoarding::all();
+        $arr=array();
+        foreach($data as $datas){
+            $val['id']=$datas->id;
+            $val['hoardingLocation']=$datas->hoardingLocation;
+            $val['Longitude']=$datas->Longitude;
+            $val['Latitude']=$datas->Latitude;
+            $val['Longitude']=$datas->Longitude;
+            // Images
+            $val['Image1']=url('/').'/'.$datas->Image1;
+            $val['Image2']=url('/').'/'.$datas->Image2;
+            // Images
+            $val['Length']=$datas->Length;
+            $val['Width']=$datas->Width;
+            $val['hoardingType']=$datas->hoardingType;
+            $val['UserID']=$datas->UserID;
+            array_push($arr,$val);
         }
+
+        $response = ['status' => true,
+            'message' => 'Data Fetched',
+            'data' => $arr
+            ];
+
+        return response($response, 200);
+        
     }
 
     public function getSurveyShop()
@@ -276,16 +291,27 @@ class SurveyController extends Controller
     {
         //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
         $data = surveyShop::select('id','AreaName','Landmark','Address','Owner','Latitude','Longitude','Image1','Image2','UserID')
-                            ->get()->first();
-        if ($data) {
-            $data->Image1=url('/').'/'.$data->Image1;
-            $data->Image2=url('/').'/'.$data->Image2;
-            $response = ['status' => true, 'data' => $data];
-            return response($response, 200);
-        } else {
-            $response = ['status' => false, 'message' => 'No Data'];
-            return response($response, 404);
+                            ->get();
+        $arr=array();
+        foreach($data as $datas){
+            $val['id']=$datas->id;
+            $val['AreaName']=$datas->AreaName;
+            $val['Landmark']=$datas->Landmark;
+            $val['Address']=$datas->Address;
+            $val['Owner']=$datas->Owner;
+            $val['Latitude']=$datas->Latitude;
+            $val['Longitude']=$datas->Longitude;
+            $val['Image1']=url('/').'/'.$datas->Image1;
+            $val['Image2']=url('/').'/'.$datas->Image2;
+            $val['UserID']=$datas->UserID;
+            array_push($arr,$val);
         }
+         $response = ['status' => true,
+            'message' => 'Data Fetched',
+            'data' => $arr
+            ];
+
+        return response($response, 200);
     }
 
     // update Survey Hoarding
