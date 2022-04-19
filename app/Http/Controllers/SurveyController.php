@@ -365,6 +365,7 @@ class SurveyController extends Controller
         //dd($request->all());
         // Validation
         $validator = Validator::make($request->all(), [
+            'id'=>'required',
             'hoardingLocation' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
@@ -426,6 +427,7 @@ class SurveyController extends Controller
     public function updateSurveyShop(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'id'=>'required',
             'areaName' => 'required',
             'landmark' => 'required',
             'address' => 'required',
@@ -473,7 +475,7 @@ class SurveyController extends Controller
         $save = $shop->save();
 
         if ($save) {
-            $response = ['status' => true, 'message' => 'Successfully Saved The Data'];
+            $response = ['status' => true, 'message' => 'Successfully Updated The Data'];
             return response($response, 200);
         } else {
             $response = ['status' => false, 'message' => 'Oops! Something Went Wrong'];
