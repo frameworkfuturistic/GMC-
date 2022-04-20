@@ -250,19 +250,19 @@ class SurveyController extends Controller
 
             $arr = array();
             foreach ($data as $datas) {
-                $val['id'] = $datas->id;
-                $val['hoardingLocation'] = $datas->hoardingLocation;
-                $val['Longitude'] = $datas->Longitude;
-                $val['Latitude'] = $datas->Latitude;
-                $val['Longitude'] = $datas->Longitude;
+                $val['id'] = $datas->id ?? '';
+                $val['hoardingLocation'] = $datas->hoardingLocation ?? '';
+                $val['Longitude'] = $datas->Longitude ?? '';
+                $val['Latitude'] = $datas->Latitude ?? '';
+                $val['Longitude'] = $datas->Longitude ?? '';
                 // Images
-                $val['Image1'] = url('/') . '/' . $datas->Image1;
-                $val['Image2'] = url('/') . '/' . $datas->Image2;
+                $val['Image1'] = url('/') . '/' . $datas->Image1 ?? '';
+                $val['Image2'] = url('/') . '/' . $datas->Image2 ?? '';
                 // Images
-                $val['Length'] = $datas->Length;
-                $val['Width'] = $datas->Width;
-                $val['hoardingType'] = $datas->hoardingType;
-                $val['UserID'] = $datas->UserID;
+                $val['Length'] = $datas->Length ?? '';
+                $val['Width'] = $datas->Width ?? '';
+                $val['hoardingType'] = $datas->hoardingType ?? '';
+                $val['UserID'] = $datas->UserID ?? '';
                 array_push($arr, $val);
             }
 
@@ -277,16 +277,31 @@ class SurveyController extends Controller
 
     public function getSurveyHoardingByID(Request $request)
     {
-        $data = SurveyHoarding::where('id', '=', $request->id)->get()->first();
-        if ($data) {
-            $data->Image1 = url('/') . '/' . $data->Image1;
-            $data->Image2 = url('/') . '/' . $data->Image2;
-            $response = ['status' => true, 'data' => $data];
-            return response($response, 200);
-        } else {
-            $response = ['status' => false, 'message' => 'No Data'];
-            return response($response, 404);
+        $data = SurveyHoarding::where('id', '=', $request->id)->get();
+        $arr = array();
+        foreach ($data as $datas) {
+            $val['id'] = $datas->id ?? '';
+                $val['hoardingLocation'] = $datas->hoardingLocation ?? '';
+                $val['Longitude'] = $datas->Longitude ?? '';
+                $val['Latitude'] = $datas->Latitude ?? '';
+                $val['Longitude'] = $datas->Longitude ?? '';
+                // Images
+                $val['Image1'] = url('/') . '/' . $datas->Image1 ?? '';
+                $val['Image2'] = url('/') . '/' . $datas->Image2 ?? '';
+                // Images
+                $val['Length'] = $datas->Length ?? '';
+                $val['Width'] = $datas->Width ?? '';
+                $val['hoardingType'] = $datas->hoardingType ?? '';
+                $val['UserID'] = $datas->UserID ?? '';
+                array_push($arr, $val);
         }
+
+        $response = ['status' => true,
+            'message' => 'Data Fetched',
+            'data' => $arr,
+        ];
+
+        return response($response, 200);
     }
 
     public function getAllSurveyHoarding()
@@ -294,20 +309,20 @@ class SurveyController extends Controller
         $data = SurveyHoarding::all();
         $arr = array();
         foreach ($data as $datas) {
-            $val['id'] = $datas->id;
-            $val['hoardingLocation'] = $datas->hoardingLocation;
-            $val['Longitude'] = $datas->Longitude;
-            $val['Latitude'] = $datas->Latitude;
-            $val['Longitude'] = $datas->Longitude;
-            // Images
-            $val['Image1'] = url('/') . '/' . $datas->Image1;
-            $val['Image2'] = url('/') . '/' . $datas->Image2;
-            // Images
-            $val['Length'] = $datas->Length;
-            $val['Width'] = $datas->Width;
-            $val['hoardingType'] = $datas->hoardingType;
-            $val['UserID'] = $datas->UserID;
-            array_push($arr, $val);
+            $val['id'] = $datas->id ?? '';
+                $val['hoardingLocation'] = $datas->hoardingLocation ?? '';
+                $val['Longitude'] = $datas->Longitude ?? '';
+                $val['Latitude'] = $datas->Latitude ?? '';
+                $val['Longitude'] = $datas->Longitude ?? '';
+                // Images
+                $val['Image1'] = url('/') . '/' . $datas->Image1 ?? '';
+                $val['Image2'] = url('/') . '/' . $datas->Image2 ?? '';
+                // Images
+                $val['Length'] = $datas->Length ?? '';
+                $val['Width'] = $datas->Width ?? '';
+                $val['hoardingType'] = $datas->hoardingType ?? '';
+                $val['UserID'] = $datas->UserID ?? '';
+                array_push($arr, $val);
         }
 
         $response = ['status' => true,
@@ -328,28 +343,28 @@ class SurveyController extends Controller
         foreach ($data as $datas) {
             $val['id'] = $datas->id;
             $val['Circle'] = $datas->Circle;
-            $val['Interviewee'] = $datas->Interviewee;
-            $val['Relation'] = $datas->Relation;
-            $val['LicenseeName'] = $datas->LicenseeName;
-            $val['LicenseeFather'] = $datas->LicenseeFather;
-            $val['Address'] = $datas->Address;
-            $val['Locality'] = $datas->Locality;
-            $val['AllotmentNo'] = $datas->AllotmentNo;
-            $val['AllotmentDate'] = $datas->AllotmentDate;
-            $val['ShopName'] = $datas->ShopName;
-            $val['ShopNo'] = $datas->ShopNo;
-            $val['PlotNo'] = $datas->PlotNo;
-            $val['HoldingNo'] = $datas->HoldingNo;
-            $val['BuildingType'] = $datas->BuildingType;
-            $val['Floor'] = $datas->Floor;
-            $val['AreaName'] = $datas->AreaName;
-            $val['Latitude'] = $datas->Latitude;
-            $val['Longitude'] = $datas->Longitude;
-            $val['Email'] = $datas->Email;
-            $val['GST'] = $datas->GST;
-            $val['Image1'] = url('/') . '/' . $datas->Image1;
-            $val['Image2'] = url('/') . '/' . $datas->Image2;
-            $val['UserID'] = $datas->UserID;
+            $val['Interviewee'] = $datas->Interviewee ?? '';
+            $val['Relation'] = $datas->Relation ?? '';
+            $val['LicenseeName'] = $datas->LicenseeName ?? '';
+            $val['LicenseeFather'] = $datas->LicenseeFather ?? '';
+            $val['Address'] = $datas->Address ?? '';
+            $val['Locality'] = $datas->Locality ?? '';
+            $val['AllotmentNo'] = $datas->AllotmentNo ?? '';
+            $val['AllotmentDate'] = $datas->AllotmentDate ?? '';
+            $val['ShopName'] = $datas->ShopName ?? '';
+            $val['ShopNo'] = $datas->ShopNo ?? '';
+            $val['PlotNo'] = $datas->PlotNo ?? '';
+            $val['HoldingNo'] = $datas->HoldingNo ?? '';
+            $val['BuildingType'] = $datas->BuildingType ?? '';
+            $val['Floor'] = $datas->Floor ?? '';
+            $val['AreaName'] = $datas->AreaName ?? '';
+            $val['Latitude'] = $datas->Latitude ?? '';
+            $val['Longitude'] = $datas->Longitude ?? '';
+            $val['Email'] = $datas->Email ?? '';
+            $val['GST'] = $datas->GST ?? '';
+            $val['Image1'] = url('/') . '/' . $datas->Image1 ?? '';
+            $val['Image2'] = url('/') . '/' . $datas->Image2 ?? '';
+            $val['UserID'] = $datas->UserID ?? '';
             array_push($arr, $val);
         }
         $response = ['status' => true,
@@ -362,48 +377,72 @@ class SurveyController extends Controller
 
     public function getSurveyShopByID(Request $request)
     {
-        $data = surveyShop::where('id', '=', $request->id)->get()->first();
-        if ($data) {
-            $data->Image1 = url('/') . '/' . $data->Image1;
-            $data->Image2 = url('/') . '/' . $data->Image2;
-            $response = ['status' => true, 'data' => $data];
-            return response($response, 200);
-        } else {
-            $response = ['status' => false, 'message' => 'No Data'];
-            return response($response, 404);
-        }
-    }
-
-    public function getAllSurveyShop()
-    {
-        //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::all();
+        $data = surveyShop::where('id', '=', $request->id)->get();
         $arr = array();
         foreach ($data as $datas) {
             $val['id'] = $datas->id;
             $val['Circle'] = $datas->Circle;
-            $val['Interviewee'] = $datas->Interviewee;
-            $val['Relation'] = $datas->Relation;
-            $val['LicenseeName'] = $datas->LicenseeName;
-            $val['LicenseeFather'] = $datas->LicenseeFather;
-            $val['Address'] = $datas->Address;
-            $val['Locality'] = $datas->Locality;
-            $val['AllotmentNo'] = $datas->AllotmentNo;
-            $val['AllotmentDate'] = $datas->AllotmentDate;
-            $val['ShopName'] = $datas->ShopName;
-            $val['ShopNo'] = $datas->ShopNo;
-            $val['PlotNo'] = $datas->PlotNo;
-            $val['HoldingNo'] = $datas->HoldingNo;
-            $val['BuildingType'] = $datas->BuildingType;
-            $val['Floor'] = $datas->Floor;
-            $val['AreaName'] = $datas->AreaName;
-            $val['Latitude'] = $datas->Latitude;
-            $val['Longitude'] = $datas->Longitude;
-            $val['Email'] = $datas->Email;
-            $val['GST'] = $datas->GST;
-            $val['Image1'] = url('/') . '/' . $datas->Image1;
-            $val['Image2'] = url('/') . '/' . $datas->Image2;
-            $val['UserID'] = $datas->UserID;
+            $val['Interviewee'] = $datas->Interviewee ?? '';
+            $val['Relation'] = $datas->Relation ?? '';
+            $val['LicenseeName'] = $datas->LicenseeName ?? '';
+            $val['LicenseeFather'] = $datas->LicenseeFather ?? '';
+            $val['Address'] = $datas->Address ?? '';
+            $val['Locality'] = $datas->Locality ?? '';
+            $val['AllotmentNo'] = $datas->AllotmentNo ?? '';
+            $val['AllotmentDate'] = $datas->AllotmentDate ?? '';
+            $val['ShopName'] = $datas->ShopName ?? '';
+            $val['ShopNo'] = $datas->ShopNo ?? '';
+            $val['PlotNo'] = $datas->PlotNo ?? '';
+            $val['HoldingNo'] = $datas->HoldingNo ?? '';
+            $val['BuildingType'] = $datas->BuildingType ?? '';
+            $val['Floor'] = $datas->Floor ?? '';
+            $val['AreaName'] = $datas->AreaName ?? '';
+            $val['Latitude'] = $datas->Latitude ?? '';
+            $val['Longitude'] = $datas->Longitude ?? '';
+            $val['Email'] = $datas->Email ?? '';
+            $val['GST'] = $datas->GST ?? '';
+            $val['Image1'] = url('/') . '/' . $datas->Image1 ?? '';
+            $val['Image2'] = url('/') . '/' . $datas->Image2 ?? '';
+            $val['UserID'] = $datas->UserID ?? '';
+            array_push($arr, $val);
+        }
+        $response = ['status' => true,
+            'message' => 'Data Fetched',
+            'data' => $arr,
+        ];
+
+        return response($response, 200);
+    }
+
+    public function getAllSurveyShop()
+    {
+        $data = surveyShop::all();
+        $arr = array();
+        foreach ($data as $datas) { 
+            $val['id'] = $datas->id;
+            $val['Circle'] = $datas->Circle;
+            $val['Interviewee'] = $datas->Interviewee ?? '';
+            $val['Relation'] = $datas->Relation ?? '';
+            $val['LicenseeName'] = $datas->LicenseeName ?? '';
+            $val['LicenseeFather'] = $datas->LicenseeFather ?? '';
+            $val['Address'] = $datas->Address ?? '';
+            $val['Locality'] = $datas->Locality ?? '';
+            $val['AllotmentNo'] = $datas->AllotmentNo ?? '';
+            $val['AllotmentDate'] = $datas->AllotmentDate ?? '';
+            $val['ShopName'] = $datas->ShopName ?? '';
+            $val['ShopNo'] = $datas->ShopNo ?? '';
+            $val['PlotNo'] = $datas->PlotNo ?? '';
+            $val['HoldingNo'] = $datas->HoldingNo ?? '';
+            $val['BuildingType'] = $datas->BuildingType ?? '';
+            $val['Floor'] = $datas->Floor ?? '';
+            $val['AreaName'] = $datas->AreaName ?? '';
+            $val['Latitude'] = $datas->Latitude ?? '';
+            $val['Longitude'] = $datas->Longitude ?? '';
+            $val['Email'] = $datas->Email ?? '';
+            $val['GST'] = $datas->GST ?? '';
+            $val['Image1'] = url('/') . '/' . $datas->Image1 ?? '';
+            $val['Image2'] = url('/') . '/' . $datas->Image2 ?? '';
+            $val['UserID'] = $datas->UserID ?? '';
             array_push($arr, $val);
         }
         $response = ['status' => true,
