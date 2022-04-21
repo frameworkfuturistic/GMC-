@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Notifications\EmailNotification;
+use Illuminate\Support\Facades\Notification;
 
 class SurveyController extends Controller
 {
@@ -62,7 +64,7 @@ class SurveyController extends Controller
 
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:5|max:15',
+            'password' => 'required|min:5|max:25',
         ]);
 
         $userinfo = surveyLogin::where('email', '=', $request->email)->first();
@@ -310,19 +312,19 @@ class SurveyController extends Controller
         $arr = array();
         foreach ($data as $datas) {
             $val['id'] = $datas->id ?? '';
-                $val['hoardingLocation'] = $datas->hoardingLocation ?? '';
-                $val['Longitude'] = $datas->Longitude ?? '';
-                $val['Latitude'] = $datas->Latitude ?? '';
-                $val['Longitude'] = $datas->Longitude ?? '';
-                // Images
-                $val['Image1'] = url('/') . '/' . $datas->Image1 ?? '';
-                $val['Image2'] = url('/') . '/' . $datas->Image2 ?? '';
-                // Images
-                $val['Length'] = $datas->Length ?? '';
-                $val['Width'] = $datas->Width ?? '';
-                $val['hoardingType'] = $datas->hoardingType ?? '';
-                $val['UserID'] = $datas->UserID ?? '';
-                array_push($arr, $val);
+            $val['hoardingLocation'] = $datas->hoardingLocation ?? '';
+            $val['Longitude'] = $datas->Longitude ?? '';
+            $val['Latitude'] = $datas->Latitude ?? '';
+            $val['Longitude'] = $datas->Longitude ?? '';
+            // Images
+            $val['Image1'] = url('/') . '/' . $datas->Image1 ?? '';
+            $val['Image2'] = url('/') . '/' . $datas->Image2 ?? '';
+            // Images
+            $val['Length'] = $datas->Length ?? '';
+            $val['Width'] = $datas->Width ?? '';
+            $val['hoardingType'] = $datas->hoardingType ?? '';
+            $val['UserID'] = $datas->UserID ?? '';
+            array_push($arr, $val);
         }
 
         $response = ['status' => true,
@@ -657,5 +659,31 @@ class SurveyController extends Controller
         ];
 
         return response($response, 200);
+    }
+
+    public function forgetPassword(Request $request){
+        $password=Str::random(20);
+        $data=surveyLogin::where('email','=',$request->email)->get()->first();
+        if($data){
+            $details=[
+                'RecoveryPassword'=>$password
+            ];
+            // Updating Password
+            $data->password=Hash::make($password);
+            $data->save();
+            // Updating Password
+            Notification::send($data,new EmailNotification($details));
+            // $notification=Notification::route('mail', $email)->notify(new EmailNotification($details));
+            $response = ['status' => true,
+            'message' => 'Password has been Sent on Your Email',
+            ];
+            return response($response,200);
+        }
+        else{
+            $response = ['status' => false,
+            'message' => 'Email Not Found',
+            ];
+            return response($response,404);
+        }
     }
 }

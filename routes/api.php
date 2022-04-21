@@ -25,7 +25,9 @@ use Illuminate\Http\Request;
 // Admin Interface Routes
 Route::post('checkLogin',[SurveyController::class,'checkLogin']);
 Route::post('saveSurveyUser',[SurveyController::class,'saveSurveyUser']);
-
+// Forget Password
+Route::get('forgetPassword',[SurveyController::class,'forgetPassword']);
+// Forget Password
 
 Route::group(['middleware' => ['cors', 'json.response', 'api.key','auth:sanctum']], function () {
 
@@ -52,6 +54,8 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key','auth:sanctum'
     Route::get('getBuildingType',[SurveyController::class,'getBuildingType']);
     Route::get('getFloor',[SurveyController::class,'getFloor']);
     // Shop Attributes
+
+    
 
     // Hoarding Survey
 });
