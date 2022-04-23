@@ -248,7 +248,9 @@ class SurveyController extends Controller
                 'message' => 'No Bearer Token',
             ], 400);
         } else {
-            $data = SurveyHoarding::where('UserID', '=', auth()->user()->id)->get();
+            $data = SurveyHoarding::where('UserID', '=', auth()->user()->id)
+                                    ->orderBy('id','Desc')
+                                    ->paginate(20);
 
             $arr = array();
             foreach ($data as $datas) {
@@ -279,7 +281,8 @@ class SurveyController extends Controller
 
     public function getSurveyHoardingByID(Request $request)
     {
-        $data = SurveyHoarding::where('id', '=', $request->id)->get();
+        $data = SurveyHoarding::where('id', '=', $request->id)
+                                ->get();
         $arr = array();
         foreach ($data as $datas) {
             $val['id'] = $datas->id ?? '';
@@ -308,7 +311,8 @@ class SurveyController extends Controller
 
     public function getAllSurveyHoarding()
     {
-        $data = SurveyHoarding::all();
+        $data = SurveyHoarding::orderBy('id','Desc')
+                                ->paginate(20);
         $arr = array();
         foreach ($data as $datas) {
             $val['id'] = $datas->id ?? '';
@@ -339,7 +343,9 @@ class SurveyController extends Controller
     public function getSurveyShop()
     {
         //$tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
-        $data = surveyShop::where('UserID', '=', auth()->user()->id)->get();
+        $data = surveyShop::where('UserID', '=', auth()->user()->id)
+                            ->orderBy('id','Desc')
+                            ->paginate(20);
 
         $arr = array();
         foreach ($data as $datas) {
@@ -379,7 +385,8 @@ class SurveyController extends Controller
 
     public function getSurveyShopByID(Request $request)
     {
-        $data = surveyShop::where('id', '=', $request->id)->get();
+        $data = surveyShop::where('id', '=', $request->id)
+                            ->get();
         $arr = array();
         foreach ($data as $datas) {
             $val['id'] = $datas->id;
@@ -418,7 +425,8 @@ class SurveyController extends Controller
 
     public function getAllSurveyShop()
     {
-        $data = surveyShop::all();
+        $data = surveyShop::orderBy('id','Desc')
+                            ->paginate(20);
         $arr = array();
         foreach ($data as $datas) { 
             $val['id'] = $datas->id;
