@@ -52,7 +52,7 @@ class="active"
                                     APPLICATION</div>
                             </div>
                             <!-- form -->
-                            <form action="{{url('api/rnc/updateAgency/'.$agency->id)}}" method="POST"
+                            <form action="{{url('rnc/updateAgency/'.$agency->id)}}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
@@ -392,7 +392,7 @@ class="active"
                                 <div class="card-title my-card-title">Verification Process Notes</div>
                             </div>
                             <!-- comments -->
-                            <form action="{{url('api/rnc/agencyInboxComment/'.$agency->id)}}" method="POST"
+                            <form action="{{url('rnc/agencyInboxComment/'.$agency->id)}}" method="POST"
                                 id="commentTo">
                                 @method('POST')
                                 @csrf
@@ -413,7 +413,7 @@ class="active"
                             <!-- comments -->
                             <!-- form -->
                             <form class="form mb-top" method="POST"
-                                action="{{url('api/rnc/agencyWorkflow/'.$agency->id)}}" id="forwardTo1">
+                                action="{{url('rnc/agencyWorkflow/'.$agency->id)}}" id="forwardTo1">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-body">

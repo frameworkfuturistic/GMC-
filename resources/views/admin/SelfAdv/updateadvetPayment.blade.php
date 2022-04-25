@@ -376,7 +376,7 @@ class="active"
                                 <!-- form -->
                                 <!-- form -->
                                 <div class="table-responsive">
-                                    <form action="{{url('api/rnc/updatePmt/'.$SelfAds->id)}}" method="POST">
+                                    <form action="{{url('rnc/updatePmt/'.$SelfAds->id)}}" method="POST">
                                         @csrf 
                                         @method('put')
                                         <table id="myTable" class="table table-bordered">

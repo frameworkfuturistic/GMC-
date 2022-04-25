@@ -52,7 +52,7 @@ class="active"
                                     APPLICATION</div>
                             </div>
                             <!-- form -->
-                            <form action="{{url('api/rnc/updateSelfAdvet/'.$SelfAds->id)}}" method="POST"
+                            <form action="{{url('rnc/updateSelfAdvet/'.$SelfAds->id)}}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
@@ -492,7 +492,7 @@ class="active"
                                 <div class="card-title my-card-title">Verification Process Notes</div>
                             </div>
                             <!-- comments -->
-                            <form action="{{url('api/rnc/inboxComment/'.$SelfAds->id)}}" method="POST" id="commentTo">
+                            <form action="{{url('rnc/inboxComment/'.$SelfAds->id)}}" method="POST" id="commentTo">
                                 @method('POST')
                                 @csrf
                                 <div class="form-group mb-top">

@@ -52,7 +52,7 @@ class="active"
                                     APPLICATION</div>
                             </div>
                             <!-- form -->
-                            <form action="{{url('api/rnc/updateBanquet/'.$banquet->id)}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{url('rnc/updateBanquet/'.$banquet->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf 
                                 @method('put')
                                 <div class="table-responsive">
