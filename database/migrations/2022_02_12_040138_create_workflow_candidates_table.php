@@ -14,7 +14,7 @@ class CreateWorkflowCandidatesTable extends Migration
     public function up()
     {
         Schema::create('workflow_candidates', function (Blueprint $table) {
-            $table->increments('CandidateID')->primary();
+            $table->id('CandidateID');
             $table->integer('WorkflowID')->nullable();
             $table->integer('EmployeeID')->nullable();
             $table->mediumText('JobDescription')->nullable();

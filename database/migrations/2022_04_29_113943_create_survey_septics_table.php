@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSurveyHoardingsTable extends Migration
+class CreateSurveySepticsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateSurveyHoardingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('survey_hoardings', function (Blueprint $table) {
+        Schema::create('survey_septics', function (Blueprint $table) {
             $table->id();
-            $table->string('hoardingType');
-            $table->string('HoardingCode');
+            $table->string('HouseOwner');
             $table->string('HoldingNo');
-            $table->string('Content');
-            $table->string('Agency');
-            $table->string('Location');
+            $table->string('Mobile');
+            $table->string('Address');
+            $table->string('Locality');
+            $table->string('Interviewee');
+            $table->string('Relation');
             $table->string('Longitude');
             $table->string('Latitude');
             $table->integer('Length');
             $table->integer('Width');
+            $table->integer('Capacity');
             $table->string('Image1');
             $table->string('Image2');
             $table->string('UserID');
@@ -39,6 +41,6 @@ class CreateSurveyHoardingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('survey_hoardings');
+        Schema::dropIfExists('survey_septics');
     }
 }

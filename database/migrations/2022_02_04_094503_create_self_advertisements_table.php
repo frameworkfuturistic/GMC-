@@ -18,7 +18,7 @@ class CreateSelfAdvertisementsTable extends Migration
             // extra fields
             $table->string('RenewalID')->nullable();
             $table->string('UniqueID')->nullable();
-            $table->string('RenewalID')->nullable();
+            // $table->string('RenewalID')->nullable();
             $table->string('OldRenewalID')->nullable();
             $table->smallInteger('Renewal')->nullable();
             // extra fields

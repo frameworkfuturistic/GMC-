@@ -34,13 +34,15 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key','auth:sanctum'
     // Hoarding Survey
     Route::get('/hoardingLogin',[SurveyController::class,'login']);
     Route::get('/hoardingRegister',[SurveyController::class,'register']);
-    
-    Route::post('AddSurveyHoarding',[SurveyController::class,'AddSurveyHoarding']);
+
+    Route::post('addSurveyHoarding',[SurveyController::class,'AddSurveyHoarding']);
     Route::post('addSurveyShop',[SurveyController::class,'addSurveyShop']);
+    Route::post('addSurveySeptic',[SurveyController::class,'addSurveySepticLatrine']);
 
     Route::get('getSurveyHoarding',[SurveyController::class,'getSurveyHoarding']);
     Route::get('getAllSurveyHoarding',[SurveyController::class,'getAllSurveyHoarding']);
     Route::get('getSurveyShops',[SurveyController::class,'getSurveyShop']);
+    Route::get('getSurveySeptic',[SurveyController::class,'getSurveySepticLatrine']);
     Route::get('getAllSurveyShops',[SurveyController::class,'getAllSurveyShop']);
 
     Route::get('getSurveyHoardingByID',[SurveyController::class,'getSurveyHoardingByID']);
@@ -53,9 +55,11 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key','auth:sanctum'
     Route::get('getCircleList',[SurveyController::class,'getCircleList']);
     Route::get('getBuildingType',[SurveyController::class,'getBuildingType']);
     Route::get('getFloor',[SurveyController::class,'getFloor']);
+    Route::get('gethoardingtypes',[SurveyController::class,'getHoardingTypes']);
+
     // Shop Attributes
 
-    
+
 
     // Hoarding Survey
 });

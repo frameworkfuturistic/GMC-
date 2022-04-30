@@ -37,6 +37,7 @@ class CreateSurveyShopsTable extends Migration
             $table->string('Image2')->nullable();
             $table->string('Email')->nullable();
             $table->string('GST')->nullable();
+            $table->string('Mobile')->nullable();
             $table->string('UserID');
             $table->timestamps();
         });
