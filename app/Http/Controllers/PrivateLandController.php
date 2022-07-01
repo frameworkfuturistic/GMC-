@@ -2,63 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\PrivateLand\EloquentPrivateLandRepository;
 use Illuminate\Http\Request;
 use App\Models\PrivateLand;
 
 class PrivateLandController extends Controller
 {
-    use Traits\PrivateLands;
+    
+
+    protected $eloquentPrivateLand;
+
+    public function __construct(EloquentPrivateLandRepository $eloquentPrivateLand)
+    {
+        $this->EloquentPrivateLand=$eloquentPrivateLand;
+    }
 
     function userView(){
-        return $this->view();
+        return $this->EloquentPrivateLand->view();
     }
 
     function savePrivateLand(Request $request){
-       return $this->SavePrivateLand($request);
+       return $this->EloquentPrivateLand->SavePrivateLand($request);
     }
 
     function LandAdvetInbox(){
-        return $this->PrivateLandAdvetInboxView();
+        return $this->EloquentPrivateLand->PrivateLandAdvetInboxView();
     }
 
     function UpdateLandInbox($id){
-        return $this->LandInboxUpdate($id);
+        return $this->EloquentPrivateLand->LandInboxUpdate($id);
     }
 
     function UpdateLand(Request $request){
-        return $this->UpdatePrivateLand($request);
+        return $this->EloquentPrivateLand->UpdatePrivateLand($request);
     }
 
     function PrivateLandWorkflow(Request $request){
-        return $this->AddPrivateLandWorkflow($request);
+        return $this->EloquentPrivateLand->AddPrivateLandWorkflow($request);
     }
 
     function addComment(Request $request){
-        return $this->workflowTrack($request);
+        return $this->EloquentPrivateLand->workflowTrack($request);
     }
     // OUTBOX
     function LandAdvetOutbox(){
-        return $this->PrivateLandOutboxView();
+        return $this->EloquentPrivateLand->PrivateLandOutboxView();
     }
 
     function updatePrivateLandOutbox($id){
-        return $this->updatePrivateLandOutboxView($id);
+        return $this->EloquentPrivateLand->updatePrivateLandOutboxView($id);
     }
     // OUTBOX
 
     function landApproved(){
-        return $this->landApprovedView();
+        return $this->EloquentPrivateLand->landApprovedView();
     }
 
     function updateLandApproved($id){
-        return $this->updateLandApprovedView($id);
+        return $this->EloquentPrivateLand->updateLandApprovedView($id);
     }
 
     function landRejected(){
-        return $this->landRejectedView();
+        return $this->EloquentPrivateLand->landRejectedView();
     }
 
     function updateLandRejected($id){
-        return $this->updateLandRejectedView($id);
+        return $this->EloquentPrivateLand->updateLandRejectedView($id);
     }
 }

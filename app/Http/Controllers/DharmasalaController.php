@@ -2,63 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\Dharmsala\EloquentDharmsalaRepository;
 use Illuminate\Http\Request;
 use App\Models\Dharmasala;
 
 class DharmasalaController extends Controller
 {
-    use Traits\Dharmasalas;
+
+    public function __construct(EloquentDharmsalaRepository $eloquentDharmsala)
+    {
+        $this->EloquentDharmsala=$eloquentDharmsala;
+    }
 
     function userView(){
-        return $this->view();
+        return $this->EloquentDharmsala->view();
     }
 
     function saveDharmasala(Request $request){
         // dd($request->all());
-        return $this->addDharmasala($request);
+        return $this->EloquentDharmsala->addDharmasala($request);
      }
 
      function dharmasalaInbox(){
-         return $this->inboxView();
+         return $this->EloquentDharmsala->inboxView();
      }
 
      function updateDharmasalaInbox($id){
-         return $this->updateDharmasalaInboxView($id);
+         return $this->EloquentDharmsala->updateDharmasalaInboxView($id);
      }
 
      function updateDharmasala(Request $request){
-         return $this->editDharmasala($request);
+         return $this->EloquentDharmsala->editDharmasala($request);
      }
 
      function dharmasalaWorkflow(Request $request){
-         return $this->workflowUpdate($request);
+         return $this->EloquentDharmsala->workflowUpdate($request);
      }
 
      function dharmasalaOutbox(){
-         return $this->dharmasalaOutboxView();
+         return $this->EloquentDharmsala->dharmasalaOutboxView();
      }
 
      function dharmasalaOutboxUpdate($id){
-         return $this->dharmasalaOutboxUpdateView($id);
+         return $this->EloquentDharmsala->dharmasalaOutboxUpdateView($id);
      }
 
      function addComment(Request $request){
-        return $this->workflowTrack($request);
+        return $this->EloquentDharmsala->workflowTrack($request);
     }
 
     function dharmasalaApproved(){
-        return $this->dharmasalaApprovedView();
+        return $this->EloquentDharmsala->dharmasalaApprovedView();
     }
 
     function updateDharmasalaApproved($id){
-        return $this->updateDharmasalaApprovedView($id);
+        return $this->EloquentDharmsala->updateDharmasalaApprovedView($id);
     }
 
     function dharmasalaRejected(){
-        return $this->DharmasalaRejectedView();
+        return $this->EloquentDharmsala->DharmasalaRejectedView();
     }
 
     function updateDharmasalaRejected($id){
-        return $this->updateDharmasalaRejectedView($id);
+        return $this->EloquentDharmsala->updateDharmasalaRejectedView($id);
     }
 }

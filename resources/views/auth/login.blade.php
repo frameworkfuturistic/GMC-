@@ -15,7 +15,7 @@
         <div class="container-fluid bg-green">
             <div class="row">
             <div class="col-md-6">
-                    <img src="img/Jharkhand_emblem.png" alt="" style="width: 100%;">
+                    <img src="Landing/assets/img/Jharkhand_emblem.png" alt="" style="width: 100%;">
                 </div>
                 <div class="col-md-6">
                     <form method="POST" action="{{ route('login') }}" style="margin-top:50px;">
@@ -41,10 +41,7 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-10">
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900"
-                                href="{{ route('register') }}">
-                                {{ __('Register') }}
-                            </a>
+                            
                             &nbsp; &nbsp;
                             @if (Route::has('password.request'))
                             <a class="underline text-sm text-gray-600 hover:text-gray-900"

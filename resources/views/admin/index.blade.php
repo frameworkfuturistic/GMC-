@@ -4,6 +4,15 @@
 Dashboard
 @endsection
 
+@section('pagecss')
+<style>
+    .activeDash{
+        color: #dcdcdc;
+        background: transparent;
+    }
+</style>
+@endsection
+
 @section('activeDash')
     class="active"
 @endsection

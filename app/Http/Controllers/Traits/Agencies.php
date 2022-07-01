@@ -2,17 +2,17 @@
 namespace App\Http\Controllers\Traits;
 
 use App\Models\Agency;
-use App\Models\User;
 use App\Models\Param;
 use App\Models\ParamString;
+use App\Models\User;
 use App\Models\Workflow;
 use App\Models\WorkflowCandidate;
 use App\Models\WorkflowTrack;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Hash;
 use datetime;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 
 trait Agencies
 {
@@ -29,7 +29,7 @@ trait Agencies
             "entityType" => "required",
             "entityName" => "required",
         ]);
-        
+
         $agency = new Agency;
         $newID = new Param();
         $workflowInitiator = Workflow::where('WorkflowID', '4')->first();
@@ -68,91 +68,93 @@ trait Agencies
         $agency->Initiator = $workflowInitiator->Initiator;
 
         // Upload Files
-            // GST PATH
-            $GSTPath = $request->gstPhoto;
-            if ($GSTPath) {
-                $GSTPathName = time() . '.' . $GSTPath->getClientOriginalName();
-                $request->gstPhoto->move('UploadFiles', $GSTPathName);
-                $agency->GSTPath = 'UploadFiles/' . $GSTPathName;
-            }
-            // GST PATH
-            // IT RETURN PATH 1
-            $ITReturnPath1=$request->itReturnPhoto1;
-            if ($ITReturnPath1) {
-                $ITReturnPath1Name = time() . '.' . $ITReturnPath1->getClientOriginalName();
-                $request->itReturnPhoto1->move('UploadFiles', $ITReturnPath1Name);
-                $agency->ITReturnPath1 = 'UploadFiles/' . $ITReturnPath1Name;
-            }
-            // IT RETURN PATH 1
-            // IT RETURN PATH 2
-            $ITReturnPath2=$request->itReturnPhoto2;
-            if ($ITReturnPath2) {
-                $ITReturnPath2Name = time() . '.' . $ITReturnPath2->getClientOriginalName();
-                $request->itReturnPhoto2->move('UploadFiles', $ITReturnPath2Name);
-                $agency->ITReturnPath2 = 'UploadFiles/' . $ITReturnPath2Name;
-            }
-            // IT RETURN PATH 2
-            // PAN NO PATH
-            $panPath=$request->panNo;
-            if($panPath){
-                $panPathName=time().'.'.$panPath->getClientOriginalName();
-                $request->panNo->move('UploadFiles/',$panPathName);
-                $agency->PANNoPath = 'UploadFiles/' . $panPathName;
-            }
-            // PAN NO PATH
-            // AFFIDIFIT PATH
-            $AffidifitPath=$request->affidifitPhoto;
-            if($AffidifitPath){
-                $AffidifitPathName=time().'.'.$AffidifitPath->getClientOriginalName();
-                $request->affidifitPhoto->move('UploadFiles/', $AffidifitPathName);
-                $agency->AffidavitPath = 'UploadFiles/' . $AffidifitPathName;
-            }
-            // AFFIDIFIT PATH
-            // DIRECTOR 1 AADHAR PATH
-            $Director1AadharPath=$request->director1Aadhar;
-            if($Director1AadharPath){
-                $Director1AadharPathName=time().'.'.$Director1AadharPath->getClientOriginalName();
-                $request->director1Aadhar->move('UploadFiles/', $Director1AadharPathName);
-                $agency->Director1AadharPath = 'UploadFiles/' . $Director1AadharPathName;
-            }
-            // DIRECTOR 1 AADHAR PATH
-            // DIRECTOR 2 AADHAR PATH
-            $Director2AadharPath=$request->director2Aadhar;
-            if($Director2AadharPath){
-                $Director2AadharPathName=time().'.'.$Director2AadharPath->getClientOriginalName();
-                $request->director2Aadhar->move('UploadFiles/', $Director2AadharPathName);
-                $agency->Director2AadharPath = 'UploadFiles/' . $Director2AadharPathName;
-            }
-            // DIRECTOR 2 AADHAR PATH
-            // DIRECTOR 3 AADHAR PATH
-            $Director3AadharPath=$request->director3Aadhar;
-            if($Director3AadharPath){
-                $Director3AadharPathName=time().'.'.$Director3AadharPath->getClientOriginalName();
-                $request->director3Aadhar->move('UploadFiles/', $Director3AadharPathName);
-                $agency->Director3AadharPath = 'UploadFiles/' . $Director3AadharPathName;
-            }
-            // DIRECTOR 3 AADHAR PATH
-            // DIRECTOR 4 AADHAR PATH
-            $Director4AadharPath=$request->director4Aadhar;
-            if($Director4AadharPath){
-                $Director4AadharPathName=time().'.'.$Director4AadharPath->getClientOriginalName();
-                $request->director4Aadhar->move('UploadFiles/', $Director4AadharPathName);
-                $agency->Director4AadharPath = 'UploadFiles/' . $Director4AadharPathName;
-            }
-            // DIRECTOR 4 AADHAR PATH
+        // GST PATH
+        $GSTPath = $request->gstPhoto;
+        if ($GSTPath) {
+            $GSTPathName = time() . '.' . $GSTPath->getClientOriginalName();
+            $request->gstPhoto->move('UploadFiles', $GSTPathName);
+            $agency->GSTPath = 'UploadFiles/' . $GSTPathName;
+        }
+        // GST PATH
+        // IT RETURN PATH 1
+        $ITReturnPath1 = $request->itReturnPhoto1;
+        if ($ITReturnPath1) {
+            $ITReturnPath1Name = time() . '.' . $ITReturnPath1->getClientOriginalName();
+            $request->itReturnPhoto1->move('UploadFiles', $ITReturnPath1Name);
+            $agency->ITReturnPath1 = 'UploadFiles/' . $ITReturnPath1Name;
+        }
+        // IT RETURN PATH 1
+        // IT RETURN PATH 2
+        $ITReturnPath2 = $request->itReturnPhoto2;
+        if ($ITReturnPath2) {
+            $ITReturnPath2Name = time() . '.' . $ITReturnPath2->getClientOriginalName();
+            $request->itReturnPhoto2->move('UploadFiles', $ITReturnPath2Name);
+            $agency->ITReturnPath2 = 'UploadFiles/' . $ITReturnPath2Name;
+        }
+        // IT RETURN PATH 2
+        // PAN NO PATH
+        $panPath = $request->panNo;
+        if ($panPath) {
+            $panPathName = time() . '.' . $panPath->getClientOriginalName();
+            $request->panNo->move('UploadFiles/', $panPathName);
+            $agency->PANNoPath = 'UploadFiles/' . $panPathName;
+        }
+        // PAN NO PATH
+        // AFFIDIFIT PATH
+        $AffidifitPath = $request->affidifitPhoto;
+        if ($AffidifitPath) {
+            $AffidifitPathName = time() . '.' . $AffidifitPath->getClientOriginalName();
+            $request->affidifitPhoto->move('UploadFiles/', $AffidifitPathName);
+            $agency->AffidavitPath = 'UploadFiles/' . $AffidifitPathName;
+        }
+        // AFFIDIFIT PATH
+        // DIRECTOR 1 AADHAR PATH
+        $Director1AadharPath = $request->director1Aadhar;
+        if ($Director1AadharPath) {
+            $Director1AadharPathName = time() . '.' . $Director1AadharPath->getClientOriginalName();
+            $request->director1Aadhar->move('UploadFiles/', $Director1AadharPathName);
+            $agency->Director1AadharPath = 'UploadFiles/' . $Director1AadharPathName;
+        }
+        // DIRECTOR 1 AADHAR PATH
+        // DIRECTOR 2 AADHAR PATH
+        $Director2AadharPath = $request->director2Aadhar;
+        if ($Director2AadharPath) {
+            $Director2AadharPathName = time() . '.' . $Director2AadharPath->getClientOriginalName();
+            $request->director2Aadhar->move('UploadFiles/', $Director2AadharPathName);
+            $agency->Director2AadharPath = 'UploadFiles/' . $Director2AadharPathName;
+        }
+        // DIRECTOR 2 AADHAR PATH
+        // DIRECTOR 3 AADHAR PATH
+        $Director3AadharPath = $request->director3Aadhar;
+        if ($Director3AadharPath) {
+            $Director3AadharPathName = time() . '.' . $Director3AadharPath->getClientOriginalName();
+            $request->director3Aadhar->move('UploadFiles/', $Director3AadharPathName);
+            $agency->Director3AadharPath = 'UploadFiles/' . $Director3AadharPathName;
+        }
+        // DIRECTOR 3 AADHAR PATH
+        // DIRECTOR 4 AADHAR PATH
+        $Director4AadharPath = $request->director4Aadhar;
+        if ($Director4AadharPath) {
+            $Director4AadharPathName = time() . '.' . $Director4AadharPath->getClientOriginalName();
+            $request->director4Aadhar->move('UploadFiles/', $Director4AadharPathName);
+            $agency->Director4AadharPath = 'UploadFiles/' . $Director4AadharPathName;
+        }
+        // DIRECTOR 4 AADHAR PATH
         // Upload Files
         $agency->save();
         return back()->with('success', 'Successfully Saved the Record');
     }
 
-    public function agencyInbox(){
+    public function agencyInbox()
+    {
         $name = Auth::user()->name;
         $data = Agency::where('CurrentUser', $name)->get();
         $array = array('agencies' => $data);
         return View::make('admin.agency.inbox')->with($array);
     }
 
-    public function updateInboxView($id){
+    public function updateInboxView($id)
+    {
         $data = Agency::find($id);
         $username = Auth::user()->name;
         $entiryType = ParamString::where('ParamCategoryID', '17')->get();
@@ -169,19 +171,20 @@ trait Agencies
             ->where('agencies.id', $id)
             ->get();
 
-        $array= array(
-            'agency'=>$data,
-            'workflowInitiator'=>$workflowInitiator,
-            'workflows'=>$WorkFlow,
-            'comments'=>$comments,
-            'entityTypes'=>$entiryType
+        $array = array(
+            'agency' => $data,
+            'workflowInitiator' => $workflowInitiator,
+            'workflows' => $WorkFlow,
+            'comments' => $comments,
+            'entityTypes' => $entiryType,
         );
         return View::make('admin.agency.updateInbox')->with($array);
     }
 
-    public function editAgency($request){
-       // dd($request->all());
-        $agency=Agency::find($request->id);
+    public function editAgency($request)
+    {
+        // dd($request->all());
+        $agency = Agency::find($request->id);
         $agency->EntityType = $request->entityType;
         $agency->EntityName = $request->entityName;
         $agency->Address = $request->address;
@@ -211,85 +214,86 @@ trait Agencies
         $agency->Director1Email = $request->director1Email;
 
         // Upload Files
-            // GST PATH
-            $GSTPath = $request->gstPhoto;
-            if ($GSTPath) {
-                $GSTPathName = time() . '.' . $GSTPath->getClientOriginalName();
-                $request->gstPhoto->move('UploadFiles', $GSTPathName);
-                $agency->GSTPath = 'UploadFiles/' . $GSTPathName;
-            }
-            // GST PATH
-            // IT RETURN PATH 1
-            $ITReturnPath1=$request->itReturnPhoto1;
-            if ($ITReturnPath1) {
-                $ITReturnPath1Name = time() . '.' . $ITReturnPath1->getClientOriginalName();
-                $request->itReturnPhoto1->move('UploadFiles', $ITReturnPath1Name);
-                $agency->ITReturnPath1 = 'UploadFiles/' . $ITReturnPath1Name;
-            }
-            // IT RETURN PATH 1
-            // IT RETURN PATH 2
-            $ITReturnPath2=$request->itReturnPhoto2;
-            if ($ITReturnPath2) {
-                $ITReturnPath2Name = time() . '.' . $ITReturnPath2->getClientOriginalName();
-                $request->itReturnPhoto2->move('UploadFiles', $ITReturnPath2Name);
-                $agency->ITReturnPath2 = 'UploadFiles/' . $ITReturnPath2Name;
-            }
-            // IT RETURN PATH 2
-            // PAN NO PATH
-            $panPath=$request->panNo;
-            if($panPath){
-                $panPathName=time().'.'.$panPath->getClientOriginalName();
-                $request->panNo->move('UploadFiles/',$panPathName);
-                $agency->PANNoPath = 'UploadFiles/' . $panPathName;
-            }
-            // PAN NO PATH
-            // AFFIDIFIT PATH
-            $AffidifitPath=$request->affidifitPhoto;
-            if($AffidifitPath){
-                $AffidifitPathName=time().'.'.$AffidifitPath->getClientOriginalName();
-                $request->affidifitPhoto->move('UploadFiles/', $AffidifitPathName);
-                $agency->AffidavitPath = 'UploadFiles/' . $AffidifitPathName;
-            }
-            // AFFIDIFIT PATH
-            // DIRECTOR 1 AADHAR PATH
-            $Director1AadharPath=$request->director1Aadhar;
-            if($Director1AadharPath){
-                $Director1AadharPathName=time().'.'.$Director1AadharPath->getClientOriginalName();
-                $request->director1Aadhar->move('UploadFiles/', $Director1AadharPathName);
-                $agency->Director1AadharPath = 'UploadFiles/' . $Director1AadharPathName;
-            }
-            // DIRECTOR 1 AADHAR PATH
-            // DIRECTOR 2 AADHAR PATH
-            $Director2AadharPath=$request->director2Aadhar;
-            if($Director2AadharPath){
-                $Director2AadharPathName=time().'.'.$Director2AadharPath->getClientOriginalName();
-                $request->director2Aadhar->move('UploadFiles/', $Director2AadharPathName);
-                $agency->Director2AadharPath = 'UploadFiles/' . $Director2AadharPathName;
-            }
-            // DIRECTOR 2 AADHAR PATH
-            // DIRECTOR 3 AADHAR PATH
-            $Director3AadharPath=$request->director3Aadhar;
-            if($Director3AadharPath){
-                $Director3AadharPathName=time().'.'.$Director3AadharPath->getClientOriginalName();
-                $request->director3Aadhar->move('UploadFiles/', $Director3AadharPathName);
-                $agency->Director3AadharPath = 'UploadFiles/' . $Director3AadharPathName;
-            }
-            // DIRECTOR 3 AADHAR PATH
-            // DIRECTOR 4 AADHAR PATH
-            $Director4AadharPath=$request->director4Aadhar;
-            if($Director4AadharPath){
-                $Director4AadharPathName=time().'.'.$Director4AadharPath->getClientOriginalName();
-                $request->director4Aadhar->move('UploadFiles/', $Director4AadharPathName);
-                $agency->Director4AadharPath = 'UploadFiles/' . $Director4AadharPathName;
-            }
-            // DIRECTOR 4 AADHAR PATH
+        // GST PATH
+        $GSTPath = $request->gstPhoto;
+        if ($GSTPath) {
+            $GSTPathName = time() . '.' . $GSTPath->getClientOriginalName();
+            $request->gstPhoto->move('UploadFiles', $GSTPathName);
+            $agency->GSTPath = 'UploadFiles/' . $GSTPathName;
+        }
+        // GST PATH
+        // IT RETURN PATH 1
+        $ITReturnPath1 = $request->itReturnPhoto1;
+        if ($ITReturnPath1) {
+            $ITReturnPath1Name = time() . '.' . $ITReturnPath1->getClientOriginalName();
+            $request->itReturnPhoto1->move('UploadFiles', $ITReturnPath1Name);
+            $agency->ITReturnPath1 = 'UploadFiles/' . $ITReturnPath1Name;
+        }
+        // IT RETURN PATH 1
+        // IT RETURN PATH 2
+        $ITReturnPath2 = $request->itReturnPhoto2;
+        if ($ITReturnPath2) {
+            $ITReturnPath2Name = time() . '.' . $ITReturnPath2->getClientOriginalName();
+            $request->itReturnPhoto2->move('UploadFiles', $ITReturnPath2Name);
+            $agency->ITReturnPath2 = 'UploadFiles/' . $ITReturnPath2Name;
+        }
+        // IT RETURN PATH 2
+        // PAN NO PATH
+        $panPath = $request->panNo;
+        if ($panPath) {
+            $panPathName = time() . '.' . $panPath->getClientOriginalName();
+            $request->panNo->move('UploadFiles/', $panPathName);
+            $agency->PANNoPath = 'UploadFiles/' . $panPathName;
+        }
+        // PAN NO PATH
+        // AFFIDIFIT PATH
+        $AffidifitPath = $request->affidifitPhoto;
+        if ($AffidifitPath) {
+            $AffidifitPathName = time() . '.' . $AffidifitPath->getClientOriginalName();
+            $request->affidifitPhoto->move('UploadFiles/', $AffidifitPathName);
+            $agency->AffidavitPath = 'UploadFiles/' . $AffidifitPathName;
+        }
+        // AFFIDIFIT PATH
+        // DIRECTOR 1 AADHAR PATH
+        $Director1AadharPath = $request->director1Aadhar;
+        if ($Director1AadharPath) {
+            $Director1AadharPathName = time() . '.' . $Director1AadharPath->getClientOriginalName();
+            $request->director1Aadhar->move('UploadFiles/', $Director1AadharPathName);
+            $agency->Director1AadharPath = 'UploadFiles/' . $Director1AadharPathName;
+        }
+        // DIRECTOR 1 AADHAR PATH
+        // DIRECTOR 2 AADHAR PATH
+        $Director2AadharPath = $request->director2Aadhar;
+        if ($Director2AadharPath) {
+            $Director2AadharPathName = time() . '.' . $Director2AadharPath->getClientOriginalName();
+            $request->director2Aadhar->move('UploadFiles/', $Director2AadharPathName);
+            $agency->Director2AadharPath = 'UploadFiles/' . $Director2AadharPathName;
+        }
+        // DIRECTOR 2 AADHAR PATH
+        // DIRECTOR 3 AADHAR PATH
+        $Director3AadharPath = $request->director3Aadhar;
+        if ($Director3AadharPath) {
+            $Director3AadharPathName = time() . '.' . $Director3AadharPath->getClientOriginalName();
+            $request->director3Aadhar->move('UploadFiles/', $Director3AadharPathName);
+            $agency->Director3AadharPath = 'UploadFiles/' . $Director3AadharPathName;
+        }
+        // DIRECTOR 3 AADHAR PATH
+        // DIRECTOR 4 AADHAR PATH
+        $Director4AadharPath = $request->director4Aadhar;
+        if ($Director4AadharPath) {
+            $Director4AadharPathName = time() . '.' . $Director4AadharPath->getClientOriginalName();
+            $request->director4Aadhar->move('UploadFiles/', $Director4AadharPathName);
+            $agency->Director4AadharPath = 'UploadFiles/' . $Director4AadharPathName;
+        }
+        // DIRECTOR 4 AADHAR PATH
         // Upload Files
         $agency->save();
-        return back()->with('success','You have successfully updated the record');
+        return back()->with('success', 'You have successfully updated the record');
     }
 
     // Comment
-    public function workflowComment(Request $request){
+    public function workflowComment(Request $request)
+    {
         $comment = new WorkflowTrack();
         $name = Auth::user()->name;
         $comment->RenewalID = $request->RenewalID;
@@ -300,7 +304,8 @@ trait Agencies
     }
     // Comment
 
-    public function agencyWorkflowUpdate(Request $request){
+    public function agencyWorkflowUpdate(Request $request)
+    {
         $data = Agency::find($request->id);
         $workflowID = Workflow::where('WorkflowName', 'AgencyAdvertisement')->get();
         if ($request->forward) {
@@ -308,19 +313,20 @@ trait Agencies
         }
 
         $data->ApplicationStatus = $request->AppStatus;
+        $data->workflowID=$workflowID;
 
-        /*udpate status */
+        /*update status */
         if ($request->UpdateStatus == 'Approved') {
             $data->Approved = '-1';
             $data->Pending = '0';
             $data->Rejected = '0';
-            
-            $data->Approver=Auth::user()->name;
 
-            $user=new User;
-            $user->name=$request->RenewalID;
-            $user->email=$request->email;
-            $user->password=Hash::make($request->mobile);
+            $data->Approver = Auth::user()->name;
+
+            $user = new User;
+            $user->name = $request->RenewalID;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->mobile);
             $user->save();
         }
 
@@ -342,14 +348,16 @@ trait Agencies
     }
 
     // OUTBOX
-    public function outboxView(){
+    public function outboxView()
+    {
         $name = Auth::user()->name;
         $data = Agency::where('CurrentUser', '<>', $name)->get();
         return view('admin.agency.Outbox', ['agencies' => $data]);
     }
     // OUTBOX
 
-    public function updateOutboxView($id){
+    public function updateOutboxView($id)
+    {
         $data = Agency::find($id);
         $username = Auth::user()->name;
         $entiryType = ParamString::where('ParamCategoryID', '17')->get();
@@ -366,22 +374,24 @@ trait Agencies
             ->where('agencies.id', $id)
             ->get();
 
-        $array= array(
-            'agency'=>$data,
-            'workflowInitiator'=>$workflowInitiator,
-            'workflows'=>$WorkFlow,
-            'comments'=>$comments,
-            'entityTypes'=>$entiryType
+        $array = array(
+            'agency' => $data,
+            'workflowInitiator' => $workflowInitiator,
+            'workflows' => $WorkFlow,
+            'comments' => $comments,
+            'entityTypes' => $entiryType,
         );
         return View::make('admin.agency.updateOutbox')->with($array);
     }
 
-    public function agencyApprovedView(){
+    public function agencyApprovedView()
+    {
         $data = Agency::where('Approved', '-1')->get();
         return view('admin.agency.approved', ['agencies' => $data]);
     }
 
-    public function updateApprovedView($id){
+    public function updateApprovedView($id)
+    {
         $data = Agency::find($id);
         $username = Auth::user()->name;
         $entiryType = ParamString::where('ParamCategoryID', '17')->get();
@@ -398,22 +408,24 @@ trait Agencies
             ->where('agencies.id', $id)
             ->get();
 
-        $array= array(
-            'agency'=>$data,
-            'workflowInitiator'=>$workflowInitiator,
-            'workflows'=>$WorkFlow,
-            'comments'=>$comments,
-            'entityTypes'=>$entiryType
+        $array = array(
+            'agency' => $data,
+            'workflowInitiator' => $workflowInitiator,
+            'workflows' => $WorkFlow,
+            'comments' => $comments,
+            'entityTypes' => $entiryType,
         );
         return View::make('admin.agency.updateApproved')->with($array);
     }
 
-    public function agencyRejectedView(){
+    public function agencyRejectedView()
+    {
         $data = Agency::where('Rejected', '-1')->get();
         return view('admin.agency.rejected', ['agencies' => $data]);
     }
 
-    public function updateRejectedView($id){
+    public function updateRejectedView($id)
+    {
         $data = Agency::find($id);
         $username = Auth::user()->name;
         $entiryType = ParamString::where('ParamCategoryID', '17')->get();
@@ -430,12 +442,12 @@ trait Agencies
             ->where('agencies.id', $id)
             ->get();
 
-        $array= array(
-            'agency'=>$data,
-            'workflowInitiator'=>$workflowInitiator,
-            'workflows'=>$WorkFlow,
-            'comments'=>$comments,
-            'entityTypes'=>$entiryType
+        $array = array(
+            'agency' => $data,
+            'workflowInitiator' => $workflowInitiator,
+            'workflows' => $WorkFlow,
+            'comments' => $comments,
+            'entityTypes' => $entiryType,
         );
         return View::make('admin.agency.updateRejected')->with($array);
     }

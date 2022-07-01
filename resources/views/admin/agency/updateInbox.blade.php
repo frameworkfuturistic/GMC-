@@ -9,10 +9,10 @@ class="active"
 @endsection
 
 @section('app-content')
-@if(session()->has('message'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissible fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    {{ session()->get('message') }}
+    {{ session()->get('success') }}
 </div>
 @endif
 <ul class="nav nav-pills nav-justified mb-8">
@@ -434,11 +434,11 @@ class="active"
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-4">
+                                            <!-- <div class="col-md-4">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="icon-check2"></i> Forward
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
 
@@ -667,7 +667,8 @@ class="active"
                     )
                 },
                 error: function (error) {
-                    alert(error);
+                    alert("Something Caused Error");
+                    $('#loaderbody').hide();
                 },
             });
         });

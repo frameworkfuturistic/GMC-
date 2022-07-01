@@ -19,7 +19,7 @@ class="active"
             Verifications</a>
     </li>
 </ul>
-<!-- pending verifications -->
+<!-- UPDATE -->
 <div class="card">
     <div class="card-body">
         <div class="card-block">
@@ -87,7 +87,7 @@ class="active"
         </div>
     </div>
 </div>
-<!-- pending verifications -->
+<!-- UPDATE -->
 @endsection
 
 @section('pagescript')

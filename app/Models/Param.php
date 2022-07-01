@@ -62,6 +62,13 @@ class Param extends Model
             $counter=$x->AgencyCounter;
             $x->AgencyCounter=$counter+1;
         }
+        elseif($pre=='HRD'){
+            $str=$x->HoardingPrefix;
+            $counter=$x->HoardingCounter;
+            $str=$x->HoardingPrefix;
+            $counter=$x->HoardingCounter;
+            $x->HoardingCounter=$counter+1;
+        }
 
         $month=date("Ym");
         $m=substr($month,2);

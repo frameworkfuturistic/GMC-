@@ -1,62 +1,82 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Repository\Agency\EloquentAgencyRepository;
 use Illuminate\Http\Request;
 
 class AgencyController extends Controller
 {
-    use Traits\Agencies;
 
-    public function Index(){
-        return $this->indexView();
+    protected $eloquentAgency;
+
+    public function __construct(EloquentAgencyRepository $eloquentAgency)
+    {
+        $this->EloquentAgency = $eloquentAgency;
     }
+
+    public function Index()
+    {
+        return $this->EloquentAgency->indexView();
+    }
+
     public function addAgency(Request $request)
     {
-        return $this->store($request);
+        return $this->EloquentAgency->store($request);
     }
 
     // Admin Interface used functions
-    public function Inbox(){
-        return $this->agencyInbox();
+    public function Inbox()
+    {
+        return $this->EloquentAgency->agencyInbox();
     }
 
-    function updateInbox($id){
-        return $this->updateInboxView($id);
+    public function updateInbox($id)
+    {
+        return $this->EloquentAgency->updateInboxView($id);
     }
 
-    function updateAgency(Request $request){
-        return $this->editAgency($request);
+    public function updateAgency(Request $request)
+    {
+        return $this->EloquentAgency->editAgency($request);
     }
 
-    function addComment(Request $request){
-        return $this->workflowComment($request);
+    public function addComment(Request $request)
+    {
+        return $this->EloquentAgency->workflowComment($request);
     }
 
-    function agencyWorkflow(Request $request){
-        return $this->agencyWorkflowUpdate($request);
+    public function agencyWorkflow(Request $request)
+    {
+        return $this->EloquentAgency->agencyWorkflowUpdate($request);
     }
 
-    function Outbox(){
-        return $this->outboxView();
+    public function Outbox()
+    {
+        return $this->EloquentAgency->outboxView();
     }
 
-    function updateOutbox($id){
-        return $this->updateOutboxView($id);
+    public function updateOutbox($id)
+    {
+        return $this->EloquentAgency->updateOutboxView($id);
     }
 
-    function agencyApproved(){
-        return $this->agencyApprovedView();
+    public function agencyApproved()
+    {
+        return $this->EloquentAgency->agencyApprovedView();
     }
 
-    function updateApproved($id){
-        return $this->updateApprovedView($id);
+    public function updateApproved($id)
+    {
+        return $this->EloquentAgency->updateApprovedView($id);
     }
 
-    function agencyRejected(){
-        return $this->agencyRejectedView();
+    public function agencyRejected()
+    {
+        return $this->EloquentAgency->agencyRejectedView();
     }
 
-    function updateRejected($id){
-        return $this->updateRejectedView($id);
+    public function updateRejected($id)
+    {
+        return $this->EloquentAgency->updateRejectedView($id);
     }
 }

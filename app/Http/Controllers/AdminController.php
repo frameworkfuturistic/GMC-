@@ -1,87 +1,105 @@
 <?php
 /*
-    AdminController is the controller of Self Advertisement field
-*/
+AdminController is the controller of Self Advertisement field
+ */
 namespace App\Http\Controllers;
-use App\Models\VehicleAdvertisement;
-use App\Models\PrivateLand;
-use App\Models\BanquetHall;
-use App\Models\Hostel;
-use App\Models\Dharmasala;
-use App\Models\ParamString;
-use App\Models\WorkflowCandidate;
+
+use App\Repository\SelfAdvet\EloquentSelfAdvetRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Auth;
+use App\Models\MenuMaster;
 
 class AdminController extends Controller
 {
-    use Traits\SelfAdvet;
+    
+    protected $eloquentSelfAdvet;
+
+    public function __construct(EloquentSelfAdvetRepository $eloquentSelfAdvet)
+    {
+
+       $this->EloquentSelfAdvet = $eloquentSelfAdvet;
+    }
 
     // User Interfaces Controller
-    function selfAdvet(){
-        return $this->SelfAdvetView();
-    }
-    function saveSelfAdvet(Request $request){
-        return $this->saveFiles($request);
+    public function selfAdvet()
+    {
+        return $this->EloquentSelfAdvet->SelfAdvetView();
     }
 
-    function updateSelfAdvet(Request $request){
-        return $this->updateFiles($request);
+    public function saveSelfAdvet(Request $request)
+    {
+        return $this->EloquentSelfAdvet->saveFiles($request);
+    }
+
+    public function updateSelfAdvet(Request $request)
+    {
+        return $this->EloquentSelfAdvet->updateFiles($request);
     }
 
     // Admin SelfAdvet Interface Controller
-    function SelfAdvetInbox(){
-        return $this->SelfAdvetInboxView();
+    public function SelfAdvetInbox()
+    {
+        return $this->EloquentSelfAdvet->SelfAdvetInboxView();
     }
 
-    function updateSelfAdvetInbox($id){
-        return $this->updateSelfAdvetInboxView($id);
+    public function updateSelfAdvetInbox($id)
+    {
+        return $this->EloquentSelfAdvet->updateSelfAdvetInboxView($id);
     }
 
-    function SelfAdvetInboxWorkflow(Request $request){
+    public function SelfAdvetInboxWorkflow(Request $request)
+    {
         //dd($request->all());
-        return $this->AddSelfAdvetInboxWorkflow($request);
+        return $this->EloquentSelfAdvet->AddSelfAdvetInboxWorkflow($request);
     }
 
-    function addComment(Request $request){
-        return $this->workflowTrack($request);
+    public function addComment(Request $request)
+    {
+        return $this->EloquentSelfAdvet->workflowTrack($request);
     }
 
-    function selfAdvetOutbox(){
-        return $this->SelfAdvetOutboxView();
+    public function selfAdvetOutbox()
+    {
+        return $this->EloquentSelfAdvet->SelfAdvetOutboxView();
     }
 
-    function updateSelfAdvetOutbox($id){
-        return $this->updateSelfAdvetOutboxView($id);
+    public function updateSelfAdvetOutbox($id)
+    {
+        return $this->EloquentSelfAdvet->updateSelfAdvetOutboxView($id);
     }
 
-    function Payment(){
-        return $this->paymentDash();
+    public function Payment()
+    {
+        return $this->EloquentSelfAdvet->paymentDash();
     }
 
-    function paymentDetails($id){
-        return $this->paymentDetailsView($id);
+    public function paymentDetails($id)
+    {
+        return $this->EloquentSelfAdvet->paymentDetailsView($id);
     }
 
-    function advetApproved(){
-        return $this->advetApprovedView();
+    public function advetApproved()
+    {
+        return $this->EloquentSelfAdvet->advetApprovedView();
     }
 
-    function updateAdvetApproved($id){
-        return $this->updateAdvetApprovedView($id);
+    public function updateAdvetApproved($id)
+    {
+        return $this->EloquentSelfAdvet->updateAdvetApprovedView($id);
     }
 
-    function advetRejected(){
-        return $this->advetRejectedView();
+    public function advetRejected()
+    {
+        return $this->EloquentSelfAdvet->advetRejectedView();
     }
 
-    function updateAdvetRejected($id){
-        return $this->updateAdvetRejectedView($id);
+    public function updateAdvetRejected($id)
+    {
+        return $this->EloquentSelfAdvet->updateAdvetRejectedView($id);
     }
 
-    function updatePmt(Request $request){
-        return $this->paymentUpdate($request);
+    public function updatePmt(Request $request)
+    {
+        return $this->EloquentSelfAdvet->paymentUpdate($request);
     }
     // Admin SelfAdvet Interface Controller
     // User Interface Controller

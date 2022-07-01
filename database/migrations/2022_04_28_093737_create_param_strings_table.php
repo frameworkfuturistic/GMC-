@@ -13,7 +13,7 @@ class CreateParamStringsTable extends Migration
      */
     public function up()
     {
-        Schema::create('param_strings', function (Blueprint $table) {
+        Schema::create('paramstrings', function (Blueprint $table) {
             $table->id();
             $table->integer('ParamCategoryID');
             $table->mediumText('StringParameter');
@@ -28,6 +28,6 @@ class CreateParamStringsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('param_strings');
+        Schema::dropIfExists('paramstrings');
     }
 }

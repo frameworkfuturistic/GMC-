@@ -9,45 +9,57 @@ class="active"
 @endsection
 
 @section('app-content')
+@if(session()->has('message'))
+<div class="alert alert-success alert-dismissible fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{ session()->get('message') }}
+</div>
+@endif
 <!-- tabs -->
 <ul class="nav nav-pills nav-justified mb-8">
     <li class="nav-item col-md-4">
-        <a class="nav-link active" id="link-pill" data-toggle="pill" href="#link" aria-expanded="false">Details Panel</a>
+        <a class="nav-link active" id="link-pill" data-toggle="pill" href="#link" aria-expanded="false">Details
+            Panel</a>
     </li>
 </ul>
 <!-- tabs -->
 <!-- tab-content start here -->
 <div class="tab-content px-1 pt-1">
     <!-- Update Panel -->
-        <div class="card">
-            <div class="card-body">
-                <!-- tabs -->
-                <div class="card-block">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1"
-                                href="#tab1" aria-expanded="true">Application Details</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2"
-                                aria-expanded="false">Workflow</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3"
-                                aria-expanded="false">Documents</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content px-1 pt-1">
-                        <!-- application details tab -->
-                        <div role="tabpanel" class="tab-pane active" id="tab1" aria-expanded="true"
-                            aria-labelledby="base-tab1">
-                            <div class="row">
-                                <!-- data form -->
-                                <div class="col-md-9">
-                                    <div class="card-header card-bg">
-                                        <div class="card-title my-card-title">Details Of Application</div>
-                                    </div>
-                                    <!-- form -->
+    <div class="card">
+        <div class="card-body">
+            <!-- tabs -->
+            <div class="card-block">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1"
+                            aria-expanded="true">Application Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2"
+                            aria-expanded="false">Workflow</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3"
+                            aria-expanded="false">Documents</a>
+                    </li>
+                </ul>
+                <div class="tab-content px-1 pt-1">
+                    <!-- application details tab -->
+                    <div role="tabpanel" class="tab-pane active" id="tab1" aria-expanded="true"
+                        aria-labelledby="base-tab1">
+                        <div class="row">
+                            <!-- data form -->
+                            <div class="col-md-9">
+                                <div class="card-header card-bg">
+                                    <div class="card-title my-card-title">SELF ADVERTISEMENT REGISTRATION
+                                        APPLICATION</div>
+                                </div>
+                                <!-- form -->
+                                <form action="{{url('rnc/updateSelfAdvet/'.$SelfAds->id)}}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('put')
                                     <div class="table-responsive">
                                         <table id="myTable" class="table table-bordered">
                                             <tbody>
@@ -124,6 +136,10 @@ class="active"
                                                             name="WardNo">
                                                             <option value="{{$SelfAds->WardNo}}">{{$SelfAds->WardNo}}
                                                             </option>
+                                                            @foreach($wards as $ward)
+                                                            <option value="{{$ward->StringParameter}}">
+                                                                {{$ward->StringParameter}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -142,10 +158,14 @@ class="active"
                                                             class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
                                                     <td>
-                                                        <select class="spin-valuearea form-control required" id="WardNo1"
-                                                            name="WardNo1">
+                                                        <select class="spin-valuearea form-control required"
+                                                            id="WardNo1" name="WardNo1">
                                                             <option value="{{$SelfAds->WardNo}}">{{$SelfAds->WardNo1}}
                                                             </option>
+                                                            @foreach($wards as $ward)
+                                                            <option value="{{$ward->StringParameter}}">
+                                                                {{$ward->StringParameter}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -174,31 +194,32 @@ class="active"
                                         </table>
                                     </div>
                                     <!-- form -->
+                            </div>
+                            <!-- data form -->
+                            <!-- Help & Advisory -->
+                            <div class="col-md-3">
+                                <h4 class="card-title success">Help & Advisory</h4>
+                                <div class="alert alert-success">Please Note!!</div>
+                                <p class="card-text">
+                                    <ul>
+                                        <li>Keep all the information handy before filling up the application form.
+                                        </li>
+                                        <li>You will have to visit RMC office for any correction regatding
+                                            application information.</li>
+                                        <li>Keep your address concise</li>
+                                        <li>Visit Market Section for further enquiry</li>
+                                    </ul>
+                                </p>
+                            </div>
+                            <!-- Help & Advisory -->
+                            <!-- Shop/Establishment Details of Applicant -->
+                            <div class="col-md-6">
+                                <div class="card-header card-bg">
+                                    <div class="card-title my-card-title">SELF ADVERTISEMENT REGISTRATION
+                                        APPLICATION</div>
                                 </div>
-                                <!-- data form -->
-                                <!-- Help & Advisory -->
-                                <div class="col-md-3">
-                                    <h4 class="card-title success">Help & Advisory</h4>
-                                    <div class="alert alert-success">Please Note!!</div>
-                                    <p class="card-text">
-                                        <ul>
-                                            <li>Keep all the information handy before filling up the application form.
-                                            </li>
-                                            <li>You will have to visit RMC office for any correction regatding
-                                                application information.</li>
-                                            <li>Keep your address concise</li>
-                                            <li>Visit Market Section for further enquiry</li>
-                                        </ul>
-                                    </p>
-                                </div>
-                                <!-- Help & Advisory -->
-                                <!-- Shop/Establishment Details of Applicant -->
-                                <div class="col-md-12">
-                                    <div class="card-header card-bg">
-                                        <div class="card-title my-card-title">Shop/Establishment Details of Applicant</div>
-                                    </div>
-                                    <!-- form -->
-                                    <div class="table-responsive">
+                                <!-- form -->
+                                <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
                                         <tbody>
                                             <tr>
@@ -230,6 +251,10 @@ class="active"
                                                         name="WardNo">
                                                         <option value="{{$SelfAds->WardNo}}">{{$SelfAds->WardNo}}
                                                         </option>
+                                                        @foreach($wards as $ward)
+                                                        <option value="{{$ward->StringParameter}}">
+                                                            {{$ward->StringParameter}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
@@ -238,10 +263,14 @@ class="active"
                                                         class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <select class="spin-valuearea form-control"
-                                                        id="InstallationLocation" name="InstallationLocation">
+                                                    <select class="spin-valuearea form-control" id="InstallLocation"
+                                                        name="InstallLocation">
                                                         <option value="{{$SelfAds->InstallLocation}}">
                                                             {{$SelfAds->InstallLocation}}</option>
+                                                        @foreach($locations as $location)
+                                                        <option value="{{$location->StringParameter}}">
+                                                            {{$location->StringParameter}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
@@ -293,6 +322,10 @@ class="active"
                                                         <option value="{{$SelfAds->DisplayType}}">
                                                             {{$SelfAds->DisplayType}}
                                                         </option>
+                                                        @foreach($DisplayTypes as $DisplayType)
+                                                        <option value="{{$DisplayType->StringParameter}}">
+                                                            {{$DisplayType->StringParameter}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
@@ -325,58 +358,166 @@ class="active"
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Zone<span
-                                                        class="spin-separator spin-star">*</span>
-                                                </td>
+                                            <td class="spin-label">Amount<span class="spin-separator spin-star">*</span>
+                                            </td>
 
-                                                <td>
-                                                    <input type="text" class="form-control" id="zone" name="zone">
+                                            <td>
+                                                <input type="text" class="form-control" id="amount" name="amount" value="{{$SelfAds->Amount}}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spin-label">GST<span class="spin-separator spin-star">*</span>
+                                            </td>
+
+                                            <td>
+                                                <input type="text" class="form-control" id="GST" name="GST" value="{{$SelfAds->GST}}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spin-label">Net Amount<span class="spin-separator spin-star">*</span>
+                                            </td>
+
+                                            <td>
+                                                <input type="text" class="form-control" id="total" name="total" value="{{$SelfAds->NetAmount}}">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- form -->
+                            </div>
+                            <!-- Shop/Establishment Details of Applicant -->
+                            <!-- Upload Documents -->
+                            <div class="col-md-6">
+                                <div class="card-header card-bg">
+                                    <div class="card-title my-card-title">Upload Documents</div>
+                                </div>
+                                <!-- form -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                        Aadhar Document</span>
+                                                    <input type="file" id="AadharPath" name="AadharPath"
+                                                        accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Amount<span
-                                                        class="spin-separator spin-star">*</span>
-                                                </td>
-
-                                                <td>
-                                                    <input type="text" class="form-control" id="amount" name="amount">
+                                                <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                        Municipal Trade License Document</span>
+                                                    <input name="TradeLicensePath" id="TradeLicensePath" type="file"
+                                                        accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">GST<span
-                                                        class="spin-separator spin-star">*</span>
-                                                </td>
-
-                                                <td>
-                                                    <input type="text" class="form-control" id="GST" name="GST">
+                                                <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                        Photograph with GPS</span>
+                                                    <input name="GPSPhotoPath" id="GPSPhotoPath" type="file"
+                                                        accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Total<span
-                                                        class="spin-separator spin-star">*</span>
+                                                <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                        Holding No</span>
+                                                    <input id="HoldingNoPath" name="HoldingNoPath" type="file"
+                                                        accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="spin-label" style="width:100%;">
+                                                    <span>Upload GST Document Photo</span><input id="GSTPath"
+                                                        name="GSTPath" type="file" accept="application/pdf,image/*"
+                                                        style="width:100%;">
+                                                </td>
+                                            </tr>
 
+                                            <tr>
+                                                <td colspan="4" class="spin-label" style="width:100%;">
+                                                    <span>Upload Proceeding1 Photo</span>
+                                                    <input id="Proceeding1Photo" name="Proceeding1Photo" type="file"
+                                                        accept="application/pdf,image/*" style="width:100%;">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                        Proceeding2 Photo</span><input id="Proceeding2Photo"
+                                                        name="Proceeding2Photo" type="file"
+                                                        accept="application/pdf,image/*" style="width:100%;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                        Proceeding3 Photo</span><input id="Proceeding3Photo"
+                                                        name="Proceeding3Photo" type="file"
+                                                        accept="application/pdf,image/*" style="width:100%;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                        Extra Document1</span><input id="ExtraDoc1" name="ExtraDoc1"
+                                                        type="file" accept="application/pdf,image/*"
+                                                        style="width:100%;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                        Extra Document2</span><input id="ExtraDoc2" name="ExtraDoc2"
+                                                        type="file" accept="application/pdf,image/*"
+                                                        style="width:100%;">
+                                                </td>
+                                            </tr colspan="4" class="spin-label">
+                                            <tr>
                                                 <td>
-                                                    <input type="text" class="form-control" id="total" name="total">
+                                                    <!-- updation for initiator -->
+                                                    @if(Auth()->user()->user_type=='2')
+                                                    <button class="btn btn-success"><i class="icon-file-archive-o"></i>
+                                                        Submit</button>
+                                                    @endif
+                                                    <!-- updation for initiator -->
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                    <!-- form -->
-                                </div>
-                                <!-- Shop/Establishment Details of Applicant -->
+                                <!-- form -->
                             </div>
+                            <!-- Upload Documents -->
+                            </form>
                         </div>
-                        <!-- application details tab -->
-                        <!-- workflow tab -->
-                        <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
-                            <div class="card-header card-bg">
-                                <div class="card-title my-card-title">Office Communication Workflow</div>
-                            </div>
-                            <div class="card-body">
+                    </div>
+                    <!-- application details tab -->
+                    <!-- workflow tab -->
+                    <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="card-header card-bg">
+                                    <div class="card-title my-card-title">Verification Process Notes</div>
+                                </div>
                                 <!-- comments -->
-                                <div class="bootstrap snippets bootdey mb-top">
+                                <form action="{{url('rnc/inboxComment/'.$SelfAds->id)}}" method="POST" id="commentTo">
+                                    @method('POST')
+                                    @csrf
+                                    <div class="form-group mb-top">
+                                        <input type="hidden" value="{{$SelfAds->RenewalID}}" id="RenewalID"
+                                            name="RenewalID">
+                                        <label for="complaintinput5">Comments</label>
+                                        <textarea id="comments" name="comments" rows="5" class="form-control round"
+                                            placeholder="comments"></textarea>
+                                        <button type="submit" class="btn btn-success mb-top" id="commentTo">
+                                            <i class="icon-check2"></i> Comment
+                                        </button>
+
+                                        <button type="button" class="btn btn-info mb-top" onclick="inputTools();">
+                                            <i class="icon-pen"></i> Hindi Input Tools
+                                        </button>
+                                    </div>
+                                </form>
+                                <!-- comments -->
+                            </div>
+                            <div class="col-md-3">
+                                <!-- comments -->
+                                <div class="container bootstrap snippets bootdey">
                                     <div class="blog-comment">
                                         <h3 class="text-success">Comments</h3>
                                         @foreach($comments as $comment)
@@ -398,11 +539,13 @@ class="active"
                                         @endforeach
                                     </div>
                                 </div>
+                                </ul>
                                 <!-- comments -->
                             </div>
                         </div>
-                        <!-- workflow tab -->
-                        <!-- documents tab -->
+                    </div>
+                    <!-- workflow tab -->
+                    <!-- documents tab -->
                     <div class="tab-pane" id="tab3" aria-labelledby="base-tab3" aria-expanded="false">
                         <div class="row">
                             <!-- photos -->
@@ -499,17 +642,18 @@ class="active"
                         </div>
                     </div>
                     <!-- document tab -->
-                    </div>
                 </div>
-                <!-- tabs -->
             </div>
+            <!-- tabs -->
         </div>
+    </div>
     <!-- Update Panel -->
 </div>
 <!-- tab-content start here -->
 @endsection
 
 @section('script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
     integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -518,11 +662,10 @@ class="active"
         event.preventDefault();
         $(this).ekkoLightbox();
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#datatable').DataTable();
-        disableInputs();
         displayNone();
-    } );
+    });
 
     function displayNone() {
         document.getElementById("first").style.display = 'none';
@@ -541,6 +684,35 @@ class="active"
         displayNone();
         document.getElementById(id).style.display = 'block';
     }
+
+    // Comment Save Using Ajax
+    $(function () {
+        $('#commentTo').submit(function (e) {
+            var targetform = $('#commentTo');
+            var murl = targetform.attr('action');
+            var mdata = $("#commentTo").serialize();
+            e.preventDefault();
+
+            $.ajax({
+                url: murl,
+                type: "post",
+                data: mdata,
+                datatype: "json",
+                success: function (mdata) {
+                    // alert("Data Successfully Added");
+                    Swal.fire(
+                        'Good job!',
+                        'You have Successfully given the Remark!',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    alert(error);
+                },
+            });
+        });
+    });
+    // Comment Save Using Ajax
 
 </script>
 @endsection

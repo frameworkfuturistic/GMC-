@@ -82,16 +82,6 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav float-xs-right">
-                        <li class="dropdown dropdown-language nav-item"><a id="dropdown-flag" href="#"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                class="dropdown-toggle nav-link"><i class="flag-icon flag-icon-gb"></i><span
-                                    class="selected-language">English</span></a>
-                            <div aria-labelledby="dropdown-flag" class="dropdown-menu"><a href="#"
-                                    class="dropdown-item"><i class="flag-icon flag-icon-gb"></i> English</a><a href="#"
-                                    class="dropdown-item"><i class="flag-icon flag-icon-fr"></i> French</a><a href="#"
-                                    class="dropdown-item"><i class="flag-icon flag-icon-cn"></i> Chinese</a><a href="#"
-                                    class="dropdown-item"><i class="flag-icon flag-icon-de"></i> German</a></div>
-                        </li>
                         <li class="dropdown dropdown-notification nav-item"><a href="#" data-toggle="dropdown"
                                 class="nav-link nav-link-label"><i class="ficon icon-bell4"></i><span
                                     class="tag tag-pill tag-default tag-danger tag-default tag-up">5</span></a>
@@ -239,7 +229,7 @@
                                 class="dropdown-toggle nav-link dropdown-user-link"><span
                                     class="avatar avatar-online"><img
                                         src="admin_dash/app-assets/images/portrait/small/avatar-s-1.png"
-                                        alt="avatar"><i></i></span><span class="user-name">User
+                                        alt="avatar"><i></i></span><span class="user-name">{{auth()->user()->name}}
                                 </span> </a>
                             <div class="dropdown-menu dropdown-menu-right"><a href="{{ route('profile.show') }}"
                                     class="dropdown-item"><i class="icon-head"></i> Edit Profile</a><a href="#"
@@ -278,7 +268,7 @@
                             class="menu-title">Dashboard</span><span
                             class="tag tag tag-warning tag-pill float-xs-right mr-2">1</span></a>
                     <ul class="menu-content">
-                        <li @yield('activeDash')><a href="agencyDash" data-i18n="nav.dash.main"
+                        <li @yield('activeDash')><a href="rnc/dashboard" data-i18n="nav.dash.main"
                                 class="menu-item">Dashboard 1</a>
                         </li>
                     </ul>
@@ -294,45 +284,45 @@
                 <li class="nav-item @yield('activeLastBill')">
                     <a href="rnc/lastBill">
                         <i class="icon-paper"></i>
-                        <span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">
+                        <span data-i18n="rnc/lastBill" class="menu-title">
                             Last Bill
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="form-layout-basic.html">
+                <li class="nav-item @yield('activeHoardingPayment')">
+                    <a href="rnc/hoardingPayment">
                         <i class="icon-money"></i>
                         <span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">
                             Payment
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="form-layout-basic.html">
+                <li class="nav-item @yield('activeCurrentHoarding')">
+                    <a href="rnc/currentHoarding">
                         <i class="icon-check-circle-o"></i>
                         <span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">
                             Current Hoarding
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="form-layout-basic.html">
+                <li class="nav-item @yield('activeRejectedHoarding')">
+                    <a href="rnc/rejectedHoarding">
                         <i class="icon-times-circle-o"></i>
                         <span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">
                             Rejected Hoarding
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="form-layout-basic.html">
+                <li class="nav-item @yield('activeVendorProfile')">
+                    <a href="rnc/vendorProfile">
                         <i class="icon-user4"></i>
                         <span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">
                             Vendor Profile
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="form-layout-basic.html">
+                <li class="nav-item @yield('activeHoardingRules')">
+                    <a href="rnc/hoardingRules">
                         <i class="icon-ribbon"></i>
                         <span data-i18n="nav.form_layouts.form_layout_basic" class="menu-title">
                             Rules

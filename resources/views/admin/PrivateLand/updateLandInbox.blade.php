@@ -274,16 +274,6 @@ class="active"
                                         </tr>
 
                                         <tr>
-                                            <td class="spin-label">Holding No of Brand Display Address <span
-                                                    class="spin-separator spin-star">*</span></td>
-
-                                            <td>
-                                                <input type="text" class="form-control" id="HoldingNo" name="HoldingNo"
-                                                    value="" required>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
                                             <td class="spin-label">Entity Ward No <span
                                                     class="spin-separator spin-star">*</span></td>
 

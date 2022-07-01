@@ -31,7 +31,7 @@ active
                             <!-- form tag -->
 
                             <!-- form -->
-                            <form action="{{ url('api/rnc/addPrivateLand') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('rnc/addPrivateLand') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
@@ -229,15 +229,6 @@ active
 
                                             <td>
                                                 <input type="text" class="form-control" id="BrandDisplayAddress" name="BrandDisplayAddress" required>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="spin-label">Holding No of Brand Display Address <span
-                                                    class="spin-separator spin-star">*</span></td>
-
-                                            <td>
-                                                <input type="text" class="form-control" id="HoldingNo" name="HoldingNo" required>
                                             </td>
                                         </tr>
 

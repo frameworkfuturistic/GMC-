@@ -410,7 +410,7 @@ class="active"
                                         </tr>
                                         <tr colspan="4" class="spin-label">
                                             <td>
-                                            @if($dharmasala->CurrentUser==$workflowInitiator->Initiator)
+                                            @if(auth()->user()->user_type=='2')
                                                 <button class="btn btn-success"><i class="icon-file-archive-o"></i>
                                                     Submit</button>
                                             @endif
@@ -555,6 +555,8 @@ class="active"
 @endsection
 
 @section('script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
     integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -567,7 +569,6 @@ class="active"
     $(document).ready(function () {
         $('#datatable').DataTable();
         displayNone();
-        disableInputs();
     });
 
     function displayNone() {
@@ -590,6 +591,35 @@ class="active"
     function inputTools(){
         window.open('https://www.google.com/inputtools/try/','_blank');
     }
+
+    // Comment Save Using Ajax
+    $(function () {
+        $('#commentTo').submit(function (e) {
+            var targetform = $('#commentTo');
+            var murl = targetform.attr('action');
+            var mdata = $("#commentTo").serialize();
+            e.preventDefault();
+
+            $.ajax({
+                url: murl,
+                type: "post",
+                data: mdata,
+                datatype: "json",
+                success: function (mdata) {
+                    // alert("Data Successfully Added");
+                    Swal.fire(
+                        'Good job!',
+                        'You have Successfully given the Remark!',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    alert(error);
+                },
+            });
+        });
+    });
+    // Comment Save Using Ajax
 
 </script>
 @endsection

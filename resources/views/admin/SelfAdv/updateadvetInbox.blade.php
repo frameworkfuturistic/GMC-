@@ -350,19 +350,11 @@ class="active"
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Zone<span class="spin-separator spin-star">*</span>
-                                            </td>
-
-                                            <td>
-                                                <input type="text" class="form-control" id="zone" name="zone">
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td class="spin-label">Amount<span class="spin-separator spin-star">*</span>
                                             </td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="amount" name="amount">
+                                                <input type="text" class="form-control" id="amount" name="amount" value="{{$SelfAds->Amount}}">
                                             </td>
                                         </tr>
                                         <tr>
@@ -370,15 +362,15 @@ class="active"
                                             </td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="GST" name="GST">
+                                                <input type="text" class="form-control" id="GST" name="GST" value="{{$SelfAds->GST}}">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Total<span class="spin-separator spin-star">*</span>
+                                            <td class="spin-label">Net Amount<span class="spin-separator spin-star">*</span>
                                             </td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="total" name="total">
+                                                <input type="text" class="form-control" id="total" name="total" value="{{$SelfAds->NetAmount}}">
                                             </td>
                                         </tr>
                                     </tbody>

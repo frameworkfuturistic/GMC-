@@ -2,68 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VehicleAdvertisement;
+use App\Repository\Vehicle\EloquentVehicleRepository;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
-    use Traits\VehicleAdvet;
 
-    function userView(){
-        return $this->view();
+    public function __construct(EloquentVehicleRepository $eloquentVehicle)
+    {
+        $this->EloquentVehicle = $eloquentVehicle;
     }
 
-    function saveVehicleAdvet(Request $request){
-        return $this->saveVehicle($request);
+    public function userView()
+    {
+        return $this->EloquentVehicle->view();
+    }
+
+    public function saveVehicleAdvet(Request $request)
+    {
+        return $this->EloquentVehicle->saveVehicle($request);
     }
 
     // INBOX
-    function vehicleInbox(){
-        return $this->vehicleInboxView();
+    public function vehicleInbox()
+    {
+        return $this->EloquentVehicle->vehicleInboxView();
     }
 
-    function udpateVehicleInbox($id){
-        return $this->vehicleInboxUpdate($id);
+    public function udpateVehicleInbox($id)
+    {
+        return $this->EloquentVehicle->vehicleInboxUpdate($id);
     }
 
-    function UpdateVehicle(Request $request){
-         return $this->UpdateVehicleInbox($request);
-    }   
-
-    function vehicleWorkflow(Request $request){
-        return $this->addVehicleWorkflow($request);
+    public function UpdateVehicle(Request $request)
+    {
+        return $this->EloquentVehicle->UpdateVehicleInbox($request);
     }
 
-    function addComment(Request $request){
-        return $this->workflowTrack($request);
+    public function vehicleWorkflow(Request $request)
+    {
+        return $this->EloquentVehicle->addVehicleWorkflow($request);
     }
-    
+
+    public function addComment(Request $request)
+    {
+        return $this->EloquentVehicle->workflowTrack($request);
+    }
+
     // INBOX
 
     // OUTBOX
-    function vehicleOutbox(){
-        return $this->vehicleOutboxView();
+    public function vehicleOutbox()
+    {
+        return $this->EloquentVehicle->vehicleOutboxView();
     }
 
-    function updateVehicleOutbox($id){
-        return $this->updateVehicleOutboxView($id);
-        
+    public function updateVehicleOutbox($id)
+    {
+        return $this->EloquentVehicle->updateVehicleOutboxView($id);
+
     }
     // OUTBOX
 
-    function vehicleApproved(){
-        return $this->vehicleApprovedView();
+    public function vehicleApproved()
+    {
+        return $this->EloquentVehicle->vehicleApprovedView();
     }
 
-    function updateVehicleApproved($id){
-        return $this->updateVehicleApprovedView($id);
+    public function updateVehicleApproved($id)
+    {
+        return $this->EloquentVehicle->updateVehicleApprovedView($id);
     }
 
-    function vehicleRejected(){
-        return $this->vehicleRejectedView();
+    public function vehicleRejected()
+    {
+        return $this->EloquentVehicle->vehicleRejectedView();
     }
 
-    function updateVehicleRejected($id){
-        return $this->updateVehicleRejectedView($id);
+    public function updateVehicleRejected($id)
+    {
+        return $this->EloquentVehicle->updateVehicleRejectedView($id);
     }
 }

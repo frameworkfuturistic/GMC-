@@ -140,13 +140,13 @@
                     </div>
                     <div class="card-block">
                         <h4 class="card-title success"><i class="icon-download5"></i> Downloads</h4>
-                        <ul>
-                            <li><a href="http://rmchams.com/Content/pdfs/jharkhand_advertisement_tax.pdf">Jharkhand Advertisement Tax</a></li>
-                            <li><a href="">Lodge Banquet Notification</a></li>
-                            <li><a href="">Regulations 18-04-17</a></li>
-                            <li><a href="">List Of documents for application</a></li>
+                        <ul class="pdfs">
+                            <li><a href="Content/pdfs/jharkhand_advertisement_tax.pdf" target="_blank" download>Jharkhand Advertisement Tax</a></li>
+                            <li><a href="Content/pdfs/lodgebanquetnotification.pdf" target="_blank" download>Lodge Banquet Notification</a></li>
+                            <li><a href="Content/pdfs/Regulations180417.pdf" target="_blank" download>Regulations 18-04-17</a></li>
+                            <li><a href="Content/pdfs/DocList.pdf" target="_blank" download>List Of documents for application</a></li>
                             <li><a href="">Online Application and payment procedures of Advertisement Licenses for Ranchi Municipal Corporation</a></li>
-                            <li><a href="">No Physical Visit</a></li>
+                            <li><a href="Content/pdfs/nophysicalvisit.pdf" target="_blank" download>No Physical Visit</a></li>
                         </ul>
                     </div>
                 </div>

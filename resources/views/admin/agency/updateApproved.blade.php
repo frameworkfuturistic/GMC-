@@ -9,10 +9,10 @@ class="active"
 @endsection
 
 @section('app-content')
-@if(session()->has('message'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissible fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    {{ session()->get('message') }}
+    {{ session()->get('success') }}
 </div>
 @endif
 <ul class="nav nav-pills nav-justified mb-8">
@@ -52,7 +52,8 @@ class="active"
                                     APPLICATION</div>
                             </div>
                             <!-- form -->
-                            <form action="{{url('rnc/updateAgency/'.$agency->id)}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{url('rnc/updateAgency/'.$agency->id)}}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
                                 <div class="table-responsive">
@@ -64,9 +65,9 @@ class="active"
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <select class="form-control" id="entityType" name="entityType">
-                                                        <option value="">Select One</option>
                                                         <option value="{{$agency->EntityType}}" selected>
                                                             {{$agency->EntityType}}</option>
+                                                        <option value="">Select One</option>
                                                         @foreach($entityTypes as $entityType)
                                                         <option value="{{$entityType->StringParameter}}">
                                                             {{$entityType->StringParameter}}</option>
@@ -87,7 +88,8 @@ class="active"
                                                         class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input type="text" class="form-control" id="address" name="address" value="{{$agency->Address}}">
+                                                    <input type="text" class="form-control" id="address" name="address"
+                                                        value="{{$agency->Address}}">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -95,7 +97,8 @@ class="active"
                                                         class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input type="number" class="form-control" id="mobile" name="mobile" value="{{$agency->MobileNo}}">
+                                                    <input type="number" class="form-control" id="mobile" name="mobile"
+                                                        value="{{$agency->MobileNo}}">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -112,7 +115,8 @@ class="active"
                                                         class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input type="text" class="form-control" id="fax" name="fax" value="{{$agency->Fax}}">
+                                                    <input type="text" class="form-control" id="fax" name="fax"
+                                                        value="{{$agency->Fax}}">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -120,7 +124,8 @@ class="active"
                                                         class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input type="email" class="form-control" id="email" name="email" value="{{$agency->Email}}">
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                        value="{{$agency->Email}}">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -128,7 +133,8 @@ class="active"
                                                         class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input type="text" class="form-control" id="pan" name="pan" value="{{$agency->PANNo}}">
+                                                    <input type="text" class="form-control" id="pan" name="pan"
+                                                        value="{{$agency->PANNo}}">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -136,7 +142,8 @@ class="active"
                                                         class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input type="text" class="form-control" id="gstNo" name="gstNo" value="{{$agency->GSTNo}}">
+                                                    <input type="text" class="form-control" id="gstNo" name="gstNo"
+                                                        value="{{$agency->GSTNo}}">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -162,7 +169,7 @@ class="active"
                         </div>
                         <!-- Help & Advisory -->
                         <!-- Shop/Establishment Details of Applicant -->
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="card-header card-bg">
                                 <div class="card-title my-card-title">OTHER INFORMATION</div>
                             </div>
@@ -180,22 +187,24 @@ class="active"
                                         <tr>
                                             <td>
                                                 @if($agency->Blacklisted=='-1')
-                                                    <input type="checkbox" id="blacklisted" name="blacklisted" value="-1" checked>
+                                                <input type="checkbox" id="blacklisted" name="blacklisted" value="-1"
+                                                    checked>
                                                 @else
-                                                    <input type="checkbox" id="blacklisted" name="blacklisted" value="-1">
+                                                <input type="checkbox" id="blacklisted" name="blacklisted" value="-1">
                                                 @endif
                                             </td>
                                             <td>
                                                 @if($agency->PendingCourtCase=='-1')
-                                                    <input type="checkbox" id="pendingCourtCase" name="pendingCourtCase"
-                                                        value="-1" checked>
+                                                <input type="checkbox" id="pendingCourtCase" name="pendingCourtCase"
+                                                    value="-1" checked>
                                                 @else
-                                                    <input type="checkbox" id="pendingCourtCase" name="pendingCourtCase"
+                                                <input type="checkbox" id="pendingCourtCase" name="pendingCourtCase"
                                                     value="-1">
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" value="{{$agency->PendingAmount}}" id="pendingAmount"
+                                                <input type="text" class="form-control"
+                                                    value="{{$agency->PendingAmount}}" id="pendingAmount"
                                                     name="pendingAmount">
                                             </td>
                                         </tr>
@@ -282,6 +291,95 @@ class="active"
                             <!-- DIRECTOR INFORMATION -->
                         </div>
                         <!-- Shop/Establishment Details of Applicant -->
+                        <!-- Upload Documents -->
+                        <div class="col-md-6">
+                            <div class="card-header card-bg">
+                                <div class="card-title my-card-title">Upload Documents</div>
+                            </div>
+                            <!-- form -->
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    GST Photograph</span>
+                                                <input type="file" style="width:100%;" id="gstPhoto" name="gstPhoto">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    IT Return Photograph for Last Financial Year</span><input
+                                                    type="file" style="width:100%;" id="itReturnPhoto1"
+                                                    name="itReturnPhoto1">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    IT Return Photograph for Previous to Last Financial
+                                                    Year</span><input type="file" style="width:100%;"
+                                                    id="itReturnPhoto2" name="itReturnPhoto2">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    Office Address Photograph</span><input type="file"
+                                                    style="width:100%;" id="officeAddress" name="officeAddress">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    PAN No. Photograph</span><input type="file" style="width:100%;"
+                                                    id="panNo" name="panNo">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    Director1 Aadhar Photo</span><input type="file" style="width:100%;"
+                                                    id="director1Aadhar" name="director1Aadhar">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    Director2 Aadhar Photo</span><input type="file" style="width:100%;"
+                                                    id="director2Aadhar" name="director2Aadhar">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    Director3 Aadhar Photo</span><input type="file" style="width:100%;"
+                                                    id="director3Aadhar" name="director3Aadhar">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    Director4 Aadhar Photo</span><input type="file" style="width:100%;"
+                                                    id="director4Aadhar" name="director4Aadhar">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    Affidifit Photo(You are required to submit the original copy to
+                                                    RMC)</span><input type="file" style="width:100%;"
+                                                    id="affidifitPhoto" name="affidifitPhoto">
+                                            </td>
+                                        </tr>
+                                        <tr colspan="4" class="spin-label">
+                                            <td>
+                                                @if(auth()->user()->user_type=='2')
+                                                <button type="submit" class="btn btn-success"><i
+                                                        class="icon-file-archive-o"></i>
+                                                    Update</button>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- form -->
+                        </div>
+                        <!-- Upload Documents -->
                         </form>
                     </div>
                 </div>
@@ -289,30 +387,57 @@ class="active"
                 <!-- workflow tab -->
                 <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
                     <div class="row">
-                        <!-- comments -->
-                        <div class="container bootstrap snippets bootdey">
-                            <div class="blog-comment">
-                                <h3 class="text-success">Comments</h3>
-                                @foreach($comments as $comment)
-                                <ul class="comments mb-top">
-                                    <li class="clearfix">
-                                        <div class="post-comments">
-                                            <p class="meta">
-                                                <span class="CommentUser"><i class="icon-android-contact"></i>
-                                                    {{$comment->UserID}}</span> says : <i class="pull-right"></i>
-                                                <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
-                                            </p>
-                                            <p class="comment_color">
-                                                <i class="icon-edit2"></i> {{$comment->Remarks}}
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                @endforeach
+                        <div class="col-md-9">
+                            <div class="card-header card-bg">
+                                <div class="card-title my-card-title">Verification Process Notes</div>
                             </div>
+                            <!-- comments -->
+                            <form action="{{url('rnc/agencyInboxComment/'.$agency->id)}}" method="POST"
+                                id="commentTo">
+                                @method('POST')
+                                @csrf
+                                <div class="form-group mb-top">
+                                    <input type="hidden" value="{{$agency->RenewalID}}" id="RenewalID" name="RenewalID">
+                                    <label for="complaintinput5">Comments</label>
+                                    <textarea id="comments" name="comments" rows="5" class="form-control round"
+                                        placeholder="comments"></textarea>
+                                    <button type="submit" class="btn btn-success mb-top" id="commentTo">
+                                        <i class="icon-check2"></i> Comment
+                                    </button>
+
+                                    <button type="button" class="btn btn-info mb-top" onclick="inputTools();">
+                                        <i class="icon-pen"></i> Hindi Input Tools
+                                    </button>
+                                </div>
+                            </form>
+                            <!-- comments -->
                         </div>
-                        </ul>
-                        <!-- comments -->
+                        <div class="col-md-3">
+                            <!-- comments -->
+                            <div class="container bootstrap snippets bootdey">
+                                <div class="blog-comment">
+                                    <h3 class="text-success">Comments</h3>
+                                    @foreach($comments as $comment)
+                                    <ul class="comments mb-top">
+                                        <li class="clearfix">
+                                            <div class="post-comments">
+                                                <p class="meta">
+                                                    <span class="CommentUser"><i class="icon-android-contact"></i>
+                                                        {{$comment->UserID}}</span> says : <i class="pull-right"></i>
+                                                    <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
+                                                </p>
+                                                <p class="comment_color">
+                                                    <i class="icon-edit2"></i> {{$comment->Remarks}}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    @endforeach
+                                </div>
+                            </div>
+                            </ul>
+                            <!-- comments -->
+                        </div>
                     </div>
                 </div>
                 <!-- workflow tab -->
@@ -331,12 +456,12 @@ class="active"
                                     name="TradeLicensePath" onclick="myfunction('second')">
                                 <br>
                                 <label for="">IT Return 2</label>
-                                <img src="{{$agency->ITReturnPath2}}" alt="" style="width: 100%;"
-                                    id="agencyPhotoPath" name="agencyPhotoPath" onclick="myfunction('third')">
+                                <img src="{{$agency->ITReturnPath2}}" alt="" style="width: 100%;" id="agencyPhotoPath"
+                                    name="agencyPhotoPath" onclick="myfunction('third')">
                                 <br>
                                 <label for="">PAN No</label>
-                                <img src="{{$agency->PANNoPath}}" alt="" style="width: 100%;"
-                                    id="OwnerBookPath" name="OwnerBookPath" onclick="myfunction('forth')">
+                                <img src="{{$agency->PANNoPath}}" alt="" style="width: 100%;" id="OwnerBookPath"
+                                    name="OwnerBookPath" onclick="myfunction('forth')">
                                 <br>
                                 <label for="">Director 1 Aadhar</label>
                                 <img src="{{$agency->Director1AadharPath}}" alt="" style="width: 100%;"
@@ -347,12 +472,12 @@ class="active"
                                     id="InsurancePhotoPath" name="InsurancePhotoPath" onclick="myfunction('sixth')">
                                 <br>
                                 <label for="">Director 3 Aadhar</label>
-                                <img src="{{$agency->Director3AadharPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('seventh')">
+                                <img src="{{$agency->Director3AadharPath}}" alt="" style="width: 100%;"
+                                    id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('seventh')">
                                 <br>
                                 <label for="">Director 4 Aadhar</label>
-                                <img src="{{$agency->Director4AadharPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('eighth')">
+                                <img src="{{$agency->Director4AadharPath}}" alt="" style="width: 100%;"
+                                    id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('eighth')">
                                 <br>
                                 <br>
                                 <label for="">Affidifit Path</label>
@@ -367,8 +492,7 @@ class="active"
                                 <div class="card-title my-card-title">Preview</div>
                             </div>
                             <a href="{{$agency->GSTPath}}" data-toggle="lightbox">
-                                <img src="{{$agency->GSTPath}}" alt="" id="first" href="#img1"
-                                    style="width: 100%;">
+                                <img src="{{$agency->GSTPath}}" alt="" id="first" href="#img1" style="width: 100%;">
                             </a>
 
                             <a href="{{$agency->ITReturnPath1}}" data-toggle="lightbox">
@@ -431,7 +555,6 @@ class="active"
     $(document).ready(function () {
         $('#datatable').DataTable();
         displayNone();
-        disableInputs();
     });
 
     function displayNone() {
@@ -454,6 +577,37 @@ class="active"
     function inputTools() {
         window.open('https://www.google.com/inputtools/try/', '_blank');
     }
+
+    // Comment Save Using Ajax
+    $(function () {
+        $('#commentTo').submit(function (e) {
+            var targetform = $('#commentTo');
+            var murl = targetform.attr('action');
+            var mdata = $("#commentTo").serialize();
+            e.preventDefault();
+
+            $('#loaderbody').show();
+
+            $.ajax({
+                url: murl,
+                type: "post",
+                data: mdata,
+                datatype: "json",
+                success: function (mdata) {
+                    $('#loaderbody').hide();
+                    Swal.fire(
+                        'Good job!',
+                        'You have Successfully given the Remark!',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    alert(error);
+                },
+            });
+        });
+    });
+    // Comment Save Using Ajax
 
 </script>
 @endsection

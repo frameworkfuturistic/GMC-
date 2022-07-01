@@ -8,12 +8,12 @@ use App\Models\surveyHoarding;
 use App\Models\surveyLogin;
 use App\Models\SurveySeptic;
 use App\Models\surveyShop;
+use App\Notifications\EmailNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use App\Notifications\EmailNotification;
-use Illuminate\Support\Facades\Notification;
 
 class SurveyController extends Controller
 {
@@ -94,7 +94,7 @@ class SurveyController extends Controller
         $data = surveyLogin::where('email', '=', $request->email)->get()->first();
         if ($data) {
             $details = [
-                'RecoveryPassword' => $password
+                'RecoveryPassword' => $password,
             ];
             // Updating Password
             $data->password = Hash::make($password);
@@ -119,7 +119,7 @@ class SurveyController extends Controller
     //MASTERS ================================================================================================================
     public function getCircleList()
     {
-        $circle = ParamString::where('ParamCategoryID', '=', '3001')->get();  //PARAM CATEGORY ID FOR CIRCLE (3001)
+        $circle = ParamString::where('ParamCategoryID', '=', '3001')->get(); //PARAM CATEGORY ID FOR CIRCLE (3001)
         $arr = array();
         foreach ($circle as $circles) {
             $val['circle'] = $circles->StringParameter;
@@ -155,7 +155,7 @@ class SurveyController extends Controller
 
     public function getFloor()
     {
-        $floor = ParamString::where('ParamCategoryID', '=', '3003')->get();  // PARAM CATEOGY ID FOR FLOOR (3003)
+        $floor = ParamString::where('ParamCategoryID', '=', '3003')->get(); // PARAM CATEOGY ID FOR FLOOR (3003)
         $arr = array();
         foreach ($floor as $floors) {
             $val['Floor'] = $floors->StringParameter;
@@ -173,7 +173,7 @@ class SurveyController extends Controller
 
     public function getHoardingTypes()
     {
-        $floor = ParamString::where('ParamCategoryID', '=', '3004')->get();  // PARAM CATEOGY ID FOR FLOOR (3003)
+        $floor = ParamString::where('ParamCategoryID', '=', '3004')->get(); // PARAM CATEOGY ID FOR FLOOR (3003)
         $arr = array();
         foreach ($floor as $floors) {
             $val['hoardingType'] = $floors->StringParameter;
@@ -508,7 +508,6 @@ class SurveyController extends Controller
         $success = file_put_contents($path, $data);
         $shop->Image2 = 'surveyFiles/' . $png_url;
 
-
         // $folderPath = "surveyFiles/";
         // $base64Image = explode(";base64,", $request->image1);
         // $explodeImage = explode("image/", $base64Image[0]);
@@ -517,7 +516,6 @@ class SurveyController extends Controller
         // $file = $folderPath . uniqid() . '. '.$imageType;
 
         // file_put_contents($file, $image_base64);
-
 
         // $image2 = $request->image2;
         // if ($image2) {

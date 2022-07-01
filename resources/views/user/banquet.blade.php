@@ -30,7 +30,7 @@ active
                             <!-- form tag -->
 
                             <!-- form -->
-                            <form action="{{ url('api/rnc/addBanquet') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('rnc/addBanquet') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">

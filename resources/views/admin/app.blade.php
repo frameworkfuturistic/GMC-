@@ -46,6 +46,7 @@
     <!-- datatable cdn -->
     <link rel="stylesheet" type="text/css" href="css/dataTables.min.css">
     <!-- datatable cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('pagecss')
 </head>
 
@@ -83,19 +84,9 @@
                         <li class="nav-item hidden-sm-down">
                             <a href="{{ url()->previous() }}"
                                 class="btn btn-success upgrade-to-pro">@yield('heading')</a>
-                            </li>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav float-xs-right">
-                        <li class="dropdown dropdown-language nav-item"><a id="dropdown-flag" href="#"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                class="dropdown-toggle nav-link"><i class="flag-icon flag-icon-gb"></i><span
-                                    class="selected-language">English</span></a>
-                            <div aria-labelledby="dropdown-flag" class="dropdown-menu"><a href="#"
-                                    class="dropdown-item"><i class="flag-icon flag-icon-gb"></i> English</a><a href="#"
-                                    class="dropdown-item"><i class="flag-icon flag-icon-fr"></i> French</a><a href="#"
-                                    class="dropdown-item"><i class="flag-icon flag-icon-cn"></i> Chinese</a><a href="#"
-                                    class="dropdown-item"><i class="flag-icon flag-icon-de"></i> German</a></div>
-                        </li>
                         <li class="dropdown dropdown-notification nav-item"><a href="#" data-toggle="dropdown"
                                 class="nav-link nav-link-label"><i class="ficon icon-bell4"></i><span
                                     class="tag tag-pill tag-default tag-danger tag-default tag-up">5</span></a>
@@ -278,6 +269,22 @@
         <!-- main menu content-->
         <div class="main-menu-content">
             <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+                <!-- MENU MASTER -->
+                @foreach($parents as $parent)
+                <li class="nav-item"><a href="index.html"><i class="{{$parent->Icon}}"></i><span data-i18n="nav.dash.main"
+                            class="menu-title">{{$parent->MenuString}}</span></a>
+                    <ul class="menu-content">
+                        @foreach($childs as $child)
+                        @if($child->ParentSerial==$parent->Serial)
+                        <li class="{{$child->ActiveName}}"><a href="{{$child->Route}}" data-i18n="nav.dash.main"
+                                class="menu-item">{{$child->MenuString}}</a>
+                        </li>
+                        @endif
+                        @endforeach
+                    </ul>
+                </li>
+                @endforeach
+                <!-- MENU MASTER -->
                 <li class="nav-item"><a href="index.html"><i class="icon-home3"></i><span data-i18n="nav.dash.main"
                             class="menu-title">Dashboard</span><span
                             class="tag tag tag-primary tag-pill float-xs-right mr-2">1</span></a>
@@ -296,8 +303,8 @@
                         <li @yield('outboxActive')><a href="rnc/advetOutbox" data-i18n="nav.page_layouts.2_columns"
                                 class="menu-item">Outbox</a>
                         </li>
-                        <li @yield('paymentActive')><a href="rnc/advetPayment"
-                                data-i18n="nav.page_layouts.boxed_layout" class="menu-item">Payments</a>
+                        <li @yield('paymentActive')><a href="rnc/advetPayment" data-i18n="nav.page_layouts.boxed_layout"
+                                class="menu-item">Payments</a>
                         </li>
                         <li @yield('approvedActive')><a href="rnc/advetApproved"
                                 data-i18n="nav.page_layouts.static_layout" class="menu-item">Approved</a>
@@ -314,39 +321,39 @@
                         <li @yield('LandInboxActive')> <a href="rnc/LandAdvetInbox"
                                 data-i18n="nav.page_layouts.1_column" class="menu-item">Inbox</a>
                         </li>
-                        <li @yield('LandOutboxActive')><a href="rnc/LandAdvetOutbox" data-i18n="nav.page_layouts.2_columns"
-                                class="menu-item">Outbox</a>
+                        <li @yield('LandOutboxActive')><a href="rnc/LandAdvetOutbox"
+                                data-i18n="nav.page_layouts.2_columns" class="menu-item">Outbox</a>
                         </li>
-                        <li @yield('LandPaymentActive')><a href="rnc/landPayment" data-i18n="nav.page_layouts.boxed_layout"
-                                class="menu-item">Payments</a>
+                        <li @yield('LandPaymentActive')><a href="rnc/landPayment"
+                                data-i18n="nav.page_layouts.boxed_layout" class="menu-item">Payments</a>
                         </li>
-                        <li @yield('LandApprovedActive')><a href="rnc/landApproved" data-i18n="nav.page_layouts.static_layout"
-                                class="menu-item">Approved</a>
+                        <li @yield('LandApprovedActive')><a href="rnc/landApproved"
+                                data-i18n="nav.page_layouts.static_layout" class="menu-item">Approved</a>
                         </li>
                         <li class="navigation-divider"></li>
-                        <li @yield('LandRejectedActive')><a href="rnc/landRejected" data-i18n="nav.page_layouts.light_layout"
-                                class="menu-item">Rejected</a>
+                        <li @yield('LandRejectedActive')><a href="rnc/landRejected"
+                                data-i18n="nav.page_layouts.light_layout" class="menu-item">Rejected</a>
                         </li>
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="icon-ios-albums-outline"></i><span
                             data-i18n="nav.cards.main" class="menu-title">VEHICLES</span></a>
                     <ul class="menu-content">
-                        <li @yield('VehicleInboxActive')> <a href="rnc/vehicleInbox" data-i18n="nav.page_layouts.1_column"
-                                class="menu-item">Inbox</a>
+                        <li @yield('VehicleInboxActive')> <a href="rnc/vehicleInbox"
+                                data-i18n="nav.page_layouts.1_column" class="menu-item">Inbox</a>
                         </li>
-                        <li @yield('VehicleOutboxActive')><a href="rnc/vehicleOutbox" data-i18n="nav.page_layouts.2_columns"
-                                class="menu-item">Outbox</a>
+                        <li @yield('VehicleOutboxActive')><a href="rnc/vehicleOutbox"
+                                data-i18n="nav.page_layouts.2_columns" class="menu-item">Outbox</a>
                         </li>
-                        <li @yield('VehiclePaymentActive')><a href="rnc/vehiclePayment" data-i18n="nav.page_layouts.boxed_layout"
-                                class="menu-item">Payments</a>
+                        <li @yield('VehiclePaymentActive')><a href="rnc/vehiclePayment"
+                                data-i18n="nav.page_layouts.boxed_layout" class="menu-item">Payments</a>
                         </li>
-                        <li @yield('VehicleApprovedActive')><a href="rnc/vehicleApproved" data-i18n="nav.page_layouts.static_layout"
-                                class="menu-item">Approved</a>
+                        <li @yield('VehicleApprovedActive')><a href="rnc/vehicleApproved"
+                                data-i18n="nav.page_layouts.static_layout" class="menu-item">Approved</a>
                         </li>
                         <li class="navigation-divider"></li>
-                        <li @yield('VehicleRejectedActive')><a href="rnc/vehicleRejected" data-i18n="nav.page_layouts.light_layout"
-                                class="menu-item">Rejected</a>
+                        <li @yield('VehicleRejectedActive')><a href="rnc/vehicleRejected"
+                                data-i18n="nav.page_layouts.light_layout" class="menu-item">Rejected</a>
                         </li>
                     </ul>
                 </li>
@@ -354,21 +361,21 @@
                 <li class=" nav-item"><a href="#"><i class="icon-ios-albums-outline"></i><span
                             data-i18n="nav.cards.main" class="menu-title">Marriage/Banquet Hall</span></a>
                     <ul class="menu-content">
-                        <li @yield('banquetInboxActive')> <a href="rnc/banquetInbox" data-i18n="nav.page_layouts.1_column"
-                                class="menu-item">Inbox</a>
+                        <li @yield('banquetInboxActive')> <a href="rnc/banquetInbox"
+                                data-i18n="nav.page_layouts.1_column" class="menu-item">Inbox</a>
                         </li>
-                        <li @yield('banquetOutboxActive')><a href="rnc/banquetOutbox" data-i18n="nav.page_layouts.2_columns"
-                                class="menu-item">Outbox</a>
+                        <li @yield('banquetOutboxActive')><a href="rnc/banquetOutbox"
+                                data-i18n="nav.page_layouts.2_columns" class="menu-item">Outbox</a>
                         </li>
-                        <li @yield('banquetPaymentActive')><a href="rnc/banquetPayment" data-i18n="nav.page_layouts.boxed_layout"
-                                class="menu-item">Payments</a>
+                        <li @yield('banquetPaymentActive')><a href="rnc/banquetPayment"
+                                data-i18n="nav.page_layouts.boxed_layout" class="menu-item">Payments</a>
                         </li>
-                        <li @yield('banquetApprovedActive')><a href="rnc/banquetApproved" data-i18n="nav.page_layouts.static_layout"
-                                class="menu-item">Approved</a>
+                        <li @yield('banquetApprovedActive')><a href="rnc/banquetApproved"
+                                data-i18n="nav.page_layouts.static_layout" class="menu-item">Approved</a>
                         </li>
                         <li class="navigation-divider"></li>
-                        <li @yield('banquetRejectedActive')><a href="rnc/banquetRejected" data-i18n="nav.page_layouts.light_layout"
-                                class="menu-item">Rejected</a>
+                        <li @yield('banquetRejectedActive')><a href="rnc/banquetRejected"
+                                data-i18n="nav.page_layouts.light_layout" class="menu-item">Rejected</a>
                         </li>
                     </ul>
                 </li>
@@ -380,18 +387,18 @@
                         <li @yield('hostelInboxActive')> <a href="rnc/hostelInbox" data-i18n="nav.page_layouts.1_column"
                                 class="menu-item">Inbox</a>
                         </li>
-                        <li @yield('hostelOutboxActive')><a href="rnc/hostelOutbox" data-i18n="nav.page_layouts.2_columns"
-                                class="menu-item">Outbox</a>
+                        <li @yield('hostelOutboxActive')><a href="rnc/hostelOutbox"
+                                data-i18n="nav.page_layouts.2_columns" class="menu-item">Outbox</a>
                         </li>
-                        <li @yield('hostelPaymentActive')><a href="rnc/hostelPayment" data-i18n="nav.page_layouts.boxed_layout"
-                                class="menu-item">Payments</a>
+                        <li @yield('hostelPaymentActive')><a href="rnc/hostelPayment"
+                                data-i18n="nav.page_layouts.boxed_layout" class="menu-item">Payments</a>
                         </li>
-                        <li @yield('hostelApprovedActive')><a href="rnc/hostelApproved" data-i18n="nav.page_layouts.static_layout"
-                                class="menu-item">Approved</a>
+                        <li @yield('hostelApprovedActive')><a href="rnc/hostelApproved"
+                                data-i18n="nav.page_layouts.static_layout" class="menu-item">Approved</a>
                         </li>
                         <li class="navigation-divider"></li>
-                        <li @yield('hostelRejectedActive')><a href="rnc/hostelRejected" data-i18n="nav.page_layouts.light_layout"
-                                class="menu-item">Rejected</a>
+                        <li @yield('hostelRejectedActive')><a href="rnc/hostelRejected"
+                                data-i18n="nav.page_layouts.light_layout" class="menu-item">Rejected</a>
                         </li>
                     </ul>
                 </li>
@@ -400,67 +407,82 @@
                 <li class=" nav-item"><a href="#"><i class="icon-ios-albums-outline"></i><span
                             data-i18n="nav.cards.main" class="menu-title">DHARMASALA</span></a>
                     <ul class="menu-content">
-                        <li @yield('dharmasalaInboxActive')> <a href="rnc/dharmasalaInbox" data-i18n="nav.page_layouts.1_column"
-                                class="menu-item">Inbox</a>
+                        <li @yield('dharmasalaInboxActive')> <a href="rnc/dharmasalaInbox"
+                                data-i18n="nav.page_layouts.1_column" class="menu-item">Inbox</a>
                         </li>
-                        <li @yield('dharmasalaOutboxActive')><a href="rnc/dharmasalaOutbox" data-i18n="nav.page_layouts.2_columns"
-                                class="menu-item">Outbox</a>
+                        <li @yield('dharmasalaOutboxActive')><a href="rnc/dharmasalaOutbox"
+                                data-i18n="nav.page_layouts.2_columns" class="menu-item">Outbox</a>
                         </li>
-                        <li @yield('dharmasalaPaymentActive')><a href="rnc/dharmasalaPayment" data-i18n="nav.page_layouts.boxed_layout"
-                                class="menu-item">Payments</a>
+                        <li @yield('dharmasalaPaymentActive')><a href="rnc/dharmasalaPayment"
+                                data-i18n="nav.page_layouts.boxed_layout" class="menu-item">Payments</a>
                         </li>
-                        <li @yield('dharmasalaApprovedActive')><a href="rnc/dharmasalaApproved" data-i18n="nav.page_layouts.static_layout"
-                                class="menu-item">Approved</a> 
+                        <li @yield('dharmasalaApprovedActive')><a href="rnc/dharmasalaApproved"
+                                data-i18n="nav.page_layouts.static_layout" class="menu-item">Approved</a>
                         </li>
                         <li class="navigation-divider"></li>
-                        <li @yield('dharmasalaRejectedActive')><a href="rnc/dharmasalaRejected" data-i18n="nav.page_layouts.light_layout"
-                                class="menu-item">Rejected</a>
+                        <li @yield('dharmasalaRejectedActive')><a href="rnc/dharmasalaRejected"
+                                data-i18n="nav.page_layouts.light_layout" class="menu-item">Rejected</a>
                         </li>
                     </ul>
                 </li>
                 <!-- Dharmasala -->
+                <!-- AGENCY -->
                 <li class=" nav-item"><a href="#"><i class="icon-whatshot"></i><span data-i18n="nav.advance_cards.main"
                             class="menu-title">AGENCY</span></a>
-                            <ul class="menu-content">
-                                <li @yield('agencyInboxActive')> <a href="rnc/agencyInbox" data-i18n="nav.page_layouts.1_column"
-                                        class="menu-item">Inbox</a>
-                                </li>
-                                <li @yield('agencyOutboxActive')><a href="rnc/agencyOutbox" data-i18n="nav.page_layouts.2_columns"
-                                        class="menu-item">Outbox</a>
-                                </li>
-                                <li @yield('agencyPaymentActive')><a href="rnc/agencyPayment" data-i18n="nav.page_layouts.boxed_layout"
-                                        class="menu-item">Payments</a>
-                                </li>
-                                <li @yield('agencyApprovedActive')><a href="rnc/agencyApproved" data-i18n="nav.page_layouts.static_layout"
-                                        class="menu-item">Approved</a>
-                                </li>
-                                <li class="navigation-divider"></li>
-                                <li @yield('agencyRejectedActive')><a href="rnc/agencyRejected" data-i18n="nav.page_layouts.light_layout"
-                                        class="menu-item">Rejected</a>
-                                </li>
-                            </ul>
+                    <ul class="menu-content">
+                        <li @yield('agencyInboxActive')> <a href="rnc/agencyInbox" data-i18n="nav.page_layouts.1_column"
+                                class="menu-item">Inbox</a>
+                        </li>
+                        <li @yield('agencyOutboxActive')><a href="rnc/agencyOutbox"
+                                data-i18n="nav.page_layouts.2_columns" class="menu-item">Outbox</a>
+                        </li>
+                        <li @yield('agencyPaymentActive')><a href="rnc/agencyPayment"
+                                data-i18n="nav.page_layouts.boxed_layout" class="menu-item">Payments</a>
+                        </li>
+                        <li @yield('agencyApprovedActive')><a href="rnc/agencyApproved"
+                                data-i18n="nav.page_layouts.static_layout" class="menu-item">Approved</a>
+                        </li>
+                        <li class="navigation-divider"></li>
+                        <li @yield('agencyRejectedActive')><a href="rnc/agencyRejected"
+                                data-i18n="nav.page_layouts.light_layout" class="menu-item">Rejected</a>
+                        </li>
+                    </ul>
                 </li>
+                <!-- AGENCY -->
+                <!-- HOARDING -->
                 <li class=" nav-item"><a href="#"><i class="icon-compass3"></i><span data-i18n="nav.content.main"
                             class="menu-title">HOARDING</span></a>
-                            <ul class="menu-content">
-                                <li @yield('hoardingInboxActive')> <a href="rnc/agencyInbox" data-i18n="nav.page_layouts.1_column"
-                                        class="menu-item">Inbox</a>
-                                </li>
-                                <li @yield('hoardingOutboxActive')><a href="rnc/agencyOutbox" data-i18n="nav.page_layouts.2_columns"
-                                        class="menu-item">Outbox</a>
-                                </li>
-                                <li @yield('hoardingPaymentActive')><a href="rnc/agencyPayment" data-i18n="nav.page_layouts.boxed_layout"
-                                        class="menu-item">Payments</a>
-                                </li>
-                                <li @yield('hoardingApprovedActive')><a href="rnc/agencyApproved" data-i18n="nav.page_layouts.static_layout"
-                                        class="menu-item">Approved</a>
-                                </li>
-                                <li class="navigation-divider"></li>
-                                <li @yield('hoardingRejectedActive')><a href="rnc/agencyRejected" data-i18n="nav.page_layouts.light_layout"
-                                        class="menu-item">Rejected</a>
-                                </li>
-                            </ul>
+                    <ul class="menu-content">
+                        <li @yield('hoardingInboxActive')> <a href="rnc/hoarding-inbox"
+                                data-i18n="nav.page_layouts.1_column" class="menu-item">Inbox</a>
+                        </li>
+                        <li @yield('hoardingOutboxActive')><a href="rnc/hoarding-outbox"
+                                data-i18n="nav.page_layouts.2_columns" class="menu-item">Outbox</a>
+                        </li>
+                        <li @yield('hoardingPaymentActive')><a href="rnc/hoarding-payment"
+                                data-i18n="nav.page_layouts.boxed_layout" class="menu-item">Payments</a>
+                        </li>
+                        <li @yield('hoardingApprovedActive')><a href="rnc/hoarding-approved"
+                                data-i18n="nav.page_layouts.static_layout" class="menu-item">Approved</a>
+                        </li>
+                        <li class="navigation-divider"></li>
+                        <li @yield('hoardingRejectedActive')><a href="rnc/hoarding-rejected"
+                                data-i18n="nav.page_layouts.light_layout" class="menu-item">Rejected</a>
+                        </li>
+                    </ul>
                 </li>
+                <!-- HOARDING -->
+                <!-- SETTINGS -->
+                @if(auth()->user()->user_type==2)
+                <li class="nav-item has-sub"><a href="#"><i class="icon-cog3"></i><span data-i18n="nav.content.main" class="menu-title">SETTING</span></a>
+                    <ul class="menu-content">
+                        <li @yield('usersActive') class=""> 
+                            <a href="rnc/add-users" data-i18n="nav.page_layouts.1_column" class="menu-item">Add Users</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+                <!-- SETTINGS -->
             </ul>
         </div>
         <!-- /main menu content-->
@@ -491,7 +513,7 @@
                 class="float-md-left d-xs-block d-md-inline-block">Copyright &copy; 2022 <a href="" target="_blank"
                     class="text-bold-800 grey darken-2">RMC Ranchi Municipal Corporation</a>, All rights reserved.
             </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i
-                    class="icon-heart5 pink"></i> <strong>Framework Futuristics Private Ltd</strong></span></p>
+                    class="icon-heart5 pink"></i> <strong>Framework Futuristic Private Ltd</strong></span></p>
     </footer>
 
     <!-- BEGIN VENDOR JS-->
@@ -532,11 +554,11 @@
             });
 
             $('#loaderbody')
-                .hide()  // Hide it initially
-                .ajaxStart(function() {
+                .hide() // Hide it initially
+                .ajaxStart(function () {
                     $(this).show();
                 })
-                .ajaxStop(function() {
+                .ajaxStop(function () {
                     $(this).hide();
                 })
         });

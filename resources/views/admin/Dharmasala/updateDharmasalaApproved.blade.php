@@ -12,8 +12,8 @@ class="active"
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        {{ session()->get('message') }}
-    </div>
+    {{ session()->get('message') }}
+</div>
 @endif
 <ul class="nav nav-pills nav-justified mb-8">
     <li class="nav-item col-md-4">
@@ -96,6 +96,9 @@ class="active"
                                                     <select class="form-control" id="WardNo" name="WardNo">
                                                         <option value="{{$dharmasala->WardNo}}">{{$dharmasala->WardNo}}</option>
                                                         <option value="">Select One</option>
+                                                        @foreach($wards as $ward)
+                                                            <option value="{{$ward->StringParameter}}">{{$ward->StringParameter}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
@@ -113,6 +116,9 @@ class="active"
                                                     <select class="form-control" id="WardNo1" name="WardNo1">
                                                         <option value="{{$dharmasala->WardNo1}}">{{$dharmasala->WardNo1}}</option>
                                                         <option value="">Select One</option>
+                                                        @foreach($wards as $ward)
+                                                            <option value="{{$ward->StringParameter}}">{{$ward->StringParameter}}</option>
+                                                        @endforeach
                                                     </select>
                                                     <span class="field-validation-valid text-danger" data-valmsg-for="WardNo1" data-valmsg-replace="true"></span>
                                                 </td>
@@ -140,7 +146,7 @@ class="active"
                         </div>
                         <!-- Help & Advisory -->
                         <!-- Shop/Establishment Details of Applicant -->
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="card-header card-bg">
                                 <div class="card-title my-card-title">DHARMASALA/MARRIAGE REGISTRATION
                                     APPLICATION</div>
@@ -213,6 +219,9 @@ class="active"
                                                 <select class="form-control" id="OrganizationType" name="OrganizationType">
                                                     <option value="{{$dharmasala->OrganizationType}}">{{$dharmasala->OrganizationType}}</option>
                                                     <option value="">Select One</option>
+                                                    @foreach($organizeTypes as $organizeType)
+                                                        <option value="{{$organizeType->StringParameter}}">{{$organizeType->StringParameter}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
@@ -223,6 +232,9 @@ class="active"
                                                 <select class="form-control" id="LandDeedType" name="LandDeedType">
                                                     <option value="{{$dharmasala->LandDeedType}}">{{$dharmasala->LandDeedType}}</option>
                                                     <option value="">Select One</option>
+                                                    @foreach($deedTypes as $deedType)
+                                                        <option value="{{$deedType->StringParameter}}">{{$deedType->StringParameter}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
@@ -233,6 +245,9 @@ class="active"
                                                 <select class="form-control" id="WaterSupplyType" name="WaterSupplyType">
                                                     <option value="{{$dharmasala->WaterSupplyType}}">{{$dharmasala->WaterSupplyType}}</option>
                                                     <option value="">Select One</option>
+                                                    @foreach($supplyTypes as $supplyType)
+                                                        <option value="{{$supplyType->StringParameter}}">{{$supplyType->StringParameter}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
@@ -243,6 +258,9 @@ class="active"
                                                 <select class="form-control" id="ElectricityType" name="ElectricityType">
                                                     <option value="{{$dharmasala->ElectricityType}}">{{$dharmasala->ElectricityType}}</option>
                                                     <option value="">Select One</option>
+                                                    @foreach($electricityTypes as $electricityType)
+                                                        <option value="{{$electricityType->StringParameter}}">{{$electricityType->StringParameter}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
@@ -253,6 +271,9 @@ class="active"
                                                 <select class="form-control" id="SecurityType" name="SecurityType">
                                                     <option value="{{$dharmasala->SecurityType}}">{{$dharmasala->SecurityType}}</option>
                                                     <option value="">Select One</option>
+                                                    @foreach($organizeTypes as $organizeType)
+                                                        <option value="{{$organizeType->StringParameter}}">{{$organizeType->StringParameter}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
@@ -332,6 +353,75 @@ class="active"
                             <!-- form -->
                         </div>
                         <!-- Shop/Establishment Details of Applicant -->
+                        <!-- Upload Documents -->
+                        <div class="col-md-6">
+                            <div class="card-header card-bg">
+                                <div class="card-title my-card-title">Upload Documents</div>
+                            </div>
+                            <!-- form -->
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Lodge/dharmasala Frontage Photograph</span>
+                                                    <input type="file" style="width:100%;" id="dharmasalaFrontagePath" name="dharmasalaFrontagePath">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Aadhar No Photograph</span>
+                                                    <input type="file" style="width:100%;" id="AadharNoPath" name="AadharNoPath">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Fire Extinguishers Photograph</span>
+                                                    <input type="file" style="width:100%;" id="FireExtinguishersPath" name="FireExtinguishersPath">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload CCTV Camera Photograph</span>
+                                                    <input type="file" style="width:100%;" id="CCTVCameraPath" name="CCTVCameraPath">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Name Plate With Mobile No Photograph</span>
+                                                    <input type="file" style="width:100%;" id="NamePlatePath" name="NamePlatePath">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Entry and Exit Photograph</span>
+                                                    <input type="file" style="width:100%;" id="EntryExitPath" name="EntryExitPath">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Building Plan Photograph</span>
+                                                    <input type="file" style="width:100%;" id="BuildingPlanPath" name="BuildingPlanPath">
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Solid Waste Photograph</span>
+                                                    <input type="file" style="width:100%;" id="SolidWastePath" name="SolidWastePath">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Holding Tax Receipt Photograph</span>
+                                                    <input type="file" style="width:100%;" id="HoldingTaxReceiptPath" name="HoldingTaxReceiptPath">
+                                            </td>
+                                        </tr>
+                                        <tr colspan="4" class="spin-label">
+                                            <td>
+                                            @if(auth()->user()->user_type=='2')
+                                                <button class="btn btn-success"><i class="icon-file-archive-o"></i>
+                                                    Submit</button>
+                                            @endif
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- form -->
+                        </div>
+                        <!-- Upload Documents -->
                         </form>
                     </div>
                 </div>
@@ -465,6 +555,7 @@ class="active"
 @endsection
 
 @section('script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
     integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -477,7 +568,6 @@ class="active"
     $(document).ready(function () {
         $('#datatable').DataTable();
         displayNone();
-        disableInputs();
     });
 
     function displayNone() {
@@ -497,9 +587,38 @@ class="active"
         document.getElementById(id).style.display = 'block';
     }
 
-    function inputTools(){
-        window.open('https://www.google.com/inputtools/try/','_blank');
+    function inputTools() {
+        window.open('https://www.google.com/inputtools/try/', '_blank');
     }
+
+    // Comment Save Using Ajax
+    $(function () {
+        $('#commentTo').submit(function (e) {
+            var targetform = $('#commentTo');
+            var murl = targetform.attr('action');
+            var mdata = $("#commentTo").serialize();
+            e.preventDefault();
+
+            $.ajax({
+                url: murl,
+                type: "post",
+                data: mdata,
+                datatype: "json",
+                success: function (mdata) {
+                    // alert("Data Successfully Added");
+                    Swal.fire(
+                        'Good job!',
+                        'You have Successfully given the Remark!',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    alert(error);
+                },
+            });
+        });
+    });
+    // Comment Save Using Ajax
 
 </script>
 @endsection

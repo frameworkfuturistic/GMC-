@@ -31,7 +31,7 @@ active
                             <!-- form tag -->
 
                             <!-- form -->
-                            <form action="{{ url('api/rnc/addAgency' )}}" method="post" enctype="multipart/form-data">
+                            <form action="{{ url('rnc/addAgency' )}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('post')
                                 <div class="table-responsive">

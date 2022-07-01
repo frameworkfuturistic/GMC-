@@ -8,6 +8,9 @@ use App\Http\Controllers\DharmasalaController;
 use App\Http\Controllers\HostelController;
 use App\Http\Controllers\PrivateLandController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\HoardingController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,11 +56,20 @@ Route::post('generateOTP', [OTPController::class, 'generate'])->name('generate')
 // Admin Interface Routes
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('rnc/dashboard', function () {
-    return view('admin.index');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('rnc/dashboard', function () {
+//     return view('admin.index');
+// })->name('dashboard');
 
-// Self Advet
+Route::group(['middleware'=>['auth:sanctum','verified']],function(){
+
+Route::get('rnc/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+// ADD ADMIN or USERS
+Route::get('rnc/add-users',[RegisterController::class,'index']);
+Route::post('rnc/store-users',[RegisterController::class,'store']);
+// ADD ADMIN OR USERS
+
+    // Self Advet
 Route::get('rnc/advetInbox', [AdminController::class, 'SelfAdvetInbox']);
 Route::get('rnc/updateadvetInbox/{id}', [AdminController::class, 'updateSelfAdvetInbox']);
 
@@ -188,17 +200,48 @@ Route::post('rnc/agencyInboxComment/{id}',[AgencyController::class,'addComment']
 Route::put('rnc/agencyWorkflow/{id}',[AgencyController::class,'agencyWorkflow']);
 // AGENCY
 
+// AGENCY ACCOUNT OCCUPIED DASHBOARD
+Route::get('rnc/newHoarding',[HoardingController::class,'newHoarding']);
+Route::get('rnc/lastBill',[HoardingController::class,'lastBill']);
+Route::get('rnc/hoardingPayment',[HoardingController::class,'hoardingPayment']);
+Route::get('rnc/currentHoarding',[HoardingController::class,'currentHoarding']);
+Route::get('rnc/rejectedHoarding',[HoardingController::class,'rejectedHoarding']);
+Route::get('rnc/vendorProfile',[HoardingController::class,'vendorProfile']);
+Route::get('rnc/hoardingRules',[HoardingController::class,'hoardingRules']);
+Route::post('storeHoarding',[HoardingController::class,'storeHoarding']);
+// AGENCY ACCOUNT OCCUPIED DASHBOARD
+
+// HOARDING 
+    /* VIEW PART */
+    Route::get('rnc/hoarding-inbox',[HoardingController::class,'hoardingInbox']);
+    Route::get('rnc/hoarding-inbox/{id}',[HoardingController::class,'hoardingInboxByID']);
+
+    Route::get('rnc/hoarding-outbox',[HoardingController::class,'hoardingOutbox']);
+    Route::get('rnc/hoarding-outbox/{id}',[HoardingController::class,'hoardingOutboxByID']);
+
+    Route::get('rnc/hoarding-payment',[HoardingController::class,'hoardingPmt']);
+
+    Route::get('rnc/hoarding-approved',[HoardingController::class,'hoardingApproved']);
+    Route::get('rnc/hoarding-approved/{id}',[HoardingController::class,'hoardingApprovedByID']);
+
+    Route::get('rnc/hoarding-rejected',[HoardingController::class,'hoardingRejected']);
+    Route::get('rnc/hoarding-rejected/{id}',[HoardingController::class,'hoardingRejectedByID']);
+    /*  VIEW PART  */
+
+    /* UPDATE HOARDING DETAILS*/
+    Route::post('rnc/edit-hoarding/{id}',[HoardingController::class,'editHoarding']);
+    /* UPDATE HOARDING DETAILS */
+    /* COMMENT */
+    Route::post('rnc/hoarding-inbox-comment',[HoardingController::class,'addComment']);
+    /* COMMENT */
+    Route::post('rnc/hoardingWorkflow',[HoardingController::class,'hoardingWorkflow']);
+
+// HOARDING
+
+
 
 // Admin Interface Routes
 
-Route::get('agencyDash', function () {
-    return view('admin.agencyDash.dashboard');
+
 });
 
-Route::get('rnc/newHoarding',function(){
-    return view('admin.agencyDash.newHoarding');
-});
-
-Route::get('rnc/lastBill',function(){
-    return view('admin.agencyDash.lastBill');
-});
