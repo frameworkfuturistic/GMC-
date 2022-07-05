@@ -25,7 +25,7 @@ class EloquentShopRepository implements ShopRepository{
      */
 
     public function shopMasterView(){
-        $shop=Shop::all();
+        $shop=Shop::orderBy('id', 'DESC')->get();
         $array=[
             'parents'=>$this->parent,
             'childs'=>$this->child,
@@ -62,6 +62,7 @@ class EloquentShopRepository implements ShopRepository{
         ]);
 
         $shop=Shop::where('AreaName','=',$request->AreaName)
+                    ->orderBy('id','Desc')
                     ->get();
         $arr=array();
         foreach($shop as $shops){
@@ -101,7 +102,7 @@ class EloquentShopRepository implements ShopRepository{
      * Getting All Shops
      */
     public function getAllShops(){
-        $shop=Shop::all();
+        $shop=Shop::orderBy('id', 'DESC')->get();
         $arr=array();
         foreach($shop as $shops){
             $val['id']=$shops->id ?? '';
