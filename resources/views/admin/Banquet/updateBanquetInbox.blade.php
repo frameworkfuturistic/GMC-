@@ -799,6 +799,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#banquetInbox").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

@@ -140,6 +140,7 @@ class="active"
 @section('script')
 <script>
     $(document).ready(function () {
+        $("#advetPaymentActive").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
             // buttons: [

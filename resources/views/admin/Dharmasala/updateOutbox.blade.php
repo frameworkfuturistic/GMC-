@@ -12,8 +12,8 @@ class="active"
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        {{ session()->get('message') }}
-    </div>
+    {{ session()->get('message') }}
+</div>
 @endif
 <ul class="nav nav-pills nav-justified mb-8">
     <li class="nav-item col-md-4">
@@ -52,75 +52,95 @@ class="active"
                                     APPLICATION</div>
                             </div>
                             <!-- form -->
-                            <form action="{{url('rnc/updatedharmasala/'.$dharmasala->id)}}" method="POST" enctype="multipart/form-data">
-                                @csrf 
+                            <form action="{{url('rnc/updatedharmasala/'.$dharmasala->id)}}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
                                 @method('put')
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td class="spin-label">Applicant<span class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Applicant<span
+                                                        class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input class="form-control" id="Applicant" name="Applicant" value="{{$dharmasala->Applicant}}">
+                                                    <input class="form-control" id="Applicant" name="Applicant"
+                                                        value="{{$dharmasala->Applicant}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Father<span class="spin-separator spin-star">*</span></td>
-                                                <td class="spin-separator">:</td>
-
-                                                <td>
-                                                    <input class="form-control" id="Father" name="Father" type="text" value="{{$dharmasala->Father}}">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="spin-label">E-mail<span class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Father<span
+                                                        class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input class="form-control" id="email" name="email" type="email" value="{{$dharmasala->Email}}">
+                                                    <input class="form-control" id="Father" name="Father" type="text"
+                                                        value="{{$dharmasala->Father}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Residence Address<span class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">E-mail<span
+                                                        class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input class="form-control" id="ResidenceAddress" name="ResidenceAddress" type="text" value="{{$dharmasala->ResidenceAddress}}">
+                                                    <input class="form-control" id="email" name="email" type="email"
+                                                        value="{{$dharmasala->Email}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Residence Address<span
+                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-separator">:</td>
+
+                                                <td>
+                                                    <input class="form-control" id="ResidenceAddress"
+                                                        name="ResidenceAddress" type="text"
+                                                        value="{{$dharmasala->ResidenceAddress}}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="spin-label">Ward No<span
+                                                        class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <select class="form-control" id="WardNo" name="WardNo">
-                                                        <option value="{{$dharmasala->WardNo}}">{{$dharmasala->WardNo}}</option>
+                                                        <option value="{{$dharmasala->WardNo}}">{{$dharmasala->WardNo}}
+                                                        </option>
                                                         <option value="">Select One</option>
                                                         @foreach($wards as $ward)
-                                                            <option value="{{$ward->StringParameter}}">{{$ward->StringParameter}}</option>
+                                                        <option value="{{$ward->StringParameter}}">
+                                                            {{$ward->StringParameter}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Permanent Address<span class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Permanent Address<span
+                                                        class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input class="form-control" id="PermanentAddress" name="PermanentAddress" type="text" value="{{$dharmasala->PermanentAddress}}">
+                                                    <input class="form-control" id="PermanentAddress"
+                                                        name="PermanentAddress" type="text"
+                                                        value="{{$dharmasala->PermanentAddress}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Ward No<span
+                                                        class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <select class="form-control" id="WardNo1" name="WardNo1">
-                                                        <option value="{{$dharmasala->WardNo1}}">{{$dharmasala->WardNo1}}</option>
+                                                        <option value="{{$dharmasala->WardNo1}}">
+                                                            {{$dharmasala->WardNo1}}</option>
                                                         <option value="">Select One</option>
                                                         @foreach($wards as $ward)
-                                                            <option value="{{$ward->StringParameter}}">{{$ward->StringParameter}}</option>
+                                                        <option value="{{$ward->StringParameter}}">
+                                                            {{$ward->StringParameter}}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span class="field-validation-valid text-danger" data-valmsg-for="WardNo1" data-valmsg-replace="true"></span>
+                                                    <span class="field-validation-valid text-danger"
+                                                        data-valmsg-for="WardNo1" data-valmsg-replace="true"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -155,72 +175,83 @@ class="active"
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <tbody>
-                                            <tr>
-                                                <td class="spin-label">License Year<span class="spin-separator spin-star">*</span></td>
-                                                <td class="spin-separator">:</td>
-                                                <td>
-                                                    <input type="hidden" value="{{$dharmasala->id}}" id="id" name="id"> 
-                                                    <select class="form-control" id="LicenseYear" name="LicenseYear">
-                                                        <option value="{{$dharmasala->LicenseYear}}">{{$dharmasala->LicenseYear}}</option>
-                                                        <option value="">Select One</option>
-                                                        <option value="2018-19">2018-19</option>
-                                                        <option value="2019-20">2019-20</option>
-                                                        <option value="2020-21">2020-21</option>
-                                                        <option value="2021-22">2021-22</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td class="spin-label">License Year<span
+                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-separator">:</td>
+                                            <td>
+                                                <input type="hidden" value="{{$dharmasala->id}}" id="id" name="id">
+                                                <select class="form-control" id="LicenseYear" name="LicenseYear">
+                                                    <option value="{{$dharmasala->LicenseYear}}">
+                                                        {{$dharmasala->LicenseYear}}</option>
+                                                    <option value="">Select One</option>
+                                                    <option value="2018-19">2018-19</option>
+                                                    <option value="2019-20">2019-20</option>
+                                                    <option value="2020-21">2020-21</option>
+                                                    <option value="2021-22">2021-22</option>
+                                                </select>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>Entity Name<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="text" class="form-control" id="EntityName" name="EntityName" value="{{$dharmasala->EntityName}}">
+                                                <input type="text" class="form-control" id="EntityName"
+                                                    name="EntityName" value="{{$dharmasala->EntityName}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Entity Address<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="text" class="form-control" id="EntityAddress" name="EntityAddress" value="{{$dharmasala->EntityAddress}}">
+                                                <input type="text" class="form-control" id="EntityAddress"
+                                                    name="EntityAddress" value="{{$dharmasala->EntityAddress}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Holding No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="HoldingNo" name="HoldingNo" value="{{$dharmasala->HoldingNo}}">
+                                                <input class="form-control" type="text" id="HoldingNo" name="HoldingNo"
+                                                    value="{{$dharmasala->HoldingNo}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Trade License No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="LicenseNo" name="LicenseNo" value="{{$dharmasala->LicenseNo}}">
+                                                <input class="form-control" type="text" id="LicenseNo" name="LicenseNo"
+                                                    value="{{$dharmasala->LicenseNo}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Longitude<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="Longitude" name="Longitude" value="{{$dharmasala->Longitude}}">
+                                                <input class="form-control" type="text" id="Longitude" name="Longitude"
+                                                    value="{{$dharmasala->Longitude}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Latitude<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="Latitude" name="Latitude" value="{{$dharmasala->Latitude}}">
+                                                <input class="form-control" type="text" id="Latitude" name="Latitude"
+                                                    value="{{$dharmasala->Latitude}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Organization Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <select class="form-control" id="OrganizationType" name="OrganizationType">
-                                                    <option value="{{$dharmasala->OrganizationType}}">{{$dharmasala->OrganizationType}}</option>
+                                                <select class="form-control" id="OrganizationType"
+                                                    name="OrganizationType">
+                                                    <option value="{{$dharmasala->OrganizationType}}">
+                                                        {{$dharmasala->OrganizationType}}</option>
                                                     <option value="">Select One</option>
                                                     @foreach($organizeTypes as $organizeType)
-                                                        <option value="{{$organizeType->StringParameter}}">{{$organizeType->StringParameter}}</option>
+                                                    <option value="{{$organizeType->StringParameter}}">
+                                                        {{$organizeType->StringParameter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -230,10 +261,12 @@ class="active"
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <select class="form-control" id="LandDeedType" name="LandDeedType">
-                                                    <option value="{{$dharmasala->LandDeedType}}">{{$dharmasala->LandDeedType}}</option>
+                                                    <option value="{{$dharmasala->LandDeedType}}">
+                                                        {{$dharmasala->LandDeedType}}</option>
                                                     <option value="">Select One</option>
                                                     @foreach($deedTypes as $deedType)
-                                                        <option value="{{$deedType->StringParameter}}">{{$deedType->StringParameter}}</option>
+                                                    <option value="{{$deedType->StringParameter}}">
+                                                        {{$deedType->StringParameter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -242,11 +275,14 @@ class="active"
                                             <td>Water Supply Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <select class="form-control" id="WaterSupplyType" name="WaterSupplyType">
-                                                    <option value="{{$dharmasala->WaterSupplyType}}">{{$dharmasala->WaterSupplyType}}</option>
+                                                <select class="form-control" id="WaterSupplyType"
+                                                    name="WaterSupplyType">
+                                                    <option value="{{$dharmasala->WaterSupplyType}}">
+                                                        {{$dharmasala->WaterSupplyType}}</option>
                                                     <option value="">Select One</option>
                                                     @foreach($supplyTypes as $supplyType)
-                                                        <option value="{{$supplyType->StringParameter}}">{{$supplyType->StringParameter}}</option>
+                                                    <option value="{{$supplyType->StringParameter}}">
+                                                        {{$supplyType->StringParameter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -255,11 +291,14 @@ class="active"
                                             <td>Electricity Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <select class="form-control" id="ElectricityType" name="ElectricityType">
-                                                    <option value="{{$dharmasala->ElectricityType}}">{{$dharmasala->ElectricityType}}</option>
+                                                <select class="form-control" id="ElectricityType"
+                                                    name="ElectricityType">
+                                                    <option value="{{$dharmasala->ElectricityType}}">
+                                                        {{$dharmasala->ElectricityType}}</option>
                                                     <option value="">Select One</option>
                                                     @foreach($electricityTypes as $electricityType)
-                                                        <option value="{{$electricityType->StringParameter}}">{{$electricityType->StringParameter}}</option>
+                                                    <option value="{{$electricityType->StringParameter}}">
+                                                        {{$electricityType->StringParameter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -269,10 +308,12 @@ class="active"
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <select class="form-control" id="SecurityType" name="SecurityType">
-                                                    <option value="{{$dharmasala->SecurityType}}">{{$dharmasala->SecurityType}}</option>
+                                                    <option value="{{$dharmasala->SecurityType}}">
+                                                        {{$dharmasala->SecurityType}}</option>
                                                     <option value="">Select One</option>
                                                     @foreach($organizeTypes as $organizeType)
-                                                        <option value="{{$organizeType->StringParameter}}">{{$organizeType->StringParameter}}</option>
+                                                    <option value="{{$organizeType->StringParameter}}">
+                                                        {{$organizeType->StringParameter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -281,70 +322,86 @@ class="active"
                                             <td>No of CCTV Camera<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="number" id="CCTVCameraNo" name="CCTVCameraNo" value="{{$dharmasala->CCTVCameraNo}}">
+                                                <input class="form-control" type="number" id="CCTVCameraNo"
+                                                    name="CCTVCameraNo" value="{{$dharmasala->CCTVCameraNo}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>No of Beds<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="number" class="form-control" id="NoOfBeds" name="NoOfBeds" value="{{$dharmasala->NoOfBeds}}">
+                                                <input type="number" class="form-control" id="NoOfBeds" name="NoOfBeds"
+                                                    value="{{$dharmasala->NoOfBeds}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>No of Rooms<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="number" class="form-control" id="NoOfRooms" name="NoOfRooms" value="{{$dharmasala->NoOfRooms}}">
+                                                <input type="number" class="form-control" id="NoOfRooms"
+                                                    name="NoOfRooms" value="{{$dharmasala->NoOfRooms}}">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>No of Fire Extinguishers<span class="spin-separator spin-star">*</span></td>
+                                            <td>No of Fire Extinguishers<span class="spin-separator spin-star">*</span>
+                                            </td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="number" id="NoOfFireExtinguishers" name="NoOfFireExtinguishers" value="{{$dharmasala->NoOfFireExtinguishers}}">
+                                                <input class="form-control" type="number" id="NoOfFireExtinguishers"
+                                                    name="NoOfFireExtinguishers"
+                                                    value="{{$dharmasala->NoOfFireExtinguishers}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>No of Entry Gates<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="EntryGatesNo" name="EntryGatesNo" value="{{$dharmasala->NoOfEntryGate}}">
+                                                <input class="form-control" type="text" id="EntryGatesNo"
+                                                    name="EntryGatesNo" value="{{$dharmasala->NoOfEntryGate}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>No of Exit Gates<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="NoOfExitGate" name="NoOfExitGate" value="{{$dharmasala->NoOfExitGate}}">
+                                                <input class="form-control" type="text" id="NoOfExitGate"
+                                                    name="NoOfExitGate" value="{{$dharmasala->NoOfExitGate}}">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>No of Two Wheelers Parking Space<span class="spin-separator spin-star">*</span></td>
+                                            <td>No of Two Wheelers Parking Space<span
+                                                    class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="NoOfTwoWheelersParking" name="NoOfTwoWheelersParking" value="{{$dharmasala->NoOfTwoWheelersParking}}">
+                                                <input class="form-control" type="text" id="NoOfTwoWheelersParking"
+                                                    name="NoOfTwoWheelersParking"
+                                                    value="{{$dharmasala->NoOfTwoWheelersParking}}">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>No of Four Wheelers Parking Space<span class="spin-separator spin-star">*</span></td>
+                                            <td>No of Four Wheelers Parking Space<span
+                                                    class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="NoOfFourWheelersParking" name="NoOfFourWheelersParking" value="{{$dharmasala->NoOfFourWheelersParking}}">
+                                                <input class="form-control" type="text" id="NoOfFourWheelersParking"
+                                                    name="NoOfFourWheelersParking"
+                                                    value="{{$dharmasala->NoOfFourWheelersParking}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Aadhar Card No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="AadharNo" name="AadharNo" value="{{$dharmasala->AadharNo}}">
+                                                <input class="form-control" type="text" id="AadharNo" name="AadharNo"
+                                                    value="{{$dharmasala->AadharNo}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>PAN Card No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="PANNo" name="PANNo" value="{{$dharmasala->PANNo}}">
+                                                <input class="form-control" type="text" id="PANNo" name="PANNo"
+                                                    value="{{$dharmasala->PANNo}}">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -363,57 +420,75 @@ class="active"
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Lodge/dharmasala Frontage Photograph</span>
-                                                    <input type="file" style="width:100%;" id="dharmasalaFrontagePath" name="dharmasalaFrontagePath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
+                                                    Lodge/dharmasala Frontage Photograph</span>
+                                                <input type="file" style="width:100%;" id="dharmasalaFrontagePath"
+                                                    name="dharmasalaFrontagePath">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Aadhar No Photograph</span>
-                                                    <input type="file" style="width:100%;" id="AadharNoPath" name="AadharNoPath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Aadhar
+                                                    No Photograph</span>
+                                                <input type="file" style="width:100%;" id="AadharNoPath"
+                                                    name="AadharNoPath">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Fire Extinguishers Photograph</span>
-                                                    <input type="file" style="width:100%;" id="FireExtinguishersPath" name="FireExtinguishersPath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Fire
+                                                    Extinguishers Photograph</span>
+                                                <input type="file" style="width:100%;" id="FireExtinguishersPath"
+                                                    name="FireExtinguishersPath">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload CCTV Camera Photograph</span>
-                                                    <input type="file" style="width:100%;" id="CCTVCameraPath" name="CCTVCameraPath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload CCTV
+                                                    Camera Photograph</span>
+                                                <input type="file" style="width:100%;" id="CCTVCameraPath"
+                                                    name="CCTVCameraPath">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Name Plate With Mobile No Photograph</span>
-                                                    <input type="file" style="width:100%;" id="NamePlatePath" name="NamePlatePath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Name
+                                                    Plate With Mobile No Photograph</span>
+                                                <input type="file" style="width:100%;" id="NamePlatePath"
+                                                    name="NamePlatePath">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Entry and Exit Photograph</span>
-                                                    <input type="file" style="width:100%;" id="EntryExitPath" name="EntryExitPath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Entry
+                                                    and Exit Photograph</span>
+                                                <input type="file" style="width:100%;" id="EntryExitPath"
+                                                    name="EntryExitPath">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Building Plan Photograph</span>
-                                                    <input type="file" style="width:100%;" id="BuildingPlanPath" name="BuildingPlanPath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Building
+                                                    Plan Photograph</span>
+                                                <input type="file" style="width:100%;" id="BuildingPlanPath"
+                                                    name="BuildingPlanPath">
                                             </td>
                                         </tr>
-                                        
+
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Solid Waste Photograph</span>
-                                                    <input type="file" style="width:100%;" id="SolidWastePath" name="SolidWastePath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Solid
+                                                    Waste Photograph</span>
+                                                <input type="file" style="width:100%;" id="SolidWastePath"
+                                                    name="SolidWastePath">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Holding Tax Receipt Photograph</span>
-                                                    <input type="file" style="width:100%;" id="HoldingTaxReceiptPath" name="HoldingTaxReceiptPath">
+                                            <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Holding
+                                                    Tax Receipt Photograph</span>
+                                                <input type="file" style="width:100%;" id="HoldingTaxReceiptPath"
+                                                    name="HoldingTaxReceiptPath">
                                             </td>
                                         </tr>
                                         <tr colspan="4" class="spin-label">
                                             <td>
-                                            @if(auth()->user()->user_type=='2')
+                                                @if(auth()->user()->user_type=='2')
                                                 <button class="btn btn-success"><i class="icon-file-archive-o"></i>
                                                     Submit</button>
-                                            @endif
+                                                @endif
                                             </td>
                                         </tr>
                                     </tbody>
@@ -428,37 +503,36 @@ class="active"
                 <!-- application details tab -->
                 <!-- workflow tab -->
                 <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
-                        <div class="card-header card-bg">
-                            <div class="card-title my-card-title">Office Communication Workflow</div>
-                        </div>
-                            <div class="card-body">
-                                <!-- comments -->
-                                <div class="bootstrap snippets bootdey mb-top">
-                                    <div class="blog-comment">
-                                        <h3 class="text-success">Comments</h3>
-                                        @foreach($comments as $comment)
-                                        <ul class="comments mb-top">
-                                            <li class="clearfix">
-                                                <div class="post-comments">
-                                                    <p class="meta">
-                                                        <span class="CommentUser"><i class="icon-android-contact"></i>
-                                                            {{$comment->UserID}}</span> says : <i
-                                                            class="pull-right"></i>
-                                                        <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
-                                                    </p>
-                                                    <p class="comment_color">
-                                                        <i class="icon-edit2"></i> {{$comment->Remarks}}
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <!-- comments -->
-                            </div>
+                    <div class="card-header card-bg">
+                        <div class="card-title my-card-title">Office Communication Workflow</div>
                     </div>
-                    <!-- workflow tab -->
+                    <div class="card-body">
+                        <!-- comments -->
+                        <div class="bootstrap snippets bootdey mb-top">
+                            <div class="blog-comment">
+                                <h3 class="text-success">Comments</h3>
+                                @foreach($comments as $comment)
+                                <ul class="comments mb-top">
+                                    <li class="clearfix">
+                                        <div class="post-comments">
+                                            <p class="meta">
+                                                <span class="CommentUser"><i class="icon-android-contact"></i>
+                                                    {{$comment->UserID}}</span> says : <i class="pull-right"></i>
+                                                <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
+                                            </p>
+                                            <p class="comment_color">
+                                                <i class="icon-edit2"></i> {{$comment->Remarks}}
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- comments -->
+                    </div>
+                </div>
+                <!-- workflow tab -->
                 <!-- documents tab -->
                 <div class="tab-pane" id="tab3" aria-labelledby="base-tab3" aria-expanded="false">
                     <div class="row">
@@ -466,40 +540,40 @@ class="active"
                         <div class="col-md-3">
                             <div class="scroll">
                                 <label for="">Lodge/dharmasala Frontage Photograph</label>
-                                <img src="{{$dharmasala->HostelFrontagePath}}" alt="" style="width:100%;" id="AadharPath"
-                                    name="AadharPath" onclick="myfunction('first')">
+                                <img src="{{$dharmasala->HostelFrontagePath}}" alt="" style="width:100%;"
+                                    id="AadharPath" name="AadharPath" onclick="myfunction('first')">
                                 <br>
                                 <label for="">Aadhar Document Photo</label>
                                 <img src="{{$dharmasala->AadharNoPath}}" alt="" style="width:100%;"
                                     id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
                                 <br>
                                 <label for="">Fire Extinguisher Photo</label>
-                                <img src="{{$dharmasala->FireExtinguishersPath}}" alt="" style="width: 100%;" id="dharmasalaPhotoPath"
-                                    name="dharmasalaPhotoPath" onclick="myfunction('third')">
+                                <img src="{{$dharmasala->FireExtinguishersPath}}" alt="" style="width: 100%;"
+                                    id="dharmasalaPhotoPath" name="dharmasalaPhotoPath" onclick="myfunction('third')">
                                 <br>
                                 <label for="">CCTV Camera Photo</label>
-                                <img src="{{$dharmasala->CCTVCameraPath}}" alt="" style="width: 100%;" id="OwnerBookPath"
-                                    name="OwnerBookPath" onclick="myfunction('forth')">
+                                <img src="{{$dharmasala->CCTVCameraPath}}" alt="" style="width: 100%;"
+                                    id="OwnerBookPath" name="OwnerBookPath" onclick="myfunction('forth')">
                                 <br>
                                 <label for="">Name Plate With Mobile Document Photo</label>
-                                <img src="{{$dharmasala->NamePlatePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('fifth')">
-                                    <br>
-                                    <label for="">Entry Exit Document Photo</label>
-                                <img src="{{$dharmasala->EntryExitPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                name="GSTNoPhotoPath" onclick="myfunction('sixth')">
+                                <img src="{{$dharmasala->NamePlatePath}}" alt="" style="width: 100%;"
+                                    id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('fifth')">
+                                <br>
+                                <label for="">Entry Exit Document Photo</label>
+                                <img src="{{$dharmasala->EntryExitPath}}" alt="" style="width: 100%;"
+                                    id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('sixth')">
                                 <br>
                                 <label for="">Building Plan Document Photo</label>
-                                <img src="{{$dharmasala->BuildingPlanPath}}" alt="" style="width: 100%;" id="DrivingLicensePath"
-                                    name="DrivingLicensePath" onclick="myfunction('seventh')">
+                                <img src="{{$dharmasala->BuildingPlanPath}}" alt="" style="width: 100%;"
+                                    id="DrivingLicensePath" name="DrivingLicensePath" onclick="myfunction('seventh')">
                                 <br>
                                 <label for="">Solid Waste Usage Document Photo</label>
-                                <img src="{{$dharmasala->SolidWastePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('eighth')">
-                                    <br>
-                                    <label for="">Holding Tax Document Photo</label>
-                                <img src="{{$dharmasala->HoldingTaxReceiptPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                name="GSTNoPhotoPath" onclick="myfunction('ninth')">
+                                <img src="{{$dharmasala->SolidWastePath}}" alt="" style="width: 100%;"
+                                    id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('eighth')">
+                                <br>
+                                <label for="">Holding Tax Document Photo</label>
+                                <img src="{{$dharmasala->HoldingTaxReceiptPath}}" alt="" style="width: 100%;"
+                                    id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('ninth')">
                             </div>
                         </div>
                         <!-- photos -->
@@ -509,28 +583,30 @@ class="active"
                                 <div class="card-title my-card-title">Preview</div>
                             </div>
                             <a href="{{$dharmasala->HostelFrontagePath}}" data-toggle="lightbox">
-                                <img src="{{$dharmasala->HostelFrontagePath}}" alt="" id="first" href="#img1" style="width: 100%;">
+                                <img src="{{$dharmasala->HostelFrontagePath}}" alt="" id="first" href="#img1"
+                                    style="width: 100%;">
                             </a>
 
                             <a href="{{$dharmasala->AadharNoPath}}" data-toggle="lightbox">
                                 <img src="{{$dharmasala->AadharNoPath}}" alt="" style="width:100%;" id="second">
                             </a>
                             <a href="{{$dharmasala->FireExtinguishersPath}}" data-toggle="lightbox">
-                                <img src="{{$dharmasala->FireExtinguishersPath}}" alt="" style="width: 100%;" id="third">
+                                <img src="{{$dharmasala->FireExtinguishersPath}}" alt="" style="width: 100%;"
+                                    id="third">
                             </a>
-                            
+
                             <a href="{{$dharmasala->CCTVCameraPath}}" data-toggle="lightbox">
                                 <img src="{{$dharmasala->CCTVCameraPath}}" alt="" style="width: 100%;" id="forth">
                             </a>
-                            
+
                             <a href="{{$dharmasala->NamePlatePath}}" data-toggle="lightbox">
                                 <img src="{{$dharmasala->NamePlatePath}}" alt="" style="width: 100%;" id="fifth">
                             </a>
-                            
+
                             <a href="{{$dharmasala->EntryExitPath}}" data-toggle="lightbox">
                                 <img src="{{$dharmasala->EntryExitPath}}" alt="" style="width: 100%;" id="sixth">
                             </a>
-                            
+
                             <a href="{{$dharmasala->BuildingPlanPath}}" data-toggle="lightbox">
                                 <img src="{{$dharmasala->BuildingPlanPath}}" alt="" style="width: 100%;" id="seventh">
                             </a>
@@ -538,7 +614,8 @@ class="active"
                                 <img src="{{$dharmasala->SolidWastePath}}" alt="" style="width: 100%;" id="eighth">
                             </a>
                             <a href="{{$dharmasala->HoldingTaxReceiptPath}}" data-toggle="lightbox">
-                                <img src="{{$dharmasala->HoldingTaxReceiptPath}}" alt="" style="width: 100%;" id="ninth">
+                                <img src="{{$dharmasala->HoldingTaxReceiptPath}}" alt="" style="width: 100%;"
+                                    id="ninth">
                             </a>
                         </div>
                         <!-- preview -->
@@ -567,6 +644,9 @@ class="active"
     });
 
     $(document).ready(function () {
+
+        // add active class
+        $("#dharmOutbox").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });
@@ -588,8 +668,8 @@ class="active"
         document.getElementById(id).style.display = 'block';
     }
 
-    function inputTools(){
-        window.open('https://www.google.com/inputtools/try/','_blank');
+    function inputTools() {
+        window.open('https://www.google.com/inputtools/try/', '_blank');
     }
 
     // Comment Save Using Ajax

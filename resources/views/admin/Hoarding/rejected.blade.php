@@ -84,6 +84,8 @@ class="active"
 <!-- datatable -->
 <script>
     $(document).ready(function () {
+        // add active class
+        $("#hoardingRejected").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
             buttons: {

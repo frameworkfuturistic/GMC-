@@ -523,6 +523,7 @@ class="active"
         $('#datatable').DataTable();
         disableInputs();
         displayNone();
+        $("#advetRejectedActive").addClass('active');
     } );
 
     function displayNone() {

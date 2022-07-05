@@ -663,6 +663,7 @@ class="active"
         $(this).ekkoLightbox();
     });
     $(document).ready(function () {
+        $("#advetApprovedActive").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

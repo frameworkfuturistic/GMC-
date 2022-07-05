@@ -510,6 +510,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#banquetRejected").addClass('active');
         $('#datatable').DataTable();
         displayNone();
         disableInputs();

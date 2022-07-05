@@ -104,6 +104,7 @@ class="active"
 @section('script')
 <script>
     $(document).ready(function() {
+        $("#advetRejectedActive").addClass('active');
         $('#datatable').DataTable();
     } );
 </script>

@@ -724,6 +724,8 @@ class="active"
 
     // Forward User using Ajax
     $(function () {
+        // add active class
+        $("#hoardingInbox").addClass('active');
         $('#forwardTo1').submit(function (e) {
             var targetform = $('#forwardTo1');
             var murl = targetform.attr('action');

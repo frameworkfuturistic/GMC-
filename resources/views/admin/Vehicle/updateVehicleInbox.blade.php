@@ -664,6 +664,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#vehicleInbox").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

@@ -756,6 +756,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#hostelInbox").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

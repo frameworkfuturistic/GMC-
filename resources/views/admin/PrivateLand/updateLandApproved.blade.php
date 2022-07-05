@@ -583,6 +583,7 @@ class="active"
     });
 
     $(document).ready(function () {
+        $("#landApprovedActive").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

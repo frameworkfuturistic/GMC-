@@ -140,6 +140,7 @@ class="active"
                 ]
             }
         });
+        $("#advetInboxActive").addClass('active');
     });
 
 </script>

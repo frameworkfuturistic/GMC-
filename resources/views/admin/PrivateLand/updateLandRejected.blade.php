@@ -458,6 +458,7 @@ class="active"
     });
 
     $(document).ready(function () {
+        $("#landRejectedActive").addClass('active');
         $('#datatable').DataTable();
         displayNone();
         disableInputs();

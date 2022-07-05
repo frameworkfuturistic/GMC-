@@ -121,6 +121,7 @@ class="active"
 @section('script')
 <script>
     $(document).ready(function () {
+        $("#advetOutboxActive").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
             buttons: {

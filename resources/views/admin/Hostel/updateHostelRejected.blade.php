@@ -475,6 +475,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#hostelRejected").addClass('active');
         $('#datatable').DataTable();
         displayNone();
         disableInputs();

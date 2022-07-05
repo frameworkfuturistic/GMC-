@@ -103,6 +103,8 @@ class="active"
 <!-- datatable -->
 <script>
     $(document).ready(function () {
+            // add active class
+        $("#hostelInbox").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
             buttons: {

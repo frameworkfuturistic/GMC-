@@ -716,6 +716,7 @@ class="active"
     $(document).ready(function () {
         $('#datatable').DataTable();
         displayNone();
+        $("#advetInboxActive").addClass('active');
     });
 
     function displayNone() {

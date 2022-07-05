@@ -103,10 +103,10 @@ Route::get('rnc/updateLandInbox/{id}', [PrivateLandController::class, 'UpdateLan
 Route::get('rnc/LandAdvetOutbox', [PrivateLandController::class, 'LandAdvetOutbox']);
 Route::get('rnc/updateLandOutbox/{id}', [PrivateLandController::class, 'updatePrivateLandOutbox']);
 
-Route::get('rnc/landApproved', [PrivateLandController::class, 'landApproved']);
+Route::get('rnc/LandAdvetApproved', [PrivateLandController::class, 'landApproved']);
 Route::get('rnc/updateLandApproved/{id}', [PrivateLandController::class, 'updateLandApproved']);
 
-Route::get('rnc/landRejected', [PrivateLandController::class, 'landRejected']);
+Route::get('rnc/LandAdvetRejected', [PrivateLandController::class, 'landRejected']);
 Route::get('rnc/updateLandRejected/{id}', [PrivateLandController::class, 'updateLandRejected']);
 // Private Land
  // Private Land

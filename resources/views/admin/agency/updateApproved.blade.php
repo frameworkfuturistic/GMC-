@@ -553,6 +553,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#agencyApproved").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

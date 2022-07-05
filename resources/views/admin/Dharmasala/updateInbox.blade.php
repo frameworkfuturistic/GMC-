@@ -509,7 +509,8 @@ class="active"
                                 <div class="card-title my-card-title">Verification Process Notes</div>
                             </div>
                             <!-- comments -->
-                            <form action="{{url('rnc/dharmasalaInboxComment/'.$dharmasala->id)}}" method="POST" id="commentTo">
+                            <form action="{{url('rnc/dharmasalaInboxComment/'.$dharmasala->id)}}" method="POST"
+                                id="commentTo">
                                 @method('POST')
                                 @csrf
                                 <div class="form-group mb-top">
@@ -597,21 +598,22 @@ class="active"
                             <div class="container bootstrap snippets bootdey">
                                 <div class="blog-comment">
                                     <h3 class="text-success">Comments</h3>
-                                        @foreach($comments as $comment)
-                                        <ul class="comments mb-top">
-                                            <li class="clearfix">
+                                    @foreach($comments as $comment)
+                                    <ul class="comments mb-top">
+                                        <li class="clearfix">
                                             <div class="post-comments">
                                                 <p class="meta">
-                                                    <span class="CommentUser"><i class="icon-android-contact"></i> {{$comment->UserID}}</span> says : <i class="pull-right"></i>
+                                                    <span class="CommentUser"><i class="icon-android-contact"></i>
+                                                        {{$comment->UserID}}</span> says : <i class="pull-right"></i>
                                                     <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
                                                 </p>
                                                 <p class="comment_color">
                                                     <i class="icon-edit2"></i> {{$comment->Remarks}}
                                                 </p>
                                             </div>
-                                            </li>
-                                        </ul>
-                                        @endforeach
+                                        </li>
+                                    </ul>
+                                    @endforeach
                                 </div>
                             </div>
                             </ul>
@@ -719,7 +721,7 @@ class="active"
 @endsection
 
 @section('pagescript')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 
 @section('script')
@@ -733,6 +735,9 @@ class="active"
     });
 
     $(document).ready(function () {
+
+        // add active class
+        $("#dharmInbox").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });
@@ -816,5 +821,6 @@ class="active"
         });
     });
     // Comment Save Using Ajax
+
 </script>
 @endsection

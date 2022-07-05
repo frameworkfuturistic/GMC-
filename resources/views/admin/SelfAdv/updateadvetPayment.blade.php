@@ -591,6 +591,7 @@ class="active"
         disableInputs();
         enableInputs();
         displayNone();
+        $("#advetPaymentActive").addClass('active');
     });
 
     function displayNone() {

@@ -646,6 +646,7 @@ class="active"
     });
 
     $(document).ready(function () {
+        $("#landInboxActive").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

@@ -134,6 +134,9 @@ Dashboard
 
 @section('script')
 <script>
+    $(document).ready(function(){
+        $("#dashActive").addClass('active');
+    });
     //Vehicle applications bar
     var ctxB = document.getElementById("barChart").getContext('2d');
     var myBarChart = new Chart(ctxB, {

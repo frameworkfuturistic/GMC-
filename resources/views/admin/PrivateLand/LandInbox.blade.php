@@ -109,6 +109,7 @@ class="active"
 <!-- datatable -->
 <script>
     $(document).ready(function () {
+        $("#landInboxActive").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
             buttons: {

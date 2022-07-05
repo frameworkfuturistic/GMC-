@@ -646,6 +646,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#hoardingOutbox").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

@@ -437,6 +437,8 @@ class="active"
 
     $(document).ready(function () {
         $('#datatable').DataTable();
+        // add active class
+        $("#vehicleRejected").addClass('active');
         displayNone();
         disableInputs();
     });

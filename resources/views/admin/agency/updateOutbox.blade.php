@@ -553,6 +553,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#agencyOutbox").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });

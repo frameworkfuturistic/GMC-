@@ -103,6 +103,9 @@ class="active"
 <!-- datatable -->
 <script>
     $(document).ready(function () {
+        
+        // add active class
+        $("#dharmRejected").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
             buttons: {

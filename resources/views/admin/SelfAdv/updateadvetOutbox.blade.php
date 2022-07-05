@@ -667,6 +667,7 @@ class="active"
     $(document).ready(function () {
         $('#datatable').DataTable();
         displayNone();
+        $("#advetOutboxActive").addClass('active');
     });
 
     function displayNone() {

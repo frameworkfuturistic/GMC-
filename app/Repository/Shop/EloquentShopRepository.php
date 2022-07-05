@@ -43,6 +43,7 @@ class EloquentShopRepository implements ShopRepository{
         dd($request->all());
 
         $shop=Shop::find($request->id);
+        
     }
 
     /**
@@ -78,6 +79,7 @@ class EloquentShopRepository implements ShopRepository{
         $arr=array();
         foreach($shop as $shops){
             $val['id']=$shops->id ?? '';
+            $val['AreaName']=$shops->AreaName ?? '';
             $val['Allotee']=$shops->Allotee ?? '';
             $val['ShopNo']=$shops->ShopNo ?? '';
             $val['ShopType']=$shops->ShopType ?? '';
@@ -113,10 +115,13 @@ class EloquentShopRepository implements ShopRepository{
      * Getting All Shops
      */
     public function getAllShops(){
-        $shop=Shop::orderBy('id', 'DESC')->get();
+        $shop=Shop::where('AreaName','=','SAKCHI')
+                   ->orderBy('id', 'DESC')
+                  ->get();
         $arr=array();
         foreach($shop as $shops){
             $val['id']=$shops->id ?? '';
+            $val['AreaName']=$shops->AreaName ?? '';
             $val['Allotee']=$shops->Allotee ?? '';
             $val['ShopNo']=$shops->ShopNo ?? '';
             $val['ShopType']=$shops->ShopType ?? '';
@@ -166,7 +171,20 @@ class EloquentShopRepository implements ShopRepository{
         $payment->PmtDate=date("Y-m-d");
         $payment->CollectedBy='1';
         $payment->save();
-        return response()->json('Successfully Saved',200);
+
+        $detail=Shop::find($payment->id);
+
+        $arry=[
+            'Message'=>'Successfully Saved',
+            'ShopId'=>$payment->ShopID,
+            'TranId'=>$payment->id,
+            'From'=>$payment->From,
+            'To'=>$payment->To,
+            'Amount'=>$payment->Amount,
+            'Area'=>$detail->AreaName,
+            'Address'=>$detail->Address
+        ];
+        return response()->json($arry,200);
     }
 
     /**
@@ -187,6 +205,20 @@ class EloquentShopRepository implements ShopRepository{
         $payment->PmtDate=date("Y-m-d");
         $payment->CollectedBy='1';
         $payment->save();
-        return response()->json('Successfully Updated',200);
+
+        $detail=Shop::find($payment->id);
+
+        $arry=[
+            'Message'=>'Successfully Saved',
+            'ShopId'=>$payment->ShopID,
+            'TranId'=>$payment->id,
+            'From'=>$payment->From,
+            'To'=>$payment->To,
+            'Amount'=>$payment->Amount,
+            'Area'=>$detail->AreaName,
+            'Address'=>$detail->Address
+        ];
+
+        return response()->json($arry,200);
     }   
 }

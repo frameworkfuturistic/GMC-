@@ -735,6 +735,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#banquetApproved").addClass('active');// add active class
         $('#datatable').DataTable();
         displayNone();
     });

@@ -597,6 +597,8 @@ class="active"
     });
 
     $(document).ready(function () {
+        // add active class
+        $("#vehicleApproved").addClass('active');
         $('#datatable').DataTable();
         displayNone();
     });
