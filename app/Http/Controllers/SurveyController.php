@@ -204,8 +204,6 @@ class SurveyController extends Controller
                 'hoardingLocation' => 'required',
                 'longitude' => 'required',
                 'latitude' => 'required',
-                'image1' => 'required',
-                'image2' => 'required',
                 'length' => 'required',
                 'width' => 'required',
                 'hoardingType' => 'required',

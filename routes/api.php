@@ -8,6 +8,7 @@ use App\Http\Controllers\HostelController;
 use App\Http\Controllers\PrivateLandController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -58,8 +59,11 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key','auth:sanctum'
     Route::get('gethoardingtypes',[SurveyController::class,'getHoardingTypes']);
 
     // Shop Attributes
-
-
-
     // Hoarding Survey
+
+    // Shops
+    Route::get('getAreaList',[ShopController::class,'getAreaList']);     //Getting Area List
+    Route::get('getShopByArea',[ShopController::class,'getShopByArea']); // Getting Shop By Area
+    Route::get('getAllShops',[ShopController::class,'getAllShops']);     // Get All Shops
+    // Shops
 });

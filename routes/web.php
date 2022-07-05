@@ -11,6 +11,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\HoardingController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -238,7 +239,12 @@ Route::post('storeHoarding',[HoardingController::class,'storeHoarding']);
 
 // HOARDING
 
+// Shops
+Route::get('rnc/AddShops',[ShopController::class,'shopMasterView']);
+Route::get('rnc/getShops/{id}',[ShopController::class,'getShops']);
 
+Route::get('rnc/BillShops',[ShopController::class,'shopBillView']);
+// Shops
 
 // Admin Interface Routes
 
