@@ -168,4 +168,25 @@ class EloquentShopRepository implements ShopRepository{
         $payment->save();
         return response()->json('Successfully Saved',201);
     }
+
+    /**
+     * Update Shop Payments
+     */
+    public function updateShopPayments(Request $request,$id){
+        $request->validate([
+            'shopId'=>'required',
+            'amount'=>'required'
+        ]);
+        
+        $payment=ShopPayment::find($id);
+        $payment->ShopID=$request->shopId;
+        $payment->From='2022-06-01';
+        $payment->To='2022-07-31';
+        $payment->Amount=$request->amount;
+        $payment->PmtMode='Cash';
+        $payment->PmtDate=date("Y-m-d");
+        $payment->CollectedBy='1';
+        $payment->save();
+        return response()->json('Successfully Updated',201);
+    }   
 }

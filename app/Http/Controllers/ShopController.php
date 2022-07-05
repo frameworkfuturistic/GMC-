@@ -70,4 +70,11 @@ class ShopController extends Controller
       public function shopPayments(Request $request){
         return $this->EloquentShop->shopPayments($request);
       }
+
+      /**
+       * Update Shop Payments
+       */
+      public function updateShopPayments(Request $request,$id){
+        return $this->EloquentShop->updateShopPayments($request,$id);
+      }
 }

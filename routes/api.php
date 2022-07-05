@@ -67,5 +67,6 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key','auth:sanctum'
     Route::get('getAllShops',[ShopController::class,'getAllShops']);     // Get All Shops
 
     Route::post('shopPayments',[ShopController::class,'shopPayments']); //Save Shop Payments
+    Route::put('updateShopPayments/{id}',[ShopController::class,'updateShopPayments']);
     // Shops
 });
