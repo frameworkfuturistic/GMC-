@@ -4,6 +4,7 @@ namespace App\Repository\Shop;
 use App\Repository\Shop\ShopRepository;
 use App\Traits\AppHelper;
 use App\Models\Shop;
+use App\Models\ShopPayment;
 use Illuminate\Http\Request;
 
 /**
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 class EloquentShopRepository implements ShopRepository{
 
     use AppHelper;
+
     public function __construct(){
         $this->menuApp();
     }
@@ -32,6 +34,15 @@ class EloquentShopRepository implements ShopRepository{
             'shops'=>$shop
         ];
         return view('admin.Shops.details-view')->with($array);
+    }
+
+    /**
+     * Edit Shops
+     */
+    public function editShops(Request $request){
+        dd($request->all());
+
+        $shop=Shop::find($request->id);
     }
 
     /**
@@ -135,5 +146,26 @@ class EloquentShopRepository implements ShopRepository{
             array_push($arr, $val);
         }
         return response()->json($arr,302);
+    }
+
+    /**
+     * Save Shop Payments
+     */
+    public function shopPayments(Request $request){
+        $request->validate([
+            'shopId'=>'required',
+            'amount'=>'required'
+        ]);
+        
+        $payment=new ShopPayment;
+        $payment->ShopID=$request->shopId;
+        $payment->From='2022-06-01';
+        $payment->To='2022-07-31';
+        $payment->Amount=$request->amount;
+        $payment->PmtMode='Cash';
+        $payment->PmtDate=date("Y-m-d");
+        $payment->CollectedBy='1';
+        $payment->save();
+        return response()->json('Successfully Saved',201);
     }
 }

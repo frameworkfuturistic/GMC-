@@ -242,6 +242,7 @@ Route::post('storeHoarding',[HoardingController::class,'storeHoarding']);
 // Shops
 Route::get('rnc/AddShops',[ShopController::class,'shopMasterView']);
 Route::get('rnc/getShops/{id}',[ShopController::class,'getShops']);
+Route::post('rnc/editShops',[ShopController::class,'editShops']);
 
 Route::get('rnc/BillShops',[ShopController::class,'shopBillView']);
 // Shops

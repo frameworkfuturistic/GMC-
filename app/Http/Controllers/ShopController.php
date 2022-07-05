@@ -34,6 +34,14 @@ class ShopController extends Controller
     }
 
     /**
+     * Edit Shops
+     */
+
+     public function editShops(Request $request){
+        return $this->EloquentShop->editShops($request);
+     }
+
+    /**
      * Getting Area List of Shops
      */
 
@@ -54,5 +62,12 @@ class ShopController extends Controller
       */
       public function getAllShops(){
         return $this->EloquentShop->getAllShops();
+      }
+
+      /**
+       * Shop Payments
+       */
+      public function shopPayments(Request $request){
+        return $this->EloquentShop->shopPayments($request);
       }
 }

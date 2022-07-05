@@ -77,13 +77,12 @@ class="active"
                             <div class="card-title my-card-title">Details of Shop</div>
                         </div>
                         <!-- form -->
-                        <form action="" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="_token" value="">
-                             <input type="hidden" name="_method" value="put">
+                        <form action="rnc/editShops" method="POST" enctype="multipart/form-data">
+                            @csrf 
                             <div class="table-responsive">
                                 <table id="myTable" class="table table-bordered">
                                     <tbody>
-                                        <input type="hidden" value="">
+                                        <input type="hidden" value="" id="id" name="id">
                                         <tr>
                                             <td class="spin-label">Allotee <span
                                                     class="spin-separator spin-star">*</span></td>
@@ -412,6 +411,7 @@ class="active"
                     alert("Result Not Found");
                 }
                 else{
+                    $('#id').val(results.id);
                     $('#allotee').val(results.Allotee);
                     $('#shopNo').val(results.ShopNo);
                     $('#address').val(results.Address);
@@ -423,7 +423,7 @@ class="active"
                     $('#preHeight').val(results.Height2);
                     $('#floors').val(results.NoOfFloors);
                     $('#preOccu').val(results.PresentOccupier);
-                    $('checkbox#tradeLicense').val(results.TradeLicense,'checked');
+                    $('#tradeLicense').val(results.TradeLicense);
                     $('#constType').val(results.ConstructionType);
                     $('#waterConnection').val(results.WaterConnection);
                     $('#electricityConnection').val(results.ElectricityConnection);
