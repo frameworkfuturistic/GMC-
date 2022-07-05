@@ -51,7 +51,7 @@ class EloquentShopRepository implements ShopRepository{
      */
     public function getShops($id){
         $shop=Shop::find($id);
-        return response()->json($shop,201);
+        return response()->json($shop,200);
     }
 
     /**
@@ -61,7 +61,7 @@ class EloquentShopRepository implements ShopRepository{
         $area=Shop::select('AreaName')
                     ->distinct()
                     ->get();
-        return response()->json($area,302);
+        return response()->json($area,200);
     }
 
     /**
@@ -106,7 +106,7 @@ class EloquentShopRepository implements ShopRepository{
             $val['Longitude']=$shops->Longitude ?? '';
             array_push($arr, $val);
         }
-        return response()->json($arr,302);
+        return response()->json($arr,200);
     }
 
     /**
@@ -145,7 +145,7 @@ class EloquentShopRepository implements ShopRepository{
             $val['Longitude']=$shops->Longitude ?? '';
             array_push($arr, $val);
         }
-        return response()->json($arr,302);
+        return response()->json($arr,200);
     }
 
     /**
@@ -166,7 +166,7 @@ class EloquentShopRepository implements ShopRepository{
         $payment->PmtDate=date("Y-m-d");
         $payment->CollectedBy='1';
         $payment->save();
-        return response()->json('Successfully Saved',201);
+        return response()->json('Successfully Saved',200);
     }
 
     /**
@@ -187,6 +187,6 @@ class EloquentShopRepository implements ShopRepository{
         $payment->PmtDate=date("Y-m-d");
         $payment->CollectedBy='1';
         $payment->save();
-        return response()->json('Successfully Updated',201);
+        return response()->json('Successfully Updated',200);
     }   
 }
