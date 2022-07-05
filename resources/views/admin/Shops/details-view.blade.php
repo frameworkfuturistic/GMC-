@@ -427,7 +427,7 @@ class="active"
                     $('#constType').val(results.ConstructionType);
                     $('#waterConnection').val(results.WaterConnection);
                     $('#electricityConnection').val(results.ElectricityConnection);
-                    $('#salePurchase').val(results.SalePurchase);
+                    $('#salePurchase').val(results.SalePurchae);
                     $('#contact').val(results.ContactNo);
                     $('#remarks').val(results.Remarks);
                     $('#photoLocation').val(results.PhotoLocation);

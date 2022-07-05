@@ -86,7 +86,7 @@ class EloquentShopRepository implements ShopRepository{
             $val['UtilityConnection']=$shops->UtilityConnection ?? '';
             $val['MobileConnection']=$shops->MobileConnection ?? '';
             $val['ElectricityConnection']=$shops->ElectricityConnection ?? '';
-            $val['SalePurchae']=$shops->SalePurchae ?? '';
+            $val['SalePurchase']=$shops->SalePurchase ?? '';
             $val['ContactNo']=$shops->ContactNo ?? '';
             $val['Remarks']=$shops->Remarks ?? '';
             $val['PhotographLocation']=$shops->PhotographLocation ?? '';
@@ -125,7 +125,7 @@ class EloquentShopRepository implements ShopRepository{
             $val['UtilityConnection']=$shops->UtilityConnection ?? '';
             $val['MobileConnection']=$shops->MobileConnection ?? '';
             $val['ElectricityConnection']=$shops->ElectricityConnection ?? '';
-            $val['SalePurchae']=$shops->SalePurchae ?? '';
+            $val['SalePurchase']=$shops->SalePurchase ?? '';
             $val['ContactNo']=$shops->ContactNo ?? '';
             $val['Remarks']=$shops->Remarks ?? '';
             $val['PhotographLocation']=$shops->PhotographLocation ?? '';
@@ -133,6 +133,6 @@ class EloquentShopRepository implements ShopRepository{
             $val['Longitude']=$shops->Longitude ?? '';
             array_push($arr, $val);
         }
-        return response()->json($arr,301);
+        return response()->json($arr,302);
     }
 }
