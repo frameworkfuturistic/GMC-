@@ -49,15 +49,17 @@ class EloquentTollRepository implements TollRepository
             $tp->UserId = auth()->user()->id;
             $tp->save();
             return response()->json([
-                'Message' => 'Successfully Saved',
-                'VendorID' => $toll->id,
-                'TranID' => $tp->id,
-                'Vendor Name' => $toll->VendorName,
-                'Market Name' => $toll->MarketName,
-                'Area Name' => $toll->AreaName,
-                'Days' => $tp->Days,
-                'Rate' => $tp->Rate,
-                'Amount' => $tp->Amount
+                'message' => 'Successfully Saved',
+                'vendor_id' => $toll->id,
+                'tran_id' => $tp->id,
+                'vendor_name' => $toll->VendorName,
+                'market_name' => $toll->MarketName,
+                'area_name' => $toll->AreaName,
+                'from' => $tp->From,
+                'to' => $tp->To,
+                'days' => $tp->Days,
+                'rate' => $tp->Rate,
+                'amount' => $tp->Amount
             ], 200);
         } catch (Exception $e) {
             return response()->json($e, 400);
