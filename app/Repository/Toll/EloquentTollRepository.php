@@ -182,8 +182,10 @@ class EloquentTollRepository implements TollRepository
 
             $tp = new TollPayment;
             $tp->TollId = $toll->id;
-            $tp->From = date($request->From);
-            $tp->To = date($request->To);
+            $From = date_create($request->From);
+            $tp->From = date_format($From, 'Y-m-d');
+            $To = date_create($request->To);
+            $tp->To = date_format($To, 'Y-m-d');
             $tp->Rate = $request->Rate;
             // Calculating Days
             $date1 = date_create($request->From);
