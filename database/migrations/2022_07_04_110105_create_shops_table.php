@@ -22,6 +22,9 @@ class CreateShopsTable extends Migration
             $table->mediumText('VendorName')->nullable();
             $table->mediumText('Address')->nullable();
             $table->mediumText('Location')->nullable();
+            $table->integer('Rate')->nullable();
+            $table->dateTime('LastPaymentDate')->nullable();
+            $table->integer('LastAmount')->nullable();
             $table->smallInteger('Length1')->nullable();
             $table->smallInteger('Breadth1')->nullable();
             $table->smallInteger('Height1')->nullable();
@@ -37,12 +40,13 @@ class CreateShopsTable extends Migration
             $table->mediumText('WaterConnection')->nullable();
             $table->mediumText('ElectricityConnection')->nullable();
             $table->mediumText('SalePurchase')->nullable();
-            $table->string('ContactNo',50)->nullable();
+            $table->string('ContactNo', 50)->nullable();
             $table->mediumText('Remarks')->nullable();
             $table->mediumText('PhotographLocation')->nullable();
-            $table->string('Latitude',10)->nullable();
-            $table->string('Longitude',10)->nullable();
+            $table->string('Latitude', 10)->nullable();
+            $table->string('Longitude', 10)->nullable();
             $table->boolean('Status')->nullable();
+            $table->integer('UserId')->nullable();
             $table->timestamps();
         });
     }

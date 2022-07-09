@@ -65,12 +65,12 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
     // Shops
 
     // Tolls
-    Route::post('tolls', [TollController::class, 'addToll']);
     Route::get('get-tolls/{id}', [TollController::class, 'getToll']);
     Route::get('get-tolls', [TollController::class, 'getAllToll']);
 
-    Route::get('get-toll-area', [TollController::class, 'getTollArea']);
-    Route::get('get-toll-market/{area}', [TollController::class, 'getTollMarketByArea']);
-    Route::get('get-vendor-details/{id}', [TollController::class, 'getVendorDetailsById']);
+    // Route::get('get-toll-location/{area}', [TollController::class, 'getTollLocationByArea']);
+    Route::get('get-toll-location', [TollController::class, 'getTollLocation']);
+    Route::get('get-vendor-details', [TollController::class, 'getVendorDetailsByArea']);
     Route::post('toll-payment/{id}', [TollController::class, 'tollPayment']);
+    Route::post('save-toll', [TollController::class, 'saveToll']);
 });

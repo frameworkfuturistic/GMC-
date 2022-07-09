@@ -21,14 +21,6 @@ class TollController extends Controller
     }
 
     /**
-     * Save Toll and Payment (Version 1)
-     */
-    public function addToll(Request $request)
-    {
-        return $this->EloquentToll->addToll($request);
-    }
-
-    /**
      * Save Toll Payment (Version 2)
      */
     public function tollPayment(Request $request, $id)
@@ -52,21 +44,21 @@ class TollController extends Controller
         return $this->EloquentToll->getAllToll();
     }
 
-    // Get All Area of Tolls
-    public function getTollArea()
+    // Get Location By Area
+    public function getTollLocation()
     {
-        return $this->EloquentToll->getTollArea();
-    }
-
-    // Get Market By Area
-    public function getTollMarketByArea($area)
-    {
-        return $this->EloquentToll->getTollMarketByArea($area);
+        return $this->EloquentToll->getTollLocation();
     }
 
     // Get Vendor Details By Ids
-    public function getVendorDetailsById($id)
+    public function getVendorDetailsByArea(Request $request)
     {
-        return $this->EloquentToll->getVendorDetailsById($id);
+        return $this->EloquentToll->getVendorDetailsByArea($request);
+    }
+
+    // Save Toll
+    public function saveToll(Request $request)
+    {
+        return $this->EloquentToll->saveToll($request);
     }
 }
