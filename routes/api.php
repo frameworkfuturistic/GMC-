@@ -1,17 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AgencyController;
-use App\Http\Controllers\BanquetController;
-use App\Http\Controllers\DharmasalaController;
-use App\Http\Controllers\HostelController;
-use App\Http\Controllers\PrivateLandController;
-use App\Http\Controllers\VehicleController;
-use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TollController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,9 +56,9 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
 
     // Shops
 
-    Route::get('getAreaList', [ShopController::class, 'getAreaList']);     //Getting Area List
+    Route::get('getAreaList', [ShopController::class, 'getAreaList']); //Getting Area List
     Route::get('getShopByArea', [ShopController::class, 'getShopByArea']); // Getting Shop By Area
-    Route::get('getAllShops', [ShopController::class, 'getAllShops']);     // Get All Shops
+    Route::get('getAllShops', [ShopController::class, 'getAllShops']); // Get All Shops
 
     Route::post('shopPayments', [ShopController::class, 'shopPayments']); //Save Shop Payments
     Route::put('updateShopPayments/{id}', [ShopController::class, 'updateShopPayments']);
@@ -76,4 +68,9 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
     Route::post('tolls', [TollController::class, 'addToll']);
     Route::get('get-tolls/{id}', [TollController::class, 'getToll']);
     Route::get('get-tolls', [TollController::class, 'getAllToll']);
+
+    Route::get('get-toll-area', [TollController::class, 'getTollArea']);
+    Route::get('get-toll-market/{area}', [TollController::class, 'getTollMarketByArea']);
+    Route::get('get-vendor-details/{id}', [TollController::class, 'getVendorDetailsById']);
+    Route::post('toll-payment/{id}', [TollController::class, 'tollPayment']);
 });

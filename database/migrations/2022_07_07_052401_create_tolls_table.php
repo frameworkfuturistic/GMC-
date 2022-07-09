@@ -20,6 +20,8 @@ class CreateTollsTable extends Migration
             $table->mediumText('ShopName')->nullable();
             $table->mediumText('MarketName')->nullable();
             $table->mediumText('AreaName')->nullable();
+            $table->dateTime('LastPaymentDate')->nullable();
+            $table->integer('LastAmount')->nullable();
             $table->integer('Rate')->nullable();
             $table->integer('UserId')->nullable();
             $table->timestamps();
