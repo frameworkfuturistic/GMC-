@@ -53,3 +53,7 @@ section h2.section-heading, section .section-heading.h2 {
         padding-bottom: 1px !important;
 }
 }
+
+header.masthead {
+    background-attachment: fixed !important;
+}

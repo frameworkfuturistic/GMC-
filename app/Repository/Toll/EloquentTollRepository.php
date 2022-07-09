@@ -132,16 +132,14 @@ class EloquentTollRepository implements TollRepository
      */
     public function getTollLocation()
     {
-        // $location = Toll::select('Location')
-        //     ->where('AreaName', '=', $area)
-        //     ->orderby('Location')
-        //     ->get();
-        // if ($location) {
-        //     return response()->json($location, 200);
-        // } else {
-        //     return response()->json('Location Not Available for this Area', 404);
-        // }
-        $location = DB::select("select distinct AreaName,Location,concat(AreaName,', ',Location) as AreaLocation from tolls");
+        $location = DB::select(
+            "select distinct
+                AreaName,
+                Location,
+                concat(AreaName,', ',Location)
+                as AreaLocation
+                from tolls"
+        );
         return response()->json($location, 200);
     }
 
@@ -171,7 +169,6 @@ class EloquentTollRepository implements TollRepository
         $request->validate([
             'From' => 'required',
             'To' => 'required',
-            'Days' => 'required',
             'Rate' => 'required',
         ]);
 
@@ -188,8 +185,13 @@ class EloquentTollRepository implements TollRepository
             $tp->From = date($request->From);
             $tp->To = date($request->To);
             $tp->Rate = $request->Rate;
-            $tp->Days = $request->Days;
-            $tp->Amount = $request->Days * $request->Rate;
+            // Calculating Days
+            $date1 = date_create($request->From);
+            $date2 = date_create($request->To);
+            $interval = date_diff($date1, $date2);
+            $tp->Days = $interval->format("%a");
+
+            $tp->Amount = $tp->Days * $request->Rate;
             $tp->PmtMode = 'CASH';
             $tp->PaymentDate = date("Y-m-d H:i:s");
             $tp->UserId = auth()->user()->id;

@@ -32,7 +32,7 @@
     </nav>
 
     <!-- ===================================== HEADER ============================================= -->
-    <header class="masthead" style="background-image:url('Landing/assets/img/header1-bg.jpg');">
+    <header class="masthead" id="parallax" style="background-image:url('Landing/assets/img/header1-bg.jpg');">
         <div class="container">
                 <div class="intro-text">
                     <div class="row">
