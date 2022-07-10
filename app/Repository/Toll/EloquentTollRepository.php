@@ -136,7 +136,6 @@ class EloquentTollRepository implements TollRepository
     {
         $location = DB::select(
             "select distinct
-                id,
                 AreaName,
                 Location,
                 concat(AreaName,', ',Location)
