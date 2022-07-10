@@ -155,12 +155,25 @@ class EloquentTollRepository implements TollRepository
             'AreaName' => 'required',
             'Location' => 'required',
         ]);
-        $details = Toll::select('id', 'ShopNo', 'ShopType', 'AreaName', 'VendorName', 'Address', 'Location', 'LastPaymentDate', 'LastAmount')
+        $arr = array();
+        $detail = Toll::select('id', 'ShopNo', 'ShopType', 'AreaName', 'VendorName', 'Address', 'Location', 'LastPaymentDate', 'LastAmount')
             ->where('AreaName', '=', $request->AreaName)
             ->where('Location', '=', $request->Location)
             ->orderByDesc('id')
             ->get();
-        return response()->json($details, 200);
+        foreach ($detail as $details) {
+            $val['id'] = $details->id ?? '';
+            $val['ShopNo'] = $details->ShopNo ?? '';
+            $val['ShopType'] = $details->ShopType ?? '';
+            $val['AreaName'] = $details->AreaName ?? '';
+            $val['VendorName'] = $details->VendorName ?? '';
+            $val['Address'] = $details->Address ?? '';
+            $val['Location'] = $details->Location ?? '';
+            $val['LastPaymentDate'] = $details->LastPaymentDate ?? '';
+            $val['LastAmount'] = $details->LastAmount ?? '';
+            array_push($arr, $val);
+        }
+        return response()->json($arr, 200);
     }
 
     /**
