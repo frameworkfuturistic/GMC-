@@ -73,4 +73,5 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
     Route::get('get-vendor-details', [TollController::class, 'getVendorDetailsByArea']);
     Route::post('toll-payment/{id}', [TollController::class, 'tollPayment']);
     Route::post('save-toll', [TollController::class, 'saveToll']);
+    Route::put('update-toll/{id}', [TollController::class, 'updateToll']);
 });

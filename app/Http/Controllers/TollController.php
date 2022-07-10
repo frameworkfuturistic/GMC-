@@ -61,4 +61,10 @@ class TollController extends Controller
     {
         return $this->EloquentToll->saveToll($request);
     }
+
+    // Update Toll
+    public function updateToll(Request $request, $id)
+    {
+        return $this->EloquentToll->updateToll($request, $id);
+    }
 }
