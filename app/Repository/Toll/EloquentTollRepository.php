@@ -14,7 +14,8 @@ class EloquentTollRepository implements TollRepository
     /**
      * Created On-07-07-2022
      * Created By-Anshu Kumar
-     * ------------------------------------------------------------------------------------------
+     * ----------------------------
+     * --------------------------------------------------------------
      * Repository for Toll payments and Tolls
      * ------------------------------------------------------------------------------------------
      * ------------------------------------------------------------------------------------------
@@ -84,6 +85,8 @@ class EloquentTollRepository implements TollRepository
             t.VendorName,
             date_format(a.From,'%d-%m-%Y') as DateFrom,
             date_format(a.To,'%d-%m-%Y') as DateTo,
+            t.AreaName,
+            t.Location,
             a.Amount,
             a.PmtMode,
             a.Rate,
@@ -114,6 +117,8 @@ class EloquentTollRepository implements TollRepository
                 $val['DailyTollFee'] = $tolls->Rate ?? '';
                 $val['Days'] = $tolls->Days ?? '';
                 $val['PaymentDate'] = $tolls->PaymentDate ?? '';
+                $val['AreaName'] = $tolls->AreaName ?? '';
+                $val['Location'] = $tolls->Location ?? '';
                 $val['CollectorName'] = $tolls->UserName ?? '';
                 $val['CollectorMobile'] = $tolls->mobile ?? '';
                 $val['CreatedAt'] = $created_at ?? '';
