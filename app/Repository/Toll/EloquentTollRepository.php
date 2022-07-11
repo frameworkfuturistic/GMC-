@@ -121,7 +121,7 @@ class EloquentTollRepository implements TollRepository
             }
             return response()->json($arr, 200);
         } else {
-            return response()->json(['Data Not Found for', 404]);
+            return response()->json(['Data Not Found for'], 404);
         }
     }
 
