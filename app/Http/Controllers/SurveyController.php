@@ -40,7 +40,14 @@ class SurveyController extends Controller
             }
             $user = new surveyLogin;
             $user->name = $request->name;
+            $user->mobile = $request->mobile;
+            $user->designation = $request->designation;
+            $user->gender = $request->gender;
+            $user->dob = $request->dob;
+            $user->offer_letter = $request->offer_letter;
+            $user->joining = $request->joining;
             $user->email = $request->email;
+            $user->photo = $request->photo;
             $user->password = Hash::make($request->password);
             $token = Str::random(80);
             // $token = $user->createToken('my-app-token')->plainTextToken;
@@ -847,5 +854,4 @@ class SurveyController extends Controller
 
         return response($response, 200);
     }
-
 }
