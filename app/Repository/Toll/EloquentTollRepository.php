@@ -268,7 +268,6 @@ class EloquentTollRepository implements TollRepository
                     return response()->json('Date Should be after the Last Payment Date', 400);
                 }
             }
-
         } catch (Exception $e) {
             return response($e, 400);
         }
@@ -312,7 +311,6 @@ class EloquentTollRepository implements TollRepository
         } catch (Exception $e) {
             return response()->json($e, 400);
         }
-
     }
 
     /**
