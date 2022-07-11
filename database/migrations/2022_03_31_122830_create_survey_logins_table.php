@@ -17,6 +17,7 @@ class CreateSurveyLoginsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
+            $table->string('mobile', 15);
             $table->string('password');
             $table->string('token');
             $table->timestamps();

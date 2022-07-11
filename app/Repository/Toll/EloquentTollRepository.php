@@ -77,22 +77,46 @@ class EloquentTollRepository implements TollRepository
      */
     public function getToll($id)
     {
-        $toll = Toll::where('id', $id)->get();
+        // $0toll = Toll::where('id', $id)->get();
+        $toll = DB::select("
+        select t.id as VendorID,
+            a.id as TranID,
+            t.VendorName,
+            date_format(a.From,'%d-%m-%Y') as DateFrom,
+            date_format(a.To,'%d-%m-%Y') as DateTo,
+            a.Amount,
+            a.PmtMode,
+            a.Rate,
+            a.Days,
+            a.PaymentDate,
+            s.name as UserName,
+            s.mobile,
+            a.created_at
+            from tolls t
+            inner join (select *
+            from toll_payments p where p.tollid=$id
+            order by p.id desc limit 1) as a on a.tollid=t.id
+            inner join survey_logins s on s.id=a.UserID
+        ");
+
         $arr = array();
         if ($toll) {
             foreach ($toll as $tolls) {
-                $val['id'] = $tolls->id ?? '';
+                $dDate = date_create($tolls->created_at);
+                $created_at = date_format($dDate, 'd-m-Y');
+                $val['VendorID'] = $tolls->VendorID ?? '';
                 $val['VendorName'] = $tolls->VendorName ?? '';
-                $val['VendorFather'] = $tolls->VendorFather ?? '';
-                $val['ShopName'] = $tolls->ShopName ?? '';
-                $val['MarketName'] = $tolls->MarketName ?? '';
-                $val['AreaName'] = $tolls->AreaName ?? '';
-                $val['Rate'] = $tolls->Rate ?? '';
-                $val['LastPaymentDate'] = $tolls->LastPaymentDate ?? '';
-                $val['LastAmount'] = $tolls->LastAmount ?? '';
-                $val['UserId'] = $tolls->UserId ?? '';
-                $val['created_at'] = $tolls->created_at ?? '';
-                $val['updated_at'] = $tolls->updated_at ?? '';
+                $val['TranID'] = $tolls->TranID ?? '';
+                $val['DateFrom'] = $tolls->DateFrom ?? '';
+                $val['DateTo'] = $tolls->DateTo ?? '';
+                $val['Amount'] = $tolls->Amount ?? '';
+                $val['PmtMode'] = $tolls->PmtMode ?? '';
+                $val['DailyTollFee'] = $tolls->Rate ?? '';
+                $val['Days'] = $tolls->Days ?? '';
+                $val['PaymentDate'] = $tolls->PaymentDate ?? '';
+                $val['CollectorName'] = $tolls->UserName ?? '';
+                $val['CollectorMobile'] = $tolls->mobile ?? '';
+                $val['CreatedAt'] = $created_at ?? '';
                 array_push($arr, $val);
             }
             return response()->json($arr, 200);
@@ -220,18 +244,25 @@ class EloquentTollRepository implements TollRepository
 
                     $toll->save();
                     $tp->save();
+
+                    $query = DB::select("
+                    select * from survey_logins where id='$toll->UserId'
+                    ");
                     return response()->json([
-                        'message' => 'Successfully Saved',
+                        'message' => 'Payment Successful',
+                        'vendor_name' => $toll->VendorName,
+                        'vendor_mobile' => $toll->ContactNo,
                         'vendor_id' => $toll->id,
                         'tran_id' => $tp->id,
-                        'vendor_name' => $toll->VendorName,
-                        'location_name' => $toll->Location,
-                        'area_name' => $toll->AreaName,
                         'from' => $tp->From,
                         'to' => $tp->To,
+                        'daily_toll_fee' => $tp->Rate,
+                        'location_name' => $toll->Location,
+                        'area_name' => $toll->AreaName,
                         'days' => $tp->Days,
-                        'rate' => $tp->Rate,
                         'amount' => $tp->Amount,
+                        'tax_collector_name' => $query[0]->name,
+                        'tax_collector_mobile' => $query[0]->mobile,
                     ], 200);
                 } else {
                     return response()->json('Date Should be after the Last Payment Date', 400);
