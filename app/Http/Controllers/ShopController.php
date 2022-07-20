@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ShopRequest;
 use App\Repository\Shop\EloquentShopRepository;
 
 /**
@@ -12,69 +13,86 @@ use App\Repository\Shop\EloquentShopRepository;
  */
 class ShopController extends Controller
 {
-    protected $eloquentShop;
+  protected $eloquentShop;
 
-    public function __construct(EloquentShopRepository $eloquentShop){
-        $this->EloquentShop=$eloquentShop;
-    }
-    /**
-     * Function for Shop Data and Details View
-     */
-    public function shopMasterView(){
-        return $this->EloquentShop->shopMasterView();
-    }
+  public function __construct(EloquentShopRepository $eloquentShop)
+  {
+    $this->EloquentShop = $eloquentShop;
+  }
+  /**
+   * Function for Shop Data and Details View
+   */
+  public function shopMasterView()
+  {
+    return $this->EloquentShop->shopMasterView();
+  }
 
-    /**
-     * Getting shop by Their Ids
-     * @param $id
-     */
+  /**
+   * Getting shop by Their Ids
+   * @param $id
+   */
 
-    public function getShops($id){
-        return $this->EloquentShop->getShops($id);
-    }
+  public function getShops($id)
+  {
+    return $this->EloquentShop->getShops($id);
+  }
 
-    /**
-     * Edit Shops
-     */
+  /**
+   * Save Shops
+   */
+  public function saveShops(ShopRequest $request)
+  {
+    return $this->EloquentShop->saveShops($request);
+  }
 
-     public function editShops(Request $request){
-        return $this->EloquentShop->editShops($request);
-     }
+  /**
+   * Edit Shops
+   */
 
-    /**
-     * Getting Area List of Shops
-     */
+  public function editShops(Request $request, $id)
+  {
+    return $this->EloquentShop->editShops($request, $id);
+  }
 
-     public function getAreaList(){
-        return $this->EloquentShop->getAreaList();
-     }
+  /**
+   * Getting Area List of Shops
+   */
 
-     /**
-      * Getting Shop By Area
-      */
+  public function getAreaList()
+  {
+    return $this->EloquentShop->getAreaList();
+  }
 
-     public function getShopByArea(Request $request){
-        return $this->EloquentShop->getShopByArea($request);
-     }
+  /**
+   * Getting Shop By Area
+   */
 
-     /**
-      * get All Shops List
-      */
-      public function getAllShops(){
-        return $this->EloquentShop->getAllShops();
-      }
+  public function getShopByArea(Request $request)
+  {
+    return $this->EloquentShop->getShopByArea($request);
+  }
 
-      /**
-       * Shop Payments
-       */
-      public function shopPayments(Request $request){
-        return $this->EloquentShop->shopPayments($request);
-      }
+  /**
+   * get All Shops List
+   */
+  public function getAllShops()
+  {
+    return $this->EloquentShop->getAllShops();
+  }
 
-      /**
-       * Update Shop Payments
-       */
-      public function updateShopPayments(Request $request,$id){
-        return $this->EloquentShop->updateShopPayments($request,$id);
-      }
+  /**
+   * Shop Payments
+   */
+  public function shopPayments(Request $request)
+  {
+    return $this->EloquentShop->shopPayments($request);
+  }
+
+  /**
+   * Update Shop Payments
+   */
+  public function updateShopPayments(Request $request, $id)
+  {
+    return $this->EloquentShop->updateShopPayments($request, $id);
+  }
 }

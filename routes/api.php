@@ -55,6 +55,8 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
     // Hoarding Survey
 
     // Shops
+    Route::post('save-shops', [ShopController::class, 'saveShops']);     // Save Shop
+    Route::put('edit-shops/{id}', [ShopController::class, 'editShops']);     // Update Shop
 
     Route::get('getAreaList', [ShopController::class, 'getAreaList']); //Getting Area List
     Route::get('getShopByArea', [ShopController::class, 'getShopByArea']); // Getting Shop By Area

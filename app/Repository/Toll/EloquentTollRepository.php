@@ -8,9 +8,11 @@ use App\Repository\Toll\TollRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Traits\Toll as TollTrait;
 
 class EloquentTollRepository implements TollRepository
 {
+    use TollTrait;
     /**
      * Created On-07-07-2022
      * Created By-Anshu Kumar
@@ -242,6 +244,7 @@ class EloquentTollRepository implements TollRepository
                     $Rate = $toll->Rate;
                     $tp->Amount = $tp->Days * $Rate;
                     $toll->LastAmount = $tp->Days * $Rate;
+                    $toll->LastPaymentDate = date('Y-m-d');
 
                     $tp->PmtMode = 'CASH';
                     $tp->PaymentDate = date("Y-m-d H:i:s");
@@ -289,28 +292,7 @@ class EloquentTollRepository implements TollRepository
         // dd($request->all());
         try {
             $toll = new Toll;
-            $toll->Allotee = $request->Allotee;
-            $toll->ShopNo = $request->ShopNo;
-            $toll->ShopType = $request->ShopType;
-            $toll->AreaName = $request->AreaName;
-            $toll->VendorName = $request->VendorName;
-            $toll->Address = $request->Address;
-            $toll->Rate = $request->Rate;
-
-            $lPaymentDate = date_create($request->LastPaymentDate);
-            $toll->LastPaymentDate = date_format($lPaymentDate, "Y-m-d");
-
-            $toll->Location = $request->Location;
-            $toll->NoOfFloors = $request->NoOfFloors;
-            $toll->PresentOccupier = $request->PresentOccupier;
-            $toll->TradeLicense = $request->TradeLicense;
-            $toll->Construction = $request->Construction;
-            $toll->ConstructionType = $request->ConstructionType;
-            $toll->SalePurchase = $request->SalePurchase;
-            $toll->ContactNo = $request->ContactNo;
-            $toll->Remarks = $request->Remarks;
-            $toll->PhotographLocation = $request->PhotographLocation;
-            $toll->UserId = auth()->user()->id;
+            $this->saving($toll, $request);
             $toll->save();
             return response()->json('Successfully Saved The Toll', 200);
         } catch (Exception $e) {
@@ -323,11 +305,13 @@ class EloquentTollRepository implements TollRepository
      */
     public function updateToll(Request $request, $id)
     {
+        $request->validate([
+            'VendorName' => 'required',
+        ]);
+
         try {
             $toll = Toll::find($id);
-            $toll->Rate = $request->Rate;
-            $mDate = date_create($request->LastPaymentDate);
-            $toll->LastPaymentDate = date_format($mDate, "Y-m-d");
+            $this->saving($toll, $request);
             $toll->save();
             return response()->json('Successfully Updated', 200);
         } catch (Exception $e) {
