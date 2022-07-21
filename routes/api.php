@@ -67,7 +67,7 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
     // Shops
 
     // Tolls
-    Route::get('get-tolls/{id}', [TollController::class, 'getToll']);
+    Route::get('gettollbyid/{id}', [TollController::class, 'getTollById']);
     Route::get('get-tolls', [TollController::class, 'getAllToll']);
 
     // Route::get('get-toll-location/{area}', [TollController::class, 'getTollLocationByArea']);

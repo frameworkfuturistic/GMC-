@@ -78,51 +78,64 @@ class EloquentTollRepository implements TollRepository
     /**
      * Repository for Get Tolls By ID
      */
-    public function getToll($id)
+    public function getTollById($id)
     {
         // $0toll = Toll::where('id', $id)->get();
-        $toll = DB::select("
+        $strSql = "
         select t.id as VendorID,
             a.id as TranID,
             t.VendorName,
-            date_format(a.From,'%d-%m-%Y') as DateFrom,
-            date_format(a.To,'%d-%m-%Y') as DateTo,
+            t.Address,
+            t.ShopType,
+            date_format(a.PaymentFrom,'%d-%m-%Y') as DateFrom,
+            date_format(a.PaymentTo,'%d-%m-%Y') as DateTo,
             t.AreaName,
-            t.Location,
+            t.Location, 
             a.Amount,
             a.PmtMode,
-            a.Rate,
+            a.Rate AS PaidRate,
             a.Days,
-            a.PaymentDate,
+            t.LastPaymentDate,
             s.name as UserName,
             s.mobile,
+            t.Rate,
             a.created_at
             from tolls t
-            inner join (select *
-            from toll_payments p where p.tollid=$id
-            order by p.id desc limit 1) as a on a.tollid=t.id
-            inner join survey_logins s on s.id=a.UserID
-        ");
+            left join (SELECT id,tollid,`FROM` AS PaymentFrom,`TO` AS PaymentTo,Amount,PmtMode,
+                       Rate,Days,PaymentDate,UserId,created_at from toll_payments where tollid=$id
+            order by id desc limit 1) as a on a.tollid=t.id
+            left join survey_logins s on s.id=a.UserID
+            WHERE t.id=$id
+        ";
+
+        $toll = DB::select($strSql);
 
         $arr = array();
         if ($toll) {
             foreach ($toll as $tolls) {
-                $dDate = date_create($tolls->created_at);
-                $created_at = date_format($dDate, 'd-m-Y');
+                // $dDate = date_create($tolls->created_at ?? '');
+                // $created_at = date_format($dDate, 'd-m-Y');
+
+                $created_at = $tolls->created_at ==null ? '' : date_format(date_create($tolls->created_at), 'd-m-Y');
                 $val['VendorID'] = $tolls->VendorID ?? '';
                 $val['VendorName'] = $tolls->VendorName ?? '';
+                $val['Address'] = $tolls->Address ?? '';
+                $val['ShopType'] = $tolls->ShopType ?? '';
+                $val['AreaName'] = $tolls->AreaName ?? '';
+                $val['Location'] = $tolls->Location ?? '';
+                $val['DailyTollFee'] = $tolls->Rate ?? '';
+                $val['LastPaymentDate'] = $tolls->LastPaymentDate ?? '';
+
                 $val['TranID'] = $tolls->TranID ?? '';
                 $val['DateFrom'] = $tolls->DateFrom ?? '';
                 $val['DateTo'] = $tolls->DateTo ?? '';
                 $val['Amount'] = $tolls->Amount ?? '';
                 $val['PmtMode'] = $tolls->PmtMode ?? '';
-                $val['DailyTollFee'] = $tolls->Rate ?? '';
-                $val['Days'] = $tolls->Days ?? '';
+                $val['RatePaid'] = $tolls->PaidRate ?? '';
+                $val['PmtDays'] = $tolls->Days ?? '';
                 $val['PaymentDate'] = $tolls->PaymentDate ?? '';
-                $val['AreaName'] = $tolls->AreaName ?? '';
-                $val['Location'] = $tolls->Location ?? '';
-                $val['CollectorName'] = $tolls->UserName ?? '';
-                $val['CollectorMobile'] = $tolls->mobile ?? '';
+                $val['UserName'] = $tolls->UserName ?? '';
+                $val['UserMobile'] = $tolls->mobile ?? '';
                 $val['CreatedAt'] = $created_at ?? '';
                 array_push($arr, $val);
             }

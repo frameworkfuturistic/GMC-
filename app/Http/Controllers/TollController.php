@@ -31,9 +31,9 @@ class TollController extends Controller
     /**
      * Get Tolls
      */
-    public function getToll($id)
+    public function getTollById($id)
     {
-        return $this->EloquentToll->getToll($id);
+        return $this->EloquentToll->getTollById($id);
     }
 
     /**
