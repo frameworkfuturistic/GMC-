@@ -86,4 +86,10 @@ class ShopController extends Controller
         return $this->EloquentShop->shopPayment($request, $id);
     }
 
+    // Total Shop Collection
+    public function totalShopCollection(Request $request)
+    {
+        return $this->EloquentShop->totalShopCollection($request);
+    }
+
 }

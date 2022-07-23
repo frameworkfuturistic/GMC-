@@ -50,13 +50,16 @@ class EloquentShopRepository implements ShopRepository
      */
     public function shopSummaryView()
     {
-        $stmQuery = "select sum(Amount) as TotalCollection
-                    from shop_payments";
-        $shop_total = DB::select($stmQuery);
+        $stmQuery = "select sum(Amount) as today_collection from toll_payments where PaymentDate=CURDATE();";
+        $today_toll_total = DB::select($stmQuery);
+
+        $stmQuery1 = "select sum(Amount) as today_collection from shop_payments where PaymentDate=CURDATE();";
+        $today_shop_total = DB::select($stmQuery1);
         $array = [
             'parents' => $this->parent,
             'childs' => $this->child,
-            'total_shop' => $shop_total[0]->TotalCollection,
+            'today_total_toll' => $today_toll_total[0]->today_collection,
+            'today_total_shop' => $today_shop_total[0]->today_collection,
         ];
         return view('admin.Shops.summary-view')->with($array);
     }
@@ -303,5 +306,16 @@ class EloquentShopRepository implements ShopRepository
         } catch (Exception $e) {
             return response()->json($e, 400);
         }
+    }
+
+    /**
+     * Total Shop Collection Amount Between Dates
+     */
+    public function totalShopCollection(Request $request)
+    {
+        $strQuery = "select sum(Amount) as collection from shop_payments
+                     where PaymentDate between DATE_FORMAT('$request->ShopFrom','%Y-%m-%d') and DATE_FORMAT('$request->ShopTo','%Y-%m-%d')";
+        $total = DB::select($strQuery);
+        return $total[0]->collection;
     }
 }

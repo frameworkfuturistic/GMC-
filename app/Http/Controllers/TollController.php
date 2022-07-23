@@ -73,4 +73,10 @@ class TollController extends Controller
     {
         return $this->EloquentToll->getAreaList();
     }
+
+    // Total Toll Collection
+    public function totalCollection(Request $request)
+    {
+        return $this->EloquentToll->totalCollection($request);
+    }
 }

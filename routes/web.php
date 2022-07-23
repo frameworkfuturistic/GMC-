@@ -11,6 +11,7 @@ use App\Http\Controllers\HostelController;
 use App\Http\Controllers\OTPController;
 use App\Http\Controllers\PrivateLandController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\TollController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
@@ -235,14 +236,17 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
 // HOARDING
 
+// Toll
+    Route::post('tollcollection', [TollController::class, 'totalCollection']);
+
 // Shops
     Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView']);
     Route::get('rnc/getShops/{id}', [ShopController::class, 'getShops']);
     Route::post('rnc/editShops', [ShopController::class, 'editShops']);
 
     Route::get('rnc/BillShops', [ShopController::class, 'shopBillView']);
-
     Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);
+    Route::post('totalshopcollection', [ShopController::class, 'totalShopCollection']);
 // Shops
 
 // Admin Interface Routes
