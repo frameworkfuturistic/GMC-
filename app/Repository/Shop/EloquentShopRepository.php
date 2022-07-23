@@ -2,19 +2,21 @@
 
 namespace App\Repository\Shop;
 
-use App\Repository\Shop\ShopRepository;
-use App\Traits\AppHelper;
+use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
 use App\Models\ShopPayment;
-use Illuminate\Http\Request;
-use App\Http\Requests\ShopRequest;
+use App\Repository\Shop\ShopRepository;
+use App\Traits\AppHelper;
 use App\Traits\Shop as ShopTrait;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 /**
- * Created On-04-07-2022 
+ * Created On-04-07-2022
  * Created By-Anshu Kumar
  * Repository for Saving Editing Bills and Payments for Shops
- * 
+ *
  */
 
 class EloquentShopRepository implements ShopRepository
@@ -38,13 +40,29 @@ class EloquentShopRepository implements ShopRepository
         $array = [
             'parents' => $this->parent,
             'childs' => $this->child,
-            'shops' => $shop
+            'shops' => $shop,
         ];
         return view('admin.Shops.details-view')->with($array);
     }
 
     /**
-     * Save Shops 
+     * Function for Shop Summary View Purpose
+     */
+    public function shopSummaryView()
+    {
+        $stmQuery = "select sum(Amount) as TotalCollection
+                    from shop_payments";
+        $shop_total = DB::select($stmQuery);
+        $array = [
+            'parents' => $this->parent,
+            'childs' => $this->child,
+            'total_shop' => $shop_total[0]->TotalCollection,
+        ];
+        return view('admin.Shops.summary-view')->with($array);
+    }
+
+    /**
+     * Save Shops
      */
     public function saveShops(ShopRequest $request)
     {
@@ -64,184 +82,226 @@ class EloquentShopRepository implements ShopRepository
     }
 
     /**
-     * Getting All shops
-     * @param $id
+     * Get Shop by id
+     * @param shopid $id
      */
-    public function getShops($id)
+    public function getShopByID($id)
     {
-        $shop = Shop::find($id);
-        return response()->json($shop, 200);
+        $strSql = "
+                select s.ID,
+                s.Market,
+                s.Allottee,
+                s.ShopNo,
+                s.Rate as RatePaid,
+                s.LastPaymentDate,
+                s.LastAmount as Amount,
+                a.PmtMode,
+                date_format(a.From,'%d-%m-%y') as PaymentFrom,
+                date_format(a.To,'%d-%m-%y') as PaymentTo,
+                a.Months as PmtMonths,
+                a.PaymentDate,
+                l.name as UserName,
+                l.mobile as UserMobile,
+                a.created_at
+                from shops s
+            left join (select * from shop_payments where ShopId=$id order by id desc limit 1) as a on a.ShopId=s.id
+            left join survey_logins l on l.id=s.UserId
+            where s.id=$id
+        ";
+
+        $shop = DB::select($strSql);
+        $arr = array();
+        foreach ($shop as $shops) {
+            $created_at = $shops->created_at == null ? '' : date_format(date_create($shops->created_at), 'd-m-Y');
+            $val['ShopID'] = $shops->ID ?? '';
+            $val['Market'] = $shops->Market ?? '';
+            $val['Allottee'] = $shops->Allottee ?? '';
+            $val['ShopNo'] = $shops->ShopNo ?? '';
+            $val['RatePaid'] = $shops->RatePaid ?? '';
+            $val['LastPaymentDate'] = $shops->LastPaymentDate ?? '';
+            $val['Amount'] = $shops->Amount ?? '';
+            $val['PmtMode'] = $shops->PmtMode ?? '';
+
+            $val['PaymentFrom'] = $shops->PaymentFrom ?? '';
+            $val['PaymentTo'] = $shops->PaymentTo ?? '';
+            $val['PmtMonths'] = $shops->PmtMonths ?? '';
+            $val['PaymentDate'] = $shops->PaymentDate ?? '';
+            $val['UserName'] = $shops->UserName ?? '';
+            $val['UserMobile'] = $shops->UserMobile ?? '';
+            $val['CreatedAt'] = $created_at ?? '';
+            array_push($arr, $val);
+            return response()->json($arr, 200);
+        }
     }
 
     /**
-     * Getting Shop Areas
+     * Get All Shops
+     * @return Shops
      */
-    public function getAreaList()
+
+    public function getAllshops()
     {
-        $area = Shop::select('AreaName')
+        $shop = Shop::orderBy('id', 'DESC')->get();
+        $arr = array();
+        if ($shop) {
+            foreach ($shop as $shops) {
+                $val['id'] = $shops->ID ?? '';
+                $val['Circle'] = $shops->Circle ?? '';
+                $val['Market'] = $shops->Market ?? '';
+                $val['Allottee'] = $shops->Allottee ?? '';
+                $val['ShopNo'] = $shops->ShopNo ?? '';
+                $val['Rate'] = $shops->Rate ?? '';
+                $val['LastPaymentDate'] = $shops->LastPaymentDate ?? '';
+                $val['LastAmount'] = $shops->LastAmount ?? '';
+                $val['created_at'] = $shops->created_at ?? '';
+                $val['updated_at'] = $shops->updated_at ?? '';
+                array_push($arr, $val);
+            }
+            return response()->json($arr, 200);
+        } else {
+            return response()->json(['Data Not Found', 404]);
+        }
+    }
+
+    /**
+     * Get Circle list of shops
+     */
+    public function getShopCircle()
+    {
+        $circle = Shop::select('Circle')
             ->distinct()
             ->get();
-        return response()->json($area, 200);
+        return $circle;
     }
 
     /**
-     * Getting Shop By Area
+     * Get Shop Circle wise Market
      */
-    public function getShopByArea(Request $request)
+    public function getShopCircleMarket()
+    {
+        $location = DB::select(
+            "select distinct
+                Circle,
+                Market,
+                concat(Circle,', ',Market)
+                as CircleMarket
+                from shops"
+        );
+        return response()->json($location, 200);
+    }
+
+    /**
+     * Get Shop Details By Circle and Market Wise
+     */
+    public function getShopDetailsByCircle(Request $request)
     {
         $request->validate([
-            'AreaName' => 'required'
+            'Circle' => 'required',
+            'Market' => 'required',
         ]);
 
-        $shop = Shop::where('AreaName', '=', $request->AreaName)
-            ->orderBy('id', 'Desc')
+        $shop = Shop::select('ID', 'Circle', 'Market', 'Allottee', 'ShopNo', 'Rate', 'LastPaymentDate', 'LastAmount', 'created_at', 'updated_at')
+            ->where('Circle', '=', $request->Circle)
+            ->where('Market', '=', $request->Market)
+            ->orderByDesc('ID')
             ->get();
+
         $arr = array();
-        foreach ($shop as $shops) {
-            $val['id'] = $shops->id ?? '';
-            $val['AreaName'] = $shops->AreaName ?? '';
-            $val['Allotee'] = $shops->Allotee ?? '';
-            $val['ShopNo'] = $shops->ShopNo ?? '';
-            $val['ShopType'] = $shops->ShopType ?? '';
-            $val['VendorName'] = $shops->VendorName ?? '';
-            $val['Address'] = $shops->Address ?? '';
-            $val['Location'] = $shops->Location ?? '';
-            $val['Length1'] = $shops->Length1 ?? '';
-            $val['Breadth1'] = $shops->Breadth1 ?? '';
-            $val['Height1'] = $shops->Height1 ?? '';
-            $val['Length2'] = $shops->Length2 ?? '';
-            $val['Breadth2'] = $shops->Breadth2 ?? '';
-            $val['Height2'] = $shops->Height2 ?? '';
-            $val['NoOfFloors'] = $shops->NoOfFloors ?? '';
-            $val['PresentOccupier'] = $shops->PresentOccupier ?? '';
-            $val['TradeLicense'] = $shops->TradeLicense ?? '';
-            $val['Construction'] = $shops->Construction ?? '';
-            $val['ConstructionType'] = $shops->ConstructionType ?? '';
-            $val['UtilityConnection'] = $shops->UtilityConnection ?? '';
-            $val['MobileConnection'] = $shops->MobileConnection ?? '';
-            $val['ElectricityConnection'] = $shops->ElectricityConnection ?? '';
-            $val['SalePurchase'] = $shops->SalePurchase ?? '';
-            $val['ContactNo'] = $shops->ContactNo ?? '';
-            $val['Remarks'] = $shops->Remarks ?? '';
-            $val['PhotographLocation'] = $shops->PhotographLocation ?? '';
-            $val['Latitude'] = $shops->Latitude ?? '';
-            $val['Longitude'] = $shops->Longitude ?? '';
-            array_push($arr, $val);
+        if ($shop) {
+            foreach ($shop as $shops) {
+                $val['id'] = $shops->ID ?? '';
+                $val['Circle'] = $shops->Circle ?? '';
+                $val['Market'] = $shops->Market ?? '';
+                $val['Allottee'] = $shops->Allottee ?? '';
+                $val['ShopNo'] = $shops->ShopNo ?? '';
+                $val['Rate'] = $shops->Rate ?? '';
+                $val['LastPaymentDate'] = $shops->LastPaymentDate ?? '';
+                $val['LastAmount'] = $shops->LastAmount ?? '';
+                $val['created_at'] = $shops->created_at ?? '';
+                $val['updated_at'] = $shops->updated_at ?? '';
+                array_push($arr, $val);
+            }
+            return response()->json($arr, 200);
+        } else {
+            return response()->json(['Data Not Found', 404]);
         }
-        return response()->json($arr, 200);
     }
 
     /**
-     * Getting All Shops
+     * Shop Payments
      */
-    public function getAllShops()
-    {
-        $shop = Shop::where('AreaName', '=', 'SAKCHI')
-            ->orderBy('id', 'DESC')
-            ->get();
-        $arr = array();
-        foreach ($shop as $shops) {
-            $val['id'] = $shops->id ?? '';
-            $val['AreaName'] = $shops->AreaName ?? '';
-            $val['Allotee'] = $shops->Allotee ?? '';
-            $val['ShopNo'] = $shops->ShopNo ?? '';
-            $val['ShopType'] = $shops->ShopType ?? '';
-            $val['VendorName'] = $shops->VendorName ?? '';
-            $val['Address'] = $shops->Address ?? '';
-            $val['Location'] = $shops->Location ?? '';
-            $val['Length1'] = $shops->Length1 ?? '';
-            $val['Breadth1'] = $shops->Breadth1 ?? '';
-            $val['Height1'] = $shops->Height1 ?? '';
-            $val['Length2'] = $shops->Length2 ?? '';
-            $val['Breadth2'] = $shops->Breadth2 ?? '';
-            $val['Height2'] = $shops->Height2 ?? '';
-            $val['NoOfFloors'] = $shops->NoOfFloors ?? '';
-            $val['PresentOccupier'] = $shops->PresentOccupier ?? '';
-            $val['TradeLicense'] = $shops->TradeLicense ?? '';
-            $val['Construction'] = $shops->Construction ?? '';
-            $val['ConstructionType'] = $shops->ConstructionType ?? '';
-            $val['UtilityConnection'] = $shops->UtilityConnection ?? '';
-            $val['MobileConnection'] = $shops->MobileConnection ?? '';
-            $val['ElectricityConnection'] = $shops->ElectricityConnection ?? '';
-            $val['SalePurchase'] = $shops->SalePurchase ?? '';
-            $val['ContactNo'] = $shops->ContactNo ?? '';
-            $val['Remarks'] = $shops->Remarks ?? '';
-            $val['PhotographLocation'] = $shops->PhotographLocation ?? '';
-            $val['Latitude'] = $shops->Latitude ?? '';
-            $val['Longitude'] = $shops->Longitude ?? '';
-            array_push($arr, $val);
-        }
-        return response()->json($arr, 200);
-    }
-
-    /**
-     * Save Shop Payments
-     */
-    public function shopPayments(Request $request)
+    public function shopPayment(Request $request, $id)
     {
         $request->validate([
-            'shopId' => 'required',
-            'amount' => 'required'
+            'To' => 'required',
         ]);
 
-        $payment = new ShopPayment;
-        $payment->ShopID = $request->shopId;
-        $payment->From = '2022-06-01';
-        $payment->To = '2022-07-31';
-        $payment->Amount = $request->amount;
-        $payment->PmtMode = 'Cash';
-        $payment->PmtDate = date("Y-m-d");
-        $payment->CollectedBy = '1';
-        $payment->save();
+        try {
+            $shop = Shop::find($id);
+            $mLastPaymentDate = $shop->LastPaymentDate;
+            if (!$mLastPaymentDate) {
+                return response()->json('This shop has no Last Payment Date', 400);
+            }
+            if ($mLastPaymentDate) {
+                $create = date_create($request->To);
+                $format = date_format($create, "Y-m-d");
+                if ($format > $mLastPaymentDate) {
+                    $Rate = $shop->Rate;
+                    $shop->UserId = auth()->user()->id;
 
-        $detail = Shop::find($payment->id);
+                    $sp = new ShopPayment;
+                    $sp->ShopId = $shop->ID;
+                    $From = date_create($mLastPaymentDate);
+                    $sp->From = date_format($From, 'Y-m-d');
+                    $sp_from = date_format($From, 'M-Y');
+                    $To = date_create($request->To);
+                    $sp->To = date_format($To, 'Y-m-d');
+                    $sp_to = date_format($To, 'M-Y');
+                    $sp->Rate = $Rate;
+                    // Calculating Months
+                    $interval = date_diff($From, $To);
+                    $sp->Months = $interval->format("%m");
 
-        $arry = [
-            'Message' => 'Successfully Saved',
-            'ShopId' => $payment->ShopID,
-            'TranId' => $payment->id,
-            'From' => $payment->From,
-            'To' => $payment->To,
-            'Amount' => $payment->Amount,
-            'Area' => $detail->AreaName,
-            'Address' => $detail->Address
-        ];
-        return response()->json($arry, 200);
-    }
+                    // Calculating Amount
+                    $Rate = $shop->Rate;
+                    $sp->Amount = $sp->Months * $Rate;
 
-    /**
-     * Update Shop Payments
-     */
-    public function updateShopPayments(Request $request, $id)
-    {
-        $request->validate([
-            'shopId' => 'required',
-            'amount' => 'required'
-        ]);
+                    $shop->LastAmount = $sp->Months * $Rate;
+                    $shop->LastPaymentDate = $sp->To;
 
-        $payment = ShopPayment::find($id);
-        $payment->ShopID = $request->shopId;
-        $payment->From = '2022-06-01';
-        $payment->To = '2022-07-31';
-        $payment->Amount = $request->amount;
-        $payment->PmtMode = 'Cash';
-        $payment->PmtDate = date("Y-m-d");
-        $payment->CollectedBy = '1';
-        $payment->save();
+                    $sp->PmtMode = 'CASH';
+                    $sp->PaymentDate = date("Y-m-d H:i:s");
+                    $sp->UserId = auth()->user()->id;
 
-        $detail = Shop::find($payment->id);
+                    $shop->save();
+                    $sp->save();
 
-        $arry = [
-            'Message' => 'Successfully Saved',
-            'ShopId' => $payment->ShopID,
-            'TranId' => $payment->id,
-            'From' => $payment->From,
-            'To' => $payment->To,
-            'Amount' => $payment->Amount,
-            'Area' => $detail->AreaName,
-            'Address' => $detail->Address
-        ];
-
-        return response()->json($arry, 200);
+                    $query = DB::select("
+                    select * from survey_logins where id='$shop->UserId'
+                    ");
+                    return response()->json([
+                        'message' => 'Payment Successful',
+                        'circle' => $shop->Circle,
+                        'Market' => $shop->Market,
+                        'shop_id' => $shop->ID,
+                        'shop_no' => $shop->ShopNo,
+                        'present_occupier' => $shop->PresentOccupier,
+                        'contact_no' => $shop->ContactNo,
+                        'tran_id' => $sp->id,
+                        'from' => $sp_from,
+                        'to' => $sp_to,
+                        'daily_shop_fee' => $sp->Rate,
+                        'months' => $sp->Months,
+                        'amount' => $sp->Amount,
+                        'tax_collector_name' => $query[0]->name,
+                        'tax_collector_mobile' => $query[0]->mobile,
+                    ], 200);
+                } else {
+                    return response()->json('Date Should be after the Last Payment Date', 400);
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json($e, 400);
+        }
     }
 }

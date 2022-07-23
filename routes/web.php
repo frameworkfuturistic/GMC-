@@ -241,6 +241,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('rnc/editShops', [ShopController::class, 'editShops']);
 
     Route::get('rnc/BillShops', [ShopController::class, 'shopBillView']);
+
+    Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);
 // Shops
 
 // Admin Interface Routes

@@ -5,10 +5,10 @@ namespace App\Repository\Toll;
 use App\Models\Toll;
 use App\Models\TollPayment;
 use App\Repository\Toll\TollRepository;
+use App\Traits\Toll as TollTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Traits\Toll as TollTrait;
 
 class EloquentTollRepository implements TollRepository
 {
@@ -90,12 +90,12 @@ class EloquentTollRepository implements TollRepository
             date_format(a.PaymentFrom,'%d-%m-%Y') as DateFrom,
             date_format(a.PaymentTo,'%d-%m-%Y') as DateTo,
             t.AreaName,
-            t.Location, 
+            t.Location,
             a.Amount,
             a.PmtMode,
             a.Rate AS PaidRate,
             a.Days,
-            t.LastPaymentDate,
+            date_format(t.LastPaymentDate,'%d-%m-%Y') as PaymentDate,
             s.name as UserName,
             s.mobile,
             t.Rate,
@@ -116,7 +116,7 @@ class EloquentTollRepository implements TollRepository
                 // $dDate = date_create($tolls->created_at ?? '');
                 // $created_at = date_format($dDate, 'd-m-Y');
 
-                $created_at = $tolls->created_at ==null ? '' : date_format(date_create($tolls->created_at), 'd-m-Y');
+                $created_at = $tolls->created_at == null ? '' : date_format(date_create($tolls->created_at), 'd-m-Y');
                 $val['VendorID'] = $tolls->VendorID ?? '';
                 $val['VendorName'] = $tolls->VendorName ?? '';
                 $val['Address'] = $tolls->Address ?? '';
@@ -226,12 +226,14 @@ class EloquentTollRepository implements TollRepository
     public function tollPayment(Request $request, $id)
     {
         $request->validate([
+            'From' => 'required',
             'To' => 'required',
         ]);
 
         try {
             $toll = Toll::find($id);
-            $mLastPaymentDate = $toll->LastPaymentDate;
+            $formatted_from = date_create($request->From);
+            $mLastPaymentDate = date_format($formatted_from, "Y-m-d");
             if (!$mLastPaymentDate) {
                 return response()->json('This shop has no Last Payment Date', 400);
             }
@@ -257,7 +259,7 @@ class EloquentTollRepository implements TollRepository
                     $Rate = $toll->Rate;
                     $tp->Amount = $tp->Days * $Rate;
                     $toll->LastAmount = $tp->Days * $Rate;
-                    $toll->LastPaymentDate = date('Y-m-d');
+                    $toll->LastPaymentDate = $tp->To;
 
                     $tp->PmtMode = 'CASH';
                     $tp->PaymentDate = date("Y-m-d H:i:s");
@@ -330,5 +332,16 @@ class EloquentTollRepository implements TollRepository
         } catch (Exception $e) {
             return response()->json($e, 400);
         }
+    }
+
+    /**
+     * Get Toll Area List
+     */
+    public function getAreaList()
+    {
+        $area = Toll::select('AreaName')
+            ->distinct()
+            ->get();
+        return response()->json($area, 200);
     }
 }

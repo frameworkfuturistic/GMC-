@@ -7,8 +7,8 @@ use App\Models\MenuMaster;
 trait AppHelper
 {
     /*
-        APP HELPER TRAIT HELPS TO DEFINE THE PARENT AND CHILD MENUES
-    */
+    APP HELPER TRAIT HELPS TO DEFINE THE PARENT AND CHILD MENUES
+     */
     protected $parent;
     protected $ParentSerial;
 

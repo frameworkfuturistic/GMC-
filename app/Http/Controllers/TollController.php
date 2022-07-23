@@ -67,4 +67,10 @@ class TollController extends Controller
     {
         return $this->EloquentToll->updateToll($request, $id);
     }
+
+    // Get Toll Area List
+    public function getAreaList()
+    {
+        return $this->EloquentToll->getAreaList();
+    }
 }
