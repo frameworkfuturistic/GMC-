@@ -15,6 +15,7 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->increments('ID');
+            $table->string('ShopCode', 50)->nullable();
             $table->string('Circle', 50)->nullable();
             $table->string('Market', 50)->nullable();
             $table->string('SerialNo', 50)->nullable();
@@ -41,6 +42,7 @@ class CreateShopsTable extends Migration
             $table->string('Latitude', 50)->nullable();
             $table->string('Photo1Path', 500)->nullable();
             $table->string('Photo2Path', 500)->nullable();
+            $table->string('Photo3Path', 500)->nullable();
             $table->string('Remarks', 50)->nullable();
             $table->integer('UserId')->nullable();
             $table->timestamps();

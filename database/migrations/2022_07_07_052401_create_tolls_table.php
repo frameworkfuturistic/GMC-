@@ -15,6 +15,7 @@ class CreateTollsTable extends Migration
     {
         Schema::create('tolls', function (Blueprint $table) {
             $table->id();
+            $table->string('TollCode')->nullable();
             $table->string('AreaName')->nullable();
             $table->string('ShopNo')->nullable();
             $table->string('ShopType')->nullable();

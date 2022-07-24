@@ -27,9 +27,33 @@ trait Shop
         $shop->ContactNo = $request->ContactNo;
         $shop->Longitude = $request->Longitude;
         $shop->Latitude = $request->Latitude;
-        $shop->Photo1Path = $request->Photo1Path;
-        $shop->Photo2Path = $request->Photo2Path;
         $shop->Remarks = $request->Remarks;
+
+        // PhotoUploads
+        // Photo1
+        $png_url = "shop-" . time() . ".png";
+        $path = public_path() . "/surveyFiles/" . $png_url;
+        $photo1_path = $request->Photo1Path;
+        $data = base64_decode($photo1_path);
+        $success = file_put_contents($path, $data);
+        $shop->Photo1Path = 'surveyFiles/' . $png_url;
+
+        // Photo2
+        $png_url = "shop-" . time() . ".png";
+        $path = public_path() . "/surveyFiles/" . $png_url;
+        $photo2_path = $request->Photo2Path;
+        $data = base64_decode($photo2_path);
+        $success = file_put_contents($path, $data);
+        $shop->Photo2Path = 'surveyFiles/' . $png_url;
+
+        // Photo3
+        $png_url = "shop-" . time() . ".png";
+        $path = public_path() . "/surveyFiles/" . $png_url;
+        $photo3_path = $request->Photo3Path;
+        $data = base64_decode($photo3_path);
+        $success = file_put_contents($path, $data);
+        $shop->Photo3Path = 'surveyFiles/' . $png_url;
+
         $shop->save();
     }
 }

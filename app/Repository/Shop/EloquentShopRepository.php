@@ -8,9 +8,9 @@ use App\Models\ShopPayment;
 use App\Repository\Shop\ShopRepository;
 use App\Traits\AppHelper;
 use App\Traits\Shop as ShopTrait;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Exception;
 
 /**
  * Created On-04-07-2022
@@ -91,21 +91,16 @@ class EloquentShopRepository implements ShopRepository
     public function getShopByID($id)
     {
         $strSql = "
-                select s.ID,
-                s.Market,
-                s.Allottee,
-                s.ShopNo,
-                s.Rate as RatePaid,
-                s.LastPaymentDate,
-                s.LastAmount as Amount,
+                select s.*,
                 a.PmtMode,
                 date_format(a.From,'%d-%m-%y') as PaymentFrom,
                 date_format(a.To,'%d-%m-%y') as PaymentTo,
                 a.Months as PmtMonths,
                 a.PaymentDate,
+                a.id as LastTranID,
+                a.PmtMode,
                 l.name as UserName,
-                l.mobile as UserMobile,
-                a.created_at
+                l.mobile as UserMobile
                 from shops s
             left join (select * from shop_payments where ShopId=$id order by id desc limit 1) as a on a.ShopId=s.id
             left join survey_logins l on l.id=s.UserId
@@ -117,18 +112,41 @@ class EloquentShopRepository implements ShopRepository
         foreach ($shop as $shops) {
             $created_at = $shops->created_at == null ? '' : date_format(date_create($shops->created_at), 'd-m-Y');
             $val['ShopID'] = $shops->ID ?? '';
+            $val['ShopCode'] = $shops->ShopCode ?? '';
+            $val['Circle'] = $shops->Circle ?? '';
             $val['Market'] = $shops->Market ?? '';
+            $val['SerialNo'] = $shops->SerialNo ?? '';
             $val['Allottee'] = $shops->Allottee ?? '';
             $val['ShopNo'] = $shops->ShopNo ?? '';
-            $val['RatePaid'] = $shops->RatePaid ?? '';
-            $val['LastPaymentDate'] = $shops->LastPaymentDate ?? '';
-            $val['Amount'] = $shops->Amount ?? '';
-            $val['PmtMode'] = $shops->PmtMode ?? '';
+            $val['MonthlyRate'] = $shops->RatePaid ?? '';
+            $val['LastPaymentAmount'] = $shops->Amount ?? '';
+            $val['AllottedLength'] = $shops->AllottedLength ?? '';
+            $val['AllottedBreadth'] = $shops->AllottedBreadth ?? '';
+            $val['AllottedHeight'] = $shops->AllottedHeight ?? '';
+            $val['PresentLength'] = $shops->PresentLength ?? '';
+            $val['PresentBreadth'] = $shops->PresentBreadth ?? '';
+            $val['PresentHeight'] = $shops->PresentHeight ?? '';
+            $val['NoOfFloors'] = $shops->NoOfFloors ?? '';
+            $val['PresentOccupier'] = $shops->PresentOccupier ?? '';
+            $val['TradeLicense'] = $shops->TradeLicense ?? '';
+            $val['Construction'] = $shops->Construction ?? '';
+            $val['Electricity'] = $shops->Electricity ?? '';
+            $val['Water'] = $shops->Water ?? '';
+            $val['SalePurchase'] = $shops->SalePurchase ?? '';
+            $val['ContactNo'] = $shops->ContactNo ?? '';
+            $val['Longitude'] = $shops->Lontitude ?? '';
+            $val['Latitude'] = $shops->Latitude ?? '';
+            $val['Photo1Path'] = $shops->Photo1Path ?? '';
+            $val['Photo2Path'] = $shops->Photo2Path ?? '';
+            $val['Photo3Path'] = $shops->Photo3Path ?? '';
 
+            $val['PmtMode'] = $shops->PmtMode ?? '';
             $val['PaymentFrom'] = $shops->PaymentFrom ?? '';
             $val['PaymentTo'] = $shops->PaymentTo ?? '';
             $val['PmtMonths'] = $shops->PmtMonths ?? '';
             $val['PaymentDate'] = $shops->PaymentDate ?? '';
+            $val['LastTranID'] = $shops->LastTranID ?? '';
+            $val['PmtMode'] = $shops->PmtMode ?? '';
             $val['UserName'] = $shops->UserName ?? '';
             $val['UserMobile'] = $shops->UserMobile ?? '';
             $val['CreatedAt'] = $created_at ?? '';

@@ -82,30 +82,24 @@ class EloquentTollRepository implements TollRepository
     {
         // $0toll = Toll::where('id', $id)->get();
         $strSql = "
-        select t.id as VendorID,
-            a.id as TranID,
-            t.VendorName,
-            t.Address,
-            t.ShopType,
-            date_format(a.PaymentFrom,'%d-%m-%Y') as DateFrom,
-            date_format(a.PaymentTo,'%d-%m-%Y') as DateTo,
-            t.AreaName,
-            t.Location,
-            a.Amount,
-            a.PmtMode,
-            a.Rate AS PaidRate,
-            a.Days,
-            date_format(t.LastPaymentDate,'%d-%m-%Y') as PaymentDate,
-            s.name as UserName,
-            s.mobile,
-            t.Rate,
-            a.created_at
-            from tolls t
-            left join (SELECT id,tollid,`FROM` AS PaymentFrom,`TO` AS PaymentTo,Amount,PmtMode,
-                       Rate,Days,PaymentDate,UserId,created_at from toll_payments where tollid=$id
-            order by id desc limit 1) as a on a.tollid=t.id
-            left join survey_logins s on s.id=a.UserID
-            WHERE t.id=$id
+                select  t.*,
+                        a.id as TranID,
+                        date_format(a.PaymentFrom,'%d-%m-%Y') as DateFrom,
+                        date_format(a.PaymentTo,'%d-%m-%Y') as DateTo,
+                        a.Amount,
+                        a.PmtMode,
+                        a.Rate AS PaidRate,
+                        a.Days,
+                        s.name as UserName,
+                        s.mobile as UserMobile,
+                        date_format(a.PaymentDate,'%d-%m-%Y'),
+                        a.created_at
+                        from tolls t
+                        left join (SELECT id,tollid,`FROM` AS PaymentFrom,`TO` AS PaymentTo,Amount,PmtMode,
+                                Rate,Days,PaymentDate,UserId,created_at from toll_payments where tollid=$id
+                        order by id desc limit 1) as a on a.tollid=t.id
+                        left join survey_logins s on s.id=a.UserID
+                        WHERE t.id=$id
         ";
 
         $toll = DB::select($strSql);
@@ -117,14 +111,25 @@ class EloquentTollRepository implements TollRepository
                 // $created_at = date_format($dDate, 'd-m-Y');
 
                 $created_at = $tolls->created_at == null ? '' : date_format(date_create($tolls->created_at), 'd-m-Y');
-                $val['VendorID'] = $tolls->VendorID ?? '';
+                $val['VendorID'] = $tolls->id ?? '';
+                $val['AreaName'] = $tolls->AreaName ?? '';
+                $val['ShopType'] = $tolls->ShopType ?? '';
                 $val['VendorName'] = $tolls->VendorName ?? '';
                 $val['Address'] = $tolls->Address ?? '';
-                $val['ShopType'] = $tolls->ShopType ?? '';
-                $val['AreaName'] = $tolls->AreaName ?? '';
+                $val['DailyTollRate'] = $tolls->Rate ?? '';
+                $val['LastPaymentAmount'] = $tolls->Amount ?? '';
                 $val['Location'] = $tolls->Location ?? '';
-                $val['DailyTollFee'] = $tolls->Rate ?? '';
-                $val['LastPaymentDate'] = $tolls->LastPaymentDate ?? '';
+                $val['PresentLength'] = $tolls->PresentLength ?? '';
+                $val['PresentBreadth'] = $tolls->PresentBreadth ?? '';
+                $val['PresentHeight'] = $tolls->PresentHeight ?? '';
+                $val['NoOfFloors'] = $tolls->NoOfFloors ?? '';
+                $val['TradeLicense'] = $tolls->TradeLicense ?? '';
+                $val['Construction'] = $tolls->Construction ?? '';
+                $val['Utility'] = $tolls->Utility ?? '';
+                $val['Mobile'] = $tolls->Mobile ?? '';
+                $val['Remarks'] = $tolls->Remarks ?? '';
+                $val['Photograph1'] = $tolls->Photograph1 ?? '';
+                $val['Photograph2'] = $tolls->Photograph2 ?? '';
 
                 $val['TranID'] = $tolls->TranID ?? '';
                 $val['DateFrom'] = $tolls->DateFrom ?? '';
@@ -135,7 +140,7 @@ class EloquentTollRepository implements TollRepository
                 $val['PmtDays'] = $tolls->Days ?? '';
                 $val['PaymentDate'] = $tolls->PaymentDate ?? '';
                 $val['UserName'] = $tolls->UserName ?? '';
-                $val['UserMobile'] = $tolls->mobile ?? '';
+                $val['UserMobile'] = $tolls->UserMobile ?? '';
                 $val['CreatedAt'] = $created_at ?? '';
                 array_push($arr, $val);
             }
