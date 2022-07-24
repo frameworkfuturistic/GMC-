@@ -118,6 +118,7 @@ class EloquentTollRepository implements TollRepository
                 $val['Address'] = $tolls->Address ?? '';
                 $val['DailyTollRate'] = $tolls->Rate ?? '';
                 $val['LastPaymentAmount'] = $tolls->Amount ?? '';
+                $val['LastPaymentDate'] = date_format(date_create($tolls->LastPaymentDate), 'd-m-Y');
                 $val['Location'] = $tolls->Location ?? '';
                 $val['PresentLength'] = $tolls->PresentLength ?? '';
                 $val['PresentBreadth'] = $tolls->PresentBreadth ?? '';

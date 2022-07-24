@@ -97,6 +97,7 @@ class EloquentShopRepository implements ShopRepository
                 date_format(a.To,'%d-%m-%y') as PaymentTo,
                 a.Months as PmtMonths,
                 a.PaymentDate,
+                s.LastPaymentDate,
                 a.id as LastTranID,
                 a.PmtMode,
                 l.name as UserName,
@@ -118,8 +119,9 @@ class EloquentShopRepository implements ShopRepository
             $val['SerialNo'] = $shops->SerialNo ?? '';
             $val['Allottee'] = $shops->Allottee ?? '';
             $val['ShopNo'] = $shops->ShopNo ?? '';
-            $val['MonthlyRate'] = $shops->RatePaid ?? '';
+            $val['MonthlyRate'] = $shops->Rate ?? '';
             $val['LastPaymentAmount'] = $shops->Amount ?? '';
+            $val['LastPaymentDate'] = $shops->LastPaymentDate ?? '';
             $val['AllottedLength'] = $shops->AllottedLength ?? '';
             $val['AllottedBreadth'] = $shops->AllottedBreadth ?? '';
             $val['AllottedHeight'] = $shops->AllottedHeight ?? '';
@@ -255,6 +257,7 @@ class EloquentShopRepository implements ShopRepository
     {
         $request->validate([
             'To' => 'required',
+            'Amount' => 'required|numeric|between:10,10000'
         ]);
 
         try {
@@ -270,8 +273,11 @@ class EloquentShopRepository implements ShopRepository
                     $Rate = $shop->Rate;
                     $shop->UserId = auth()->user()->id;
 
+                    $arrear =  is_null($shop->Arrear) ? 0 : $shop->Arrear;
+
                     $sp = new ShopPayment;
                     $sp->ShopId = $shop->ID;
+
                     $From = date_create($mLastPaymentDate);
                     $sp->From = date_format($From, 'Y-m-d');
                     $sp_from = date_format($From, 'M-Y');
@@ -285,11 +291,15 @@ class EloquentShopRepository implements ShopRepository
 
                     // Calculating Amount
                     $Rate = $shop->Rate;
-                    $sp->Amount = $sp->Months * $Rate;
+                    $demand = $sp->Months * $Rate;
+                    $net_demand = $demand + $arrear;
 
-                    $shop->LastAmount = $sp->Months * $Rate;
+                    $sp->Amount = $request->Amount;
+
+                    $shop->Arrear = $net_demand - $request->Amount;
+                    $shop->LastAmount = $request->Amount;
                     $shop->LastPaymentDate = $sp->To;
-
+                    
                     $sp->PmtMode = 'CASH';
                     $sp->PaymentDate = date("Y-m-d H:i:s");
                     $sp->UserId = auth()->user()->id;
