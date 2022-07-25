@@ -96,6 +96,7 @@ class EloquentShopRepository implements ShopRepository
                 date_format(a.From,'%d-%m-%y') as PaymentFrom,
                 date_format(a.To,'%d-%m-%y') as PaymentTo,
                 a.Months as PmtMonths,
+                s.ContactNo,
                 a.PaymentDate,
                 s.LastPaymentDate,
                 a.id as LastTranID,
@@ -118,6 +119,7 @@ class EloquentShopRepository implements ShopRepository
             $val['Market'] = $shops->Market ?? '';
             $val['SerialNo'] = $shops->SerialNo ?? '';
             $val['Allottee'] = $shops->Allottee ?? '';
+            $val['ContactNo'] = $shops->ContactNo ?? '';
             $val['ShopNo'] = $shops->ShopNo ?? '';
             $val['MonthlyRate'] = $shops->Rate ?? '';
             $val['LastPaymentAmount'] = $shops->Amount ?? '';
@@ -287,7 +289,7 @@ class EloquentShopRepository implements ShopRepository
                     $sp->Rate = $Rate;
                     // Calculating Months
                     $interval = date_diff($From, $To);
-                    $sp->Months = $interval->format("%m");
+                    $sp->Months = $interval->format("%m") + 1;
 
                     // Calculating Amount
                     $Rate = $shop->Rate;
