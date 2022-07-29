@@ -432,12 +432,14 @@ class EloquentShopRepository implements ShopRepository
             }
             //CALCULATION
             $paidFrom = $refPaidUpto + 1;
-            $paidTo = ($request->To->format('Y') * 12) + $request->To->format('m');
+            // $generatedDate = date_create($request->To);
+            $generatedDate = date_create_from_format("j-M-Y",$request->To);
+            $paidTo = ($generatedDate->format('Y') * 12) + $generatedDate->format('m');
             if($refPaidUpto >=  $paidTo){
                 DB::rollBack();
                 return response()->json('This shop has no Last Payment Date', 400);
             }
-            $months = $paidFrom - $paidTo;
+            $months = ($paidTo - $paidFrom) + 1;
             $demand = $months * $refRate;
             $netDemand = $demand + $refArrear;
             $due = $netDemand -$request->Amount;
