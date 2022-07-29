@@ -433,7 +433,7 @@ class EloquentShopRepository implements ShopRepository
             //CALCULATION
             $paidFrom = $refPaidUpto + 1;
             // $generatedDate = date_create($request->To);
-            $generatedDate = date_create_from_format("j-M-Y",$request->To);
+            $generatedDate = date_create_from_format("d-m-Y",$request->To);
             $paidTo = ($generatedDate->format('Y') * 12) + $generatedDate->format('m');
             if($refPaidUpto >=  $paidTo){
                 DB::rollBack();
