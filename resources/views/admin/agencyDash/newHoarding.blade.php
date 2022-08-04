@@ -295,23 +295,9 @@ active
                                     </table>
                                 </div>
                             </div>
-                            <!-- NOTICE -->
-                            <div class="col-md-3">
-                                <h4 class="card-title success">Help &amp; Advisory</h4>
-                                <div class="alert alert-success">Please Note!!</div>
-                                <p class="card-text">
-                                </p>
-                                <ul>
-                                    <li>Keep all the information handy before filling up the application form.
-                                    </li>
-                                    <li>You will have to visit RMC office for any correction regatding
-                                        application information.</li>
-                                    <li>Keep your address concise</li>
-                                    <li>Visit Market Section for further enquiry</li>
-                                </ul>
-                                <p></p>
-                            </div>
-                            <!-- NOTICE -->
+                            <!-- Help and Advisory -->
+                            @include('admin.help-and-advisory')
+                            <!-- Help and Advisory -->
                             <!-- UPLOAD DOCUMENTS -->
                             <div class="col-md-9">
                                 <div class="card-header card-bg">

@@ -150,20 +150,7 @@ class="active"
                         </div>
                         <!-- data form -->
                         <!-- Help & Advisory -->
-                        <div class="col-md-3">
-                            <h4 class="card-title success">Help & Advisory</h4>
-                            <div class="alert alert-success">Please Note!!</div>
-                            <p class="card-text">
-                                <ul>
-                                    <li>Keep all the information handy before filling up the application form.
-                                    </li>
-                                    <li>You will have to visit RMC office for any correction regatding
-                                        application information.</li>
-                                    <li>Keep your address concise</li>
-                                    <li>Visit Market Section for further enquiry</li>
-                                </ul>
-                            </p>
-                        </div>
+                        @include('admin.help-and-advisory')
                         <!-- Help & Advisory -->
                         <!-- Shop/Establishment Details of Applicant -->
                         <div class="col-md-6">
@@ -502,36 +489,64 @@ class="active"
                 </div>
                 <!-- application details tab -->
                 <!-- workflow tab -->
-                <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
-                    <div class="card-header card-bg">
-                        <div class="card-title my-card-title">Office Communication Workflow</div>
-                    </div>
-                    <div class="card-body">
-                        <!-- comments -->
-                        <div class="bootstrap snippets bootdey mb-top">
-                            <div class="blog-comment">
-                                <h3 class="text-success">Comments</h3>
-                                @foreach($comments as $comment)
-                                <ul class="comments mb-top">
-                                    <li class="clearfix">
-                                        <div class="post-comments">
-                                            <p class="meta">
-                                                <span class="CommentUser"><i class="icon-android-contact"></i>
-                                                    {{$comment->UserID}}</span> says : <i class="pull-right"></i>
-                                                <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
-                                            </p>
-                                            <p class="comment_color">
-                                                <i class="icon-edit2"></i> {{$comment->Remarks}}
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                @endforeach
+                 <!-- workflow tab -->
+                 <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="card-header card-bg">
+                                <div class="card-title my-card-title">Verification Process Notes</div>
                             </div>
+                            <!-- comments -->
+                            <form action="{{url('rnc/dharmasalaInboxComment/'.$dharmasala->id)}}" method="POST"
+                                id="commentTo">
+                                @method('POST')
+                                @csrf
+                                <div class="form-group mb-top">
+                                    <input type="hidden" value="{{$dharmasala->RenewalID}}" id="RenewalID"
+                                        name="RenewalID">
+                                    <label for="complaintinput5">Comments</label>
+                                    <textarea id="comments" name="comments" rows="5" class="form-control round"
+                                        placeholder="comments"></textarea>
+                                    <button type="submit" class="btn btn-success mb-top" id="commentTo">
+                                        <i class="icon-check2"></i> Comment
+                                    </button>
+
+                                    <button type="button" class="btn btn-info mb-top" onclick="inputTools();">
+                                        <i class="icon-pen"></i> Hindi Input Tools
+                                    </button>
+                                </div>
+                            </form>
+                            <!-- comments -->
                         </div>
-                        <!-- comments -->
+                        <div class="col-md-3">
+                            <!-- comments -->
+                            <div class="container bootstrap snippets bootdey">
+                                <div class="blog-comment">
+                                    <h3 class="text-success">Comments</h3>
+                                    @foreach($comments as $comment)
+                                    <ul class="comments mb-top">
+                                        <li class="clearfix">
+                                            <div class="post-comments">
+                                                <p class="meta">
+                                                    <span class="CommentUser"><i class="icon-android-contact"></i>
+                                                        {{$comment->UserID}}</span> says : <i class="pull-right"></i>
+                                                    <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
+                                                </p>
+                                                <p class="comment_color">
+                                                    <i class="icon-edit2"></i> {{$comment->Remarks}}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    @endforeach
+                                </div>
+                            </div>
+                            </ul>
+                            <!-- comments -->
+                        </div>
                     </div>
                 </div>
+                <!-- workflow tab -->
                 <!-- workflow tab -->
                 <!-- documents tab -->
                 <div class="tab-pane" id="tab3" aria-labelledby="base-tab3" aria-expanded="false">
