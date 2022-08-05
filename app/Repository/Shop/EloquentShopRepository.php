@@ -118,7 +118,7 @@ class EloquentShopRepository implements ShopRepository
 	        l.name AS LastCreatedBy,
 	        l.mobile AS LastUserMobile
         FROM shops s
-        LEFT JOIN shop_payments p ON s.ID=p.ShopId
+        LEFT JOIN shop_payments p ON s.LastTranID=p.ID
         LEFT JOIN survey_logins l ON p.UserId=l.id
         WHERE s.id = $id ORDER BY s.Allottee";
 
@@ -442,7 +442,7 @@ class EloquentShopRepository implements ShopRepository
             $months = ($paidTo - $paidFrom) + 1;
             $demand = $months * $refRate;
             $netDemand = $demand + $refArrear;
-            $due = $netDemand -$request->Amount;
+            $due = doubleval($netDemand) - doubleval($request->Amount);
 
             //Add Record in ShopPayment table
             $sp = new ShopPayment;
