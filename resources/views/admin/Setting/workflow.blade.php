@@ -111,7 +111,8 @@ class="active"
                 <h4 class="modal-title" id="myModalLabel1"><i class="fa fa-plus-circle"></i> Add New Workflow</h4>
             </div>
             {{-- form --}}
-            <form action="add-designation">
+            <form action="add-designation" method="POST">
+                @csrf
                 <div class="modal-body">
                     <label for="newDesignation">Workflow</label>
                     <input type="text" class="form-control" id="newDesignation" name="newDesignation" required>

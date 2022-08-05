@@ -19,6 +19,20 @@ class="active"
             Designations</a>
     </li>
 </ul>
+{{-- Error Messages --}}
+@if ($errors->any())
+<div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">x</span>
+    </button>
+    <ul class="list-unstyled">
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+{{-- Error Messages --}}
 <!-- pending verifications -->
 <div class="card">
     <div class="card-body">
@@ -59,14 +73,6 @@ class="active"
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tax Collector</td>
-                                                <td><button type="button" class="btn btn-outline-primary btn-sm"
-                                                        onclick="detailPreview();"><i class="fa fa-pen"></i>
-                                                        Update</button></td>
-                                            </tr>
-                                        </tbody>
                                     </table>
                                 </div>
                                 <!-- table -->
@@ -75,13 +81,15 @@ class="active"
                             {{-- Tab 2 --}}
                             <div class="tab-pane" id="tab2" aria-labelledby="base-tab2">
                                 {{-- Form --}}
-                                <form action="">
+                                <form action="update-designation" id="updateDesignation" method="post">
+                                    @csrf
                                     <table class="table table-hover">
                                         <tr>
                                             <td><label for="designationUpd">Designation</label></td>
+                                            <input type="hidden" id="id" name="id">
                                             <td><input type="text" class="form-control" id="designationUpd"
                                                     name="designationUpd"></td>
-                                            <td colspan="2"><button type="button" class="btn btn-primary"><i
+                                            <td colspan="2"><button type="submit" class="btn btn-primary"><i
                                                         class="fa fa-edit"></i> Update</button></td>
                                         </tr>
                                     </table>
@@ -117,10 +125,11 @@ class="active"
                 <h4 class="modal-title" id="myModalLabel1"><i class="fa fa-plus-circle"></i> Add New Designation</h4>
             </div>
             {{-- form --}}
-            <form action="add-designation">
+            <form action="add-designation" method="POST" id="addDesignation">
+                @csrf
                 <div class="modal-body">
-                    <label for="newDesignation">New Designation</label>
-                    <input type="text" class="form-control" id="newDesignation" name="newDesignation" required>
+                    <label for="designation">New Designation</label>
+                    <input type="text" class="form-control" id="designation" name="designation" required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
@@ -135,16 +144,22 @@ class="active"
 
 @section('script')
 <script src="js/dataTables.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script src="js/custom-js/designation.js"></script>
 
 <script>
     $(document).ready(function () {
         $("#designations").addClass('active');
-        $('#dataTable').DataTable();
+        fetchData();
     });
 
-    function detailPreview() {
-        $("#base-tab2").trigger("click");
-    }
+    $('#addDesignation').submit(function (e) {
+        saveDesignation(e);
+    });
+
+    $('#updateDesignation').submit(function (e) {
+        updateDesignation(e);
+    });
 
 </script>
 @endsection

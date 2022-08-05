@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BanquetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\DesignationRoleController;
 use App\Http\Controllers\DharmasalaController;
 use App\Http\Controllers\HoardingController;
 use App\Http\Controllers\HostelController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TollController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WorkflowController;
+use App\Models\Designation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -251,11 +253,26 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
 /**
  * ---------------------------------------------------------------------------------------------------------------------
- * Routes with designations entries, modification Permission Workflows
+ * Routes with designations CRUD operations
  * ---------------------------------------------------------------------------------------------------------------------
  */
-    Route::get('Designations', [DesignationController::class, 'designationView']);
-    Route::get('DesignationRole', [DesignationController::class, 'designationRoleView']);
+    Route::get('Designations', [DesignationController::class, 'designationView']); // Designations View
+    Route::post('add-designation', [DesignationController::class, 'addDesignation']); // Save New Designation
+    Route::post('update-designation', [DesignationController::class, 'updateDesignation']); // Update Designation By ID
+    Route::get('get-designations', [DesignationController::class, 'getDesignations']); // Get All Designations
+    Route::get('get-designation-by-id/{id}', [DesignationController::class, 'getDesignationByID']); // Get Designation By ID
+
+/**
+ * --------------------------------------------------------------------------------------------------------------------
+ * | Designation Role Crud Operations
+ * --------------------------------------------------------------------------------------------------------------------
+ */
+    Route::get('DesignationRole', [DesignationRoleController::class, 'designationRoleView']); // Designation Role Entry View
+    Route::post('add-designation-role', [DesignationRoleController::class, 'addDesignationRole']); // Add New Designation Role
+    Route::post('update-designation-role', [DesignationRoleController::class, 'updateDesignationRole']); // Update Designation Role
+    Route::get('get-role-by-designation-id/{id}', [DesignationRoleController::class, 'getRoleByDesignationID']); // Get Role By DesignationID
+    Route::get('get-designation-role-by-id/{id}', [DesignationRoleController::class, 'getDesignationRoleByID']); // Get Designation Role By ID
+
     Route::get('Permissions', [DesignationController::class, 'permissionView']);
 
 /**

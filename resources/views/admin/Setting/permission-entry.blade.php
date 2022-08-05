@@ -2,6 +2,7 @@
 
 @section('pagecss')
 <link rel="stylesheet" href="css/dataTables.min.css">
+<link href="css/bootstrap-switch-button.min.css" rel="stylesheet">
 @endsection
 
 @section('heading')
@@ -61,19 +62,23 @@ class="active"
                                     <tbody>
                                         <tr>
                                             <td>Self Advertisement Inbox</td>
-                                            <td><input type="checkbox" class="form-control"></td>
+                                            <td><input type="checkbox" data-toggle="switchbutton" checked data-onstyle="success" data-offstyle="danger" data-size="xs" data-onlabel="Enabled" data-offlabel="Disabled" value="1"></td>
                                         </tr>
                                         <tr>
-                                            <td>Self Advertisement Outbox</td>
-                                            <td><input type="checkbox" class="form-control"></td>
+                                            <td>Self Advertisement Inbox</td>
+                                            <td><input type="checkbox" data-toggle="switchbutton" data-onstyle="success" data-offstyle="danger" data-size="xs" data-onlabel="Enabled" data-offlabel="Disabled"></td>
                                         </tr>
                                         <tr>
-                                            <td>Self Advertisement Approved</td>
-                                            <td><input type="checkbox" class="form-control"></td>
+                                            <td>Self Advertisement Inbox</td>
+                                            <td><input type="checkbox" data-toggle="switchbutton" checked data-onstyle="success" data-offstyle="danger" data-size="xs" data-onlabel="Enabled" data-offlabel="Disabled"></td>
                                         </tr>
                                         <tr>
-                                            <td>Self Advertisement Rejected</td>
-                                            <td><input type="checkbox" class="form-control"></td>
+                                            <td>Self Advertisement Inbox</td>
+                                            <td><input type="checkbox" data-toggle="switchbutton" data-onstyle="success" data-offstyle="danger" data-size="xs" data-onlabel="Enabled" data-offlabel="Disabled"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Self Advertisement Inbox</td>
+                                            <td><input type="checkbox" data-toggle="switchbutton" data-onstyle="success" data-offstyle="danger" data-size="xs" data-onlabel="Enabled" data-offlabel="Disabled"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -97,6 +102,7 @@ class="active"
 
 @section('script')
 <script src="js/dataTables.min.js"></script>
+<script src="js/bootstrap-switch-button.min.js"></script>
 
 <script>
     $(document).ready(function () {

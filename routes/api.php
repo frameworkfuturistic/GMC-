@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\SurveyController;
-use App\Http\Controllers\TollController;
+use App\Http\Controllers\Api\ShopController;
+use App\Http\Controllers\Api\SurveyController;
+use App\Http\Controllers\Api\TollController;
 use Illuminate\Support\Facades\Route;
 
 /*
