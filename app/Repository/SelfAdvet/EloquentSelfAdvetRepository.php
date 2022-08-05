@@ -7,15 +7,15 @@ use App\Models\SelfAdvertisements;
 use App\Models\Workflow;
 use App\Models\WorkflowCandidate;
 use App\Models\WorkflowTrack;
+use App\Traits\AppHelper as TraitAppHelper;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use App\Traits\AppHelper as TraitAppHelper;
 
 class EloquentSelfAdvetRepository implements SelfAdvetRepository
 {
-   
+
     use TraitAppHelper;
 
     public function __construct()
@@ -23,17 +23,17 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
         $this->menuApp();
     }
 
-     /* this function is for the user interface who will fillup the form */
-     public function SelfAdvetView()
-     {
-         $ward = ParamString::where('ParamCategoryID', '7')->get();
-         $InstallLocation = ParamString::where('ParamCategoryID', '1023')->get();
-         $DisplayType = ParamString::where('ParamCategoryID', '8')->get();
-         $data = array('wards' => $ward, 'InstallLocations' => $InstallLocation, 'DisplayTypes' => $DisplayType);
-         return View::make('user.selfAdvet')->with($data);
-     }
- 
-      /*this function is for the user saving data in database  */
+    /* this function is for the user interface who will fillup the form */
+    public function SelfAdvetView()
+    {
+        $ward = ParamString::where('ParamCategoryID', '7')->get();
+        $InstallLocation = ParamString::where('ParamCategoryID', '1023')->get();
+        $DisplayType = ParamString::where('ParamCategoryID', '8')->get();
+        $data = array('wards' => $ward, 'InstallLocations' => $InstallLocation, 'DisplayTypes' => $DisplayType);
+        return View::make('user.selfAdvet')->with($data);
+    }
+
+    /*this function is for the user saving data in database  */
     public function saveFiles(Request $request)
     {
         $data = new SelfAdvertisements();
@@ -172,9 +172,9 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
         $data->Longitude = $request->Longitude;
         $data->Latitude = $request->Latitude;
 
-        $data->Amount=$request->amount;
-        $data->GST=$request->GST;
-        $data->NetAmount=$request->total;
+        $data->Amount = $request->amount;
+        $data->GST = $request->GST;
+        $data->NetAmount = $request->total;
 
         // upload image
         // AadharPath
@@ -257,10 +257,10 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     {
         $name = Auth::user()->name;
         $data = SelfAdvertisements::where('CurrentUser', $name)->get();
-        $array=[
-            'SelfAds'=>$data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+        $array = [
+            'SelfAds' => $data,
+            'parents' => $this->parent,
+            'childs' => $this->child,
         ];
         return view('admin.SelfAdv.advetInbox')->with($array);
     }
@@ -318,8 +318,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     {
         $name = Auth::user()->name;
         $data = SelfAdvertisements::where('CurrentUser', '<>', $name)->get();
-        return view('admin.SelfAdv.advetOutbox', ['SelfAds' => $data,'parents'=>$this->parent,
-        'childs'=>$this->child]);
+        return view('admin.SelfAdv.advetOutbox', ['SelfAds' => $data, 'parents' => $this->parent,
+            'childs' => $this->child]);
     }
 
     // this function is fetching data of individual applicants
@@ -353,8 +353,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
             'locations' => $InstallLocation,
             'workflowInitiator' => $workflowInitiator,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child,
         );
         return View::make('admin.SelfAdv.updateadvetInbox')->with($array);
     }
@@ -389,8 +389,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
             'locations' => $InstallLocation,
             'workflowInitiator' => $workflowInitiator,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child,
         );
 
         return view('admin.SelfAdv.updateadvetOutbox')->with($array);
@@ -400,8 +400,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     public function paymentDash()
     {
         $data = SelfAdvertisements::all();
-        return view('admin.SelfAdv.advetPayment', ['SelfAds' => $data,'parents'=>$this->parent,
-        'childs'=>$this->child]);
+        return view('admin.SelfAdv.advetPayment', ['SelfAds' => $data, 'parents' => $this->parent,
+            'childs' => $this->child]);
     }
 
     public function paymentDetailsView($id)
@@ -418,8 +418,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
         $array = array(
             'SelfAds' => $data,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child,
         );
         return View::make('admin.SelfAdv.updateadvetPayment')->with($array);
     }
@@ -429,8 +429,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     public function advetApprovedView()
     {
         $data = SelfAdvertisements::where('Approved', '-1')->get();
-        return view('admin.SelfAdv.advetApproved', ['SelfAds' => $data,'parents'=>$this->parent,
-        'childs'=>$this->child]);
+        return view('admin.SelfAdv.advetApproved', ['SelfAds' => $data, 'parents' => $this->parent,
+            'childs' => $this->child]);
     }
 
     public function updateAdvetApprovedView($id)
@@ -463,8 +463,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
             'locations' => $InstallLocation,
             'workflowInitiator' => $workflowInitiator,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child,
         );
         return view('admin.SelfAdv.updateadvetApproved')->with($array);
     }
@@ -474,8 +474,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     public function advetRejectedView()
     {
         $data = SelfAdvertisements::where('Rejected', '-1')->get();
-        return view('admin.SelfAdv.advetRejected', ['SelfAds' => $data,'parents'=>$this->parent,
-        'childs'=>$this->child]);
+        return view('admin.SelfAdv.advetRejected', ['SelfAds' => $data, 'parents' => $this->parent,
+            'childs' => $this->child]);
     }
 
     public function updateAdvetRejectedView($id)
@@ -492,8 +492,8 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
         $array = array(
             'SelfAds' => $data,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child,
         );
         return view('admin.SelfAdv.updateadvetRejected')->with($array);
     }
@@ -507,5 +507,5 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     // Payment
 
     // function used for the modifing data on workflow of selfAdvertisement
-     // function used for the modifing data on workflow of selfAdvertisement
+    // function used for the modifing data on workflow of selfAdvertisement
 }

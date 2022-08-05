@@ -165,20 +165,7 @@ class="active"
                         </div>
                         <!-- data form -->
                         <!-- Help & Advisory -->
-                        <div class="col-md-3">
-                            <h4 class="card-title success">Help & Advisory</h4>
-                            <div class="alert alert-success">Please Note!!</div>
-                            <p class="card-text">
-                                <ul>
-                                    <li>Keep all the information handy before filling up the application form.
-                                    </li>
-                                    <li>You will have to visit RMC office for any correction regatding
-                                        application information.</li>
-                                    <li>Keep your address concise</li>
-                                    <li>Visit Market Section for further enquiry</li>
-                                </ul>
-                            </p>
-                        </div>
+                        @include('admin.help-and-advisory')
                         <!-- Help & Advisory -->
                         <!-- Shop/Establishment Details of Applicant -->
                         <div class="col-md-6">

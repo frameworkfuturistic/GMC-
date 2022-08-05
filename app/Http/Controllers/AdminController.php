@@ -6,17 +6,16 @@ namespace App\Http\Controllers;
 
 use App\Repository\SelfAdvet\EloquentSelfAdvetRepository;
 use Illuminate\Http\Request;
-use App\Models\MenuMaster;
 
 class AdminController extends Controller
 {
-    
+
     protected $eloquentSelfAdvet;
 
     public function __construct(EloquentSelfAdvetRepository $eloquentSelfAdvet)
     {
 
-       $this->EloquentSelfAdvet = $eloquentSelfAdvet;
+        $this->EloquentSelfAdvet = $eloquentSelfAdvet;
     }
 
     // User Interfaces Controller

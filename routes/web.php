@@ -5,6 +5,7 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BanquetController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DharmasalaController;
 use App\Http\Controllers\HoardingController;
 use App\Http\Controllers\HostelController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\PrivateLandController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TollController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\WorkflowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,11 +55,9 @@ Route::get('rnc/user/dharmasala', [DharmasalaController::class, 'userView']);
 
 Route::post('generateOTP', [OTPController::class, 'generate'])->name('generate');
 
-// Admin Interface Routes
+// -------------------------------------------------------------------------------------------------------
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('rnc/dashboard', function () {
-//     return view('admin.index');
-// })->name('dashboard');
+// Admin Interface Routes
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
@@ -248,6 +248,22 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);
     Route::post('totalshopcollection', [ShopController::class, 'totalShopCollection']);
 // Shops
+
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ * Routes with designations entries, modification Permission Workflows
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+    Route::get('Designations', [DesignationController::class, 'designationView']);
+    Route::get('DesignationRole', [DesignationController::class, 'designationRoleView']);
+    Route::get('Permissions', [DesignationController::class, 'permissionView']);
+
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ * Routes with workflow entries, modifications and workflow candidates
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+    Route::get('Workflow', [WorkflowController::class, 'workflowView']);
 
 // Admin Interface Routes
 
