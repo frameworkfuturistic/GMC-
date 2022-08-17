@@ -31,11 +31,8 @@ use Illuminate\Support\Facades\Route;
  */
 
 /* User Interface Routes   */
-Route::get('/', function () {
-    return view('index');
-});
 
-Route::get('rnc/user/Dashboard', function () {
+Route::get('/', function () {
     return view('user.index');
 });
 
@@ -65,10 +62,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::get('rnc/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// ADD ADMIN or USERS
+    // ADD ADMIN or USERS
     Route::get('rnc/add-users', [RegisterController::class, 'index']);
     Route::post('rnc/store-users', [RegisterController::class, 'store']);
-// ADD ADMIN OR USERS
+    // ADD ADMIN OR USERS
 
     // Self Advet
     Route::get('rnc/advetInbox', [AdminController::class, 'SelfAdvetInbox']);
@@ -86,16 +83,16 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::get('rnc/advetRejected', [AdminController::class, 'advetRejected']);
     Route::get('rnc/updateadvetRejected/{id}', [AdminController::class, 'updateAdvetRejected']);
-// Self Advet
-// Self advet
+    // Self Advet
+    // Self advet
     Route::post('rnc/addSelfAdvet', [AdminController::class, 'saveSelfAdvet']);
     Route::put('rnc/updateSelfAdvet/{id}', [AdminController::class, 'updateSelfAdvet']);
     Route::put('rnc/InboxWorkflow/{id}', [AdminController::class, 'SelfAdvetInboxWorkflow']);
     Route::post('rnc/inboxComment/{id}', [AdminController::class, 'addComment']);
     Route::put('rnc/updatePmt/{id}', [AdminController::class, 'updatePmt']);
-// Self Advet
+    // Self Advet
 
-// Private Land
+    // Private Land
     Route::get('rnc/LandAdvetInbox', [PrivateLandController::class, 'LandAdvetInbox']);
     Route::get('rnc/updateLandInbox/{id}', [PrivateLandController::class, 'UpdateLandInbox']);
 
@@ -107,7 +104,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::get('rnc/LandAdvetRejected', [PrivateLandController::class, 'landRejected']);
     Route::get('rnc/updateLandRejected/{id}', [PrivateLandController::class, 'updateLandRejected']);
-// Private Land
+    // Private Land
     // Private Land
     Route::post('rnc/addPrivateLand', [PrivateLandController::class, 'savePrivateLand']);
     Route::put('rnc/updatePrivateLand/{id}', [PrivateLandController::class, 'UpdateLand']);
@@ -115,7 +112,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('rnc/LandInboxComment/{id}', [PrivateLandController::class, 'addComment']);
     // Private Land
 
-// VEHICLE
+    // VEHICLE
     Route::get('rnc/vehicleInbox', [VehicleController::class, 'vehicleInbox']);
     Route::get('rnc/updatevehicleInbox/{id}', [VehicleController::class, 'udpateVehicleInbox']);
     Route::get('rnc/vehicleOutbox', [VehicleController::class, 'vehicleOutbox']);
@@ -124,15 +121,15 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateVehicleApproved/{id}', [VehicleController::class, 'updateVehicleApproved']);
     Route::get('rnc/vehicleRejected', [VehicleController::class, 'vehicleRejected']);
     Route::get('rnc/updateVehicleRejected/{id}', [VehicleController::class, 'updateVehicleRejected']);
-// VEHICLE
-// VEHICLE
+    // VEHICLE
+    // VEHICLE
     Route::post('rnc/addVehicleAdvet', [VehicleController::class, 'saveVehicleAdvet']);
     Route::put('rnc/updateVehicle/{id}', [VehicleController::class, 'UpdateVehicle']);
     Route::put('rnc/vehicleWorkflow/{id}', [VehicleController::class, 'vehicleWorkflow']);
     Route::post('rnc/VehicleInboxComment/{id}', [VehicleController::class, 'addComment']);
-// VEHICLE
+    // VEHICLE
 
-// MARRIAGE/ BANQUET HALL
+    // MARRIAGE/ BANQUET HALL
     Route::get('rnc/banquetInbox', [BanquetController::class, 'banquetInbox']);
     Route::get('rnc/updateBanquetInbox/{id}', [BanquetController::class, 'updateBanquetInbox']);
     Route::get('rnc/banquetOutbox', [BanquetController::class, 'banquetOutbox']);
@@ -141,7 +138,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateBanquetApproved/{id}', [BanquetController::class, 'updateBanquetApproved']);
     Route::get('rnc/banquetRejected', [BanquetController::class, 'banquetRejected']);
     Route::get('rnc/updateBanquetRejected/{id}', [BanquetController::class, 'updateBanquetRejected']);
-// MARRIAGE/BANQUET HALL
+    // MARRIAGE/BANQUET HALL
     // MARRIGE/ BANQUET HALL
     Route::post('rnc/addBanquet', [BanquetController::class, 'saveBanquet']);
     Route::put('rnc/updateBanquet/{id}', [BanquetController::class, 'updateBanquet']);
@@ -149,7 +146,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('rnc/banquetInboxComment/{id}', [BanquetController::class, 'addComment']);
     // MARRIAGE/ BANQUET HALL
 
-// HOSTEL
+    // HOSTEL
     Route::get('rnc/hostelInbox', [HostelController::class, 'hostelInbox']);
     Route::get('rnc/updateHostelInbox/{id}', [HostelController::class, 'updateHostelInbox']);
     Route::get('rnc/hostelOutbox', [HostelController::class, 'hostelOutbox']);
@@ -158,15 +155,15 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateHostelApproved/{id}', [HostelController::class, 'updateHostelApproved']);
     Route::get('rnc/hostelRejected', [HostelController::class, 'hostelRejected']);
     Route::get('rnc/updateHostelRejected/{id}', [HostelController::class, 'updateHostelRejected']);
-// HOSTEL
-// HOSTEL/LODGE
+    // HOSTEL
+    // HOSTEL/LODGE
     Route::post('rnc/addHostel', [HostelController::class, 'saveHostel']);
     Route::put('rnc/updatehostel/{id}', [HostelController::class, 'updateHostel']);
     Route::put('rnc/hostelWorkflow/{id}', [HostelController::class, 'hostelWorkflow']);
     Route::post('rnc/hostelInboxComment/{id}', [HostelController::class, 'addComment']);
-// HOSTEL/LODGE
+    // HOSTEL/LODGE
 
-// DHARMSALA
+    // DHARMSALA
     Route::get('rnc/dharmasalaInbox', [DharmasalaController::class, 'dharmasalaInbox']);
     Route::get('rnc/updatedharmasalaInbox/{id}', [DharmasalaController::class, 'updateDharmasalaInbox']);
     Route::get('rnc/dharmasalaOutbox', [DharmasalaController::class, 'dharmasalaOutbox']);
@@ -175,15 +172,15 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateDharmasalaApproved/{id}', [DharmasalaController::class, 'updateDharmasalaApproved']);
     Route::get('rnc/dharmasalaRejected', [DharmasalaController::class, 'dharmasalaRejected']);
     Route::get('rnc/updateDharmasalaRejected/{id}', [DharmasalaController::class, 'updateDharmasalaRejected']);
-// DHARMSALA
-// DHARMASALA
+    // DHARMSALA
+    // DHARMASALA
     Route::post('rnc/addDharmasala', [DharmasalaController::class, 'saveDharmasala']);
     Route::put('rnc/updatedharmasala/{id}', [DharmasalaController::class, 'updateDharmasala']);
     Route::put('rnc/dharmasalaWorkflow/{id}', [DharmasalaController::class, 'dharmasalaWorkflow']);
     Route::post('rnc/dharmasalaInboxComment/{id}', [DharmasalaController::class, 'addComment']);
-// DHARMASALA
+    // DHARMASALA
 
-// AGENCY
+    // AGENCY
     Route::get('rnc/agencyInbox', [AgencyController::class, 'Inbox']);
     Route::get('rnc/updateInbox/{id}', [AgencyController::class, 'updateInbox']);
     Route::get('rnc/agencyOutbox', [AgencyController::class, 'Outbox']);
@@ -192,15 +189,15 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateApproved/{id}', [AgencyController::class, 'updateApproved']);
     Route::get('rnc/agencyRejected', [AgencyController::class, 'agencyRejected']);
     Route::get('rnc/updateRejected/{id}', [AgencyController::class, 'updateRejected']);
-// AGENCY
-// AGENCY
+    // AGENCY
+    // AGENCY
     Route::post('rnc/addAgency', [AgencyController::class, 'addAgency']);
     Route::put('rnc/updateAgency/{id}', [AgencyController::class, 'updateAgency']);
     Route::post('rnc/agencyInboxComment/{id}', [AgencyController::class, 'addComment']);
     Route::put('rnc/agencyWorkflow/{id}', [AgencyController::class, 'agencyWorkflow']);
-// AGENCY
+    // AGENCY
 
-// AGENCY ACCOUNT OCCUPIED DASHBOARD
+    // AGENCY ACCOUNT OCCUPIED DASHBOARD
     Route::get('rnc/newHoarding', [HoardingController::class, 'newHoarding']);
     Route::get('rnc/lastBill', [HoardingController::class, 'lastBill']);
     Route::get('rnc/hoardingPayment', [HoardingController::class, 'hoardingPayment']);
@@ -209,9 +206,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/vendorProfile', [HoardingController::class, 'vendorProfile']);
     Route::get('rnc/hoardingRules', [HoardingController::class, 'hoardingRules']);
     Route::post('storeHoarding', [HoardingController::class, 'storeHoarding']);
-// AGENCY ACCOUNT OCCUPIED DASHBOARD
+    // AGENCY ACCOUNT OCCUPIED DASHBOARD
 
-// HOARDING
+    // HOARDING
     /* VIEW PART */
     Route::get('rnc/hoarding-inbox', [HoardingController::class, 'hoardingInbox']);
     Route::get('rnc/hoarding-inbox/{id}', [HoardingController::class, 'hoardingInboxByID']);
@@ -236,12 +233,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     /* COMMENT */
     Route::post('rnc/hoardingWorkflow', [HoardingController::class, 'hoardingWorkflow']);
 
-// HOARDING
+    // HOARDING
 
-// Toll
+    // Toll
     Route::post('tollcollection', [TollController::class, 'totalCollection']);
 
-// Shops
+    // Shops
     Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView']);
     Route::get('rnc/getShops/{id}', [ShopController::class, 'getShops']);
     Route::post('rnc/editShops', [ShopController::class, 'editShops']);
@@ -249,24 +246,24 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/BillShops', [ShopController::class, 'shopBillView']);
     Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);
     Route::post('totalshopcollection', [ShopController::class, 'totalShopCollection']);
-// Shops
+    // Shops
 
-/**
- * ---------------------------------------------------------------------------------------------------------------------
- * Routes with designations CRUD operations
- * ---------------------------------------------------------------------------------------------------------------------
- */
+    /**
+     * ---------------------------------------------------------------------------------------------------------------------
+     * Routes with designations CRUD operations
+     * ---------------------------------------------------------------------------------------------------------------------
+     */
     Route::get('Designations', [DesignationController::class, 'designationView']); // Designations View
     Route::post('add-designation', [DesignationController::class, 'addDesignation']); // Save New Designation
     Route::post('update-designation', [DesignationController::class, 'updateDesignation']); // Update Designation By ID
     Route::get('get-designations', [DesignationController::class, 'getDesignations']); // Get All Designations
     Route::get('get-designation-by-id/{id}', [DesignationController::class, 'getDesignationByID']); // Get Designation By ID
 
-/**
- * --------------------------------------------------------------------------------------------------------------------
- * | Designation Role Crud Operations
- * --------------------------------------------------------------------------------------------------------------------
- */
+    /**
+     * --------------------------------------------------------------------------------------------------------------------
+     * | Designation Role Crud Operations
+     * --------------------------------------------------------------------------------------------------------------------
+     */
     Route::get('DesignationRole', [DesignationRoleController::class, 'designationRoleView']); // Designation Role Entry View
     Route::post('add-designation-role', [DesignationRoleController::class, 'addDesignationRole']); // Add New Designation Role
     Route::post('update-designation-role', [DesignationRoleController::class, 'updateDesignationRole']); // Update Designation Role
@@ -275,13 +272,13 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::get('Permissions', [DesignationController::class, 'permissionView']);
 
-/**
- * ---------------------------------------------------------------------------------------------------------------------
- * Routes with workflow entries, modifications and workflow candidates
- * ---------------------------------------------------------------------------------------------------------------------
- */
+    /**
+     * ---------------------------------------------------------------------------------------------------------------------
+     * Routes with workflow entries, modifications and workflow candidates
+     * ---------------------------------------------------------------------------------------------------------------------
+     */
     Route::get('Workflow', [WorkflowController::class, 'workflowView']);
 
-// Admin Interface Routes
+    // Admin Interface Routes
 
 });

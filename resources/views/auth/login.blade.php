@@ -14,7 +14,7 @@
 
         <div class="container-fluid bg-green">
             <div class="row">
-            <div class="col-md-6">
+                <div class="col-md-6">
                     <img src="Landing/assets/img/Jharkhand_emblem.png" alt="" style="width: 100%;">
                 </div>
                 <div class="col-md-6">
@@ -23,14 +23,12 @@
 
                         <div>
                             <x-jet-label for="email" value="{{ __('Email') }}" />
-                            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email"
-                                :value="old('email')" required autofocus />
+                            <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
                         </div>
 
                         <div class="mt-4">
                             <x-jet-label for="password" value="{{ __('Password') }}" />
-                            <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password"
-                                required autocomplete="current-password" />
+                            <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
                         </div>
 
                         <div class="block mt-4">
@@ -41,11 +39,10 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-10">
-                            
+
                             &nbsp; &nbsp;
                             @if (Route::has('password.request'))
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900"
-                                href="{{ route('password.request') }}">
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
                             @endif
