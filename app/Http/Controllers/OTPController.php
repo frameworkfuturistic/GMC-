@@ -3,22 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator;
-use Illuminate\Support\Facades\DB;
-use Nexmo\Laravel\Facade\Nexmo;
+use App\Models\OtpMaster;
 
 class OTPController extends Controller
 {
-    function generate(Request $request){
-        //dd($request->all());
-        $num=$request->input('mobile');
-        $otp=mt_rand(1000,9999);
+    function generate(Request $request)
+    {
+        // dd($request->all());
+        $num = $request->mobile;
+        $otp = mt_rand(1000, 9999);
 
-        Nexmo::message()->send([
-            'to'=>'91'.$num,
-            'from'=>'916201675668',
-            'text'=>'Your OTP is' .$otp. 'for Verification'
-        ]);
-        echo 'success','Message Sent';
+        $check_mob = OtpMaster::where('mobile_no', '=', $num)->first();
+        if ($check_mob) {
+            $check_mob->otp = $otp;
+            $check_mob->save();
+            return $otp;
+        }
+        $mobile = new OtpMaster();
+        $mobile->mobile_no = $num;
+        $mobile->otp = $otp;
+        $mobile->save();
+        return $otp;
     }
 }

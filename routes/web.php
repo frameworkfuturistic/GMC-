@@ -52,7 +52,7 @@ Route::get('rnc/user/dharmasala', [DharmasalaController::class, 'userView']);
 
 /* User Interface Routes */
 
-Route::post('generateOTP', [OTPController::class, 'generate'])->name('generate');
+Route::post('otp-master', [OTPController::class, 'generate'])->name('generate');
 
 // -------------------------------------------------------------------------------------------------------
 
