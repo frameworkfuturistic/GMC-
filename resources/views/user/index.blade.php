@@ -22,7 +22,7 @@ active
                     <p class="lead">License Application</p>
                     <img src="content/img/self.png" alt="">
                     <h6 class="card-title success">You can get license to advertise your business name on your shop</h6>
-                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Self Advertisement');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
+                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Self Advertisement','rnc/user/selfAdvet');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@ active
                     <p class="lead">License Application</p>
                     <img src="content/img/vehicle.jpg" alt="" class="font_img">
                     <h6 class="card-title success">You can get license to advertise your business name on your shop</h6>
-                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Movable Vehicles');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
+                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Movable Vehicles','rnc/user/vehicle');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@ active
                     <p class="lead">License Application</p>
                     <img src="content/img/building.png" alt="" class="font_img">
                     <h6 class="card-title success">You can get license to advertise your business name on your shop</h6>
-                    <a href="rnc/user/land" class="btn btn-success"><i class="icon-check"></i> Apply Online</a>
+                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Private Land','rnc/user/land');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@ active
                     <p class="lead">License Application</p>
                     <img src="content/img/citihall.png" alt="" class="font_img">
                     <h6 class="card-title success">Advertisement Agencies can apply to get License</h6>
-                    <a href="rnc/user/agency" class="btn btn-success"><i class="icon-check"></i> Apply Online</a>
+                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Agency Advertisement','rnc/user/agency');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@ active
                     <p class="lead">License Application</p>
                     <img src="content/img/citihall.png" alt="" class="font_img">
                     <h6 class="card-title success">Advertisement Agencies can apply to get License</h6>
-                    <a href="rnc/user/banquet" class="btn btn-success"><i class="icon-check"></i> Apply Online</a>
+                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Marriage/Banquet Hall','rnc/user/banquet');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@ active
                     <img src="content/img/hostel.png" alt="" class="font_img">
                     <h6 class="card-title success">You can apply for Lodge/ Hostel</h6>
                     <br>
-                    <a href="rnc/user/hostel" class="btn btn-success"><i class="icon-check"></i> Apply Online</a>
+                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Lodge/Hostel','rnc/user/hostel');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@ active
                     <img src="content/img/multichannel.png" alt="" class="font_img">
                     <h6 class="card-title success">You can apply for Dharmasala</h6>
                     <br>
-                    <a href="rnc/user/dharmasala" class="btn btn-success"><i class="icon-check"></i> Apply Online</a>
+                    <button data-toggle="modal" data-target="#exampleModal" onclick="showModal('Dharmsala','rnc/user/dharmasala');" type="button" type="button" class="btn btn-success"><i class="icon-check"></i> Apply Online</button>
                 </div>
             </div>
         </div>
@@ -147,6 +147,7 @@ active
                             <tr>
                                 <form action="user-authentication" method="POST">
                                     @csrf
+                                    <input type="hidden" id="link" name="link" value="">
                                     <td><label for="otp">Enter OTP</label></td>
                                     <input type="hidden" id="mobile1" name="mobile1">
                                     <td><input type="text" class="form-control" id="otp" name="otp"></input></td>

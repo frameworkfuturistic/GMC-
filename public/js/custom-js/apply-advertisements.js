@@ -1,6 +1,7 @@
-function showModal($header){
+function showModal($header,$link){
     $('#exampleModalLabel').empty();
     $('#exampleModalLabel').append($header);
+    $('#link').val($link);
 }
 
 // Store OTP

@@ -35,7 +35,7 @@ class OTPController extends Controller
         if ($mobile->otp == $request->otp) {
             $request->session()->put('mobile', $request->mobile1);
             $value = session('mobile');
-            return redirect('rnc/user/selfAdvet');
+            return redirect("$request->link");
         } else
             return back()->with('status', 'Incorrect OTP');
     }
