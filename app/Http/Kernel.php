@@ -41,7 +41,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             // For sectrum authenticate through API
-             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             //  for sectrum authenticate through API
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'api.key' => \App\Http\Middleware\ApiKeyMiddleware::class,
         'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
         'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
+        'user' => \App\Http\Middleware\User::class
     ];
 }

@@ -5,6 +5,12 @@ active
 @endsection
 
 @section('app-content')
+@if(session()->has('status'))
+<div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{ session()->get('status') }}</strong>
+</div>
+@endif
 <div class="row">
     <!-- menu-links -->
     <!-- self advertisement -->
@@ -135,13 +141,17 @@ active
                                     @csrf
                                     <td><label for="mobile">Mobile No</label></td>
                                     <td><input type="text" class="form-control" id="mobile" name="mobile"></input></td>
-                                    <td><button type="submit" class="btn btn-success">Send OTP</button></td>
+                                    <td><button type="submit" class="btn btn-success">Generate OTP</button></td>
                                 </form>
                             </tr>
                             <tr>
-                                <td><label for="otp">Enter OTP</label></td>
-                                <td><input type="text" class="form-control" id="otp" name="otp"></input></td>
-                                <td><button type="button" class="btn btn-success">Submit</button></td>
+                                <form action="user-authentication" method="POST">
+                                    @csrf
+                                    <td><label for="otp">Enter OTP</label></td>
+                                    <input type="hidden" id="mobile1" name="mobile1">
+                                    <td><input type="text" class="form-control" id="otp" name="otp"></input></td>
+                                    <td><button type="submit" class="btn btn-success">Submit</button></td>
+                                </form>
                             </tr>
                         </table>
                     </div>
@@ -162,6 +172,9 @@ active
 <script src="js/sweetalert.min.js"></script>
 <script>
     $('#otp-master').submit(function(e) {
+        e.preventDefault();
+        var mobile = document.getElementById('mobile').value;
+        $('#mobile1').val(mobile);
         storeOTP(e);
     });
 </script>

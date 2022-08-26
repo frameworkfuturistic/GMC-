@@ -25,4 +25,18 @@ class OTPController extends Controller
         $mobile->save();
         return $otp;
     }
+
+    public function authenticateOtp(Request $request)
+    {
+        if ($request->mobile1 == null) {
+            return back()->with('status', 'Incorrect OTP');
+        }
+        $mobile = OtpMaster::where('mobile_no', $request->mobile1)->first();
+        if ($mobile->otp == $request->otp) {
+            $request->session()->put('mobile', $request->mobile1);
+            $value = session('mobile');
+            return redirect('rnc/user/selfAdvet');
+        } else
+            return back()->with('status', 'Incorrect OTP');
+    }
 }
