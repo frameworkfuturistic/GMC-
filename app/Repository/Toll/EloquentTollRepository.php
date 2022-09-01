@@ -259,7 +259,7 @@ class EloquentTollRepository implements TollRepository
                     $tp->Rate = $Rate;
                     // Calculating Days
                     $interval = date_diff($From, $To);
-                    $tp->Days = $interval->format("%a");
+                    $tp->Days = $interval->format("%a") + 1;
 
                     // Calculating Amount
                     $Rate = $toll->Rate;
