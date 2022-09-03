@@ -5,10 +5,10 @@ namespace App\Providers;
 use App\Repository\MRD\EloquentSelfAdvetRepository;
 use App\Repository\MRD\SelfAdvetRepository;
 use Illuminate\Support\ServiceProvider;
-use Opcodes\LogViewer\Facades\LogViewer;
-use Opcodes\LogViewer\LogFile;
-use Illuminate\Support\Facades\Gate;
-use App\Models\User;
+// use Opcodes\LogViewer\Facades\LogViewer;
+// use Opcodes\LogViewer\LogFile;
+// use Illuminate\Support\Facades\Gate;
+// use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,17 +30,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        LogViewer::auth(function ($request) {
-            // return true to allow viewing the Log Viewer.
-        });
+        // LogViewer::auth(function ($request) {
+        //     // return true to allow viewing the Log Viewer.
+        // });
 
-        // Here's an example:
-        LogViewer::auth(function ($request) {
-            return $request->user()
-                && in_array($request->user()->email, [
-                    'admin@gmail.com'
-                ]);
-        });
+        // // Here's an example:
+        // LogViewer::auth(function ($request) {
+        //     return $request->user()
+        //         && in_array($request->user()->email, [
+        //             'admin@gmail.com'
+        //         ]);
+        // });
 
         // $this->registerPolicies();
 
