@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'request_logger'
         ],
 
         'api' => [
@@ -45,6 +46,7 @@ class Kernel extends HttpKernel
             //  for sectrum authenticate through API
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'request_logger'
         ],
     ];
 
@@ -70,6 +72,7 @@ class Kernel extends HttpKernel
         'api.key' => \App\Http\Middleware\ApiKeyMiddleware::class,
         'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
         'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
-        'user' => \App\Http\Middleware\User::class
+        'user' => \App\Http\Middleware\User::class,
+        'request_logger' => \App\Http\Middleware\LogRequests::class
     ];
 }

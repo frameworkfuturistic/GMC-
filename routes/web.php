@@ -247,7 +247,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/getShops/{id}', [ShopController::class, 'getShops']);
     Route::post('rnc/editShops', [ShopController::class, 'editShops']);
     Route::get('shops/payments/bill-payments', [ShopController::class, 'billPaymentView']);
-    Route::post('shops/payments/bill-payments', [ShopController::class, 'postBillPayment']);    // Save Shop Payment
+    Route::post('shops/payments/bill-payments', [ShopController::class, 'postBillPayment'])->middleware('request_logger');    // Save Shop Payment
 
     Route::get('rnc/BillShops', [ShopController::class, 'shopBillView']);
     Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);

@@ -12,6 +12,7 @@ use App\Traits\Shop as ShopTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Created On-04-07-2022
