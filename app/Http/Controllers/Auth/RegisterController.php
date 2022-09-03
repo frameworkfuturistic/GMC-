@@ -7,12 +7,23 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\AppHelper;
 
 class RegisterController extends Controller
 {
+    use AppHelper;
+
+    public function __construct()
+    {
+        $this->menuApp();
+    }
     public function index()
     {
-        return view('admin.add-users');
+        $array = [
+            'parents' => $this->parent,
+            'childs' => $this->child
+        ];
+        return view('admin.add-users')->with($array);
     }
 
     public function store(Request $request)
@@ -37,6 +48,5 @@ class RegisterController extends Controller
         $user->password = Hash::make($request->pass);
         $user->save();
         return back()->with('success', 'Successfully added the User');
-
     }
 }

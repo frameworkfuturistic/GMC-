@@ -60,6 +60,9 @@ Route::post('user-authentication', [OTPController::class, 'authenticateOtp']);
 // Admin Interface Routes
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('register', function () {
+        return back();
+    });
 
     Route::get('rnc/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -243,6 +246,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView']);
     Route::get('rnc/getShops/{id}', [ShopController::class, 'getShops']);
     Route::post('rnc/editShops', [ShopController::class, 'editShops']);
+    Route::get('shops/payments/bill-payments', [ShopController::class, 'billPaymentView']);
+    Route::post('shops/payments/bill-payments', [ShopController::class, 'postBillPayment']);    // Save Shop Payment
 
     Route::get('rnc/BillShops', [ShopController::class, 'shopBillView']);
     Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);

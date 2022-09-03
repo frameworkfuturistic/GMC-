@@ -33,6 +33,18 @@ class ShopController extends Controller
         return $this->EloquentShop->shopSummaryView();
     }
 
+    // Bill Payment View
+    public function billPaymentView()
+    {
+        return $this->EloquentShop->billPaymentView();
+    }
+
+    // Post Bill Payment
+    public function postBillPayment(Request $request)
+    {
+        return $this->EloquentShop->postBillPayment($request);
+    }
+
     /**
      * Save Shops
      */
@@ -91,5 +103,4 @@ class ShopController extends Controller
     {
         return $this->EloquentShop->totalShopCollection($request);
     }
-
 }

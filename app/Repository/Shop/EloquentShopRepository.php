@@ -5,6 +5,7 @@ namespace App\Repository\Shop;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
 use App\Models\ShopPayment;
+use App\Models\surveyLogin;
 use App\Repository\Shop\ShopRepository;
 use App\Traits\AppHelper;
 use App\Traits\Shop as ShopTrait;
@@ -62,6 +63,92 @@ class EloquentShopRepository implements ShopRepository
             'today_total_shop' => $today_shop_total[0]->today_collection,
         ];
         return view('admin.Shops.summary-view')->with($array);
+    }
+
+    /**
+     * | Shop Bill Payment View
+     */
+    public function billPaymentView()
+    {
+        $user = surveyLogin::select('id', 'name')->get();
+        $array = [
+            'parents' => $this->parent,
+            'childs' => $this->child,
+            'users' => $user
+        ];
+        return view('admin.Shops.bill-payment-view')->with($array);
+    }
+
+    /**
+     * | Post Bill Payments
+     * | Generating Shop Payment for pending Paid Shops
+     * | @param Request $request
+     * | @var shops the shop id for the requested shop No
+     * | @var shopPayment created a new object for inserting Payment 
+     */
+    public function postBillPayment(Request $request)
+    {
+        $request->validate([
+            'shopNo' => 'required',
+            'amount' => 'required|integer',
+            'from' => 'required',
+            'to' => 'required',
+            'rate' => 'required|integer',
+            'paymentDate' => 'required'
+        ]);
+        try {
+            DB::beginTransaction();
+            $generatedFrom = formatDate($request->from);
+            $generatedTo = formatDate($request->to);
+            $generatedPaymentDate = formatDate($request->paymentDate);
+            $paidFrom = ($generatedFrom->format('Y') * 12) + $generatedFrom->format('m');   // Payment From
+            $paidTo = ($generatedTo->format('Y') * 12) + $generatedTo->format('m');         // Payment To
+            $months = $paidTo - $paidFrom;
+
+            // Finding The ShopID
+            $shop = Shop::select('id')->where('ShopNo', $request->shopNo)->first();
+
+            if (!$shop) {
+                DB::rollBack();
+                return back()->with('message', 'Shop Not Found for this Shop ID');
+            }
+
+            // Shop Payment
+            $shopPayment = new ShopPayment();
+            $shopPayment->ShopId = $shop->id;
+            $shopPayment->PaidFrom = $paidFrom;
+            $shopPayment->PaidTo = $paidTo;
+            $shopPayment->Demand = $request->amount;
+            $shopPayment->Amount = $request->amount;
+            $shopPayment->PmtMode = 'CASH';
+            $shopPayment->Rate = $request->rate;
+            $shopPayment->Months = $months;
+            $shopPayment->PaymentDate = $request->paymentDate;
+            $shopPayment->UserId = $request->collectedBy;
+
+            // Photo Upload
+            if ($file = $request->file('photoUpload')) {
+                $ext = $file->getClientOriginalExtension();
+                if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
+                    $fileName = $request->shopNo . '-' . time() . '.' . $ext;
+                    $shopPayment->PhotoPath = $fileName;
+                    $year = $generatedPaymentDate->format('Y');
+                    $file->move('UploadReceipts/' . $year, $fileName);
+                } else {
+                    DB::rollBack();
+                    return response()->json(['Error', 'File Name must be in png, jpg or jpeg']);
+                }
+            }
+
+            $shopPayment->CreatedBy = auth()->user()->id;
+            $shopPayment->Remarks = $request->remarks;
+            $shopPayment->save();
+            DB::commit();
+            return back()->with('message', 'Payment Done Successfully');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $e;
+        }
     }
 
     /**
@@ -277,57 +364,58 @@ class EloquentShopRepository implements ShopRepository
     }
 
     /**
-	 * Function to convert int to Month and Year
-	 */
-	function funMonthYear($val){
-		$retStr = '';
-		$tmpYear =  floor($val/12);
-		$tmpMnth = $val%12;
-		$tmpMnth;
-	 
-		switch ($tmpMnth) {
-		  case 0:
-			$retStr = 'Dec, '.($tmpYear - 1);
-			break;
-		  case 1:
-			$retStr = 'Jan, '.($tmpYear);
-			break;
-		  case 2:
-			$retStr = 'Feb, '.($tmpYear);
-			break;
-		  case 3:
-			$retStr = 'Mar, '.($tmpYear);
-			break;
-		  case 4:
-			$retStr = 'Apr, '.($tmpYear);
-			break;
-		  case 5:
-			$retStr = 'May, '.($tmpYear);
-			break;
-		  case 6:
-			$retStr = 'Jun, '.($tmpYear);
-			break;
-		  case 7:
-			$retStr = 'Jul, '.($tmpYear);
-			break;
-		  case 8:
-			$retStr = 'Aug, '.($tmpYear);
-			break;
-		  case 9:
-			$retStr = 'Sep, '.($tmpYear);
-			break;
-		  case 10:
-			$retStr = 'Oct, '.($tmpYear);
-			break;
-		  case 11:
-			$retStr = 'Nov, '.($tmpYear);
-			break;
-		  default:
-			$retStr = '';
-		}
-		return $retStr;
-	 }
-	 
+     * Function to convert int to Month and Year
+     */
+    function funMonthYear($val)
+    {
+        $retStr = '';
+        $tmpYear =  floor($val / 12);
+        $tmpMnth = $val % 12;
+        $tmpMnth;
+
+        switch ($tmpMnth) {
+            case 0:
+                $retStr = 'Dec, ' . ($tmpYear - 1);
+                break;
+            case 1:
+                $retStr = 'Jan, ' . ($tmpYear);
+                break;
+            case 2:
+                $retStr = 'Feb, ' . ($tmpYear);
+                break;
+            case 3:
+                $retStr = 'Mar, ' . ($tmpYear);
+                break;
+            case 4:
+                $retStr = 'Apr, ' . ($tmpYear);
+                break;
+            case 5:
+                $retStr = 'May, ' . ($tmpYear);
+                break;
+            case 6:
+                $retStr = 'Jun, ' . ($tmpYear);
+                break;
+            case 7:
+                $retStr = 'Jul, ' . ($tmpYear);
+                break;
+            case 8:
+                $retStr = 'Aug, ' . ($tmpYear);
+                break;
+            case 9:
+                $retStr = 'Sep, ' . ($tmpYear);
+                break;
+            case 10:
+                $retStr = 'Oct, ' . ($tmpYear);
+                break;
+            case 11:
+                $retStr = 'Nov, ' . ($tmpYear);
+                break;
+            default:
+                $retStr = '';
+        }
+        return $retStr;
+    }
+
 
     /**
      * Shop Payments
@@ -409,7 +497,7 @@ class EloquentShopRepository implements ShopRepository
          * END $$
          *
          * DELIMITER ;
-       */
+         */
         $request->validate([
             'To' => 'required',
             'Amount' => 'required|numeric|between:10,10000'
@@ -423,19 +511,19 @@ class EloquentShopRepository implements ShopRepository
             $refArrear = $shop->Arrear;
             //* --Find #LastTranID = LastTranID
             $refTranID = $shop->LastTranID;
-            
+
             //* --#PaidUpto = PaidTo; [if not found make it April 2022]
             $refPaidUpto = 24268; // April 2022
-            if($refTranID != null) {
+            if ($refTranID != null) {
                 $oldShopPayments = ShopPayment::find($refTranID);
                 $refPaidUpto = $oldShopPayments->PaidTo;
             }
             //CALCULATION
             $paidFrom = $refPaidUpto + 1;
             // $generatedDate = date_create($request->To);
-            $generatedDate = date_create_from_format("d-m-Y",$request->To);
+            $generatedDate = date_create_from_format("d-m-Y", $request->To);
             $paidTo = ($generatedDate->format('Y') * 12) + $generatedDate->format('m');
-            if($refPaidUpto >=  $paidTo){
+            if ($refPaidUpto >=  $paidTo) {
                 DB::rollBack();
                 return response()->json('This shop has no Last Payment Date', 400);
             }
@@ -543,7 +631,7 @@ class EloquentShopRepository implements ShopRepository
     //                 $shop->Arrear = $net_demand - $request->Amount;
     //                 $shop->LastAmount = $request->Amount;
     //                 $shop->LastPaymentDate = $sp->To;
-                    
+
     //                 $sp->PmtMode = 'CASH';
     //                 $sp->PaymentDate = date("Y-m-d H:i:s");
     //                 $sp->UserId = auth()->user()->id;
