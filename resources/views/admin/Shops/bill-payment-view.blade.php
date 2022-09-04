@@ -32,10 +32,16 @@ class="active"
                             <input type="text" id="shopNo" class="form-control" placeholder="Shop No" name="shopNo" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="amount">Amount</label>
                             <input type="text" id="amount" class="form-control" placeholder="Amount" name="amount" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="due">Due</label>
+                            <input type="text" id="due" class="form-control" placeholder="Due" name="due" value="0">
                         </div>
                     </div>
                     <div class="col-md-3">
