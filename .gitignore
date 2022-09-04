@@ -15,5 +15,5 @@ yarn-error.log
 /.vscode
 surveyFiles/
 Urban.rar
-UploadReceipts/
 UploadFiles/
+public/UploadReceipts/

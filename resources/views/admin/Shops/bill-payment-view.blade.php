@@ -41,13 +41,13 @@ class="active"
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="from">From</label>
-                            <input type="date" id="from" class="form-control" placeholder="From" name="from" required>
+                            <input type="month" id="from" class="form-control" placeholder="From" name="from" required>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="to">To</label>
-                            <input type="date" id="to" class="form-control" placeholder="to" name="to" required>
+                            <input type="month" id="to" class="form-control" placeholder="to" name="to" required>
                         </div>
                     </div>
                     <div class="col-md-3">

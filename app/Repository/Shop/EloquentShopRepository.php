@@ -99,12 +99,13 @@ class EloquentShopRepository implements ShopRepository
         ]);
         try {
             DB::beginTransaction();
-            $generatedFrom = formatDate($request->from);
-            $generatedTo = formatDate($request->to);
-            $generatedPaymentDate = formatDate($request->paymentDate);
+            // return date_create($request->to)->format('Y');
+            $generatedFrom = date_create($request->from);
+            $generatedTo = date_create($request->to);
+            $generatedPaymentDate = date_create($request->paymentDate);
             $paidFrom = ($generatedFrom->format('Y') * 12) + $generatedFrom->format('m');   // Payment From
             $paidTo = ($generatedTo->format('Y') * 12) + $generatedTo->format('m');         // Payment To
-            $months = $paidTo - $paidFrom;
+            $months = ($paidTo - $paidFrom) +1;
 
             // Finding The ShopID
             $shop = Shop::select('id')->where('ShopNo', $request->shopNo)->first();
@@ -131,9 +132,9 @@ class EloquentShopRepository implements ShopRepository
             if ($file = $request->file('photoUpload')) {
                 $ext = $file->getClientOriginalExtension();
                 if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
-                    $fileName = $request->shopNo . '-' . time() . '.' . $ext;
-                    $shopPayment->PhotoPath = $fileName;
                     $year = $generatedPaymentDate->format('Y');
+                    $fileName = $year.'/'.$request->shopNo . '-' . time() . '.' . $ext;
+                    $shopPayment->PhotoPath = $fileName;
                     $file->move('UploadReceipts/' . $year, $fileName);
                 } else {
                     DB::rollBack();
@@ -144,11 +145,15 @@ class EloquentShopRepository implements ShopRepository
             $shopPayment->CreatedBy = auth()->user()->id;
             $shopPayment->Remarks = $request->remarks;
             $shopPayment->save();
+            // Update Last TranID for Shop
+            $shop->LastTranID=$shopPayment->id;
+            $shop->save();
+
             DB::commit();
             return back()->with('message', 'Payment Done Successfully');
         } catch (Exception $e) {
             DB::rollBack();
-            return $e;
+            return response()->json($e);
         }
     }
 
