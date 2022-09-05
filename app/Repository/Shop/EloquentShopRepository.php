@@ -105,10 +105,10 @@ class EloquentShopRepository implements ShopRepository
             $generatedPaymentDate = date_create($request->paymentDate);
             $paidFrom = ($generatedFrom->format('Y') * 12) + $generatedFrom->format('m');   // Payment From
             $paidTo = ($generatedTo->format('Y') * 12) + $generatedTo->format('m');         // Payment To
-            $months = ($paidTo - $paidFrom) +1;
+            $months = ($paidTo - $paidFrom) + 1;
 
             // Finding The ShopID
-            $shop = Shop::select('id')->where('ShopNo', $request->shopNo)->first();
+            $shop = Shop::where('ShopNo', $request->shopNo)->first();
 
             if (!$shop) {
                 DB::rollBack();
@@ -117,7 +117,7 @@ class EloquentShopRepository implements ShopRepository
 
             // Shop Payment
             $shopPayment = new ShopPayment();
-            $shopPayment->ShopId = $shop->id;
+            $shopPayment->ShopId = $shop->ID;
             $shopPayment->PaidFrom = $paidFrom;
             $shopPayment->PaidTo = $paidTo;
             $shopPayment->Demand = $request->amount;
@@ -133,7 +133,7 @@ class EloquentShopRepository implements ShopRepository
                 $ext = $file->getClientOriginalExtension();
                 if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
                     $year = $generatedPaymentDate->format('Y');
-                    $fileName = $year.'/'.$request->shopNo . '-' . time() . '.' . $ext;
+                    $fileName = $year . '/' . $request->shopNo . '-' . time() . '.' . $ext;
                     $shopPayment->PhotoPath = $fileName;
                     $file->move('UploadReceipts/' . $year, $fileName);
                 } else {
@@ -146,8 +146,8 @@ class EloquentShopRepository implements ShopRepository
             $shopPayment->Remarks = $request->remarks;
             $shopPayment->save();
             // Update Last TranID for Shop
-            $shop->LastTranID=$shopPayment->id;
-            $shop->Arrear=$request->due;
+            $shop->LastTranID = $shopPayment->id;
+            $shop->Arrear = $request->due;
             $shop->save();
 
             DB::commit();
