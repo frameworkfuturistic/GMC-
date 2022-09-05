@@ -58,8 +58,7 @@ class="active"
                         @foreach($SelfAds as $SelfAd)
                         <tr>
                             <td scope="row">
-                                <button onclick="window.location.replace('rnc/updateadvetInbox/{{$SelfAd->id}}')"
-                                    class="btn btn-success btn-sm"><i class="icon-pen"></i>
+                                <button onclick="window.location.replace('rnc/updateadvetInbox/{{$SelfAd->id}}')" class="btn btn-success btn-sm"><i class="icon-pen"></i>
                                     Details
                                 </button>
                             </td>
@@ -108,7 +107,7 @@ class="active"
 @section('script')
 <!-- datatable -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#datatable').DataTable({
             dom: 'Bfrtip',
             buttons: {
@@ -142,7 +141,6 @@ class="active"
         });
         $("#advetInboxActive").addClass('active');
     });
-
 </script>
 <!-- datatable -->
 @endsection

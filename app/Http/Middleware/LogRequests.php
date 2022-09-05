@@ -23,16 +23,11 @@ class LogRequests
         $url = $request->fullUrl();
         $method = $request->getMethod();
         $ip = $request->getClientIp();
-        $allReq = $request->all();
+        $reqLog = $request->all();
+        $log = "{$ip}: {$method}@{$url} - {$duration}ms \n" .
+            "Request : {[$request->all()]} \n";
         // $log = "{$ip}: {$method}@{$url} - {$duration}ms \n" .
-        $log = [
-            'duration' => $duration,
-            'url' => $url,
-            'method' => $method,
-            'ip' => $ip,
-            'request' => $allReq
-        ];
-        //     "Request : {$request->all()}";
+        //     "Request : {$reqLog} \n";
         Log::info($log);
     }
 }

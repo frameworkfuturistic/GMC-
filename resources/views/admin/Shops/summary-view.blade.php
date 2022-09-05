@@ -1,7 +1,7 @@
 @extends('admin.app')
 
 @section('pagecss')
-
+<link rel="stylesheet" href="css/buttons.dataTables.min.css">
 @endsection
 
 @section('heading')
@@ -43,6 +43,41 @@ class="active"
                 </div>
             </div>
         </div>
+        <!-- Form Wise Search -->
+        <!-- Search By Date Form -->
+        <div class="col-md-6 mt-15">
+            <form action="tollcollection" class="form" method="POST" id="TollTotalCollection">
+                @csrf
+                <div class="form-group col-md-6">
+                    <label for="TollFrom">From</label>
+                    <div class="position-relative has-icon-left">
+                        <input type="date" id="TollFrom" name="TollFrom" class="form-control" name="date">
+                        <div class="form-control-position">
+                            <i class="icon-calendar5"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label for="TollTo">To</label>
+                    <div class="position-relative has-icon-left">
+                        <input type="date" id="TollTo" name="TollTo" class="form-control" name="date">
+                        <div class="form-control-position">
+                            <i class="icon-calendar5"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-1" style="margin-top: 12px;">
+                    <label for=""></label>
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="icon-eye"></i> See Collection
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- Search By Date form -->
+        <!-- Form Wise Search -->
         {{-- Today Toll Collection --}}
         {{-- Toll Collection Between Dates --}}
         <div class="col-md-12">
@@ -50,35 +85,22 @@ class="active"
                 <div class="card-body">
                     <div class="card-block">
                         <div class="media">
-
-                            <form action="tollcollection" class="form" method="POST" id="TollTotalCollection">
-                                @csrf
-                                <div class="form-group col-md-6">
-                                    <label for="TollFrom">From</label>
-                                    <div class="position-relative has-icon-left">
-                                        <input type="date" id="TollFrom" name="TollFrom" class="form-control" name="date">
-                                        <div class="form-control-position">
-                                            <i class="icon-calendar5"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="TollTo">To</label>
-                                    <div class="position-relative has-icon-left">
-                                        <input type="date" id="TollTo" name="TollTo" class="form-control" name="date">
-                                        <div class="form-control-position">
-                                            <i class="icon-calendar5"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="icon-eye"></i> See Collection
-                                    </button>
-                                </div>
-                            </form>
+                            <!-- Data Table Summary -->
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="tollDataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Toll Name</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Rate Days</th>
+                                            <th>PaymentDate</th>
+                                            <th>Tax Collected By</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!-- Data Table Summary -->
                         </div>
                     </div>
                 </div>
@@ -161,8 +183,18 @@ class="active"
 
 @endsection
 
-@section('script')
+@section('pagescript')
+<script src="js/custom-js/Shops/summary-view.js"></script>
+<script src="js/datatable_buttons/dataTables.buttons.min.js"></script>
+<script src="js/datatable_buttons/jszip.min.js"></script>
+<script src="js/datatable_buttons/pdfmake.min.js"></script>
+<script src="js/datatable_buttons/vfs_fonts.js"></script>
+<script src="js/datatable_buttons/buttons.html5.min.js"></script>
+<script src="js/datatable_buttons/buttons.print.min.js"></script>
 <script type="text/javascript" src="js/sweetalert.min.js"></script>
+@endsection
+
+@section('script')
 <script>
     $(document).ready(function() {
         // add active class
@@ -178,58 +210,58 @@ class="active"
     });
 </script>
 <script>
-    // Total Toll Collection
-    function showTotalTollCollection(e) {
-        var targetform = $('#TollTotalCollection');
-        var murl = targetform.attr('action');
-        var mdata = $("#TollTotalCollection").serialize();
-        e.preventDefault();
+    // // Total Toll Collection
+    // function showTotalTollCollection(e) {
+    //     var targetform = $('#TollTotalCollection');
+    //     var murl = targetform.attr('action');
+    //     var mdata = $("#TollTotalCollection").serialize();
+    //     e.preventDefault();
 
-        $.ajax({
-            url: murl,
-            type: "post",
-            data: mdata,
-            datatype: "json",
-            success: function(mdata) {
-                swal({
-                    title: mdata + "₹",
-                    text: "Total Toll Collection",
-                    icon: "success",
-                    button: "Ok!",
-                });
-            },
+    //     $.ajax({
+    //         url: murl,
+    //         type: "post",
+    //         data: mdata,
+    //         datatype: "json",
+    //         success: function(mdata) {
+    //             swal({
+    //                 title: mdata + "₹",
+    //                 text: "Total Toll Collection",
+    //                 icon: "success",
+    //                 button: "Ok!",
+    //             });
+    //         },
 
-            error: function(error) {
-                alert(error);
-            },
-        });
-    }
+    //         error: function(error) {
+    //             alert(error);
+    //         },
+    //     });
+    // }
 
-    // Total Shop Collection
-    function showTotalShopCollection(e) {
-        var targetform = $('#TotalShopCollection');
-        var murl = targetform.attr('action');
-        var mdata = $("#TotalShopCollection").serialize();
-        e.preventDefault();
+    // // Total Shop Collection
+    // function showTotalShopCollection(e) {
+    //     var targetform = $('#TotalShopCollection');
+    //     var murl = targetform.attr('action');
+    //     var mdata = $("#TotalShopCollection").serialize();
+    //     e.preventDefault();
 
-        $.ajax({
-            url: murl,
-            type: "post",
-            data: mdata,
-            datatype: "json",
-            success: function(mdata) {
-                swal({
-                    title: mdata + "₹",
-                    text: "Total Shop Collection",
-                    icon: "success",
-                    button: "Ok!",
-                });
-            },
+    //     $.ajax({
+    //         url: murl,
+    //         type: "post",
+    //         data: mdata,
+    //         datatype: "json",
+    //         success: function(mdata) {
+    //             swal({
+    //                 title: mdata + "₹",
+    //                 text: "Total Shop Collection",
+    //                 icon: "success",
+    //                 button: "Ok!",
+    //             });
+    //         },
 
-            error: function(error) {
-                alert(error);
-            },
-        });
-    }
+    //         error: function(error) {
+    //             alert(error);
+    //         },
+    //     });
+    // }
 </script>
 @endsection

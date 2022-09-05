@@ -359,6 +359,21 @@ class EloquentTollRepository implements TollRepository
         $strQuery = "select sum(Amount) as collection from toll_payments
                      where PaymentDate between DATE_FORMAT('$request->TollFrom','%Y-%m-%d') and DATE_FORMAT('$request->TollTo','%Y-%m-%d')";
         $total = DB::select($strQuery);
-        return $total[0]->collection;
+
+        $collectionSummaryQuery = "SELECT 
+                                    t.AreaName,
+                                    t.VendorName,
+                                    p.From,
+                                    p.To,
+                                    p.Amount,
+                                    p.PaymentDate,
+                                    p.Rate,
+                                    l.name AS CollectedBy
+                            FROM toll_payments p
+                            INNER JOIN tolls t ON t.id=p.TollId
+                            INNER JOIN survey_logins l ON l.id=p.UserId
+                            WHERE p.PaymentDate BETWEEN DATE_FORMAT('$request->TollFrom','%Y-%m-%d') AND DATE_FORMAT('$request->TollTo','%Y-%m-%d')";
+        $collectionSummary = DB::select($collectionSummaryQuery);
+        return ['totalCollection' => $total[0]->collection, 'collectionSummary' => $collectionSummary];
     }
 }

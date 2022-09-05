@@ -305,3 +305,11 @@ z-index : 2147483647;
   100% { transform: rotate(360deg); }
 }
 /* Loader */
+
+.mt-31{
+    margin-top: 31px;
+}
+
+.mt-15{
+    margin-top: 15px;
+}
