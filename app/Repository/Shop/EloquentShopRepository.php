@@ -680,9 +680,22 @@ class EloquentShopRepository implements ShopRepository
      */
     public function totalShopCollection(Request $request)
     {
-        $strQuery = "select sum(Amount) as collection from shop_payments
-                     where PaymentDate between DATE_FORMAT('$request->ShopFrom','%Y-%m-%d') and DATE_FORMAT('$request->ShopTo','%Y-%m-%d')";
-        $total = DB::select($strQuery);
-        return $total[0]->collection;
+        $strQuery = "SELECT 
+                    s.ShopNo,
+                    s.Allottee,
+                    monthyear(p.PaidFrom) AS PaidFrom,
+                    monthyear(p.PaidTo) AS PaidTo,
+                    p.Amount,
+                    p.Rate,
+                    p.Months,
+                    DATE_FORMAT(p.PaymentDate,'%d-%b-%y') AS PaymentDate,
+                    l.name AS TaxCollector
+                    
+                    FROM shop_payments p
+                    INNER JOIN shops s ON s.ID=p.ShopId
+                    INNER JOIN survey_logins l ON l.id=p.UserId
+                    WHERE p.PaymentDate BETWEEN DATE_FORMAT('$request->ShopFrom','%Y-%m-%d') AND DATE_FORMAT('$request->ShopTo','%Y-%m-%d')";
+        $collectionSummary = DB::select($strQuery);
+        return $collectionSummary;
     }
 }

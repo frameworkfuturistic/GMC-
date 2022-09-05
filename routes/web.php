@@ -251,7 +251,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::get('rnc/BillShops', [ShopController::class, 'shopBillView']);
     Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);
-    Route::post('totalshopcollection', [ShopController::class, 'totalShopCollection']);
+    Route::post('shops/totalshopcollection', [ShopController::class, 'totalShopCollection']);
     // Shops
 
     /**
