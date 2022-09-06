@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
+use DataTables;
 
 class EloquentVehicleRepository implements VehicleRepository
 {
@@ -328,12 +329,30 @@ class EloquentVehicleRepository implements VehicleRepository
         $comment->save();
     }
     // OUTBOX
-    public function vehicleOutboxView()
+    public function vehicleOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        $data = VehicleAdvertisement::where('CurrentUser', '<>', $name)->get();
+        // $data = VehicleAdvertisement::where('CurrentUser', '<>', $name)->get();
+        // return view('admin.Vehicle.vehicleOutbox', [
+        //     'vehicles' => $data,
+        //     'parents' => $this->parent,
+        //     'childs' => $this->child
+        // ]);
+        if ($request->ajax()) {
+            $data = VehicleAdvertisement::where('CurrentUser', '<>', $name)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateVehicleOutbox/" . $row['id'];
+                    $btn = "<a class='btn btn-success btn-sm' href='$link' class='edit btn btn-primary btn-sm'>
+                                <i class='icon-pen'></i> Details
+                            </a>";
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Vehicle.vehicleOutbox', [
-            'vehicles' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);

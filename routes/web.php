@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // VEHICLE
     Route::get('rnc/vehicleInbox', [VehicleController::class, 'vehicleInbox']);
     Route::get('rnc/updatevehicleInbox/{id}', [VehicleController::class, 'udpateVehicleInbox']);
-    Route::get('rnc/vehicleOutbox', [VehicleController::class, 'vehicleOutbox']);
+    Route::get('rnc/vehicleOutbox', [VehicleController::class, 'vehicleOutbox'])->name('vehicle.outbox');
     Route::get('rnc/updateVehicleOutbox/{id}', [VehicleController::class, 'updateVehicleOutbox']);
     Route::get('rnc/vehicleApproved', [VehicleController::class, 'vehicleApproved']);
     Route::get('rnc/updateVehicleApproved/{id}', [VehicleController::class, 'updateVehicleApproved']);

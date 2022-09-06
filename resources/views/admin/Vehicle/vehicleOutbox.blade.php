@@ -27,8 +27,8 @@ class="active"
         <div class="mb-top">
             <!-- table -->
             <div class="container table-responsive">
-            <table class="table table-responsive mb-0 display" id="datatable">
-                <thead class="">
+                <table class="table table-responsive mb-0 display" id="datatable">
+                    <thead class="">
                         <tr>
                             <th>Action</th>
                             <th>RenewalID</th>
@@ -47,46 +47,12 @@ class="active"
                             <th>LisenceFee</th>
                             <th>GST</th>
                             <th>NetAmount</th>
-                            <th>PmtAmount</th>
                             <th>Bank</th>
                             <th>MRno</th>
                             <th>PaymentDate</th>
                             <th>AppDate</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($vehicles as $vehicle)
-                        <tr>
-                            <td scope="row">
-                                <button onclick="window.location.replace('rnc/updateVehicleOutbox/{{$vehicle->id}}')"
-                                    class="btn btn-success btn-sm"><i class="icon-pen"></i>
-                                    Details
-                                </button>
-                            </td>
-                            <td>{{$vehicle->RenewalID}}</td>
-                            <td>{{$vehicle->LicenseFrom}}</td>
-                            <td>{{$vehicle->LicenseTo}}</td>
-                            <td>{{$vehicle->EntityName}}</td>
-                            <td>{{$vehicle->WardNo}}</td>
-                            <td>{{$vehicle->TradeLicenseNo}}</td>
-                            <td>{{$vehicle->MobileNo}}</td>
-                            <td>{{$vehicle->applicant}}</td>
-                            <td>{{$vehicle->father}}</td>
-                            <td>{{$vehicle->CurrentUser}}</td>
-                            <td>{{$vehicle->Initiator}}</td>
-                            <td></td>
-                            <td>{{$vehicle->ApplicationStatus}}</td>
-                            <td>{{$vehicle->LicenseFee}}</td>
-                            <td>{{$vehicle->GSTNo}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             <!-- table -->
@@ -108,7 +74,7 @@ class="active"
 @section('script')
 <!-- datatable -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // add active class
         $("#vehicleOutbox").addClass('active');
         $('#datatable').DataTable({
@@ -140,10 +106,102 @@ class="active"
                         className: 'printButton btn-padding'
                     }
                 ]
-            }
+            },
+            "processing": true,
+            "serverSide": true,
+            "language": {
+                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            },
+            ajax: "{{ route('vehicle.outbox') }}",
+            columns: [{
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'RenewalID',
+                    name: 'RenewalID'
+                },
+                {
+                    data: 'LicenseFrom',
+                    name: 'LicenseFrom'
+                },
+                {
+                    data: 'LicenseTo',
+                    name: 'LicenseTo'
+                },
+                {
+                    data: 'EntityName',
+                    name: 'EntityName'
+                },
+                {
+                    data: 'WardNo',
+                    name: 'WardNo'
+                },
+                {
+                    data: 'TradeLicenseNo',
+                    name: 'TradeLicenseNo'
+                },
+                {
+                    data: 'MobileNo',
+                    name: 'MobileNo'
+                },
+                {
+                    data: 'applicant',
+                    name: 'applicant'
+                },
+                {
+                    data: 'father',
+                    name: 'father'
+                },
+                {
+                    data: 'CurrentUser',
+                    name: 'CurrentUser'
+                },
+                {
+                    data: 'Initiator',
+                    name: 'Initiator'
+                },
+                {
+                    data: 'Approver',
+                    name: 'Approver'
+                },
+                {
+                    data: 'ApplicationStatus',
+                    name: 'ApplicationStatus'
+                },
+                {
+                    data: 'LicenseFee',
+                    name: 'LicenseFee'
+                },
+                {
+                    data: 'GSTNo',
+                    name: 'GSTNo'
+                },
+                {
+                    data: 'NetAmount',
+                    name: 'NetAmount'
+                },
+                {
+                    data: 'Bank',
+                    name: 'Bank'
+                },
+                {
+                    data: 'MRNo',
+                    name: 'MRNo'
+                },
+                {
+                    data: 'PaymentDate',
+                    name: 'PaymentDate'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                }
+            ]
         });
     });
-
 </script>
 <!-- datatable -->
 @endsection

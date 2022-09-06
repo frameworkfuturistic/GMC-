@@ -52,15 +52,14 @@ class VehicleController extends Controller
     // INBOX
 
     // OUTBOX
-    public function vehicleOutbox()
+    public function vehicleOutbox(Request $request)
     {
-        return $this->EloquentVehicle->vehicleOutboxView();
+        return $this->EloquentVehicle->vehicleOutboxView($request);
     }
 
     public function updateVehicleOutbox($id)
     {
         return $this->EloquentVehicle->updateVehicleOutboxView($id);
-
     }
     // OUTBOX
 

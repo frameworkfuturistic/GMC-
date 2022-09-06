@@ -357,6 +357,7 @@ class EloquentTollRepository implements TollRepository
     public function totalCollection(Request $request)
     {
         $collectionSummaryQuery = "SELECT 
+                                    p.id,
                                     t.AreaName,
                                     t.VendorName,
                                     date_format(p.From,'%d-%b-%y') AS PaymentFrom,
@@ -369,7 +370,7 @@ class EloquentTollRepository implements TollRepository
                             INNER JOIN tolls t ON t.id=p.TollId
                             INNER JOIN survey_logins l ON l.id=p.UserId
                             WHERE p.PaymentDate BETWEEN DATE_FORMAT('$request->TollFrom','%Y-%m-%d') AND DATE_FORMAT('$request->TollTo','%Y-%m-%d')
-                            ORDER BY P.id DESC";
+                            ORDER BY p.id DESC";
         $collectionSummary = DB::select($collectionSummaryQuery);
         return $collectionSummary;
     }
