@@ -68,7 +68,7 @@ class EloquentVehicleRepository implements VehicleRepository
         $vehicle->CurrentUser = $workflowInitiator->Initiator;
         $vehicle->Initiator = $workflowInitiator->Initiator;
 
-        
+
         // Upload
 
         // Aadhar Upload
@@ -139,8 +139,8 @@ class EloquentVehicleRepository implements VehicleRepository
         $data = VehicleAdvertisement::where('CurrentUser', $name)->get();
         $array = array(
             'vehicles' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Vehicle.vehicleInbox')->with($array);
     }
@@ -178,8 +178,8 @@ class EloquentVehicleRepository implements VehicleRepository
             'workflowInitiator' => $workflowInitiator,
             'vehicletypes' => $vehicleType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Vehicle.updateVehicleInbox')->with($array);
     }
@@ -212,9 +212,9 @@ class EloquentVehicleRepository implements VehicleRepository
         $vehicle->TopArea = $request->TopArea;
         $vehicle->DisplayType = $request->DisplayType;
 
-        $vehicle->Amount=$request->amount;
-        $vehicle->GST=$request->GST;
-        $vehicle->NetAmount=$request->total;
+        $vehicle->Amount = $request->amount;
+        $vehicle->GST = $request->GST;
+        $vehicle->NetAmount = $request->total;
 
         // upload
         // Aadhar Upload
@@ -332,10 +332,11 @@ class EloquentVehicleRepository implements VehicleRepository
     {
         $name = Auth::user()->name;
         $data = VehicleAdvertisement::where('CurrentUser', '<>', $name)->get();
-        return view('admin.Vehicle.vehicleOutbox', ['vehicles' => $data,
-        'parents'=>$this->parent,
-        'childs'=>$this->child
-    ]);
+        return view('admin.Vehicle.vehicleOutbox', [
+            'vehicles' => $data,
+            'parents' => $this->parent,
+            'childs' => $this->child
+        ]);
     }
 
     public function updateVehicleOutboxView($id)
@@ -371,8 +372,8 @@ class EloquentVehicleRepository implements VehicleRepository
             'workflowInitiator' => $workflowInitiator,
             'vehicletypes' => $vehicleType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
 
         return view('admin.Vehicle.updateVehicleOutbox')->with($array);
@@ -383,9 +384,10 @@ class EloquentVehicleRepository implements VehicleRepository
     public function vehicleApprovedView()
     {
         $data = VehicleAdvertisement::where('Approved', '-1')->get();
-        return view('admin.Vehicle.vehicleApproved', ['vehicles' => $data,
-        'parents'=>$this->parent,
-        'childs'=>$this->child
+        return view('admin.Vehicle.vehicleApproved', [
+            'vehicles' => $data,
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -422,8 +424,8 @@ class EloquentVehicleRepository implements VehicleRepository
             'workflowInitiator' => $workflowInitiator,
             'vehicletypes' => $vehicleType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.Vehicle.updateVehicleApproved')->with($array);
     }
@@ -433,10 +435,11 @@ class EloquentVehicleRepository implements VehicleRepository
     public function vehicleRejectedView()
     {
         $data = VehicleAdvertisement::where('Rejected', '-1')->get();
-        return view('admin.Vehicle.vehicleRejected', ['vehicles' => $data,
-                        'parents'=>$this->parent,
-                        'childs'=>$this->child
-                    ]);
+        return view('admin.Vehicle.vehicleRejected', [
+            'vehicles' => $data,
+            'parents' => $this->parent,
+            'childs' => $this->child
+        ]);
     }
 
     public function updateVehicleRejectedView($id)
@@ -453,8 +456,8 @@ class EloquentVehicleRepository implements VehicleRepository
         $array = array(
             'vehicle' => $data,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.Vehicle.updateVehicleRejected')->with($array);
     }

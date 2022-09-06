@@ -117,8 +117,11 @@ class="active"
                     }
                 ]
             },
-            processing: true,
-            serverSide: true,
+            "processing": true,
+            "serverSide": true,
+            "language": {
+                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            },
             ajax: "{{ route('selfAdvet.Outbox') }}",
             columns: [{
                     data: 'action',

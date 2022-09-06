@@ -118,7 +118,7 @@ active
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input class="spin-valuearea form-control text-box single-line" id="MobileNo" name="MobileNo" type="text" value="{{ session('mobile') }}" disabled>
+                                                    <input class="spin-valuearea form-control text-box single-line" id="MobileNo" name="MobileNo" type="text" value="{{ session('mobile') }}" readonly>
                                                 </td>
                                             </tr>
                                             <tr>

@@ -321,14 +321,16 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
         $name = Auth::user()->name;
 
         if ($request->ajax()) {
-            $data = SelfAdvertisements::where('CurrentUser', '<>', $name)->get();
+            $data = SelfAdvertisements::where('CurrentUser', '<>', $name)
+                ->orderByDesc('id')
+                ->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-
-                    $btn = '<a class="btn btn-success btn-sm" href="rnc/updateadvetOutbox/' + $row . id + '" class="edit btn btn-primary btn-sm">
-                                <i class="icon-pen"></i> Details
-                            </a>';
+                    $link = "rnc/updateadvetOutbox/" . $row['id'];
+                    $btn = "<a class='btn btn-success btn-sm' href='$link' class='edit btn btn-primary btn-sm'>
+                                <i class='icon-pen'></i> Details
+                            </a>";
 
                     return $btn;
                 })

@@ -19,8 +19,8 @@ class CreateWorkflowTracksTable extends Migration
             $table->mediumText('RenewalID');
             $table->dateTime('TrackDate');
             $table->mediumText('UserID');
-            $table->mediumText('Remarks');
-            $table->smallInteger('IsSMS');
+            $table->mediumText('Remarks')->nullable();
+            $table->smallInteger('IsSMS')->nullable();
             $table->timestamps();
         });
     }

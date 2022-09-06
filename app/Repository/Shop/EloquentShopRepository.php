@@ -154,7 +154,7 @@ class EloquentShopRepository implements ShopRepository
             return back()->with('message', 'Payment Done Successfully');
         } catch (Exception $e) {
             DB::rollBack();
-            return response()->json($e);
+            return $e;
         }
     }
 
