@@ -507,7 +507,7 @@ class EloquentShopRepository implements ShopRepository
          */
         $request->validate([
             'To' => 'required',
-            'Amount' => 'required|numeric|between:5,10000'
+            'Amount' => 'required|numeric|between:1,30000'
         ]);
 
         DB::beginTransaction();

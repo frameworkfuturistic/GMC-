@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/advetInbox', [AdminController::class, 'SelfAdvetInbox']);
     Route::get('rnc/updateadvetInbox/{id}', [AdminController::class, 'updateSelfAdvetInbox']);
 
-    Route::get('rnc/advetOutbox', [AdminController::class, 'selfAdvetOutbox']);
+    Route::get('rnc/advetOutbox', [AdminController::class, 'selfAdvetOutbox'])->name('selfAdvet.Outbox');
     Route::get('rnc/updateadvetOutbox/{id}', [AdminController::class, 'updateSelfAdvetOutbox']);
 
     Route::get('rnc/advetPayment', [AdminController::class, 'Payment']);

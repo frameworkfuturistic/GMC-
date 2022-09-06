@@ -2,6 +2,7 @@
 /*
 AdminController is the controller of Self Advertisement field
  */
+
 namespace App\Http\Controllers;
 
 use App\Repository\SelfAdvet\EloquentSelfAdvetRepository;
@@ -56,9 +57,9 @@ class AdminController extends Controller
         return $this->EloquentSelfAdvet->workflowTrack($request);
     }
 
-    public function selfAdvetOutbox()
+    public function selfAdvetOutbox(Request $request)
     {
-        return $this->EloquentSelfAdvet->SelfAdvetOutboxView();
+        return $this->EloquentSelfAdvet->SelfAdvetOutboxView($request);
     }
 
     public function updateSelfAdvetOutbox($id)

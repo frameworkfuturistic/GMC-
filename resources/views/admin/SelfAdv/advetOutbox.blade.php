@@ -55,47 +55,12 @@ class="active"
                                         <th>LisenceFee</th>
                                         <th>GST</th>
                                         <th>NetAmount</th>
-                                        <th>PmtAmount</th>
                                         <th>Bank</th>
                                         <th>MRno</th>
                                         <th>PaymentDate</th>
                                         <th>AppDate</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($SelfAds as $SelfAd)
-                                    <tr>
-                                        <td scope="row">
-                                            <button
-                                                onclick="window.location.replace('rnc/updateadvetOutbox/{{$SelfAd->id}}')"
-                                                class="btn btn-success btn-sm"><i class="icon-pen"></i>
-                                                Details
-                                            </button>
-                                        </td>
-                                        <td>{{$SelfAd->RenewalID}}</td>
-                                        <td>{{$SelfAd->LicenseYear}}</td>
-                                        <td>{{$SelfAd->EntityName}}</td>
-                                        <td>{{$SelfAd->EntityAddress}}</td>
-                                        <td>{{$SelfAd->WardNo}}</td>
-                                        <td>{{$SelfAd->TradeLicense}}</td>
-                                        <td>{{$SelfAd->MobileNo}}</td>
-                                        <td>{{$SelfAd->Applicant}}</td>
-                                        <td>{{$SelfAd->Father}}</td>
-                                        <td>{{$SelfAd->CurrentUser}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{$SelfAd->TradeLicense}}</td>
-                                        <td>{{$SelfAd->GSTNo}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
                         </div>
                         <!-- table -->
@@ -120,7 +85,7 @@ class="active"
 
 @section('script')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#advetOutboxActive").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
@@ -151,9 +116,98 @@ class="active"
                         className: 'printButton btn-padding'
                     }
                 ]
-            }
+            },
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('selfAdvet.Outbox') }}",
+            columns: [{
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'RenewalID',
+                    name: 'RenewalID'
+                },
+                {
+                    data: 'LicenseYear',
+                    name: 'LicenseYear'
+                },
+                {
+                    data: 'EntityName',
+                    name: 'EntityName'
+                },
+                {
+                    data: 'EntityAddress',
+                    name: 'EntityAddress'
+                },
+                {
+                    data: 'WardNo',
+                    name: 'WardNo'
+                },
+                {
+                    data: 'TradeLicense',
+                    name: 'TradeLicense'
+                },
+                {
+                    data: 'MobileNo',
+                    name: 'MobileNo'
+                },
+                {
+                    data: 'Applicant',
+                    name: 'Applicant'
+                },
+                {
+                    data: 'Father',
+                    name: 'Father'
+                },
+                {
+                    data: 'CurrentUser',
+                    name: 'CurrentUser'
+                },
+                {
+                    data: 'Initiator',
+                    name: 'Initiator'
+                },
+                {
+                    data: 'Approver',
+                    name: 'Approver'
+                },
+                {
+                    data: 'ApplicationStatus',
+                    name: 'ApplicationStatus'
+                },
+                {
+                    data: 'TradeLicense',
+                    name: 'TradeLicense'
+                },
+                {
+                    data: 'GSTNo',
+                    name: 'GSTNo'
+                },
+                {
+                    data: 'NetAmount',
+                    name: 'NetAmount'
+                },
+                {
+                    data: 'Bank',
+                    name: 'Bank'
+                },
+                {
+                    data: 'MRNo',
+                    name: 'MRNo'
+                },
+                {
+                    data: 'PaymentDate',
+                    name: 'PaymentDate'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                }
+            ]
         });
     });
-
 </script>
 @endsection

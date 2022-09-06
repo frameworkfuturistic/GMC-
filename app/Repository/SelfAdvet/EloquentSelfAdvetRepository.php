@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repository\SelfAdvet;
 
 use App\Models\Param;
@@ -12,6 +13,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use DataTables;
 
 class EloquentSelfAdvetRepository implements SelfAdvetRepository
 {
@@ -314,12 +316,29 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     // Comment on workflowTrack
 
     //function for admin Outbox
-    public function SelfAdvetOutboxView()
+    public function SelfAdvetOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        $data = SelfAdvertisements::where('CurrentUser', '<>', $name)->get();
-        return view('admin.SelfAdv.advetOutbox', ['SelfAds' => $data, 'parents' => $this->parent,
-            'childs' => $this->child]);
+
+        if ($request->ajax()) {
+            $data = SelfAdvertisements::where('CurrentUser', '<>', $name)->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a class="btn btn-success btn-sm" href="rnc/updateadvetOutbox/' + $row . id + '" class="edit btn btn-primary btn-sm">
+                                <i class="icon-pen"></i> Details
+                            </a>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('admin.SelfAdv.advetOutbox', [
+            'parents' => $this->parent,
+            'childs' => $this->child
+        ]);
     }
 
     // this function is fetching data of individual applicants
@@ -400,8 +419,10 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     public function paymentDash()
     {
         $data = SelfAdvertisements::all();
-        return view('admin.SelfAdv.advetPayment', ['SelfAds' => $data, 'parents' => $this->parent,
-            'childs' => $this->child]);
+        return view('admin.SelfAdv.advetPayment', [
+            'SelfAds' => $data, 'parents' => $this->parent,
+            'childs' => $this->child
+        ]);
     }
 
     public function paymentDetailsView($id)
@@ -429,8 +450,10 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     public function advetApprovedView()
     {
         $data = SelfAdvertisements::where('Approved', '-1')->get();
-        return view('admin.SelfAdv.advetApproved', ['SelfAds' => $data, 'parents' => $this->parent,
-            'childs' => $this->child]);
+        return view('admin.SelfAdv.advetApproved', [
+            'SelfAds' => $data, 'parents' => $this->parent,
+            'childs' => $this->child
+        ]);
     }
 
     public function updateAdvetApprovedView($id)
@@ -474,8 +497,10 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     public function advetRejectedView()
     {
         $data = SelfAdvertisements::where('Rejected', '-1')->get();
-        return view('admin.SelfAdv.advetRejected', ['SelfAds' => $data, 'parents' => $this->parent,
-            'childs' => $this->child]);
+        return view('admin.SelfAdv.advetRejected', [
+            'SelfAds' => $data, 'parents' => $this->parent,
+            'childs' => $this->child
+        ]);
     }
 
     public function updateAdvetRejectedView($id)
