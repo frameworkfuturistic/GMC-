@@ -91,10 +91,10 @@ class EloquentShopRepository implements ShopRepository
     {
         $request->validate([
             'shopNo' => 'required',
-            'amount' => 'required|integer',
+            'amount' => 'required|numeric',
             'from' => 'required',
             'to' => 'required',
-            'rate' => 'required|integer',
+            'rate' => 'required|numeric',
             'paymentDate' => 'required'
         ]);
         try {
