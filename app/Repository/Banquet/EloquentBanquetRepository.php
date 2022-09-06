@@ -13,9 +13,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
+use DataTables;
 
 
-class EloquentBanquetRepository implements BanquetRepository{
+class EloquentBanquetRepository implements BanquetRepository
+{
 
     use TraitAppHelper;
 
@@ -24,7 +26,8 @@ class EloquentBanquetRepository implements BanquetRepository{
         $this->menuApp();
     }
 
-    public function view(){
+    public function view()
+    {
         $ward = ParamString::where('ParamCategoryID', '7')->get();
         $InstallLocation = ParamString::where('ParamCategoryID', '1023')->get();
         $hallType = ParamString::where('ParamCategoryID', '13')->get();
@@ -56,6 +59,7 @@ class EloquentBanquetRepository implements BanquetRepository{
         $banquet->licenseYear = $request->licenseYear;
         $banquet->Father = $request->Father;
         $banquet->Email = $request->Email;
+        $banquet->Mobile = $request->Mobile;
         $banquet->ResidenceAddress = $request->ResidenceAddress;
         $banquet->WardNo = $request->WardNo;
         $banquet->PermanentAddress = $request->PermanentAddress;
@@ -192,8 +196,8 @@ class EloquentBanquetRepository implements BanquetRepository{
         $data = banquetHall::where('CurrentUser', $name)->get();
         $array = array(
             'banquets' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Banquet.banquetInbox')->with($array);
     }
@@ -237,8 +241,8 @@ class EloquentBanquetRepository implements BanquetRepository{
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Banquet.updateBanquetInbox')->with($array);
     }
@@ -429,14 +433,28 @@ class EloquentBanquetRepository implements BanquetRepository{
     // Comment on workflowTrack
 
     //  OUTBOX
-    public function banquetOutboxView()
+    public function banquetOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        $data = banquetHall::where('CurrentUser', '<>', $name)->get();
+        if ($request->ajax()) {
+            $data = banquetHall::where('CurrentUser', '<>', $name)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateLandOutbox/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Banquet.banquetOutbox', [
-            'banquets' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -479,8 +497,8 @@ class EloquentBanquetRepository implements BanquetRepository{
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Banquet.updateBanquetOutbox')->with($array);
     }
@@ -491,8 +509,8 @@ class EloquentBanquetRepository implements BanquetRepository{
         $data = banquetHall::where('Approved', '-1')->get();
         return view('admin.Banquet.banquetApproved', [
             'banquets' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -535,8 +553,8 @@ class EloquentBanquetRepository implements BanquetRepository{
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.Banquet.updateBanquetApproved')->with($array);
     }
@@ -548,8 +566,8 @@ class EloquentBanquetRepository implements BanquetRepository{
         $data = banquetHall::where('Rejected', '-1')->get();
         return view('admin.Banquet.banquetRejected', [
             'banquets' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -567,11 +585,11 @@ class EloquentBanquetRepository implements BanquetRepository{
         $array = array(
             'banquet' => $data,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.Banquet.updateBanquetRejected')->with($array);
     }
     // Rejected
-    
+
 }

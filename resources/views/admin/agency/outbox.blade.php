@@ -27,12 +27,11 @@ class="active"
         <div class="mb-top">
             <!-- table -->
             <div class="container table-responsive">
-            <table class="table table-responsive mb-0 display" id="datatable">
-                <thead class="">
+                <table class="table table-responsive mb-0 display" id="datatable">
+                    <thead class="">
                         <tr>
                             <th>Action</th>
                             <th>RenewalID</th>
-                            <th>UniqueID</th>
                             <th>ApplicantDate</th>
                             <th>RegistrationNo</th>
                             <th>EntityName</th>
@@ -57,67 +56,12 @@ class="active"
                             <th>LisenceFee</th>
                             <th>GST</th>
                             <th>NetAmount</th>
-                            <th>PmtAmount</th>
                             <th>Bank</th>
                             <th>MRno</th>
                             <th>PaymentDate</th>
                             <th>DraftDate</th>
                         </tr>
                     </thead>
-                    <tbody>
-                         @foreach($agencies as $agency)
-                         <tr>
-                            <td scope="row">
-                                <button onclick="window.location.replace('rnc/updateAgencyOutbox/{{$agency->id}}')"
-                                    class="btn btn-success btn-sm"><i class="icon-pen"></i>
-                                    Details
-                                </button>
-                            </td>
-                            <td>{{$agency->RenewalID}}</td>
-                            <td>{{$agency->UniqueID}}</td>
-                            <td>{{$agency->ApplicationDate}}</td>
-                            <td>{{$agency->RegistrationNo}}</td>
-                            <td>{{$agency->EntityName}}</td>
-                            <td>{{$agency->EntityType}}</td>
-                            <td>{{$agency->Address}}</td>
-                            <td>{{$agency->MobileNo}}</td>
-                            <td>{{$agency->Telephone}}</td>
-                            <td>{{$agency->Email}}</td>
-                            <td>{{$agency->PANNo}}</td>
-                            <td>{{$agency->GSTNo}}</td>
-                            <td>{{$agency->RegistrationFee}}</td>
-                            <td>@if($agency->Blacklisted=='-1')
-                                    True
-                                @else
-                                    False
-                                @endif
-                            </td>
-                            <td>{{$agency->PendingAmount}}</td>
-                            <td>
-                                @if($agency->PendingCourtCase=='-1')
-                                    True
-                                @else
-                                    False
-                                @endif
-                            </td>
-                            <td>{{$agency->CurrentUser}}</td>
-                            <td>{{$agency->Initiator}}</td>
-                            <td>{{$agency->Approver}}</td>
-                            <td>{{$agency->ApprovalDate}}</td>
-                            <td>{{$agency->Paid}}</td>
-                            <td>{{$agency->RejectionReason}}</td>
-                            <td>{{$agency->ApplicationStatus}}</td>
-                            <td>{{$agency->LicenseFee}}</td>
-                            <td>{{$agency->GST}}</td>
-                            <td>{{$agency->NetAmount}}</td>
-                            <td>{{$agency->PmtMode}}</td>
-                            <td>{{$agency->Bank}}</td>
-                            <td>{{$agency->MRNo}}</td>
-                            <td>{{$agency->PaymentDate}}</td>
-                            <td>{{$agency->DraftDate}}</td>
-                         </tr>
-                         @endforeach
-                    </tbody>
                 </table>
             </div>
             <!-- table -->
@@ -139,7 +83,7 @@ class="active"
 @section('script')
 <!-- datatable -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // add active class
         $("#agencyOutbox").addClass('active');
         $('#datatable').DataTable({
@@ -171,10 +115,138 @@ class="active"
                         className: 'printButton btn-padding'
                     }
                 ]
-            }
+            },
+            "processing": true,
+            "serverSide": true,
+            "language": {
+                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            },
+            ajax: "{{ route('agency.outbox') }}",
+            columns: [{
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'RenewalID',
+                    name: 'RenewalID'
+                },
+                {
+                    data: 'ApplicationDate',
+                    name: 'ApplicationDate'
+                },
+                {
+                    data: 'RegistrationNo',
+                    name: 'RegistrationNo'
+                },
+                {
+                    data: 'EntityName',
+                    name: 'EntityName'
+                },
+                {
+                    data: 'EntityType',
+                    name: 'EntityType'
+                },
+                {
+                    data: 'Address',
+                    name: 'Address'
+                },
+                {
+                    data: 'MobileNo',
+                    name: 'MobileNo'
+                },
+                {
+                    data: 'Telephone',
+                    name: 'Telephone'
+                },
+                {
+                    data: 'Email',
+                    name: 'Email'
+                },
+                {
+                    data: 'PANNo',
+                    name: 'PANNo'
+                },
+                {
+                    data: 'GSTNo',
+                    name: 'GSTNo'
+                },
+                {
+                    data: 'RegistrationFee',
+                    name: 'RegistrationFee'
+                },
+                {
+                    data: 'Blacklisted',
+                    name: 'Blacklisted'
+                },
+                {
+                    data: 'PendingAmount',
+                    name: 'PendingAmount'
+                },
+                {
+                    data: 'PendingCourtCase',
+                    name: 'PendingCourtCase'
+                },
+                {
+                    data: 'CurrentUser',
+                    name: 'CurrentUser'
+                },
+                {
+                    data: 'Initiator',
+                    name: 'Initiator'
+                },
+                {
+                    data: 'Approver',
+                    name: 'Approver'
+                },
+                {
+                    data: 'ApprovalDate',
+                    name: 'ApprovalDate'
+                },
+                {
+                    data: 'Paid',
+                    name: 'Paid'
+                },
+                {
+                    data: 'RejectionReason',
+                    name: 'RejectionReason'
+                },
+                {
+                    data: 'ApplicationStatus',
+                    name: 'ApplicationStatus'
+                },
+                {
+                    data: 'LicenseFee',
+                    name: 'LicenseFee'
+                },
+                {
+                    data: 'GST',
+                    name: 'GST'
+                },
+                {
+                    data: 'NetAmount',
+                    name: 'NetAmount'
+                },
+                {
+                    data: 'Bank',
+                    name: 'Bank'
+                },
+                {
+                    data: 'MRNo',
+                    name: 'MRNo'
+                },
+                {
+                    data: 'PaymentDate',
+                    name: 'PaymentDate'
+                },
+                {
+                    data: 'DraftDate',
+                    name: 'DraftDate'
+                }
+            ]
         });
     });
-
 </script>
 <!-- datatable -->
 @endsection

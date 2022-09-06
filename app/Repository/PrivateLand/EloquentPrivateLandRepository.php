@@ -13,6 +13,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use DataTables;
 
 class EloquentPrivateLandRepository implements PrivateLandRepository
 {
@@ -313,12 +314,33 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
     // Private Land workflow
 
     // OUTBOX
-    public function PrivateLandOutboxView()
+    public function PrivateLandOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        $data = PrivateLand::where('CurrentUser', '<>', $name)->get();
+        // $data = PrivateLand::where('CurrentUser', '<>', $name)->get();
+        // return view('admin.PrivateLand.PrivateLandOutbox', [
+        //     'lands' => $data,
+        //     'parents' => $this->parent,
+        //     'childs' => $this->child
+        // ]);
+        if ($request->ajax()) {
+            $data = PrivateLand::where('CurrentUser', '<>', $name)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateLandOutbox/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
         return view('admin.PrivateLand.PrivateLandOutbox', [
-            'lands' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);
@@ -354,9 +376,9 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
             'DisplayTypes' => $DisplayType,
             'locations' => $InstallLocation,
             'workflowInitiator' => $workflowInitiator,
-            'comments' => $comments,     
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'comments' => $comments,
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
 
         return view('admin.PrivateLand.updatePrivateLandOutbox')->with($array);
@@ -369,8 +391,8 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
         $data = PrivateLand::where('Approved', '-1')->get();
         return view('admin.PrivateLand.landApproved', [
             'lands' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -405,8 +427,8 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
             'locations' => $InstallLocation,
             'workflowInitiator' => $workflowInitiator,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.PrivateLand.updateLandApproved')->with($array);
     }
@@ -418,8 +440,8 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
         $data = PrivateLand::where('Rejected', '-1')->get();
         return view('admin.PrivateLand.landRejected', [
             'lands' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -437,8 +459,8 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
         $array = array(
             'land' => $data,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.PrivateLand.updateLandRejected')->with($array);
     }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repository\Dharmsala;
+
 use App\Models\Dharmasala;
 use App\Models\Param;
 use App\Models\ParamString;
@@ -12,8 +13,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
+use DataTables;
 
-class EloquentDharmsalaRepository implements DharmsalaRepository{
+class EloquentDharmsalaRepository implements DharmsalaRepository
+{
 
     use TraitAppHelper;
 
@@ -22,7 +25,8 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
         $this->menuApp();
     }
 
-    public function view(){
+    public function view()
+    {
         $ward = ParamString::where('ParamCategoryID', '7')->get();
         $InstallLocation = ParamString::where('ParamCategoryID', '1023')->get();
         $hallType = ParamString::where('ParamCategoryID', '13')->get();
@@ -39,7 +43,7 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
             'deedTypes' => $deedType,
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
-            'lodgeTypes'=>$lodgeType
+            'lodgeTypes' => $lodgeType
         );
         return View::make('user.dharmasala')->with($array);
     }
@@ -172,8 +176,8 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
         $data = Dharmasala::where('CurrentUser', $name)->get();
         $array = array(
             'dharmasalas' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Dharmasala.Inbox')->with($array);
     }
@@ -217,8 +221,8 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Dharmasala.updateInbox')->with($array);
     }
@@ -390,14 +394,28 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
     // Comment on workflowTrack
 
     // OUTBOX
-    public function dharmasalaOutboxView()
+    public function dharmasalaOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        $data = Dharmasala::where('CurrentUser', '<>', $name)->get();
+        if ($request->ajax()) {
+            $data = Dharmasala::where('CurrentUser', '<>', $name)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updatedharmasalaOutbox/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         $array = array(
-            'dharmasalas' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Dharmasala.Outbox')->with($array);
     }
@@ -440,8 +458,8 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Dharmasala.updateOutbox')->with($array);
     }
@@ -453,8 +471,8 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
         $data = Dharmasala::where('Approved', '-1')->get();
         return view('admin.Dharmasala.dharmasalaApproved', [
             'dharmasalas' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -497,8 +515,8 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.Dharmasala.updateDharmasalaApproved')->with($array);
     }
@@ -510,8 +528,8 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
         $data = Dharmasala::where('Rejected', '-1')->get();
         return view('admin.Dharmasala.dharmasalaRejected', [
             'dharmasalas' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -529,8 +547,8 @@ class EloquentDharmsalaRepository implements DharmsalaRepository{
         $array = array(
             'dharmasala' => $data,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.Dharmasala.updateDharmasalaRejected')->with($array);
     }

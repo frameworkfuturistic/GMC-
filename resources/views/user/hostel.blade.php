@@ -9,8 +9,8 @@ active
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        {{ session()->get('message') }}
-    </div>
+    {{ session()->get('message') }}
+</div>
 @endif
 <!-- Success Message -->
 <!-- form -->
@@ -36,16 +36,14 @@ active
                                     <table id="myTable" class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td class="spin-label">Applicant Name<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Applicant Name<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <input class="form-control" id="Applicant" name="Applicant">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Father's Name<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Father's Name<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
@@ -53,17 +51,15 @@ active
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Mobile<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Mobile<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input class="form-control" type="number" id="mobile" name="mobile">
+                                                    <input class="form-control" type="number" id="mobile" name="mobile" value="{{session('mobile')}}" readonly>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">E-mail<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">E-mail<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
@@ -71,8 +67,7 @@ active
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Residence Address<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Residence Address<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
@@ -80,42 +75,39 @@ active
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Ward No<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <select class="form-control" id="WardNo" name="WardNo">
                                                         <option value="">Select One</option>
                                                         @foreach($wards as $ward)
                                                         <option value="{{$ward->StringParameter}}">
-                                                            {{$ward->StringParameter}}</option>
+                                                            {{$ward->StringParameter}}
+                                                        </option>
                                                         @endforeach
                                                     </select>
-                                                    <span class="field-validation-valid text-danger"
-                                                        data-valmsg-for="WardNo" data-valmsg-replace="true"></span>
+                                                    <span class="field-validation-valid text-danger" data-valmsg-for="WardNo" data-valmsg-replace="true"></span>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Permanent Address<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Permanent Address<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <input class="form-control" type="text" id="PermanentAddress" name="PermanentAddress">
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Ward No<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <select class="form-control" id="WardNo1" name="WardNo1">
                                                         <option value="">Select One</option>
                                                         @foreach($wards as $ward)
                                                         <option value="{{$ward->StringParameter}}">
-                                                            {{$ward->StringParameter}}</option>
+                                                            {{$ward->StringParameter}}
+                                                        </option>
                                                         @endforeach
                                                     </select>
-                                                    <span class="field-validation-valid text-danger"
-                                                        data-valmsg-for="WardNo1" data-valmsg-replace="true"></span>
+                                                    <span class="field-validation-valid text-danger" data-valmsg-for="WardNo1" data-valmsg-replace="true"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -154,25 +146,25 @@ active
                                             <td>License Year<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                            <select class="form-control" id="LicenseYear" name="LicenseYear">
-                                                <option value="">Select One</option>
-                                                <option value="2018-19">2018-19</option>
-                                                <option value="2019-20">2019-20</option>
-                                                <option value="2020-21">2020-21</option>
-                                                <option value="2021-22">2021-22</option>
-                                            </select>
+                                                <select class="form-control" id="LicenseYear" name="LicenseYear">
+                                                    <option value="">Select One</option>
+                                                    <option value="2018-19">2018-19</option>
+                                                    <option value="2019-20">2019-20</option>
+                                                    <option value="2020-21">2020-21</option>
+                                                    <option value="2021-22">2021-22</option>
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Established Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                            <select class="form-control" id="EstablishedType" name="EstablishedType">
-                                                <option value="">Select One</option>
-                                                @foreach($establishedTypes as $establishedType)
-                                                <option value="{{$establishedType->StringParameter}}">{{$establishedType->StringParameter}}</option>
-                                                @endforeach
-                                            </select>
+                                                <select class="form-control" id="EstablishedType" name="EstablishedType">
+                                                    <option value="">Select One</option>
+                                                    @foreach($establishedTypes as $establishedType)
+                                                    <option value="{{$establishedType->StringParameter}}">{{$establishedType->StringParameter}}</option>
+                                                    @endforeach
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
@@ -188,7 +180,7 @@ active
                                             <td>
                                                 <input type="text" class="form-control" id="EntityAddress" name="EntityAddress">
                                             </td>
-                                        </tr> 
+                                        </tr>
                                         <tr>
                                             <td>Entity Ward<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
@@ -197,11 +189,12 @@ active
                                                     <option value="">Select One</option>
                                                     @foreach($wards as $ward)
                                                     <option value="{{$ward->StringParameter}}">
-                                                        {{$ward->StringParameter}}</option>
+                                                        {{$ward->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
-                                        </tr> 
+                                        </tr>
                                         <tr>
                                             <td>Holding No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
@@ -230,7 +223,7 @@ active
                                                 <input type="text" class="form-control" id="Latitude" name="Latitude">
                                             </td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td>Organization Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
@@ -239,7 +232,8 @@ active
                                                     <option value="">Select One</option>
                                                     @foreach($organizeTypes as $organizeType)
                                                     <option value="{{$organizeType->StringParameter}}">
-                                                        {{$organizeType->StringParameter}}</option>
+                                                        {{$organizeType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -252,7 +246,8 @@ active
                                                     <option value="">Select One</option>
                                                     @foreach($deedTypes as $deedType)
                                                     <option value="{{$deedType->StringParameter}}">
-                                                        {{$deedType->StringParameter}}</option>
+                                                        {{$deedType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -265,7 +260,8 @@ active
                                                     <option value="">Select One</option>
                                                     @foreach($supplyTypes as $supplyType)
                                                     <option value="{{$supplyType->StringParameter}}">
-                                                        {{$supplyType->StringParameter}}</option>
+                                                        {{$supplyType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -275,11 +271,12 @@ active
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <select name="ElectricityType" id="ElectricityType" class="form-control">
-                                                        <option value="">Select One</option>
-                                                        @foreach($electricityTypes as $electricityType)
-                                                        <option value="{{$electricityType->StringParameter}}">
-                                                            {{$electricityType->StringParameter}}</option>
-                                                        @endforeach
+                                                    <option value="">Select One</option>
+                                                    @foreach($electricityTypes as $electricityType)
+                                                    <option value="{{$electricityType->StringParameter}}">
+                                                        {{$electricityType->StringParameter}}
+                                                    </option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
@@ -288,11 +285,12 @@ active
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <select name="SecurityType" id="SecurityType" class="form-control">
-                                                      <option value="">Select One</option>
-                                                      @foreach($organizeTypes as $organizeType)
-                                                        <option value="{{$organizeType->StringParameter}}">
-                                                            {{$organizeType->StringParameter}}</option>
-                                                        @endforeach
+                                                    <option value="">Select One</option>
+                                                    @foreach($organizeTypes as $organizeType)
+                                                    <option value="{{$organizeType->StringParameter}}">
+                                                        {{$organizeType->StringParameter}}
+                                                    </option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
@@ -304,7 +302,8 @@ active
                                                     <option value="">Select One</option>
                                                     @foreach($lodgeTypes as $lodgeType)
                                                     <option value="{{$organizeType->StringParameter}}">
-                                                        {{$lodgeType->StringParameter}}</option>
+                                                        {{$lodgeType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -396,48 +395,48 @@ active
                                     <tbody>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Lodge/Hostel Frontage Photograph</span>
-                                                    <input type="file" style="width:100%;" id="HostelFrontagePath" name="HostelFrontagePath">
+                                                <input type="file" style="width:100%;" id="HostelFrontagePath" name="HostelFrontagePath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Aadhar No Photograph</span>
-                                                    <input type="file" style="width:100%;" id="AadharNoPath" name="AadharNoPath">
+                                                <input type="file" style="width:100%;" id="AadharNoPath" name="AadharNoPath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Fire Extinguishers Photograph</span>
-                                                    <input type="file" style="width:100%;" id="FireExtinguishersPath" name="FireExtinguishersPath">
+                                                <input type="file" style="width:100%;" id="FireExtinguishersPath" name="FireExtinguishersPath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload CCTV Camera Photograph</span>
-                                                    <input type="file" style="width:100%;" id="CCTVCameraPath" name="CCTVCameraPath">
+                                                <input type="file" style="width:100%;" id="CCTVCameraPath" name="CCTVCameraPath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Name Plate With Mobile No Photograph</span>
-                                                    <input type="file" style="width:100%;" id="NamePlatePath" name="NamePlatePath">
+                                                <input type="file" style="width:100%;" id="NamePlatePath" name="NamePlatePath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Entry and Exit Photograph</span>
-                                                    <input type="file" style="width:100%;" id="EntryExitPath" name="EntryExitPath">
+                                                <input type="file" style="width:100%;" id="EntryExitPath" name="EntryExitPath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Building Plan Photograph</span>
-                                                    <input type="file" style="width:100%;" id="BuildingPlanPath" name="BuildingPlanPath">
+                                                <input type="file" style="width:100%;" id="BuildingPlanPath" name="BuildingPlanPath">
                                             </td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Solid Waste Photograph</span>
-                                                    <input type="file" style="width:100%;" id="SolidWastePath" name="SolidWastePath">
+                                                <input type="file" style="width:100%;" id="SolidWastePath" name="SolidWastePath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Holding Tax Receipt Photograph</span>
-                                                    <input type="file" style="width:100%;" id="HoldingTaxReceiptPath" name="HoldingTaxReceiptPath">
+                                                <input type="file" style="width:100%;" id="HoldingTaxReceiptPath" name="HoldingTaxReceiptPath">
                                             </td>
                                         </tr>
                                         <tr colspan="4" class="spin-label">

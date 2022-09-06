@@ -11,59 +11,72 @@ class BanquetController extends Controller
 
     public function __construct(EloquentBanquetRepository $eloquentBanquet)
     {
-        $this->EloquentBanquet=$eloquentBanquet;
+        $this->EloquentBanquet = $eloquentBanquet;
     }
 
-    function userView(){
-      return $this->EloquentBanquet->view();
+    function userView()
+    {
+        return $this->EloquentBanquet->view();
     }
 
-    function saveBanquet(Request $request){
-       //dd($request->all());
-       return $this->EloquentBanquet->addBanquet($request);
+    function saveBanquet(Request $request)
+    {
+        //dd($request->all());
+        return $this->EloquentBanquet->addBanquet($request);
     }
 
-    function banquetInbox(){
+    function banquetInbox()
+    {
         return $this->EloquentBanquet->banquetInboxView();
     }
 
-    function updateBanquetInbox($id){
+    function updateBanquetInbox($id)
+    {
         return $this->EloquentBanquet->updateBanquetInbox($id);
     }
 
-    function updateBanquet(Request $request){
+    function updateBanquet(Request $request)
+    {
         return $this->EloquentBanquet->editBanquet($request);
     }
 
-    function banquetWorkflow(Request $request){
+    function banquetWorkflow(Request $request)
+    {
         return $this->EloquentBanquet->banquetWorkflowUpdate($request);
     }
 
-    function addComment(Request $request){
+    function addComment(Request $request)
+    {
         return $this->EloquentBanquet->workflowTrack($request);
     }
 
-    function banquetOutbox(){
-        return $this->EloquentBanquet->banquetOutboxView();
+    function banquetOutbox(Request $request)
+    {
+        return $this->EloquentBanquet->banquetOutboxView($request);
     }
 
-    function banquetOutboxUpdate($id){
+    function banquetOutboxUpdate($id)
+    {
         return $this->EloquentBanquet->updateBanquetOutbox($id);
     }
 
-    function banquetApproved(){
+    function banquetApproved()
+    {
         return $this->EloquentBanquet->banquetApprovedView();
     }
 
-    function updateBanquetApproved($id){
+    function updateBanquetApproved($id)
+    {
         return $this->EloquentBanquet->updateBanquetApprovedView($id);
     }
 
-    function banquetRejected(){
+    function banquetRejected()
+    {
         return $this->EloquentBanquet->banquetBanquetView();
     }
 
-    function updateBanquetRejected($id){
+    function updateBanquetRejected($id)
+    {
         return $this->EloquentBanquet->updateBanquetRejectedView($id);
     }
 }

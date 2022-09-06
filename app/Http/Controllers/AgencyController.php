@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Repository\Agency\EloquentAgencyRepository;
@@ -50,9 +51,9 @@ class AgencyController extends Controller
         return $this->EloquentAgency->agencyWorkflowUpdate($request);
     }
 
-    public function Outbox()
+    public function Outbox(Request $request)
     {
-        return $this->EloquentAgency->outboxView();
+        return $this->EloquentAgency->outboxView($request);
     }
 
     public function updateOutbox($id)

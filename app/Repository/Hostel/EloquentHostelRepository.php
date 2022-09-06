@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
+use DataTables;
 
 class EloquentHostelRepository implements HostelRepository
 {
@@ -23,7 +24,8 @@ class EloquentHostelRepository implements HostelRepository
         $this->menuApp();
     }
 
-    public function view(){
+    public function view()
+    {
         $ward = ParamString::where('ParamCategoryID', '7')->get();
         $InstallLocation = ParamString::where('ParamCategoryID', '1023')->get();
         $hallType = ParamString::where('ParamCategoryID', '13')->get();
@@ -31,8 +33,8 @@ class EloquentHostelRepository implements HostelRepository
         $deedType = ParamString::where('ParamCategoryID', '12')->get();
         $supplyType = ParamString::where('ParamCategoryID', '11')->get();
         $electricityType = ParamString::where('ParamCategoryID', '10')->get();
-        $establishedType=ParamString::where('ParamCategoryID','16')->get();
-        $lodgeType=ParamString::where('ParamCategoryID','4')->get();
+        $establishedType = ParamString::where('ParamCategoryID', '16')->get();
+        $lodgeType = ParamString::where('ParamCategoryID', '4')->get();
 
         $array = array(
             'wards' => $ward,
@@ -42,8 +44,8 @@ class EloquentHostelRepository implements HostelRepository
             'deedTypes' => $deedType,
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
-            'establishedTypes'=>$establishedType,
-            'lodgeTypes'=>$lodgeType
+            'establishedTypes' => $establishedType,
+            'lodgeTypes' => $lodgeType
         );
         return View::make('user.hostel')->with($array);
     }
@@ -176,8 +178,8 @@ class EloquentHostelRepository implements HostelRepository
         $data = Hostel::where('CurrentUser', $name)->get();
         $array = array(
             'hostels' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Hostel.hostelInbox')->with($array);
     }
@@ -202,8 +204,8 @@ class EloquentHostelRepository implements HostelRepository
         $deedType = ParamString::where('ParamCategoryID', '12')->get();
         $supplyType = ParamString::where('ParamCategoryID', '11')->get();
         $electricityType = ParamString::where('ParamCategoryID', '10')->get();
-        $establishedType=ParamString::where('ParamCategoryID','16')->get();
-        $lodgeType=ParamString::where('ParamCategoryID','4')->get();
+        $establishedType = ParamString::where('ParamCategoryID', '16')->get();
+        $lodgeType = ParamString::where('ParamCategoryID', '4')->get();
 
         $comments = WorkflowTrack::select(
             "workflow_tracks.Remarks",
@@ -226,10 +228,10 @@ class EloquentHostelRepository implements HostelRepository
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'establishedTypes'=>$establishedType,
-            'lodgeTypes'=>$lodgeType,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'establishedTypes' => $establishedType,
+            'lodgeTypes' => $lodgeType,
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Hostel.updateHostelInbox')->with($array);
     }
@@ -349,7 +351,6 @@ class EloquentHostelRepository implements HostelRepository
         $hostel->save();
 
         return back()->with('message', 'Successfully Updated');
-
     }
 
     public function hostelWorkflowUpdate(Request $request)
@@ -400,15 +401,35 @@ class EloquentHostelRepository implements HostelRepository
     }
     // Comment on workflowTrack
 
-    public function hostelOutboxView()
+    public function hostelOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        $data = Hostel::where('CurrentUser', '<>', $name)->get();
+        // $data = Hostel::where('CurrentUser', '<>', $name)->get();
+        // return view('admin.Hostel.hostelOutbox', [
+        //     'hostels' => $data,
+        //     'parents' => $this->parent,
+        //     'childs' => $this->child
+        // ]);
+        if ($request->ajax()) {
+            $data = Hostel::where('CurrentUser', '<>', $name)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateHostelOutbox/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Hostel.hostelOutbox', [
-        'hostels' => $data,
-        'parents'=>$this->parent,
-        'childs'=>$this->child
-    ]);
+            'parents' => $this->parent,
+            'childs' => $this->child
+        ]);
     }
 
     public function hostelOutboxUpdateView($id)
@@ -431,8 +452,8 @@ class EloquentHostelRepository implements HostelRepository
         $deedType = ParamString::where('ParamCategoryID', '12')->get();
         $supplyType = ParamString::where('ParamCategoryID', '11')->get();
         $electricityType = ParamString::where('ParamCategoryID', '10')->get();
-        $establishedType=ParamString::where('ParamCategoryID','16')->get();
-        $lodgeType=ParamString::where('ParamCategoryID','4')->get();
+        $establishedType = ParamString::where('ParamCategoryID', '16')->get();
+        $lodgeType = ParamString::where('ParamCategoryID', '4')->get();
 
         $comments = WorkflowTrack::select(
             "workflow_tracks.Remarks",
@@ -455,10 +476,10 @@ class EloquentHostelRepository implements HostelRepository
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'establishedTypes'=>$establishedType,
-            'lodgeTypes'=>$lodgeType,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'establishedTypes' => $establishedType,
+            'lodgeTypes' => $lodgeType,
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.Hostel.updateHostelOutbox')->with($array);
     }
@@ -468,8 +489,8 @@ class EloquentHostelRepository implements HostelRepository
         $data = Hostel::where('Approved', '-1')->get();
         return view('admin.Hostel.hostelApproved', [
             'hostels' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -493,8 +514,8 @@ class EloquentHostelRepository implements HostelRepository
         $deedType = ParamString::where('ParamCategoryID', '12')->get();
         $supplyType = ParamString::where('ParamCategoryID', '11')->get();
         $electricityType = ParamString::where('ParamCategoryID', '10')->get();
-        $establishedType=ParamString::where('ParamCategoryID','16')->get();
-        $lodgeType=ParamString::where('ParamCategoryID','4')->get();
+        $establishedType = ParamString::where('ParamCategoryID', '16')->get();
+        $lodgeType = ParamString::where('ParamCategoryID', '4')->get();
 
         $comments = WorkflowTrack::select(
             "workflow_tracks.Remarks",
@@ -517,10 +538,10 @@ class EloquentHostelRepository implements HostelRepository
             'supplyTypes' => $supplyType,
             'electricityTypes' => $electricityType,
             'comments' => $comments,
-            'establishedTypes'=>$establishedType,
-            'lodgeTypes'=>$lodgeType,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'establishedTypes' => $establishedType,
+            'lodgeTypes' => $lodgeType,
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.Hostel.updateHostelApproved')->with($array);
     }
@@ -532,8 +553,8 @@ class EloquentHostelRepository implements HostelRepository
         $data = Hostel::where('Rejected', '-1')->get();
         return view('admin.Hostel.hostelRejected', [
             'hostels' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -551,8 +572,8 @@ class EloquentHostelRepository implements HostelRepository
         $array = array(
             'hostel' => $data,
             'comments' => $comments,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return view('admin.Hostel.updateHostelRejected')->with($array);
     }

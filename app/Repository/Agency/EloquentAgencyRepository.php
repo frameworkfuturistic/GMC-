@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
+use DataTables;
 
 class EloquentAgencyRepository implements AgencyRepository
 {
@@ -160,8 +161,8 @@ class EloquentAgencyRepository implements AgencyRepository
         $data = Agency::where('CurrentUser', $name)->get();
         $array = array(
             'agencies' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.agency.inbox')->with($array);
     }
@@ -190,8 +191,8 @@ class EloquentAgencyRepository implements AgencyRepository
             'workflows' => $WorkFlow,
             'comments' => $comments,
             'entityTypes' => $entiryType,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.agency.updateInbox')->with($array);
     }
@@ -325,9 +326,8 @@ class EloquentAgencyRepository implements AgencyRepository
         $workflowID = Workflow::select('WorkflowID')->where('WorkflowName', 'AgencyAdvertisement')->first();
         if ($request->forward) {
             $data->CurrentUser = $request->forward;
-        }
-        else{
-            $data->CurrentUser='';
+        } else {
+            $data->CurrentUser = '';
         }
 
         $data->ApplicationStatus = $request->AppStatus;
@@ -345,7 +345,7 @@ class EloquentAgencyRepository implements AgencyRepository
             $user->name = $request->RenewalID;
             $user->email = $request->email;
             $user->password = Hash::make($request->mobile);
-            $user->user_type='1';
+            $user->user_type = '1';
             $user->save();
         }
 
@@ -367,14 +367,28 @@ class EloquentAgencyRepository implements AgencyRepository
     }
 
     // OUTBOX
-    public function outboxView()
+    public function outboxView(Request $request)
     {
         $name = Auth::user()->name;
-        $data = Agency::where('CurrentUser', '<>', $name)->get();
+        if ($request->ajax()) {
+            $data = Agency::where('CurrentUser', '<>', $name)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateAgencyOutbox/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.agency.Outbox', [
-            'agencies' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
     // OUTBOX
@@ -403,8 +417,8 @@ class EloquentAgencyRepository implements AgencyRepository
             'workflows' => $WorkFlow,
             'comments' => $comments,
             'entityTypes' => $entiryType,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.agency.updateOutbox')->with($array);
     }
@@ -414,8 +428,8 @@ class EloquentAgencyRepository implements AgencyRepository
         $data = Agency::where('Approved', '-1')->get();
         return view('admin.agency.approved', [
             'agencies' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -443,8 +457,8 @@ class EloquentAgencyRepository implements AgencyRepository
             'workflows' => $WorkFlow,
             'comments' => $comments,
             'entityTypes' => $entiryType,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.agency.updateApproved')->with($array);
     }
@@ -454,8 +468,8 @@ class EloquentAgencyRepository implements AgencyRepository
         $data = Agency::where('Rejected', '-1')->get();
         return view('admin.agency.rejected', [
             'agencies' => $data,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
@@ -483,10 +497,9 @@ class EloquentAgencyRepository implements AgencyRepository
             'workflows' => $WorkFlow,
             'comments' => $comments,
             'entityTypes' => $entiryType,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
         return View::make('admin.agency.updateRejected')->with($array);
     }
-
 }
