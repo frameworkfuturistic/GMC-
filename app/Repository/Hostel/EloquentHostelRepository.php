@@ -175,7 +175,10 @@ class EloquentHostelRepository implements HostelRepository
     public function hostelInboxView()
     {
         $name = Auth::user()->name;
-        $data = Hostel::where('CurrentUser', $name)->get();
+        $data = Hostel::where('CurrentUser', $name)
+            ->where('Pending', null)
+            ->orderByDesc('id')
+            ->get();
         $array = array(
             'hostels' => $data,
             'parents' => $this->parent,
@@ -404,14 +407,11 @@ class EloquentHostelRepository implements HostelRepository
     public function hostelOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        // $data = Hostel::where('CurrentUser', '<>', $name)->get();
-        // return view('admin.Hostel.hostelOutbox', [
-        //     'hostels' => $data,
-        //     'parents' => $this->parent,
-        //     'childs' => $this->child
-        // ]);
         if ($request->ajax()) {
-            $data = Hostel::where('CurrentUser', '<>', $name)->get();
+            $data = Hostel::where('CurrentUser', '<>', $name)
+                ->where('Pending', null)
+                ->orderByDesc('id')
+                ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

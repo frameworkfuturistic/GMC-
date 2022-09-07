@@ -158,7 +158,10 @@ class EloquentAgencyRepository implements AgencyRepository
     public function agencyInbox()
     {
         $name = Auth::user()->name;
-        $data = Agency::where('CurrentUser', $name)->get();
+        $data = Agency::where('CurrentUser', $name)
+            ->where('Pending', null)
+            ->orderByDesc('id')
+            ->get();
         $array = array(
             'agencies' => $data,
             'parents' => $this->parent,
@@ -371,7 +374,10 @@ class EloquentAgencyRepository implements AgencyRepository
     {
         $name = Auth::user()->name;
         if ($request->ajax()) {
-            $data = Agency::where('CurrentUser', '<>', $name)->get();
+            $data = Agency::where('CurrentUser', '<>', $name)
+                ->where('Pending', null)
+                ->orderByDesc('id')
+                ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

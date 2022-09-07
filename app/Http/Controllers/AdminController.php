@@ -77,9 +77,9 @@ class AdminController extends Controller
         return $this->EloquentSelfAdvet->paymentDetailsView($id);
     }
 
-    public function advetApproved()
+    public function advetApproved(Request $request)
     {
-        return $this->EloquentSelfAdvet->advetApprovedView();
+        return $this->EloquentSelfAdvet->advetApprovedView($request);
     }
 
     public function updateAdvetApproved($id)
@@ -87,9 +87,9 @@ class AdminController extends Controller
         return $this->EloquentSelfAdvet->updateAdvetApprovedView($id);
     }
 
-    public function advetRejected()
+    public function advetRejected(Request $request)
     {
-        return $this->EloquentSelfAdvet->advetRejectedView();
+        return $this->EloquentSelfAdvet->advetRejectedView($request);
     }
 
     public function updateAdvetRejected($id)

@@ -34,68 +34,33 @@ class="active"
                 <div class="mb-top">
                     <!-- table -->
                     <div class="container table-responsive">
-                    <table class="table table-responsive mb-0 display" id="datatable">
-                                <thead class="">
-                                    <tr>
-                                        <th>Action</th>
-                                        <th>RenewalID</th>
-                                        <th>LicenseYear</th>
-                                        <th>EntityName</th>
-                                        <th>EntiryAddress</th>
-                                        <th>EntityWard</th>
-                                        <th>TradeLicenseNo</th>
-                                        <th>MobileNo</th>
-                                        <th>Applicant</th>
-                                        <th>Father</th>
-                                        <th>CurrentUser</th>
-                                        <th>Initiator</th>
-                                        <th>Approver</th>
-                                        <th>ApplicationStatus</th>
-                                        <th>LisenceFee</th>
-                                        <th>GST</th>
-                                        <th>NetAmount</th>
-                                        <th>PmtAmount</th>
-                                        <th>Bank</th>
-                                        <th>MRno</th>
-                                        <th>PaymentDate</th>
-                                        <th>AppDate</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($SelfAds as $SelfAd)
-                                    <tr>
-                                        <td scope="row">
-                                            <button
-                                                onclick="window.location.replace('rnc/updateadvetApproved/{{$SelfAd->id}}')"
-                                                class="btn btn-success btn-sm"><i class="icon-pen"></i>
-                                                Details
-                                            </button>
-                                        </td>
-                                        <td>{{$SelfAd->RenewalID}}</td>
-                                        <td>{{$SelfAd->LicenseYear}}</td>
-                                        <td>{{$SelfAd->EntityName}}</td>
-                                        <td>{{$SelfAd->EntityAddress}}</td>
-                                        <td>{{$SelfAd->WardNo}}</td>
-                                        <td>{{$SelfAd->TradeLicense}}</td>
-                                        <td>{{$SelfAd->MobileNo}}</td>
-                                        <td>{{$SelfAd->Applicant}}</td>
-                                        <td>{{$SelfAd->Father}}</td>
-                                        <td>{{$SelfAd->CurrentUser}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{$SelfAd->TradeLicense}}</td>
-                                        <td>{{$SelfAd->GSTNo}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <table class="table table-responsive mb-0 display" id="datatable">
+                            <thead class="">
+                                <tr>
+                                    <th>Action</th>
+                                    <th>RenewalID</th>
+                                    <th>LicenseYear</th>
+                                    <th>EntityName</th>
+                                    <th>EntiryAddress</th>
+                                    <th>EntityWard</th>
+                                    <th>TradeLicenseNo</th>
+                                    <th>MobileNo</th>
+                                    <th>Applicant</th>
+                                    <th>Father</th>
+                                    <th>CurrentUser</th>
+                                    <th>Initiator</th>
+                                    <th>Approver</th>
+                                    <th>ApplicationStatus</th>
+                                    <th>LisenceFee</th>
+                                    <th>GST</th>
+                                    <th>NetAmount</th>
+                                    <th>Bank</th>
+                                    <th>MRno</th>
+                                    <th>PaymentDate</th>
+                                    <th>AppDate</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                     <!-- table -->
                 </div>
@@ -119,13 +84,10 @@ class="active"
 
 @section('script')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#advetApprovedActive").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
-            // buttons: [
-            //     'copy', 'csv', 'excel', 'pdf', 'print'
-            // ]
             buttons: {
                 buttons: [{
                         extend: 'pdf',
@@ -153,9 +115,101 @@ class="active"
                         className: 'printButton btn-padding'
                     }
                 ]
-            }
+            },
+            "processing": true,
+            "serverSide": true,
+            "language": {
+                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            },
+            ajax: "{{ route('advet.approved') }}",
+            columns: [{
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'RenewalID',
+                    name: 'RenewalID'
+                },
+                {
+                    data: 'LicenseYear',
+                    name: 'LicenseYear'
+                },
+                {
+                    data: 'EntityName',
+                    name: 'EntityName'
+                },
+                {
+                    data: 'EntityAddress',
+                    name: 'EntityAddress'
+                },
+                {
+                    data: 'WardNo',
+                    name: 'WardNo'
+                },
+                {
+                    data: 'TradeLicense',
+                    name: 'TradeLicense'
+                },
+                {
+                    data: 'MobileNo',
+                    name: 'MobileNo'
+                },
+                {
+                    data: 'Applicant',
+                    name: 'Applicant'
+                },
+                {
+                    data: 'Father',
+                    name: 'Father'
+                },
+                {
+                    data: 'CurrentUser',
+                    name: 'CurrentUser'
+                },
+                {
+                    data: 'Initiator',
+                    name: 'Initiator'
+                },
+                {
+                    data: 'Approver',
+                    name: 'Approver'
+                },
+                {
+                    data: 'ApplicationStatus',
+                    name: 'ApplicationStatus'
+                },
+                {
+                    data: 'TradeLicense',
+                    name: 'TradeLicense'
+                },
+                {
+                    data: 'GSTNo',
+                    name: 'GSTNo'
+                },
+                {
+                    data: 'NetAmount',
+                    name: 'NetAmount'
+                },
+                {
+                    data: 'Bank',
+                    name: 'Bank'
+                },
+                {
+                    data: 'MRNo',
+                    name: 'MRNo'
+                },
+                {
+                    data: 'PaymentDate',
+                    name: 'PaymentDate'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                }
+            ]
         });
     });
-
 </script>
 @endsection

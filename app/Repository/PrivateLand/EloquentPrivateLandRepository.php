@@ -317,14 +317,10 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
     public function PrivateLandOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        // $data = PrivateLand::where('CurrentUser', '<>', $name)->get();
-        // return view('admin.PrivateLand.PrivateLandOutbox', [
-        //     'lands' => $data,
-        //     'parents' => $this->parent,
-        //     'childs' => $this->child
-        // ]);
         if ($request->ajax()) {
-            $data = PrivateLand::where('CurrentUser', '<>', $name)->get();
+            $data = PrivateLand::where('CurrentUser', '<>', $name)
+                ->orderByDesc('id')
+                ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -386,11 +382,28 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
     // OUTBOX
 
     // Approved
-    public function landApprovedView()
+    public function landApprovedView(Request $request)
     {
-        $data = PrivateLand::where('Approved', '-1')->get();
+        if ($request->ajax()) {
+            $data = PrivateLand::where('Approved', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateLandApproved/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
         return view('admin.PrivateLand.landApproved', [
-            'lands' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);

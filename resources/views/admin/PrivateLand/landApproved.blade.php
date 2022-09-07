@@ -27,8 +27,8 @@ class="active"
         <div class="mb-top">
             <!-- table -->
             <div class="container table-responsive">
-            <table class="table table-responsive mb-0 display" id="datatable">
-                <thead class="">
+                <table class="table table-responsive mb-0 display" id="datatable">
+                    <thead class="">
                         <tr>
                             <th>Action</th>
                             <th>RenewalID</th>
@@ -58,8 +58,7 @@ class="active"
                         @foreach($lands as $land)
                         <tr>
                             <td scope="row">
-                                <button onclick="window.location.replace('rnc/updateLandApproved/{{$land->id}}')"
-                                    class="btn btn-success btn-sm"><i class="icon-pen"></i>
+                                <button onclick="window.location.replace('rnc/updateLandApproved/{{$land->id}}')" class="btn btn-success btn-sm"><i class="icon-pen"></i>
                                     Details
                                 </button>
                             </td>
@@ -108,7 +107,7 @@ class="active"
 @section('script')
 <!-- datatable -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#landApprovedActive").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
@@ -142,7 +141,6 @@ class="active"
             }
         });
     });
-
 </script>
 <!-- datatable -->
 @endsection

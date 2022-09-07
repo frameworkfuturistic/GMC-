@@ -63,9 +63,9 @@ class PrivateLandController extends Controller
     }
     // OUTBOX
 
-    function landApproved()
+    function landApproved(Request $request)
     {
-        return $this->EloquentPrivateLand->landApprovedView();
+        return $this->EloquentPrivateLand->landApprovedView($request);
     }
 
     function updateLandApproved($id)

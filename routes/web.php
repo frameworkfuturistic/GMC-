@@ -82,10 +82,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::get('rnc/updateadvetPayment/{id}', [AdminController::class, 'paymentDetails']);
 
-    Route::get('rnc/advetApproved', [AdminController::class, 'advetApproved']);
+    Route::get('rnc/advetApproved', [AdminController::class, 'advetApproved'])->name('advet.approved');
     Route::get('rnc/updateadvetApproved/{id}', [AdminController::class, 'updateAdvetApproved']);
 
-    Route::get('rnc/advetRejected', [AdminController::class, 'advetRejected']);
+    Route::get('rnc/advetRejected', [AdminController::class, 'advetRejected'])->name('advet.rejected');
     Route::get('rnc/updateadvetRejected/{id}', [AdminController::class, 'updateAdvetRejected']);
     // Self Advet
     // Self advet
@@ -103,10 +103,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/LandAdvetOutbox', [PrivateLandController::class, 'LandAdvetOutbox'])->name('land.outbox');
     Route::get('rnc/updateLandOutbox/{id}', [PrivateLandController::class, 'updatePrivateLandOutbox']);
 
-    Route::get('rnc/LandAdvetApproved', [PrivateLandController::class, 'landApproved']);
+    Route::get('rnc/LandAdvetApproved', [PrivateLandController::class, 'landApproved'])->name('land.approved');
     Route::get('rnc/updateLandApproved/{id}', [PrivateLandController::class, 'updateLandApproved']);
 
-    Route::get('rnc/LandAdvetRejected', [PrivateLandController::class, 'landRejected']);
+    Route::get('rnc/LandAdvetRejected', [PrivateLandController::class, 'landRejected'])->name('land.rejected');
     Route::get('rnc/updateLandRejected/{id}', [PrivateLandController::class, 'updateLandRejected']);
     // Private Land
     // Private Land

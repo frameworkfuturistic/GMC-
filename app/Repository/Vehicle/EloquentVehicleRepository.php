@@ -137,7 +137,10 @@ class EloquentVehicleRepository implements VehicleRepository
     public function vehicleInboxView()
     {
         $name = Auth::user()->name;
-        $data = VehicleAdvertisement::where('CurrentUser', $name)->get();
+        $data = VehicleAdvertisement::where('CurrentUser', $name)
+            ->where('Pending', null)
+            ->orderByDesc('id')
+            ->get();
         $array = array(
             'vehicles' => $data,
             'parents' => $this->parent,
@@ -339,7 +342,10 @@ class EloquentVehicleRepository implements VehicleRepository
         //     'childs' => $this->child
         // ]);
         if ($request->ajax()) {
-            $data = VehicleAdvertisement::where('CurrentUser', '<>', $name)->get();
+            $data = VehicleAdvertisement::where('CurrentUser', '<>', $name)
+                ->where('Pending', null)
+                ->orderByDesc('id')
+                ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

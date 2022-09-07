@@ -207,8 +207,7 @@ class EloquentShopRepository implements ShopRepository
             p.PmtMode AS LastPmtMode,
             p.Rate AS LastRate,
             p.Months AS LastMonths,
-            DATE_format(ifnull(p.created_at,'2022-04-30'),'%Y-%m-%d') AS LastPaymentDate,
-        	DATE_format(p.created_at,'%h:%m %p') AS LastPaymentTime,
+            DATE_format(ifnull(p.PaymentDate,'2022-04-30'),'%Y-%m-%d') AS LastPaymentDate,
 	        l.name AS LastCreatedBy,
 	        l.mobile AS LastUserMobile
         FROM shops s

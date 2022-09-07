@@ -193,7 +193,10 @@ class EloquentBanquetRepository implements BanquetRepository
     public function banquetInboxView()
     {
         $name = Auth::user()->name;
-        $data = banquetHall::where('CurrentUser', $name)->get();
+        $data = banquetHall::where('CurrentUser', $name)
+            ->where('Pending', null)
+            ->orderByDesc('id')
+            ->get();
         $array = array(
             'banquets' => $data,
             'parents' => $this->parent,
@@ -437,7 +440,10 @@ class EloquentBanquetRepository implements BanquetRepository
     {
         $name = Auth::user()->name;
         if ($request->ajax()) {
-            $data = banquetHall::where('CurrentUser', '<>', $name)->get();
+            $data = banquetHall::where('CurrentUser', '<>', $name)
+                ->where('Pending', null)
+                ->orderByDesc('id')
+                ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

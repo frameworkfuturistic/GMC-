@@ -173,7 +173,10 @@ class EloquentDharmsalaRepository implements DharmsalaRepository
     public function inboxView()
     {
         $name = Auth::user()->name;
-        $data = Dharmasala::where('CurrentUser', $name)->get();
+        $data = Dharmasala::where('CurrentUser', $name)
+            ->where('Pending', null)
+            ->orderByDesc('id')
+            ->get();
         $array = array(
             'dharmasalas' => $data,
             'parents' => $this->parent,
@@ -398,7 +401,10 @@ class EloquentDharmsalaRepository implements DharmsalaRepository
     {
         $name = Auth::user()->name;
         if ($request->ajax()) {
-            $data = Dharmasala::where('CurrentUser', '<>', $name)->get();
+            $data = Dharmasala::where('CurrentUser', '<>', $name)
+                ->where('Pending', null)
+                ->orderByDesc('id')
+                ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

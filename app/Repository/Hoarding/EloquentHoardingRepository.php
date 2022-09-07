@@ -44,7 +44,8 @@ class EloquentHoardingRepository implements HoardingRepository
             ->where('ParamCategoryID', '=', '1019')
             ->get();
 
-        $hoarding = Hoarding::select('RenewalID',
+        $hoarding = Hoarding::select(
+            'RenewalID',
             'HoardingNo',
             'ApplicationDate',
             'LicenseYear',
@@ -131,10 +132,10 @@ class EloquentHoardingRepository implements HoardingRepository
         $hoarding->OwnerCity = $request->ownerCity;
         $hoarding->OwnerPhone = $request->ownerPhone;
         $hoarding->OwnerWhatsapp = $request->ownerWhatsapp;
-        
+
         $hoarding->CurrentUser = $workflowInitiator->Initiator;
         $hoarding->Initiator = $workflowInitiator->Initiator;
-        $hoarding->WorkflowID=$workflowInitiator->WorkflowID;
+        $hoarding->WorkflowID = $workflowInitiator->WorkflowID;
 
         /*
         ===========================PHOTO UPLOADS============================================
@@ -247,34 +248,37 @@ class EloquentHoardingRepository implements HoardingRepository
 
     /* FOR ADMIN USED FUNCTIONS */
     // VIEW
-    public function hoardingInbox(){
+    public function hoardingInbox()
+    {
         $name = Auth::user()->name;
-        $hoarding=Hoarding::select(
-                            'HoardingID',
-                            'RenewalID',
-                            'ApplicationDate',
-                            'HoardingNo',
-                            'LicenseYear',
-                            'Location',
-                            'Longitude',
-                            'Latitude',
-                            'Length',
-                            'Width',
-                            'BoardArea',
-                            'MaterialType'
-                           )
-                           ->where('CurrentUser','=',$name)
-                          ->orderByDesc('HoardingID')
-                          ->get();
-        return view('admin.Hoarding.inbox',[
-            'hoardings'=>$hoarding,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+        $hoarding = Hoarding::select(
+            'HoardingID',
+            'RenewalID',
+            'ApplicationDate',
+            'HoardingNo',
+            'LicenseYear',
+            'Location',
+            'Longitude',
+            'Latitude',
+            'Length',
+            'Width',
+            'BoardArea',
+            'MaterialType'
+        )
+            ->where('CurrentUser', '=', $name)
+            ->where('Pending', null)
+            ->orderByDesc('HoardingID')
+            ->get();
+        return view('admin.Hoarding.inbox', [
+            'hoardings' => $hoarding,
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
-    public function hoardingInboxByID($id){
-        $hoarding=Hoarding::find($id);
+    public function hoardingInboxByID($id)
+    {
+        $hoarding = Hoarding::find($id);
         $username = Auth::user()->name;
 
         $workflowInitiator = Workflow::where('WorkflowID', '4')->first();
@@ -323,43 +327,46 @@ class EloquentHoardingRepository implements HoardingRepository
             'workflowInitiators' => $workflowInitiator,
             'workflows' => $WorkFlow,
             'comments' => $comment,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
 
         // dd($hoarding);
 
-        return view('admin.Hoarding.update-inbox',$array);
+        return view('admin.Hoarding.update-inbox', $array);
     }
 
-    public function hoardingOutbox(){
+    public function hoardingOutbox()
+    {
         $name = Auth::user()->name;
-        $hoarding=Hoarding::select(
-                            'HoardingID',
-                            'RenewalID',
-                            'ApplicationDate',
-                            'HoardingNo',
-                            'LicenseYear',
-                            'Location',
-                            'Longitude',
-                            'Latitude',
-                            'Length',
-                            'Width',
-                            'BoardArea',
-                            'MaterialType'
-                           )
-                           ->where('CurrentUser','<>',$name)
-                          ->orderByDesc('HoardingID')
-                          ->get();
-        return view('admin.Hoarding.outbox',[
-            'hoardings'=>$hoarding,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+        $hoarding = Hoarding::select(
+            'HoardingID',
+            'RenewalID',
+            'ApplicationDate',
+            'HoardingNo',
+            'LicenseYear',
+            'Location',
+            'Longitude',
+            'Latitude',
+            'Length',
+            'Width',
+            'BoardArea',
+            'MaterialType'
+        )
+            ->where('CurrentUser', '<>', $name)
+            ->where('Pending', null)
+            ->orderByDesc('HoardingID')
+            ->get();
+        return view('admin.Hoarding.outbox', [
+            'hoardings' => $hoarding,
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
-    public function hoardingOutboxByID($id){
-        $hoarding=Hoarding::find($id);
+    public function hoardingOutboxByID($id)
+    {
+        $hoarding = Hoarding::find($id);
         $username = Auth::user()->name;
 
         $workflowInitiator = Workflow::where('WorkflowID', '4')->first();
@@ -408,18 +415,20 @@ class EloquentHoardingRepository implements HoardingRepository
             'workflowInitiators' => $workflowInitiator,
             'workflows' => $WorkFlow,
             'comments' => $comment,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
-        return view('admin.Hoarding.update-outbox',$array);
+        return view('admin.Hoarding.update-outbox', $array);
     }
 
-    public function hoardingPmt(){
+    public function hoardingPmt()
+    {
         return view('admin.Hoarding.pmt');
     }
 
-    public function hoardingApproved(){
-        $hoarding=Hoarding::select(
+    public function hoardingApproved()
+    {
+        $hoarding = Hoarding::select(
             'HoardingID',
             'RenewalID',
             'ApplicationDate',
@@ -433,18 +442,19 @@ class EloquentHoardingRepository implements HoardingRepository
             'BoardArea',
             'MaterialType'
         )
-        ->where('Approved','=','-1')
-        ->orderByDesc('HoardingID')
-        ->get();
-        return view('admin.Hoarding.approved',[
-            'hoardings'=>$hoarding,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            ->where('Approved', '=', '-1')
+            ->orderByDesc('HoardingID')
+            ->get();
+        return view('admin.Hoarding.approved', [
+            'hoardings' => $hoarding,
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
-    public function hoardingApprovedByID($id){
-        $hoarding=Hoarding::find($id);
+    public function hoardingApprovedByID($id)
+    {
+        $hoarding = Hoarding::find($id);
         $username = Auth::user()->name;
 
         $workflowInitiator = Workflow::where('WorkflowID', '4')->first();
@@ -493,14 +503,15 @@ class EloquentHoardingRepository implements HoardingRepository
             'workflowInitiators' => $workflowInitiator,
             'workflows' => $WorkFlow,
             'comments' => $comment,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
-        return view('admin.Hoarding.update-approved',$array);
+        return view('admin.Hoarding.update-approved', $array);
     }
 
-    public function hoardingRejected(){
-        $hoarding=Hoarding::select(
+    public function hoardingRejected()
+    {
+        $hoarding = Hoarding::select(
             'HoardingID',
             'RenewalID',
             'ApplicationDate',
@@ -514,18 +525,19 @@ class EloquentHoardingRepository implements HoardingRepository
             'BoardArea',
             'MaterialType'
         )
-        ->where('Rejected','=','-1')
-        ->orderByDesc('HoardingID')
-        ->get();
-        return view('admin.Hoarding.rejected',[
-            'hoardings'=>$hoarding,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+            ->where('Rejected', '=', '-1')
+            ->orderByDesc('HoardingID')
+            ->get();
+        return view('admin.Hoarding.rejected', [
+            'hoardings' => $hoarding,
+            'parents' => $this->parent,
+            'childs' => $this->child
         ]);
     }
 
-    public function hoardingRejectedByID($id){
-        $hoarding=Hoarding::find($id);
+    public function hoardingRejectedByID($id)
+    {
+        $hoarding = Hoarding::find($id);
         $comment = WorkflowTrack::select(
             "workflow_tracks.Remarks",
             "workflow_tracks.UserID",
@@ -534,23 +546,24 @@ class EloquentHoardingRepository implements HoardingRepository
             ->leftJoin("hoardings", "hoardings.HoardingNo", "=", "workflow_tracks.RenewalID")
             ->where('hoardings.HoardingID', $id)
             ->get();
-        $array=array(
-            'hoardings'=>$hoarding,
-            'comments'=>$comment,
-            'parents'=>$this->parent,
-            'childs'=>$this->child
+        $array = array(
+            'hoardings' => $hoarding,
+            'comments' => $comment,
+            'parents' => $this->parent,
+            'childs' => $this->child
         );
-        return view('admin.Hoarding.update-rejected',$array);
+        return view('admin.Hoarding.update-rejected', $array);
     }
     // VIEW
 
-    public function editHoarding(Request $request, $id){
-        
+    public function editHoarding(Request $request, $id)
+    {
+
         $hoarding = Hoarding::find($id);
         $hoarding->LicenseYear = $request->LicenseYear;
-        $hoarding->PermissionFrom=$request->licenseFrom;
-        $hoarding->PermissionTo=$request->licenseTo;
-        
+        $hoarding->PermissionFrom = $request->licenseFrom;
+        $hoarding->PermissionTo = $request->licenseTo;
+
         $hoarding->Location = $request->location;
         $hoarding->Longitude = $request->longitude;
         $hoarding->Latitude = $request->latitude;
@@ -568,12 +581,12 @@ class EloquentHoardingRepository implements HoardingRepository
         $hoarding->OwnerCity = $request->ownerCity;
         $hoarding->OwnerPhone = $request->ownerPhone;
         $hoarding->OwnerWhatsapp = $request->ownerWhatsapp;
-        $hoarding->zone=$request->zone;
+        $hoarding->zone = $request->zone;
 
-        $hoarding->LicenseFee=$request->licenseFee;
-        $hoarding->Amount=$request->amount;
-        $hoarding->GST=$request->gst;
-        $hoarding->NetAmount=$request->netAmount;
+        $hoarding->LicenseFee = $request->licenseFee;
+        $hoarding->Amount = $request->amount;
+        $hoarding->GST = $request->gst;
+        $hoarding->NetAmount = $request->netAmount;
         /*
         ===========================PHOTO UPLOADS============================================
          */
@@ -680,10 +693,10 @@ class EloquentHoardingRepository implements HoardingRepository
          */
         $hoarding->save();
         return back()->with('message', 'Successfully Updated the Data');
-
     }
 
-    public function addComment(Request $request){
+    public function addComment(Request $request)
+    {
         $comment = new WorkflowTrack();
         $name = Auth::user()->name;
         $comment->RenewalID = $request->RenewalID;
@@ -693,11 +706,12 @@ class EloquentHoardingRepository implements HoardingRepository
         $comment->save();
     }
 
-    public function hoardingWorkflow(Request $request){
+    public function hoardingWorkflow(Request $request)
+    {
         // dd($request->all());
 
         $data = Hoarding::find($request->id);
-        $approver=Auth()->user()->name;
+        $approver = Auth()->user()->name;
         $workflowID = Workflow::where('WorkflowName', 'AgencyAdvertisement')->get();
         if ($request->forward) {
             $data->CurrentUser = $request->forward;
@@ -712,7 +726,7 @@ class EloquentHoardingRepository implements HoardingRepository
             $data->Pending = '0';
             $data->Rejected = '0';
 
-            $data->Approver=$approver;
+            $data->Approver = $approver;
         }
 
         if ($request->UpdateStatus == 'Pending') {

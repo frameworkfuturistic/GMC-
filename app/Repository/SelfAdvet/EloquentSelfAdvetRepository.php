@@ -258,7 +258,10 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     public function SelfAdvetInboxView()
     {
         $name = Auth::user()->name;
-        $data = SelfAdvertisements::where('CurrentUser', $name)->get();
+        $data = SelfAdvertisements::where('CurrentUser', $name)
+            ->where('Pending', null)
+            ->orderByDesc('id')
+            ->get();
         $array = [
             'SelfAds' => $data,
             'parents' => $this->parent,
@@ -322,6 +325,7 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
 
         if ($request->ajax()) {
             $data = SelfAdvertisements::where('CurrentUser', '<>', $name)
+                ->where('Pending', null)
                 ->orderByDesc('id')
                 ->get();
             return DataTables::of($data)
@@ -449,11 +453,27 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     // Payment
 
     // Approved
-    public function advetApprovedView()
+    public function advetApprovedView(Request $request)
     {
-        $data = SelfAdvertisements::where('Approved', '-1')->get();
+        if ($request->ajax()) {
+            $data = SelfAdvertisements::where('Approved', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateadvetApproved/" . $row['id'];
+                    $btn = "<a class='btn btn-success btn-sm' href='$link' class='edit btn btn-primary btn-sm'>
+                                <i class='icon-pen'></i> Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.SelfAdv.advetApproved', [
-            'SelfAds' => $data, 'parents' => $this->parent,
+            'parents' => $this->parent,
             'childs' => $this->child
         ]);
     }
@@ -496,11 +516,32 @@ class EloquentSelfAdvetRepository implements SelfAdvetRepository
     // Approved
 
     // Rejected
-    public function advetRejectedView()
+    public function advetRejectedView(Request $request)
     {
-        $data = SelfAdvertisements::where('Rejected', '-1')->get();
+        // $data = SelfAdvertisements::where('Rejected', '-1')->get();
+        // return view('admin.SelfAdv.advetRejected', [
+        //     'SelfAds' => $data, 'parents' => $this->parent,
+        //     'childs' => $this->child
+        // ]);
+        if ($request->ajax()) {
+            $data = SelfAdvertisements::where('Rejected', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateadvetRejected/" . $row['id'];
+                    $btn = "<a class='btn btn-success btn-sm' href='$link' class='edit btn btn-primary btn-sm'>
+                                <i class='icon-pen'></i> Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.SelfAdv.advetRejected', [
-            'SelfAds' => $data, 'parents' => $this->parent,
+            'parents' => $this->parent,
             'childs' => $this->child
         ]);
     }
