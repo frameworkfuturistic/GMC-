@@ -90,7 +90,7 @@ class="active"
                                 <table class="table table-hover" id="tollDataTable">
                                     <thead>
                                         <tr>
-                                            <th>StallNo</th>
+                                            <th>VendorID</th>
                                             <th>VendorName</th>
                                             <th>Area</th>
                                             <th>From</th>

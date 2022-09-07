@@ -57,7 +57,7 @@ function showTollDataTable(data){
         "method":"POST",
         "columns": [
         {
-            "data": "StallNo"
+            "data": "id"
         },
         {
             "data": "VendorName"
