@@ -57,7 +57,13 @@ function showTollDataTable(data){
         "method":"POST",
         "columns": [
         {
+            "data": "StallNo"
+        },
+        {
             "data": "VendorName"
+        },
+        {
+            "data": "Area"
         },
         {
             "data": "PaymentFrom"
@@ -91,11 +97,11 @@ function showTollDataTable(data){
             "targets": 2
         },
         {
-            "width": "20px",
+            "width": "50px",
             "targets": 3
         },
         {
-            "width": "20px",
+            "width": "50px",
             "targets": 4
         },
         {
@@ -105,6 +111,14 @@ function showTollDataTable(data){
         {
             "width": "20px",
             "targets": 6
+        },
+        {
+            "width": "20px",
+            "targets": 7
+        },
+        {
+            "width": "20px",
+            "targets": 8
         }
     ],
 
@@ -119,7 +133,7 @@ function showTollDataTable(data){
 
         // Total over all pages
         total = api
-            .column(4)
+            .column(6)
             .data()
             .reduce(function (a, b) {
                 return intVal(a) + intVal(b);
@@ -127,14 +141,14 @@ function showTollDataTable(data){
 
         // Total over this page
         pageTotal = api
-            .column(4, { page: 'current' })
+            .column(6, { page: 'current' })
             .data()
             .reduce(function (a, b) {
                 return intVal(a) + intVal(b);
             }, 0);
 
         // Update footer
-        $(api.column(4).footer()).html('₹ ' + pageTotal + ' ( ₹ ' + total + ' total)');
+        $(api.column(6).footer()).html('₹ ' + pageTotal + ' ( ₹ ' + total + ' total)');
         console.log(total,pageTotal);
     }
     });
@@ -205,6 +219,9 @@ function showShopDataTable(data){
             "data": "ShopNo"
         },
         {
+            "data": "Circle"
+        },
+        {
             "data": "Allottee"
         },
         {
@@ -264,6 +281,10 @@ function showShopDataTable(data){
         {
             "width": "20px",
             "targets": 6
+        },
+        {
+            "width": "20px",
+            "targets": 7
         }
     ],
 
@@ -278,7 +299,7 @@ function showShopDataTable(data){
 
         // Total over all pages
         total = api
-            .column(4)
+            .column(5)
             .data()
             .reduce(function (a, b) {
                 return intVal(a) + intVal(b);
@@ -286,14 +307,14 @@ function showShopDataTable(data){
 
         // Total over this page
         pageTotal = api
-            .column(4, { page: 'current' })
+            .column(5, { page: 'current' })
             .data()
             .reduce(function (a, b) {
                 return intVal(a) + intVal(b);
             }, 0);
 
         // Update footer
-        $(api.column(4).footer()).html('₹ ' + pageTotal + ' ( ₹ ' + total + ' total)');
+        $(api.column(5).footer()).html('₹ ' + pageTotal + ' ( ₹ ' + total + ' total)');
         console.log(total,pageTotal);
     }
     });

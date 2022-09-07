@@ -90,7 +90,9 @@ class="active"
                                 <table class="table table-hover" id="tollDataTable">
                                     <thead>
                                         <tr>
-                                            <th>Vendor Name</th>
+                                            <th>StallNo</th>
+                                            <th>VendorName</th>
+                                            <th>Area</th>
                                             <th>From</th>
                                             <th>To</th>
                                             <th>Rate</th>
@@ -101,7 +103,7 @@ class="active"
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="6" style="text-align:right">Total:</th>
+                                            <th colspan="8" style="text-align:right">Total:</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
@@ -179,7 +181,8 @@ class="active"
                                 <table class="table table-hover" id="shopDataTable">
                                     <thead>
                                         <tr>
-                                            <th>Shop No</th>
+                                            <th>ShopNo</th>
+                                            <th>Location</th>
                                             <th>Allottee</th>
                                             <th>PaidFrom</th>
                                             <th>PaidTo</th>
@@ -192,7 +195,7 @@ class="active"
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="6" style="text-align:right">Total:</th>
+                                            <th colspan="9" style="text-align:right">Total:</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>

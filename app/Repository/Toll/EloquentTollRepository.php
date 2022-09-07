@@ -357,8 +357,8 @@ class EloquentTollRepository implements TollRepository
     public function totalCollection(Request $request)
     {
         $collectionSummaryQuery = "SELECT 
-                                    p.id,
-                                    t.AreaName,
+                                    t.Address AS StallNo,
+                                    t.AreaName AS Area,
                                     t.VendorName,
                                     date_format(p.From,'%d-%b-%y') AS PaymentFrom,
 		                            date_format(p.To,'%d-%b-%y') AS PaymentTo,

@@ -682,6 +682,7 @@ class EloquentShopRepository implements ShopRepository
     {
         $strQuery = "SELECT 
                     s.ShopNo,
+                    s.Circle,
                     s.Allottee,
                     monthyear(p.PaidFrom) AS PaidFrom,
                     monthyear(p.PaidTo) AS PaidTo,
