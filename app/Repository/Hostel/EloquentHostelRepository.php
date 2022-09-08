@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
-use DataTables;
+use Yajra\DataTables\DataTables;
 
 class EloquentHostelRepository implements HostelRepository
 {
@@ -484,11 +484,27 @@ class EloquentHostelRepository implements HostelRepository
         return View::make('admin.Hostel.updateHostelOutbox')->with($array);
     }
     // Approved
-    public function hostelApprovedView()
+    public function hostelApprovedView(Request $request)
     {
-        $data = Hostel::where('Approved', '-1')->get();
+        if ($request->ajax()) {
+            $data = Hostel::where('Approved', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateHostelApproved/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Hostel.hostelApproved', [
-            'hostels' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);
@@ -548,11 +564,27 @@ class EloquentHostelRepository implements HostelRepository
     // Approved
 
     // Rejected
-    public function hostelRejectedView()
+    public function hostelRejectedView(Request $request)
     {
-        $data = Hostel::where('Rejected', '-1')->get();
+        if ($request->ajax()) {
+            $data = Hostel::where('Rejected', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateHostelRejected/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Hostel.hostelRejected', [
-            'hostels' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);

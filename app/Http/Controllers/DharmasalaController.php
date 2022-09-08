@@ -60,9 +60,9 @@ class DharmasalaController extends Controller
         return $this->EloquentDharmsala->workflowTrack($request);
     }
 
-    function dharmasalaApproved()
+    function dharmasalaApproved(Request $request)
     {
-        return $this->EloquentDharmsala->dharmasalaApprovedView();
+        return $this->EloquentDharmsala->dharmasalaApprovedView($request);
     }
 
     function updateDharmasalaApproved($id)
@@ -70,9 +70,9 @@ class DharmasalaController extends Controller
         return $this->EloquentDharmsala->updateDharmasalaApprovedView($id);
     }
 
-    function dharmasalaRejected()
+    function dharmasalaRejected(Request $request)
     {
-        return $this->EloquentDharmsala->DharmasalaRejectedView();
+        return $this->EloquentDharmsala->DharmasalaRejectedView($request);
     }
 
     function updateDharmasalaRejected($id)

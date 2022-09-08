@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\Hostel\EloquentHostelRepository;
 use Illuminate\Http\Request;
-use App\Models\Hostel;
+use Laravel\Ui\Presets\React;
 
 class HostelController extends Controller
 {
@@ -61,9 +61,9 @@ class HostelController extends Controller
     }
 
 
-    function hostelApproved()
+    function hostelApproved(Request $request)
     {
-        return $this->EloquentHostel->hostelApprovedView();
+        return $this->EloquentHostel->hostelApprovedView($request);
     }
 
     function updateHostelApproved($id)
@@ -71,9 +71,9 @@ class HostelController extends Controller
         return $this->EloquentHostel->updateHostelApprovedView($id);
     }
 
-    function hostelRejected()
+    function hostelRejected(Request $request)
     {
-        return $this->EloquentHostel->hostelRejectedView();
+        return $this->EloquentHostel->hostelRejectedView($request);
     }
 
     function updateHostelRejected($id)

@@ -61,9 +61,9 @@ class AgencyController extends Controller
         return $this->EloquentAgency->updateOutboxView($id);
     }
 
-    public function agencyApproved()
+    public function agencyApproved(Request $request)
     {
-        return $this->EloquentAgency->agencyApprovedView();
+        return $this->EloquentAgency->agencyApprovedView($request);
     }
 
     public function updateApproved($id)
@@ -71,9 +71,9 @@ class AgencyController extends Controller
         return $this->EloquentAgency->updateApprovedView($id);
     }
 
-    public function agencyRejected()
+    public function agencyRejected(Request $request)
     {
-        return $this->EloquentAgency->agencyRejectedView();
+        return $this->EloquentAgency->agencyRejectedView($request);
     }
 
     public function updateRejected($id)

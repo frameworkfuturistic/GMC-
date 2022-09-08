@@ -448,11 +448,28 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
     // Approved
 
     // Rejected
-    public function landRejectedView()
+    public function landRejectedView(Request $request)
     {
-        $data = PrivateLand::where('Rejected', '-1')->get();
+        if ($request->ajax()) {
+            $data = PrivateLand::where('Rejected', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateLandRejected/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
         return view('admin.PrivateLand.landRejected', [
-            'lands' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);

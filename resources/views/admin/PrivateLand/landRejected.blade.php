@@ -27,12 +27,13 @@ class="active"
         <div class="mb-top">
             <!-- table -->
             <div class="container table-responsive">
-            <table class="table table-responsive mb-0 display" id="datatable">
-                <thead class="">
+                <table class="table table-responsive mb-0 display" id="datatable">
+                    <thead class="">
                         <tr>
                             <th>Action</th>
                             <th>RenewalID</th>
-                            <th>LicenseYear</th>
+                            <th>LicenseFrom</th>
+                            <th>LicenseTo</th>
                             <th>EntityName</th>
                             <th>EntiryAddress</th>
                             <th>EntityWard</th>
@@ -47,46 +48,12 @@ class="active"
                             <th>LisenceFee</th>
                             <th>GST</th>
                             <th>NetAmount</th>
-                            <th>PmtAmount</th>
                             <th>Bank</th>
                             <th>MRno</th>
                             <th>PaymentDate</th>
                             <th>AppDate</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($lands as $land)
-                        <tr>
-                            <td scope="row">
-                                <button onclick="window.location.replace('rnc/updateLandRejected/{{$land->id}}')"
-                                    class="btn btn-success btn-sm"><i class="icon-pen"></i>
-                                    Details
-                                </button>
-                            </td>
-                            <td>{{$land->RenewalID}}</td>
-                            <td>{{$land->LicenseYear}}</td>
-                            <td>{{$land->EntityName}}</td>
-                            <td>{{$land->EntityAddress}}</td>
-                            <td>{{$land->WardNo}}</td>
-                            <td>{{$land->TradeLicense}}</td>
-                            <td>{{$land->MobileNo}}</td>
-                            <td>{{$land->Applicant}}</td>
-                            <td>{{$land->Father}}</td>
-                            <td>{{$land->CurrentUser}}</td>
-                            <td></td>
-                            <td></td>
-                            <td>{{$land->ApplicationStatus}}</td>
-                            <td>{{$land->TradeLicense}}</td>
-                            <td>{{$land->GSTNo}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             <!-- table -->
@@ -108,7 +75,7 @@ class="active"
 @section('script')
 <!-- datatable -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#landRejectedActive").addClass('active');
         $('#datatable').DataTable({
             dom: 'Bfrtip',
@@ -139,10 +106,106 @@ class="active"
                         className: 'printButton btn-padding'
                     }
                 ]
-            }
+            },
+            "processing": true,
+            "serverSide": true,
+            "language": {
+                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            },
+            ajax: "{{ route('land.rejected') }}",
+            columns: [{
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'RenewalID',
+                    name: 'RenewalID'
+                },
+                {
+                    data: 'LicenseFrom',
+                    name: 'LicenseFrom'
+                },
+                {
+                    data: 'LicenseTo',
+                    name: 'LicenseTo'
+                },
+                {
+                    data: 'EntityName',
+                    name: 'EntityName'
+                },
+                {
+                    data: 'EntityAddress',
+                    name: 'EntityAddress'
+                },
+                {
+                    data: 'WardNo',
+                    name: 'WardNo'
+                },
+                {
+                    data: 'TradeLicenseNo',
+                    name: 'TradeLicenseNo'
+                },
+                {
+                    data: 'MobileNo',
+                    name: 'MobileNo'
+                },
+                {
+                    data: 'applicant',
+                    name: 'applicant'
+                },
+                {
+                    data: 'father',
+                    name: 'father'
+                },
+                {
+                    data: 'CurrentUser',
+                    name: 'CurrentUser'
+                },
+                {
+                    data: 'Initiator',
+                    name: 'Initiator'
+                },
+                {
+                    data: 'Approver',
+                    name: 'Approver'
+                },
+                {
+                    data: 'ApplicationStatus',
+                    name: 'ApplicationStatus'
+                },
+                {
+                    data: 'LicenseFee',
+                    name: 'LicenseFee'
+                },
+                {
+                    data: 'GSTNo',
+                    name: 'GSTNo'
+                },
+                {
+                    data: 'NetAmount',
+                    name: 'NetAmount'
+                },
+                {
+                    data: 'Bank',
+                    name: 'Bank'
+                },
+                {
+                    data: 'MRNo',
+                    name: 'MRNo'
+                },
+                {
+                    data: 'PaymentDate',
+                    name: 'PaymentDate'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                }
+            ]
         });
     });
-
 </script>
 <!-- datatable -->
 @endsection

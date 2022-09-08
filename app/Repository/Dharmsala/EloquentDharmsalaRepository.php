@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
-use DataTables;
+use Yajra\DataTables\DataTables;
 
 class EloquentDharmsalaRepository implements DharmsalaRepository
 {
@@ -472,11 +472,27 @@ class EloquentDharmsalaRepository implements DharmsalaRepository
     // OUTBOX
 
     // Approved
-    public function dharmasalaApprovedView()
+    public function dharmasalaApprovedView(Request $request)
     {
-        $data = Dharmasala::where('Approved', '-1')->get();
+        if ($request->ajax()) {
+            $data = Dharmasala::where('Approved', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateDharmasalaApproved/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Dharmasala.dharmasalaApproved', [
-            'dharmasalas' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);
@@ -529,11 +545,27 @@ class EloquentDharmsalaRepository implements DharmsalaRepository
     // Approved
 
     // Rejected
-    public function DharmasalaRejectedView()
+    public function DharmasalaRejectedView(Request $request)
     {
-        $data = Dharmasala::where('Rejected', '-1')->get();
+        if ($request->ajax()) {
+            $data = Dharmasala::where('Rejected', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateDharmasalaRejected/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Dharmasala.dharmasalaRejected', [
-            'dharmasalas' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);

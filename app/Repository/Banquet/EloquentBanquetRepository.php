@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
-use DataTables;
+use Yajra\DataTables\DataTables;
 
 
 class EloquentBanquetRepository implements BanquetRepository
@@ -510,11 +510,27 @@ class EloquentBanquetRepository implements BanquetRepository
     }
 
     // Approved
-    public function banquetApprovedView()
+    public function banquetApprovedView(Request $request)
     {
-        $data = banquetHall::where('Approved', '-1')->get();
+        if ($request->ajax()) {
+            $data = banquetHall::where('Approved', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateBanquetApproved/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Banquet.banquetApproved', [
-            'banquets' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);
@@ -567,11 +583,27 @@ class EloquentBanquetRepository implements BanquetRepository
     // Approved
 
     // Rejected
-    public function banquetBanquetView()
+    public function banquetBanquetView(Request $request)
     {
-        $data = banquetHall::where('Rejected', '-1')->get();
+        if ($request->ajax()) {
+            $data = banquetHall::where('Rejected', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateBanquetRejected/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.Banquet.banquetRejected', [
-            'banquets' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);

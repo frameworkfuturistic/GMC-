@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
-use DataTables;
+use Yajra\DataTables\DataTables;
+use App\Traits\YajraDatatable;
 
 class EloquentAgencyRepository implements AgencyRepository
 {
-    use TraitAppHelper;
+    use TraitAppHelper, YajraDatatable;
 
     public function __construct()
     {
@@ -429,11 +430,28 @@ class EloquentAgencyRepository implements AgencyRepository
         return View::make('admin.agency.updateOutbox')->with($array);
     }
 
-    public function agencyApprovedView()
+    public function agencyApprovedView(Request $request)
     {
-        $data = Agency::where('Approved', '-1')->get();
+        if ($request->ajax()) {
+            $data = Agency::where('Approved', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateApproved/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
         return view('admin.agency.approved', [
-            'agencies' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);
@@ -469,11 +487,27 @@ class EloquentAgencyRepository implements AgencyRepository
         return View::make('admin.agency.updateApproved')->with($array);
     }
 
-    public function agencyRejectedView()
+    public function agencyRejectedView(Request $request)
     {
-        $data = Agency::where('Rejected', '-1')->get();
+        if ($request->ajax()) {
+            $data = Agency::where('Rejected', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateRejected/" . $row['id'];
+                    $btn = "<a href='$link'
+                                class='btn btn-success btn-sm'><i class='icon-pen'></i>
+                                Details
+                            </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         return view('admin.agency.rejected', [
-            'agencies' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);

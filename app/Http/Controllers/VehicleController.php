@@ -63,9 +63,9 @@ class VehicleController extends Controller
     }
     // OUTBOX
 
-    public function vehicleApproved()
+    public function vehicleApproved(Request $request)
     {
-        return $this->EloquentVehicle->vehicleApprovedView();
+        return $this->EloquentVehicle->vehicleApprovedView($request);
     }
 
     public function updateVehicleApproved($id)
@@ -73,9 +73,9 @@ class VehicleController extends Controller
         return $this->EloquentVehicle->updateVehicleApprovedView($id);
     }
 
-    public function vehicleRejected()
+    public function vehicleRejected(Request $request)
     {
-        return $this->EloquentVehicle->vehicleRejectedView();
+        return $this->EloquentVehicle->vehicleRejectedView($request);
     }
 
     public function updateVehicleRejected($id)

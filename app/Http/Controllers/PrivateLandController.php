@@ -73,9 +73,9 @@ class PrivateLandController extends Controller
         return $this->EloquentPrivateLand->updateLandApprovedView($id);
     }
 
-    function landRejected()
+    function landRejected(Request $request)
     {
-        return $this->EloquentPrivateLand->landRejectedView();
+        return $this->EloquentPrivateLand->landRejectedView($request);
     }
 
     function updateLandRejected($id)

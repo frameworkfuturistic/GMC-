@@ -27,8 +27,8 @@ class="active"
         <div class="mb-top">
             <!-- table -->
             <div class="container table-responsive">
-            <table class="table table-responsive mb-0 display" id="datatable">
-                <thead class="">
+                <table class="table table-responsive mb-0 display" id="datatable">
+                    <thead class="">
                         <tr>
                             <th>Action</th>
                             <th>RenewalID</th>
@@ -44,43 +44,12 @@ class="active"
                             <th>LisenceFee</th>
                             <th>GST</th>
                             <th>NetAmount</th>
-                            <th>PmtAmount</th>
                             <th>Bank</th>
                             <th>MRno</th>
                             <th>PaymentDate</th>
                             <th>AppDate</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($dharmasalas as $dharmasala)
-                        <tr>
-                            <td scope="row">
-                                <button onclick="window.location.replace('rnc/updateDharmasalaRejected/{{$dharmasala->id}}')"
-                                    class="btn btn-success btn-sm"><i class="icon-pen"></i>
-                                    Details
-                                </button>
-                            </td>
-                            <td>{{$dharmasala->RenewalID}}</td>
-                            <td>{{$dharmasala->LicenseYear}}</td>
-                            <td>{{$dharmasala->Applicant}}</td>
-                            <td>{{$dharmasala->Father}}</td>
-                            <td>{{$dharmasala->EntityName}}</td>
-                            <td>{{$dharmasala->EntityAddress}}</td>
-                            <td>{{$dharmasala->CurrentUser}}</td>
-                            <td>{{$dharmasala->Initiator}}</td>
-                            <td>{{$dharmasala->Approver}}</td>
-                            <td>{{$dharmasala->ApplicationStatus}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
             <!-- table -->
@@ -102,8 +71,8 @@ class="active"
 @section('script')
 <!-- datatable -->
 <script>
-    $(document).ready(function () {
-        
+    $(document).ready(function() {
+
         // add active class
         $("#dharmRejected").addClass('active');
         $('#datatable').DataTable({
@@ -135,10 +104,90 @@ class="active"
                         className: 'printButton btn-padding'
                     }
                 ]
-            }
+            },
+            "processing": true,
+            "serverSide": true,
+            "language": {
+                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            },
+            ajax: "{{ route('dharmsala.rejected') }}",
+            columns: [{
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'RenewalID',
+                    name: 'RenewalID'
+                },
+                {
+                    data: 'LicenseYear',
+                    name: 'LicenseYear'
+                },
+                {
+                    data: 'Applicant',
+                    name: 'Applicant'
+                },
+                {
+                    data: 'Father',
+                    name: 'Father'
+                },
+                {
+                    data: 'EntityName',
+                    name: 'EntityName'
+                },
+                {
+                    data: 'EntityAddress',
+                    name: 'EntityAddress'
+                },
+                {
+                    data: 'CurrentUser',
+                    name: 'CurrentUser'
+                },
+                {
+                    data: 'Initiator',
+                    name: 'Initiator'
+                },
+                {
+                    data: 'Approver',
+                    name: 'Approver'
+                },
+                {
+                    data: 'ApplicationStatus',
+                    name: 'ApplicationStatus'
+                },
+                {
+                    data: 'LicenseFee',
+                    name: 'LicenseFee'
+                },
+                {
+                    data: 'GST',
+                    name: 'GST'
+                },
+                {
+                    data: 'NetAmount',
+                    name: 'NetAmount'
+                },
+                {
+                    data: 'Bank',
+                    name: 'Bank'
+                },
+                {
+                    data: 'MRNo',
+                    name: 'MRNo'
+                },
+                {
+                    data: 'PaymentDate',
+                    name: 'PaymentDate'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                }
+            ]
         });
     });
-
 </script>
 <!-- datatable -->
 @endsection

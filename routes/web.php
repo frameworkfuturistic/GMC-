@@ -121,9 +121,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updatevehicleInbox/{id}', [VehicleController::class, 'udpateVehicleInbox']);
     Route::get('rnc/vehicleOutbox', [VehicleController::class, 'vehicleOutbox'])->name('vehicle.outbox');
     Route::get('rnc/updateVehicleOutbox/{id}', [VehicleController::class, 'updateVehicleOutbox']);
-    Route::get('rnc/vehicleApproved', [VehicleController::class, 'vehicleApproved']);
+    Route::get('rnc/vehicleApproved', [VehicleController::class, 'vehicleApproved'])->name('vehicle.approved');
     Route::get('rnc/updateVehicleApproved/{id}', [VehicleController::class, 'updateVehicleApproved']);
-    Route::get('rnc/vehicleRejected', [VehicleController::class, 'vehicleRejected']);
+    Route::get('rnc/vehicleRejected', [VehicleController::class, 'vehicleRejected'])->name('vehicle.rejected');
     Route::get('rnc/updateVehicleRejected/{id}', [VehicleController::class, 'updateVehicleRejected']);
     // VEHICLE
     // VEHICLE
@@ -138,9 +138,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateBanquetInbox/{id}', [BanquetController::class, 'updateBanquetInbox']);
     Route::get('rnc/banquetOutbox', [BanquetController::class, 'banquetOutbox'])->name('banquet.outbox');
     Route::get('rnc/udpateBanquetOutbox/{id}', [BanquetController::class, 'banquetOutboxUpdate']);
-    Route::get('rnc/banquetApproved', [BanquetController::class, 'banquetApproved']);
+    Route::get('rnc/banquetApproved', [BanquetController::class, 'banquetApproved'])->name('banquet.approved');
     Route::get('rnc/updateBanquetApproved/{id}', [BanquetController::class, 'updateBanquetApproved']);
-    Route::get('rnc/banquetRejected', [BanquetController::class, 'banquetRejected']);
+    Route::get('rnc/banquetRejected', [BanquetController::class, 'banquetRejected'])->name('banquet.rejected');
     Route::get('rnc/updateBanquetRejected/{id}', [BanquetController::class, 'updateBanquetRejected']);
     // MARRIAGE/BANQUET HALL
     // MARRIGE/ BANQUET HALL
@@ -155,9 +155,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateHostelInbox/{id}', [HostelController::class, 'updateHostelInbox']);
     Route::get('rnc/hostelOutbox', [HostelController::class, 'hostelOutbox'])->name('hostel.outbox');
     Route::get('rnc/updateHostelOutbox/{id}', [HostelController::class, 'hostelOutboxUpdate']);
-    Route::get('rnc/hostelApproved', [HostelController::class, 'hostelApproved']);
+    Route::get('rnc/hostelApproved', [HostelController::class, 'hostelApproved'])->name('hostel.approved');
     Route::get('rnc/updateHostelApproved/{id}', [HostelController::class, 'updateHostelApproved']);
-    Route::get('rnc/hostelRejected', [HostelController::class, 'hostelRejected']);
+    Route::get('rnc/hostelRejected', [HostelController::class, 'hostelRejected'])->name('hostel.rejected');
     Route::get('rnc/updateHostelRejected/{id}', [HostelController::class, 'updateHostelRejected']);
     // HOSTEL
     // HOSTEL/LODGE
@@ -172,9 +172,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updatedharmasalaInbox/{id}', [DharmasalaController::class, 'updateDharmasalaInbox']);
     Route::get('rnc/dharmasalaOutbox', [DharmasalaController::class, 'dharmasalaOutbox'])->name('dharmasala.outbox');
     Route::get('rnc/updatedharmasalaOutbox/{id}', [DharmasalaController::class, 'dharmasalaOutboxUpdate']);
-    Route::get('rnc/dharmasalaApproved', [DharmasalaController::class, 'dharmasalaApproved']);
+    Route::get('rnc/dharmasalaApproved', [DharmasalaController::class, 'dharmasalaApproved'])->name('dharmsala.approved');
     Route::get('rnc/updateDharmasalaApproved/{id}', [DharmasalaController::class, 'updateDharmasalaApproved']);
-    Route::get('rnc/dharmasalaRejected', [DharmasalaController::class, 'dharmasalaRejected']);
+    Route::get('rnc/dharmasalaRejected', [DharmasalaController::class, 'dharmasalaRejected'])->name('dharmsala.rejected');
     Route::get('rnc/updateDharmasalaRejected/{id}', [DharmasalaController::class, 'updateDharmasalaRejected']);
     // DHARMSALA
     // DHARMASALA
@@ -189,9 +189,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateInbox/{id}', [AgencyController::class, 'updateInbox']);
     Route::get('rnc/agencyOutbox', [AgencyController::class, 'Outbox'])->name('agency.outbox');
     Route::get('rnc/updateAgencyOutbox/{id}', [AgencyController::class, 'updateOutbox']);
-    Route::get('rnc/agencyApproved', [AgencyController::class, 'agencyApproved']);
+    Route::get('rnc/agencyApproved', [AgencyController::class, 'agencyApproved'])->name('agency.approved');
     Route::get('rnc/updateApproved/{id}', [AgencyController::class, 'updateApproved']);
-    Route::get('rnc/agencyRejected', [AgencyController::class, 'agencyRejected']);
+    Route::get('rnc/agencyRejected', [AgencyController::class, 'agencyRejected'])->name('agency.rejected');
     Route::get('rnc/updateRejected/{id}', [AgencyController::class, 'updateRejected']);
     // AGENCY
     // AGENCY

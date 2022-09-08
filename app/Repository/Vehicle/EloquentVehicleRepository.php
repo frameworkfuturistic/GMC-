@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Traits\AppHelper as TraitAppHelper;
-use DataTables;
+use Yajra\DataTables\DataTables;
 
 class EloquentVehicleRepository implements VehicleRepository
 {
@@ -335,12 +335,6 @@ class EloquentVehicleRepository implements VehicleRepository
     public function vehicleOutboxView(Request $request)
     {
         $name = Auth::user()->name;
-        // $data = VehicleAdvertisement::where('CurrentUser', '<>', $name)->get();
-        // return view('admin.Vehicle.vehicleOutbox', [
-        //     'vehicles' => $data,
-        //     'parents' => $this->parent,
-        //     'childs' => $this->child
-        // ]);
         if ($request->ajax()) {
             $data = VehicleAdvertisement::where('CurrentUser', '<>', $name)
                 ->where('Pending', null)
@@ -406,11 +400,26 @@ class EloquentVehicleRepository implements VehicleRepository
     // OUTBOX
 
     // Approved
-    public function vehicleApprovedView()
+    public function vehicleApprovedView(Request $request)
     {
-        $data = VehicleAdvertisement::where('Approved', '-1')->get();
+        if ($request->ajax()) {
+            $data = VehicleAdvertisement::where('Approved', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateVehicleApproved/" . $row['id'];
+                    $btn = "<a class='btn btn-success btn-sm' href='$link' class='edit btn btn-primary btn-sm'>
+                                <i class='icon-pen'></i> Details
+                            </a>";
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
         return view('admin.Vehicle.vehicleApproved', [
-            'vehicles' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);
@@ -457,11 +466,26 @@ class EloquentVehicleRepository implements VehicleRepository
     // Approved
 
     // Rejected
-    public function vehicleRejectedView()
+    public function vehicleRejectedView(Request $request)
     {
-        $data = VehicleAdvertisement::where('Rejected', '-1')->get();
+        if ($request->ajax()) {
+            $data = VehicleAdvertisement::where('Rejected', '-1')
+                ->orderByDesc('id')
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "rnc/updateVehicleRejected/" . $row['id'];
+                    $btn = "<a class='btn btn-success btn-sm' href='$link' class='edit btn btn-primary btn-sm'>
+                                <i class='icon-pen'></i> Details
+                            </a>";
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
         return view('admin.Vehicle.vehicleRejected', [
-            'vehicles' => $data,
             'parents' => $this->parent,
             'childs' => $this->child
         ]);

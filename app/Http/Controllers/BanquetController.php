@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Repository\Banquet\EloquentBanquetRepository;
 use Illuminate\Http\Request;
-use App\Models\BanquetHall;
 
 class BanquetController extends Controller
 {
@@ -60,9 +59,9 @@ class BanquetController extends Controller
         return $this->EloquentBanquet->updateBanquetOutbox($id);
     }
 
-    function banquetApproved()
+    function banquetApproved(Request $request)
     {
-        return $this->EloquentBanquet->banquetApprovedView();
+        return $this->EloquentBanquet->banquetApprovedView($request);
     }
 
     function updateBanquetApproved($id)
@@ -70,9 +69,9 @@ class BanquetController extends Controller
         return $this->EloquentBanquet->updateBanquetApprovedView($id);
     }
 
-    function banquetRejected()
+    function banquetRejected(Request $request)
     {
-        return $this->EloquentBanquet->banquetBanquetView();
+        return $this->EloquentBanquet->banquetBanquetView($request);
     }
 
     function updateBanquetRejected($id)
