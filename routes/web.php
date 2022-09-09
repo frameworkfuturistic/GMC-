@@ -241,10 +241,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     // Toll
     Route::post('tollcollection', [TollController::class, 'totalCollection']);
+    Route::get('tolls/masters/toll-master', [TollController::class, 'tollMaster'])->name('toll.master');
 
     // Shops
     Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView'])->name('shops.master');
-    Route::get('rnc/getShops/{id}', [ShopController::class, 'getShops']);
+    Route::get('rnc/getShops/{id}', [ShopController::class, 'getShopByID']);
     Route::post('rnc/editShops', [ShopController::class, 'editShops']);
     Route::get('shops/payments/bill-payments', [ShopController::class, 'billPaymentView']);
     Route::post('shops/payments/bill-payments', [ShopController::class, 'postBillPayment'])->middleware('request_logger');    // Save Shop Payment

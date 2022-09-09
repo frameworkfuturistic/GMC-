@@ -79,4 +79,10 @@ class TollController extends Controller
     {
         return $this->EloquentToll->totalCollection($request);
     }
+
+    // Toll Master View
+    public function tollMaster(Request $req)
+    {
+        return $this->EloquentToll->tollMaster($req);
+    }
 }

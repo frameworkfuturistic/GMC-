@@ -9,10 +9,18 @@ use App\Traits\Toll as TollTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Traits\AppHelper;
 
 class EloquentTollRepository implements TollRepository
 {
     use TollTrait;
+    use AppHelper;
+
+    // Initialization of construct function for sidebar menu
+    public function __construct()
+    {
+        $this->menuApp();
+    }
     /**
      * Created On-07-07-2022
      * Created By-Anshu Kumar
@@ -373,5 +381,17 @@ class EloquentTollRepository implements TollRepository
                             ORDER BY p.id DESC";
         $collectionSummary = DB::select($collectionSummaryQuery);
         return $collectionSummary;
+    }
+
+    /**
+     * | Toll Master View for the Web App
+     */
+    public function tollMaster(Request $req)
+    {
+        $array = [
+            'parents' => $this->parent,
+            'childs' => $this->child,
+        ];
+        return view('admin.Tolls.toll-master', $array);
     }
 }

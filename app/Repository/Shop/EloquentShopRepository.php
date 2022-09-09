@@ -41,20 +41,10 @@ class EloquentShopRepository implements ShopRepository
     public function shopMasterView(Request $req)
     {
         if ($req->ajax()) {
-            $shop = Shop::select('ID', 'ShopNo', 'Circle', 'Allottee', 'Rate', 'Arrear', 'Address')
+            $shop = Shop::select('ID', 'ShopNo', 'Circle', 'Allottee', 'Rate', 'Arrear', 'Address', 'ContactNo', 'Longitude', 'Latitude')
                 ->latest()
                 ->get();
             return Datatables::of($shop)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $event = "detailPreview" . "(" . $row['ID'] . ");";
-
-                    $btn = "<button class='btn btn-success btn-sm btnNext'
-                    onclick='$event'>Details</button>";
-
-                    return $btn;
-                })
-                ->rawColumns(['action'])
                 ->make(true);
         }
         $array = [
@@ -219,6 +209,10 @@ class EloquentShopRepository implements ShopRepository
             s.ContactNo,
             monthyear(p.PaidFrom) as PaidFrom,
             monthyear(p.PaidTo) as PaidTo,
+
+            p.PaidFrom as PaidFromN,
+            p.PaidTo as PaidToN,
+
             p.Demand as LastDemand,
             p.Amount AS LastPaymentAmount,
             p.PmtMode AS LastPmtMode,
@@ -252,6 +246,10 @@ class EloquentShopRepository implements ShopRepository
             $val['ContactNo'] = $shops->ContactNo ?? '';
             $val['PaidFrom'] = $shops->PaidFrom ?? '';
             $val['PaidTo'] = $shops->PaidTo ?? '';
+
+            $val['PaidFromN'] = $shops->PaidFromN ?? '';
+            $val['PaidToN'] = $shops->PaidToN ?? '';
+
             $val['LastDemand'] = $shops->LastDemand ?? '';
             $val['LastPaymentAmount'] = $shops->LastPaymentAmount ?? '';
             $val['LastPmtMode'] = $shops->LastPmtMode ?? '';

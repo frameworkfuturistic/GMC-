@@ -5,21 +5,17 @@
 @endsection
 
 @section('heading')
-Shop Details
+Toll Masters
 @endsection
 
-@section('shopactive')
+@section('tollMasterActive')
 class="active"
 @endsection
 
 @section('app-content')
 <div class="card">
-    <div class="card-header">
-        <h4 class="card-title">Details Panel</h4>
-    </div>
-    <div class="card-body">
-        <div class="card-block">
-            <!-- Shop List Tabs -->
+    <div class="card-block">
+        <div class="card-body">
             <!-- DataTable -->
             <div class="table-responsive">
                 <table class="table table-hover" id="dataTable">
@@ -44,14 +40,16 @@ class="active"
 </div>
 @endsection
 
-@section('script')
+@section('pagescript')
 <script src="js/datatable_buttons/dataTables.buttons.min.js"></script>
 <script src="js/datatable_buttons/jszip.min.js"></script>
 <script src="js/datatable_buttons/pdfmake.min.js"></script>
 <script src="js/datatable_buttons/vfs_fonts.js"></script>
 <script src="js/datatable_buttons/buttons.html5.min.js"></script>
 <script src="js/datatable_buttons/buttons.print.min.js"></script>
+@endsection
 
+@section('script')
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable({
@@ -84,52 +82,9 @@ class="active"
                     }
                 ]
             },
-            processing: true,
-            serverSide: true,
-            "language": {
-                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
-            },
-            ajax: "{{ route('shops.master') }}",
-            columns: [{
-                    data: 'ShopNo',
-                    name: 'ShopNo'
-                },
-                {
-                    data: 'Circle',
-                    name: 'Circle'
-                },
-                {
-                    data: 'Allottee',
-                    name: 'Allottee'
-                },
-                {
-                    data: 'Rate',
-                    name: 'Rate'
-                },
-                {
-                    data: 'Arrear',
-                    name: 'Arrear'
-                },
-                {
-                    data: 'Address',
-                    name: 'Address'
-                },
-                {
-                    data: 'ContactNo',
-                    name: 'ContactNo'
-                },
-                {
-                    data: 'Longitude',
-                    name: 'Longitude'
-                },
-                {
-                    data: 'Latitude',
-                    name: 'Latitude'
-                }
-            ]
         });
-        // add active class
-        $("#shopActive").addClass('active');
+
+        $("#tollMasterActive").addClass('active');
     });
 </script>
 @endsection
