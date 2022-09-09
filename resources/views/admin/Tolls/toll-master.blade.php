@@ -21,15 +21,13 @@ class="active"
                 <table class="table table-hover" id="dataTable">
                     <thead>
                         <tr>
-                            <th>ShopNo</th>
-                            <th>Circle</th>
-                            <th>Allottee</th>
-                            <th>Rate</th>
-                            <th>Arrear</th>
+                            <th>VendorID</th>
+                            <th>AreaName</th>
+                            <th>VendorName</th>
                             <th>Address</th>
-                            <th>ContactNo</th>
-                            <th>Longitude</th>
-                            <th>Latitude</th>
+                            <th>Rate</th>
+                            <th>Location</th>
+                            <th>Mobile</th>
                         </tr>
                     </thead>
                 </table>
@@ -82,6 +80,41 @@ class="active"
                     }
                 ]
             },
+            processing: true,
+            serverSide: true,
+            "language": {
+                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            },
+            ajax: "{{ route('toll.master') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'AreaName',
+                    name: 'AreaName'
+                },
+                {
+                    data: 'VendorName',
+                    name: 'VendorName'
+                },
+                {
+                    data: 'Address',
+                    name: 'Address'
+                },
+                {
+                    data: 'Rate',
+                    name: 'Rate'
+                },
+                {
+                    data: 'Location',
+                    name: 'Location'
+                },
+                {
+                    data: 'Mobile',
+                    name: 'Mobile'
+                }
+            ]
         });
 
         $("#tollMasterActive").addClass('active');

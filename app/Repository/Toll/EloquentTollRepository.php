@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Traits\AppHelper;
+use Yajra\DataTables\DataTables;
 
 class EloquentTollRepository implements TollRepository
 {
@@ -388,6 +389,12 @@ class EloquentTollRepository implements TollRepository
      */
     public function tollMaster(Request $req)
     {
+        if ($req->ajax()) {
+            $toll = Toll::select('id', 'AreaName', 'VendorName', 'Address', 'Rate', 'Location', 'Mobile')
+                ->get();
+            return DataTables::of($toll)
+                ->make(true);
+        }
         $array = [
             'parents' => $this->parent,
             'childs' => $this->child,
