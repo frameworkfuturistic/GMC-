@@ -243,7 +243,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('tollcollection', [TollController::class, 'totalCollection']);
 
     // Shops
-    Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView']);
+    Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView'])->name('shops.master');
     Route::get('rnc/getShops/{id}', [ShopController::class, 'getShops']);
     Route::post('rnc/editShops', [ShopController::class, 'editShops']);
     Route::get('shops/payments/bill-payments', [ShopController::class, 'billPaymentView']);

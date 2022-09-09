@@ -13,6 +13,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Yajra\DataTables\Contracts\DataTable;
+use Yajra\DataTables\DataTables;
 
 /**
  * Created On-04-07-2022
@@ -36,13 +38,28 @@ class EloquentShopRepository implements ShopRepository
      * function for View of the Shop and Shop Details
      */
 
-    public function shopMasterView()
+    public function shopMasterView(Request $req)
     {
-        $shop = Shop::orderBy('id', 'DESC')->get();
+        if ($req->ajax()) {
+            $shop = Shop::select('ID', 'ShopNo', 'Circle', 'Allottee', 'Rate', 'Arrear', 'Address')
+                ->latest()
+                ->get();
+            return Datatables::of($shop)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $event = "detailPreview" . "(" . $row['ID'] . ");";
+
+                    $btn = "<button class='btn btn-success btn-sm btnNext'
+                    onclick='$event'>Details</button>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
         $array = [
             'parents' => $this->parent,
             'childs' => $this->child,
-            'shops' => $shop,
         ];
         return view('admin.Shops.details-view')->with($array);
     }

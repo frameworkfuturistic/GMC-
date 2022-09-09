@@ -21,12 +21,10 @@ class="active"
         <div class="card-block">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1"
-                        aria-expanded="true">Shop List</a>
+                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1" aria-expanded="true">Shop List</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2"
-                        aria-expanded="false">Details</a>
+                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2" aria-expanded="false">Details</a>
                 </li>
             </ul>
             <div class="tab-content px-1 pt-1">
@@ -38,32 +36,14 @@ class="active"
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>AlloteeName</th>
-                                    <th>Shop</th>
+                                    <th>ShopNo</th>
+                                    <th>Circle</th>
+                                    <th>Allottee</th>
+                                    <th>Rate</th>
+                                    <th>Arrear</th>
                                     <th>Address</th>
-                                    <th>ContactNo</th>
-                                    <th>TradeLicense</th>
-                                    <th>NoOfFloors</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach($shops as $shop)
-                                <tr>
-                                    <td><button class="btn btn-success btn-sm btnNext"
-                                            onclick='detailPreview("{{$shop->id}}");'>Details</button></td>
-                                    <td>{{$shop->Allotee}}</td>
-                                    <td>{{$shop->ShopNo}}</td>
-                                    <td>{{$shop->Address}}</td>
-                                    <td>{{$shop->ContactNo}}</td>
-                                    <td>{{$shop->TradeLicense}}</td>
-                                    <td>{{$shop->NoOfFloors}}</td>
-                                    <td>{{$shop->Latitude}}</td>
-                                    <td>{{$shop->Longitude}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                     <!-- DataTable -->
@@ -78,14 +58,13 @@ class="active"
                         </div>
                         <!-- form -->
                         <form action="rnc/editShops" method="POST" enctype="multipart/form-data">
-                            @csrf 
+                            @csrf
                             <div class="table-responsive">
                                 <table id="myTable" class="table table-bordered">
                                     <tbody>
                                         <input type="hidden" value="" id="id" name="id">
                                         <tr>
-                                            <td class="spin-label">Allotee <span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Allotee <span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <input type="text" class="form-control" id="allotee" class="allotee">
@@ -100,8 +79,7 @@ class="active"
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Address<span
-                                                    class="spin-separator spin-star">*</span>
+                                            <td class="spin-label">Address<span class="spin-separator spin-star">*</span>
                                             </td>
                                             <td class="spin-separator">:</td>
 
@@ -120,26 +98,22 @@ class="active"
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Alloted Breadth(ft.)<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Alloted Breadth(ft.)<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="allBreadth"
-                                                    name="allBreadth">
+                                                <input type="text" class="form-control" id="allBreadth" name="allBreadth">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Alloted Height(ft.)<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Alloted Height(ft.)<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <input type="text" class="form-control" id="allHeight" name="allHeight">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Present Length(ft.)<span
-                                                    class="spin-separator spin-star">*</span>
+                                            <td class="spin-label">Present Length(ft.)<span class="spin-separator spin-star">*</span>
                                             </td>
                                             <td class="spin-separator">:</td>
 
@@ -148,48 +122,40 @@ class="active"
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Present Breadth(ft.)<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Present Breadth(ft.)<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="text" class="form-control" id="preBreadth"
-                                                    name="preBreadth">
+                                                <input type="text" class="form-control" id="preBreadth" name="preBreadth">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Present Height(ft.)<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Present Height(ft.)<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <input type="text" class="form-control" id="preHeight" name="preHeight">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">NoOfFloors<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">NoOfFloors<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <input type="text" class="form-control" id="floors" name="floors">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Present Occupier<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Present Occupier<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <input type="text" class="form-control" id="preOccu" name="preOccu">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Trade License<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Trade License<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <div class="input-group">
-                                                    <label
-                                                        class="display-inline-block custom-control custom-radio ml-1">
-                                                        <input type="radio" id="tradeLicense" name="tradeLicense"
-                                                            class="custom-control-input" value="Yes">
+                                                    <label class="display-inline-block custom-control custom-radio ml-1">
+                                                        <input type="radio" id="tradeLicense" name="tradeLicense" class="custom-control-input" value="Yes">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description ml-0">Yes</span>
                                                     </label>
@@ -202,8 +168,7 @@ class="active"
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="spin-label">Construction Type<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Construction Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <input type="text" class="form-control" id="constType" name="constType">
@@ -211,21 +176,17 @@ class="active"
                                         </tr>
 
                                         <tr>
-                                            <td class="spin-label">Water Connection<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Water Connection<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <div class="input-group">
-                                                    <label
-                                                        class="display-inline-block custom-control custom-radio ml-1">
-                                                        <input type="radio" id="waterConnection" name="waterConnection"
-                                                            class="custom-control-input" value="Yes">
+                                                    <label class="display-inline-block custom-control custom-radio ml-1">
+                                                        <input type="radio" id="waterConnection" name="waterConnection" class="custom-control-input" value="Yes">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description ml-0">Yes</span>
                                                     </label>
                                                     <label class="display-inline-block custom-control custom-radio">
-                                                        <input type="radio" id="waterConnection" name="waterConnection"
-                                                            class="custom-control-input" value="No">
+                                                        <input type="radio" id="waterConnection" name="waterConnection" class="custom-control-input" value="No">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description ml-0">No</span>
                                                     </label>
@@ -234,21 +195,17 @@ class="active"
                                         </tr>
 
                                         <tr>
-                                            <td class="spin-label">Electricity Connection<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Electricity Connection<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <div class="input-group">
-                                                    <label
-                                                        class="display-inline-block custom-control custom-radio ml-1">
-                                                        <input type="radio" id="electricityConnection" name="electricityConnection"
-                                                            class="custom-control-input" value="Yes">
+                                                    <label class="display-inline-block custom-control custom-radio ml-1">
+                                                        <input type="radio" id="electricityConnection" name="electricityConnection" class="custom-control-input" value="Yes">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description ml-0">Yes</span>
                                                     </label>
                                                     <label class="display-inline-block custom-control custom-radio">
-                                                        <input type="radio" id="electricityConnection" name="electricityConnection"
-                                                            class="custom-control-input" value="No">
+                                                        <input type="radio" id="electricityConnection" name="electricityConnection" class="custom-control-input" value="No">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description ml-0">No</span>
                                                     </label>
@@ -259,14 +216,12 @@ class="active"
                                             <td class="spin-label">Sale Purchase</td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="text" class="form-control" id="salePurchase"
-                                                    name="salePurchase">
+                                                <input type="text" class="form-control" id="salePurchase" name="salePurchase">
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td class="spin-label">Contact No<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Contact No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <input type="text" class="form-control" id="contact" name="contact">
@@ -283,12 +238,10 @@ class="active"
 
 
                                         <tr>
-                                            <td class="spin-label">Photograph Location<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">Photograph Location<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="text" class="form-control" id="photoLocation"
-                                                    name="photoLocation">
+                                                <input type="text" class="form-control" id="photoLocation" name="photoLocation">
                                             </td>
                                         </tr>
 
@@ -359,7 +312,7 @@ class="active"
 <script src="js/datatable_buttons/buttons.print.min.js"></script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#dataTable').DataTable({
             dom: 'Bfrtip',
             buttons: {
@@ -389,16 +342,53 @@ class="active"
                         className: 'printButton btn-padding'
                     }
                 ]
-            }
+            },
+            processing: true,
+            serverSide: true,
+            "language": {
+                processing: '<i class="fas fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            },
+            ajax: "{{ route('shops.master') }}",
+            columns: [{
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'ShopNo',
+                    name: 'ShopNo'
+                },
+                {
+                    data: 'Circle',
+                    name: 'Circle'
+                },
+                {
+                    data: 'Allottee',
+                    name: 'Allottee'
+                },
+                {
+                    data: 'Rate',
+                    name: 'Rate'
+                },
+                {
+                    data: 'Arrear',
+                    name: 'Arrear'
+                },
+                {
+                    data: 'Address',
+                    name: 'Address'
+                }
+            ]
         });
         // add active class
         $("#shopActive").addClass('active');
     });
 
-    function detailPreview(myid){
+    function detailPreview(myid) {
         $("#base-tab2").trigger("click");
 
-        var mUrl="/rnc/getShops/"+ myid;
+        var mUrl = "/rnc/getShops/" + myid;
 
         $.ajax({
             url: mUrl,
@@ -406,11 +396,10 @@ class="active"
             cache: false,
             contentType: "application/json;charset=utf-8",
             datatype: 'json',
-            success: function(results){
-                if(results==false){
+            success: function(results) {
+                if (results == false) {
                     alert("Result Not Found");
-                }
-                else{
+                } else {
                     $('#id').val(results.id);
                     $('#allotee').val(results.Allotee);
                     $('#shopNo').val(results.ShopNo);
@@ -437,6 +426,5 @@ class="active"
             }
         })
     }
-
 </script>
 @endsection

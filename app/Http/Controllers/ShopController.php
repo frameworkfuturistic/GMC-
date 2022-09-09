@@ -22,9 +22,9 @@ class ShopController extends Controller
     /**
      * Function for Shop Data and Details View
      */
-    public function shopMasterView()
+    public function shopMasterView(Request $req)
     {
-        return $this->EloquentShop->shopMasterView();
+        return $this->EloquentShop->shopMasterView($req);
     }
 
     // Shop Summary View
