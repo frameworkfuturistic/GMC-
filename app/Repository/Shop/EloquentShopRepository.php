@@ -155,6 +155,7 @@ class EloquentShopRepository implements ShopRepository
             // Update Last TranID for Shop
             $shop->LastTranID = $shopPayment->id;
             $shop->Arrear = $request->due;
+            $shop->Rate = $request->rate;
             $shop->save();
 
             DB::commit();
