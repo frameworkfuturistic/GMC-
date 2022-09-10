@@ -95,7 +95,11 @@ class EloquentSurveyRepository implements SurveyRepository
         if (!$userinfo) {
             $response = ['status' => false, 'message' => 'Oops! Given email does not exist'];
             return response($response, 401);
-        } else {
+        }
+        if ($userinfo) {
+            if ($userinfo->suspended == 1) {
+                return response()->json(['status' => false, 'message' => 'You Are a Suspended User'], 200);
+            }
             if (Hash::check($request->password, $userinfo->password)) {
                 $token = $userinfo->createToken('my-app-token')->plainTextToken;
                 $userinfo->token = $token;
