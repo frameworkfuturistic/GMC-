@@ -153,17 +153,17 @@ class EloquentShopRepository implements ShopRepository
             $shopPayment->CreatedBy = auth()->user()->id;
             $shopPayment->Remarks = $request->remarks;
             $shopPayment->save();
+            // Creating Log
+            $log = new ShopPaymentLog();
+            $log->shop_payment_id = $shop->LastTranID;
+            $log->ip_address = $request->ip();
+            $log->save();
+
             // Update Last TranID for Shop
             $shop->LastTranID = $shopPayment->id;
             $shop->Arrear = $request->due;
             $shop->Rate = $request->rate;
             $shop->save();
-
-            // Creating Log
-            $log = new ShopPaymentLog();
-            $log->shop_payment_id = $shopPayment->id;
-            $log->ip_address = $request->ip();
-            $log->save();
 
             DB::commit();
             return back()->with('message', 'Payment Done Successfully');
