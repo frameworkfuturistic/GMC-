@@ -83,7 +83,7 @@ class="active"
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="collectedBy">Collected By</label>
-                            <select name="collectedBy" id="collectedby" class="form-control" required>
+                            <select name="collectedBy" id="collectedby" class="form-control">
                                 <option value="">-- Select Users --</option>
                                 @foreach($users as $user)
                                 <option value="{{$user->id}}">{{$user->name}}</option>
