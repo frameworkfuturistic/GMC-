@@ -5,6 +5,7 @@ namespace App\Repository\Shop;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
 use App\Models\ShopPayment;
+use App\Models\ShopPaymentLog;
 use App\Models\surveyLogin;
 use App\Repository\Shop\ShopRepository;
 use App\Traits\AppHelper;
@@ -157,6 +158,12 @@ class EloquentShopRepository implements ShopRepository
             $shop->Arrear = $request->due;
             $shop->Rate = $request->rate;
             $shop->save();
+
+            // Creating Log
+            $log = new ShopPaymentLog();
+            $log->shop_payment_id = $shopPayment->id;
+            $log->ip_address = $request->ip();
+            $log->save();
 
             DB::commit();
             return back()->with('message', 'Payment Done Successfully');
