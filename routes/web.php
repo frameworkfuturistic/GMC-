@@ -242,6 +242,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Toll
     Route::post('tollcollection', [TollController::class, 'totalCollection']);
     Route::get('tolls/masters/toll-master', [TollController::class, 'tollMaster'])->name('toll.master');
+    Route::get('export/tolls/toll-master', [TollController::class, 'exportToExcel']);
 
     // Shops
     Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView'])->name('shops.master');
@@ -253,6 +254,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/BillShops', [ShopController::class, 'shopBillView']);
     Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);
     Route::post('shops/totalshopcollection', [ShopController::class, 'totalShopCollection']);
+    Route::get('export/shops/shop-master', [ShopController::class, 'exportToExcel']);
     // Shops
 
     /**

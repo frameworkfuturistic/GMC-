@@ -2,6 +2,7 @@
 
 namespace App\Repository\Shop;
 
+use App\Exports\ShopExport;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
 use App\Models\ShopPayment;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Created On-04-07-2022
@@ -720,5 +722,13 @@ class EloquentShopRepository implements ShopRepository
                     WHERE p.PaymentDate BETWEEN DATE_FORMAT('$request->ShopFrom','%Y-%m-%d') AND DATE_FORMAT('$request->ShopTo','%Y-%m-%d')";
         $collectionSummary = DB::select($strQuery);
         return $collectionSummary;
+    }
+
+    /**
+     * | Export the all shop data to excel
+     */
+    public function exportToExcel()
+    {
+        return Excel::download(new ShopExport, 'shops.xlsx');
     }
 }

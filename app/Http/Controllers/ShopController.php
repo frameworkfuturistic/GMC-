@@ -103,4 +103,10 @@ class ShopController extends Controller
     {
         return $this->EloquentShop->totalShopCollection($request);
     }
+
+    // Export all shops to excel
+    public function exportToExcel()
+    {
+        return $this->EloquentShop->exportToExcel();
+    }
 }

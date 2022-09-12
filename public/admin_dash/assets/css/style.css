@@ -313,3 +313,12 @@ z-index : 2147483647;
 .mt-15{
     margin-top: 15px;
 }
+
+span.dt-down-arrow {
+    color: white !important;
+}
+
+button.dt-button.buttons-collection.buttons-page-length.pdfButton.btn-padding {
+    color: white;
+    background: crimson;
+}

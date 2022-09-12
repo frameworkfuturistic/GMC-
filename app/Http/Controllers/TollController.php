@@ -85,4 +85,10 @@ class TollController extends Controller
     {
         return $this->EloquentToll->tollMaster($req);
     }
+
+    // Export all the toll master to excel
+    public function exportToExcel()
+    {
+        return $this->EloquentToll->exportToExcel();
+    }
 }

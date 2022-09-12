@@ -75,7 +75,10 @@ class="active"
                     {
                         extend: 'excel',
                         text: '<i class="icon-document-text"></i> Excel',
-                        className: 'excelButton btn-padding'
+                        className: 'excelButton btn-padding',
+                        action: function(e, dt, node, config) {
+                            window.open('export/shops/shop-master').opener = null;
+                        }
                     },
                     {
                         extend: 'print',

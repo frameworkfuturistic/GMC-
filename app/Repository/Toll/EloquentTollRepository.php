@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Traits\AppHelper;
 use Yajra\DataTables\DataTables;
+use App\Exports\TollExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EloquentTollRepository implements TollRepository
 {
@@ -400,5 +402,10 @@ class EloquentTollRepository implements TollRepository
             'childs' => $this->child,
         ];
         return view('admin.Tolls.toll-master', $array);
+    }
+
+    public function exportToExcel()
+    {
+        return Excel::download(new TollExport, 'toll.xlsx');
     }
 }
