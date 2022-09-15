@@ -243,6 +243,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('tollcollection', [TollController::class, 'totalCollection']);
     Route::get('tolls/masters/toll-master', [TollController::class, 'tollMaster'])->name('toll.master');
     Route::get('export/tolls/toll-master', [TollController::class, 'exportToExcel']);
+    Route::get('tolls/bills/toll-bill-payments', [TollController::class, 'tollBillPayments']);
+    Route::post('tolls/bills/toll-bill-payments', [TollController::class, 'postTollBillPayments']);
 
     // Shops
     Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView'])->name('shops.master');

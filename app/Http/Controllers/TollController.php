@@ -91,4 +91,16 @@ class TollController extends Controller
     {
         return $this->EloquentToll->exportToExcel();
     }
+
+    // Toll Bill Payments View
+    public function tollBillPayments()
+    {
+        return $this->EloquentToll->tollBillPayments();
+    }
+
+    // post Toll Bill Payments
+    public function postTollBillPayments(Request $req)
+    {
+        return $this->EloquentToll->postTollBillPayments($req);
+    }
 }

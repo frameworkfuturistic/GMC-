@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\AppHelper;
 use Yajra\DataTables\DataTables;
 use App\Exports\TollExport;
+use App\Models\surveyLogin;
 use Maatwebsite\Excel\Facades\Excel;
 
 class EloquentTollRepository implements TollRepository
@@ -404,8 +405,109 @@ class EloquentTollRepository implements TollRepository
         return view('admin.Tolls.toll-master', $array);
     }
 
+    /**
+     * | Export all the Vendors Data to Excel
+     */
     public function exportToExcel()
     {
         return Excel::download(new TollExport, 'toll.xlsx');
+    }
+
+    /**
+     * | Toll Bill Payment view
+     */
+    public function tollBillPayments()
+    {
+        $user = surveyLogin::select('id', 'name')->get();
+        $array = [
+            'parents' => $this->parent,
+            'childs' => $this->child,
+            'users' => $user
+        ];
+        return view('admin.Tolls.toll-bill-payments', $array);
+    }
+
+    /**
+     * | Save Toll Bill Payments
+     * | @param Request $req
+     */
+    public function postTollBillPayments(Request $req)
+    {
+        $req->validate([
+            'vendorID' => 'required|integer',
+            'rate' => 'required|integer',
+            'amount' => 'required|integer',
+            'from' => 'required',
+            'to' => 'required',
+            'paymentDate' => 'required'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $toll = Toll::where('id', $req->vendorID)->first();
+            if (!$toll) {
+                DB::rollBack();
+                return back()->with('message', 'Toll not found for this VendorID');
+            }
+
+            $generatedPaymentDate = date_create($req->paymentDate);
+            // Toll Payment
+            $tollPayment = new TollPayment();
+            $tollPayment->TollId = $req->vendorID;
+            $tollPayment->From = $req->from;
+            $tollPayment->To = $req->to;
+            $tollPayment->Amount = $req->amount;
+            $tollPayment->PmtMode = 'CASH';
+            $tollPayment->Rate = $req->rate;
+            $tollPayment->TollId = $req->vendorID;
+
+            // Days Calculation
+            $dateTo = date_create($req->to);
+            $dateFrom = date_create($req->from);
+            if ($dateFrom > $dateTo) {
+                DB::rollBack();
+                return back()->with('message', 'Could Not Save!! Payment From is greater then Payment To');
+            }
+            $interval = date_diff($dateFrom, $dateTo);
+            $days = $interval->format('%a') + 1;
+
+            $tollPayment->Days = $days;
+            $tollPayment->PaymentDate = $req->paymentDate;
+            $tollPayment->UserId = $req->collectedBy;
+            $tollPayment->Remarks = $req->remarks;
+            $tollPayment->CreatedBy = auth()->user()->id;
+
+            // Image Upload
+            if ($file = $req->file('photoUpload')) {
+                $ext = $file->getClientOriginalExtension();
+                $fileSize = filesize($file);
+                if ($fileSize > 2000000) {
+                    DB::rollBack();
+                    return back()->with('message', 'File Size Should Be less than 2 MB');
+                }
+                if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
+                    $year = $generatedPaymentDate->format('Y');
+                    $fileName = $year . '/' . $req->vendorID . '-' . time() . '.' . $ext;
+                    $tollPayment->ReceiptPath = $fileName;
+                    $file->move('TollUploadReceipts/' . $year, $fileName);
+                } else {
+                    DB::rollBack();
+                    return back()->with('message', 'File Name must be in png, jpg or jpeg');
+                }
+            }
+            $tollPayment->save();
+            // Reflection to Toll Master Table
+            $toll->LastPaymentDate = $req->paymentDate;
+            $toll->LastAmount = $req->amount;
+            $toll->UserId = $req->collectedBy;
+            $toll->save();
+
+            DB::commit();
+            return back()->with('message', 'Payment Reflection Successful');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $e;
+        }
     }
 }
