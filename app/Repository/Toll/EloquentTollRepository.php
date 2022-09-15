@@ -448,7 +448,7 @@ class EloquentTollRepository implements TollRepository
             $toll = Toll::where('id', $req->vendorID)->first();
             if (!$toll) {
                 DB::rollBack();
-                return back()->with('message', 'Toll not found for this VendorID');
+                return back()->with('error', 'Toll not found for this VendorID');
             }
 
             $generatedPaymentDate = date_create($req->paymentDate);
@@ -467,7 +467,7 @@ class EloquentTollRepository implements TollRepository
             $dateFrom = date_create($req->from);
             if ($dateFrom > $dateTo) {
                 DB::rollBack();
-                return back()->with('message', 'Could Not Save!! Payment From is greater then Payment To');
+                return back()->with('error', 'Could Not Save!! Payment From is greater then Payment To');
             }
             $interval = date_diff($dateFrom, $dateTo);
             $days = $interval->format('%a') + 1;
@@ -484,7 +484,7 @@ class EloquentTollRepository implements TollRepository
                 $fileSize = filesize($file);
                 if ($fileSize > 2000000) {
                     DB::rollBack();
-                    return back()->with('message', 'File Size Should Be less than 2 MB');
+                    return back()->with('error', 'File Size Should Be less than 2 MB');
                 }
                 if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
                     $year = $generatedPaymentDate->format('Y');
@@ -493,7 +493,7 @@ class EloquentTollRepository implements TollRepository
                     $file->move('TollUploadReceipts/' . $year, $fileName);
                 } else {
                     DB::rollBack();
-                    return back()->with('message', 'File Name must be in png, jpg or jpeg');
+                    return back()->with('error', 'File Name must be in png, jpg or jpeg');
                 }
             }
             $tollPayment->save();

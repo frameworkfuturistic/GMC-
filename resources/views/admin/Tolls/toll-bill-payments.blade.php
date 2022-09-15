@@ -19,6 +19,13 @@ class="active"
     {{ session()->get('message') }}
 </div>
 @endif
+
+@if(session()->has('error'))
+<div class="alert alert-danger alert-dismissible fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{ session()->get('error') }}
+</div>
+@endif
 <div class="card">
     <div class="card-body collapse in">
         <div class="card-block">
