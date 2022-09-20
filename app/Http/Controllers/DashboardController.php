@@ -10,13 +10,17 @@ class DashboardController extends Controller
     use TraitAppHelper;
     protected $role_id;
 
+    // public function __construct()
+    // {
+    //     $this->middleware(function ($request, $next) {
+    //         $this->user_info = Auth::user()->role_id; // returns user
+    //         $this->menuApp($this->user_info);
+    //         return $next($request);
+    //     });
+    // }
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            $this->user_info = Auth::user()->role_id; // returns user
-            $this->menuApp($this->user_info);
-            return $next($request);
-        });
+        $this->menuApp();
     }
 
     public function index()

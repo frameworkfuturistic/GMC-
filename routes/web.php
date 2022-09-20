@@ -36,7 +36,10 @@ Route::get('/', function () {
     return view('user.index');
 });
 
+// Self Advertisement
 Route::get('rnc/user/selfAdvet', [AdminController::class, 'selfAdvet']);
+Route::post('rnc/addSelfAdvet', [AdminController::class, 'saveSelfAdvet']);
+Route::put('rnc/updateSelfAdvet/{id}', [AdminController::class, 'updateSelfAdvet']);
 
 Route::get('rnc/user/vehicle', [VehicleController::class, 'userView']);
 
@@ -54,6 +57,7 @@ Route::get('rnc/user/dharmasala', [DharmasalaController::class, 'userView']);
 
 Route::post('otp-master', [OTPController::class, 'generate'])->name('generate');
 Route::post('user-authentication', [OTPController::class, 'authenticateOtp']);
+
 
 // -------------------------------------------------------------------------------------------------------
 
@@ -89,8 +93,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rnc/updateadvetRejected/{id}', [AdminController::class, 'updateAdvetRejected']);
     // Self Advet
     // Self advet
-    Route::post('rnc/addSelfAdvet', [AdminController::class, 'saveSelfAdvet']);
-    Route::put('rnc/updateSelfAdvet/{id}', [AdminController::class, 'updateSelfAdvet']);
     Route::put('rnc/InboxWorkflow/{id}', [AdminController::class, 'SelfAdvetInboxWorkflow']);
     Route::post('rnc/inboxComment/{id}', [AdminController::class, 'addComment']);
     Route::put('rnc/updatePmt/{id}', [AdminController::class, 'updatePmt']);

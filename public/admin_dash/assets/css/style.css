@@ -322,3 +322,8 @@ button.dt-button.buttons-collection.buttons-page-length.pdfButton.btn-padding {
     color: white;
     background: crimson;
 }
+
+.fl-right{
+    float: right !important;
+    margin-left: 1px !important;
+}

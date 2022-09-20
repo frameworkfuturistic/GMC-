@@ -72,13 +72,13 @@
                         <li class="nav-item hidden-sm-down"><a href="{{ url()->previous() }}" class="btn btn-success upgrade-to-pro">
                                 JAMSHEDPUR NOTIFIED AREA COMMITTEE, MARKETING SECTION</a>
                         </li>
+                        @yield('login-btn')
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-
 
     <!-- sidebar-->
     <div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
