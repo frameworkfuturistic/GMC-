@@ -3,6 +3,8 @@
 namespace App\Traits;
 
 use App\Models\MenuMaster;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 trait AppHelper
 {
@@ -12,9 +14,17 @@ trait AppHelper
     protected $parent;
     protected $ParentSerial;
 
-    public function menuApp()
+    public function menuApp($roleID)
     {
         $this->parent = MenuMaster::all()->where('ParentSerial', '0');
-        $this->child = MenuMaster::all()->where('ParentSerial', '<>', '0');
+        $query = "SELECT
+                    p.*,
+                    m.*
+                    FROM permissions p
+                    INNER JOIN menu_masters m ON m.MenuID=p.MenuID
+
+                    WHERE RoleID=$roleID";
+
+        $this->child = DB::select($query);
     }
 }
