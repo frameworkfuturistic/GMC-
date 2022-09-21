@@ -103,4 +103,9 @@ class TollController extends Controller
     {
         return $this->EloquentToll->postTollBillPayments($req);
     }
+
+    // Activate or Deactivate Payment
+    public function activateOrDeactivatePayment(Request $req){
+        dd($req);
+    }
 }

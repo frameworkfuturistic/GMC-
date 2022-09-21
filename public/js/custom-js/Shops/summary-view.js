@@ -57,6 +57,15 @@ function showTollDataTable(data){
         "method":"POST",
         "columns": [
         {
+            "data":"PaymentID",
+            "render": function ( data, type, row, meta ) {
+                return  '<label class="switch">' +
+                        '<input type="checkbox" id="toggle" name="toggle" onchange="functionTest('+ data +')">' +
+                        '<span class="slider round"></span>' +
+                        '</label> ';
+              }
+        },
+        {
             "data": "id"
         },
         {
@@ -115,6 +124,10 @@ function showTollDataTable(data){
         {
             "width": "20px",
             "targets": 7
+        },
+        {
+            "width": "20px",
+            "targets": 8
         },
         {
             "width": "20px",
@@ -317,5 +330,34 @@ function showShopDataTable(data){
         $(api.column(5).footer()).html('₹ ' + pageTotal + ' ( ₹ ' + total + ' total)');
         console.log(total,pageTotal);
     }
+    });
+}
+
+function functionTest(id){
+    let token = $('meta[name="csrf_token"]').attr('content');
+
+    alert(id);
+    var status=$('#toggle').is(":checked");
+    alert(status);
+    var murl = 'tolls/payments/activation/'+id;
+    var mdata = '_token="'+token+'"&&toggle='+ status +'';
+    alert(mdata);
+    const postFormData = {
+        'toggle': status,
+        _token: token
+    }; 
+    $.ajax({
+        url: murl,
+        type: "post",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
+        data: mdata,
+        datatype: "json",
+        success: function(postFormData) {
+            alert('success');
+        },
+
+        error: function(error) {
+            alert(error);
+        },
     });
 }
