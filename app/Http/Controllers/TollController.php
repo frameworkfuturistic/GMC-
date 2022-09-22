@@ -105,7 +105,8 @@ class TollController extends Controller
     }
 
     // Activate or Deactivate Payment
-    public function activateOrDeactivatePayment(Request $req){
-        dd($req);
+    public function activateOrDeactivatePayment(Request $req, $id)
+    {
+        return $this->EloquentToll->activateOrDeactivatePayment($req, $id);
     }
 }

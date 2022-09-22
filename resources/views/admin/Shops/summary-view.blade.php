@@ -182,6 +182,7 @@ class="active"
                                 <table class="table table-hover" id="shopDataTable">
                                     <thead>
                                         <tr>
+                                            <th>Deactivate</th>
                                             <th>ShopNo</th>
                                             <th>Location</th>
                                             <th>Allottee</th>

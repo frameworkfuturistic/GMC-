@@ -158,6 +158,7 @@ class EloquentShopRepository implements ShopRepository
             // Creating Log
             $log = new ShopPaymentLog();
             $log->shop_payment_id = $shop->LastTranID;
+            $log->new_shop_payment_id = $shopPayment->id;
             $log->ip_address = $request->ip();
             $log->save();
 
@@ -705,6 +706,7 @@ class EloquentShopRepository implements ShopRepository
     public function totalShopCollection(Request $request)
     {
         $strQuery = "SELECT 
+                    p.id AS PaymentID,
                     s.ShopNo,
                     s.Circle,
                     s.Allottee,
@@ -719,7 +721,7 @@ class EloquentShopRepository implements ShopRepository
                     FROM shop_payments p
                     INNER JOIN shops s ON s.ID=p.ShopId
                     INNER JOIN survey_logins l ON l.id=p.UserId
-                    WHERE p.PaymentDate BETWEEN DATE_FORMAT('$request->ShopFrom','%Y-%m-%d') AND DATE_FORMAT('$request->ShopTo','%Y-%m-%d')";
+                    WHERE p.PaymentDate BETWEEN DATE_FORMAT('$request->ShopFrom','%Y-%m-%d') AND DATE_FORMAT('$request->ShopTo','%Y-%m-%d') AND p.IsActive=1";
         $collectionSummary = DB::select($strQuery);
         return $collectionSummary;
     }
@@ -730,5 +732,42 @@ class EloquentShopRepository implements ShopRepository
     public function exportToExcel()
     {
         return Excel::download(new ShopExport, 'shops.xlsx');
+    }
+
+    /**
+     * | Activation and Deactivation for shop Payment
+     */
+    public function activationOrDeactivationPayment(Request $req, $id)
+    {
+        DB::beginTransaction();
+        try {
+            // Getting first the Shop Payment ID
+            $shopPayment = ShopPayment::find($id);
+            if ($req->toggle == "true") {
+                $shopPayment->IsActive = 0;
+                $colString = "deactivated_by";
+                $msg = ['message' => 'Successfully Deactivated The Transaction'];
+            }
+            if ($req->toggle == "false") {
+                $shopPayment->IsActive = 1;
+                $colString = "activated_by";
+                $msg = ['message' => 'Successfully Activated The Transaction'];
+            }
+            $shopPayment->CreatedBy = auth()->user()->id;
+            $shopPayment->save();
+
+            // Creating Activation or Deactivation Log
+            $log = new ShopPaymentLog();
+            $log->new_shop_payment_id = $shopPayment->id;
+            $log->ip_address = $req->ip();
+            $log->$colString = auth()->user()->id;
+            $log->save();
+
+            DB::commit();
+            return response()->json($msg);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $e;
+        }
     }
 }

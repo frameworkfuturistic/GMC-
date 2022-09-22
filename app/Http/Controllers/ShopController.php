@@ -109,4 +109,10 @@ class ShopController extends Controller
     {
         return $this->EloquentShop->exportToExcel();
     }
+
+    // Shop Payment Acttivation or Deactivation
+    public function activationOrDeactivationPayment(Request $req, $id)
+    {
+        return $this->EloquentShop->activationOrDeactivationPayment($req, $id);
+    }
 }
