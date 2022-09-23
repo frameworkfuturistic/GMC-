@@ -90,7 +90,11 @@ class="active"
                                 <table class="table table-hover" id="tollDataTable">
                                     <thead>
                                         <tr>
-                                            <!-- <th>Deactivate</th> -->
+                                            @can('isAdmin')
+                                            <th>Deactivate</th>
+                                            @else
+                                            <th>#</th>
+                                            @endcan
                                             <th>VendorID</th>
                                             <th>VendorName</th>
                                             <th>Area</th>
@@ -182,7 +186,11 @@ class="active"
                                 <table class="table table-hover" id="shopDataTable">
                                     <thead>
                                         <tr>
-                                            <!-- <th>Deactivate</th> -->
+                                            @can('isAdmin')
+                                            <th>Deactivate</th>
+                                            @else
+                                            <th>#</th>
+                                            @endcan
                                             <th>ShopNo</th>
                                             <th>Location</th>
                                             <th>Allottee</th>

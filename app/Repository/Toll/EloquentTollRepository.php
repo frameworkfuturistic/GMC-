@@ -369,7 +369,9 @@ class EloquentTollRepository implements TollRepository
      */
     public function totalCollection(Request $request)
     {
+        $userType = auth()->user()->user_type;
         $collectionSummaryQuery = "SELECT 
+                                    $userType AS userType,
                                     p.id AS PaymentID,
                                     t.id,
                                     t.AreaName AS Area,

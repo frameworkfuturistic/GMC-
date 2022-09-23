@@ -705,7 +705,9 @@ class EloquentShopRepository implements ShopRepository
      */
     public function totalShopCollection(Request $request)
     {
+        $userType = auth()->user()->user_type;
         $strQuery = "SELECT 
+                    $userType AS userType,
                     p.id AS PaymentID,
                     s.ShopNo,
                     s.Circle,

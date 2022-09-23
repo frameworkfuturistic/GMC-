@@ -51,5 +51,6 @@ class AppServiceProvider extends ServiceProvider
         // Gate::define('deleteLogFile', function (?User $user, LogFile $file) {
         //     return true;
         // });
+
     }
 }
