@@ -56,15 +56,15 @@ function showTollDataTable(data){
         "processing":true,
         "method":"POST",
         "columns": [
-        {
-            "data":"PaymentID",
-            "render": function ( data, type, row, meta ) {
-                return  '<label class="switch">' +
-                        '<input type="checkbox" id="toggle" name="toggle" onchange="functionDeactivation('+ data +')">' +
-                        '<span class="slider round"></span>' +
-                        '</label> ';
-              }
-        },
+        // {
+        //     "data":"PaymentID",
+        //     "render": function ( data, type, row, meta ) {
+        //         return  '<label class="switch">' +
+        //                 '<input type="checkbox" id="toggle" name="toggle" onchange="functionDeactivation('+ data +')">' +
+        //                 '<span class="slider round"></span>' +
+        //                 '</label> ';
+        //       }
+        // },
         {
             "data": "id"
         },
@@ -129,10 +129,10 @@ function showTollDataTable(data){
             "width": "20px",
             "targets": 8
         },
-        {
-            "width": "20px",
-            "targets": 9
-        }
+        // {
+        //     "width": "20px",
+        //     "targets": 9
+        // }
     ],
 
     // Calculating Total Sum Amount
@@ -228,15 +228,15 @@ function showShopDataTable(data){
         "processing":true,
         "method":"POST",
         "columns": [
-        {
-            "data":"PaymentID",
-            "render": function ( data, type, row, meta ) {
-                return  '<label class="switch">' +
-                        '<input type="checkbox" id="toggle" name="toggle" onchange="functionShopDeactivation('+ data +')">' +
-                        '<span class="slider round"></span>' +
-                        '</label> ';
-                }
-        },
+        // {
+        //     "data":"PaymentID",
+        //     "render": function ( data, type, row, meta ) {
+        //         return  '<label class="switch">' +
+        //                 '<input type="checkbox" id="toggle" name="toggle" onchange="functionShopDeactivation('+ data +')">' +
+        //                 '<span class="slider round"></span>' +
+        //                 '</label> ';
+        //         }
+        // },
 
         {
             "data": "ShopNo"
@@ -309,10 +309,10 @@ function showShopDataTable(data){
             "width": "20px",
             "targets": 7
         },
-        {
-            "width": "20px",
-            "targets": 8
-        }
+        // {
+        //     "width": "20px",
+        //     "targets": 8
+        // }
     ],
 
     // Calculating Total Sum Amount

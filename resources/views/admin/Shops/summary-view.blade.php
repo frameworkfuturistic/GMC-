@@ -90,7 +90,7 @@ class="active"
                                 <table class="table table-hover" id="tollDataTable">
                                     <thead>
                                         <tr>
-                                            <th>Deactivate</th>
+                                            <!-- <th>Deactivate</th> -->
                                             <th>VendorID</th>
                                             <th>VendorName</th>
                                             <th>Area</th>
@@ -182,7 +182,7 @@ class="active"
                                 <table class="table table-hover" id="shopDataTable">
                                     <thead>
                                         <tr>
-                                            <th>Deactivate</th>
+                                            <!-- <th>Deactivate</th> -->
                                             <th>ShopNo</th>
                                             <th>Location</th>
                                             <th>Allottee</th>
