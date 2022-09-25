@@ -20,9 +20,9 @@ class EloquentDharmsalaRepository implements DharmsalaRepository
 
     use TraitAppHelper;
 
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
     }
 
     public function view()
@@ -81,7 +81,7 @@ class EloquentDharmsalaRepository implements DharmsalaRepository
         $dharmasala->NoOfBeds = $request->NoOfBeds;
         $dharmasala->NoOfRooms = $request->NoOfRooms;
         $dharmasala->NoOfFireExtinguishers = $request->NoOfFireExtinguishers;
-        $dharmasala->NoOfEntryGate = $request->EntryGatesNo;
+        $dharmasala->NoOfEntryGate = $request->NoOfEntryGate;
         $dharmasala->NoOfExitGate = $request->NoOfExitGate;
         $dharmasala->NoOfTwoWheelersParking = $request->NoOfTwoWheelersParking;
         $dharmasala->NoOfFourWheelersParking = $request->NoOfFourWheelersParking;
@@ -260,7 +260,7 @@ class EloquentDharmsalaRepository implements DharmsalaRepository
         $dharmasala->NoOfBeds = $request->NoOfBeds;
         $dharmasala->NoOfRooms = $request->NoOfRooms;
         $dharmasala->NoOfFireExtinguishers = $request->NoOfFireExtinguishers;
-        $dharmasala->NoOfEntryGate = $request->EntryGatesNo;
+        $dharmasala->NoOfEntryGate = $request->NoOfEntryGate;
         $dharmasala->NoOfExitGate = $request->NoOfExitGate;
         $dharmasala->NoOfTwoWheelersParking = $request->NoOfTwoWheelersParking;
         $dharmasala->NoOfFourWheelersParking = $request->NoOfFourWheelersParking;

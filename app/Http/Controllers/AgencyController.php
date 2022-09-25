@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Repository\Agency\EloquentAgencyRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class AgencyController extends Controller
 {
 
     protected $eloquentAgency;
 
-    public function __construct(EloquentAgencyRepository $eloquentAgency)
+    public function __construct()
     {
-        $this->EloquentAgency = $eloquentAgency;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentAgencyRepository($user);
+            $this->EloquentAgency = $obj;
+            return $next($request);
+        });
     }
 
     public function Index()

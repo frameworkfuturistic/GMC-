@@ -22,9 +22,9 @@ class EloquentTollRepository implements TollRepository
     use AppHelper;
 
     // Initialization of construct function for sidebar menu
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
     }
     /**
      * Created On-07-07-2022

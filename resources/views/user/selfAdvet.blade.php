@@ -231,7 +231,7 @@ active
                                             <td class="spin-label">Display Type <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <select class="spin-valuearea form-control" id="InstallLocation" name="InstallLocation">
+                                                <select class="spin-valuearea form-control" id="DisplayType" name="DisplayType">
                                                     <option value="">Select One</option>
                                                     @foreach($DisplayTypes as $DisplayType)
                                                     <option value="{{$DisplayType->StringParameter}}">{{$DisplayType->StringParameter}}</option>

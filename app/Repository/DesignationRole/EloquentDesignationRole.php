@@ -21,9 +21,9 @@ class EloquentDesignationRole implements DesignationRole
 {
     use AppHelper;
 
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
         $this->array = ['parents' => $this->parent, 'childs' => $this->child];
     }
 

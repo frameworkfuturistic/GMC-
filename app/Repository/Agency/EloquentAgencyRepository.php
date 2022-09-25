@@ -22,9 +22,9 @@ class EloquentAgencyRepository implements AgencyRepository
 {
     use TraitAppHelper, YajraDatatable;
 
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
     }
 
     public function indexView()

@@ -18,9 +18,9 @@ class EloquentHoardingRepository implements HoardingRepository
 {
     use TraitAppHelper;
 
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
     }
 
     public function newHoarding()

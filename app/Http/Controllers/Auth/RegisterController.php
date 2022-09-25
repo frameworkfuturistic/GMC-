@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\AppHelper;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -15,7 +16,11 @@ class RegisterController extends Controller
 
     public function __construct()
     {
-        $this->menuApp();
+        $this->middleware(function ($request, $next) {
+            $this->user_info = Auth::user()->role_id; // returns user
+            $this->menuApp($this->user_info);
+            return $next($request);
+        });
     }
     public function index()
     {

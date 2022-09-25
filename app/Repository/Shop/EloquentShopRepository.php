@@ -32,9 +32,9 @@ class EloquentShopRepository implements ShopRepository
     use AppHelper;
     use ShopTrait;
 
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
     }
 
     /**

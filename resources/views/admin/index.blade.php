@@ -6,7 +6,7 @@ Dashboard
 
 @section('pagecss')
 <style>
-    .activeDash{
+    .activeDash {
         color: #dcdcdc;
         background: transparent;
     }
@@ -14,7 +14,7 @@ Dashboard
 @endsection
 
 @section('activeDash')
-    class="active"
+class="active"
 @endsection
 
 @section('app-content')
@@ -134,7 +134,7 @@ Dashboard
 
 @section('script')
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $("#dashActive").addClass('active');
     });
     //Vehicle applications bar
@@ -252,6 +252,5 @@ Dashboard
             }
         }
     });
-
 </script>
 @endsection

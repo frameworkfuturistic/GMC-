@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Repository\Banquet\EloquentBanquetRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class BanquetController extends Controller
 {
 
-    public function __construct(EloquentBanquetRepository $eloquentBanquet)
+    public function __construct()
     {
-        $this->EloquentBanquet = $eloquentBanquet;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentBanquetRepository($user);
+            $this->EloquentBanquet = $obj;
+            return $next($request);
+        });
     }
 
     function userView()

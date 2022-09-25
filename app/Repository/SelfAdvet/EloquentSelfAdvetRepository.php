@@ -14,15 +14,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use DataTables;
+use Illuminate\Contracts\Auth\Guard;
 
 class EloquentSelfAdvetRepository implements SelfAdvetRepository
 {
 
     use TraitAppHelper;
+    protected $user;
 
-    public function __construct()
+    public function __construct($user)
     {
-        $this->menuApp();
+        $this->menuApp($user);
     }
 
     /* this function is for the user interface who will fillup the form */

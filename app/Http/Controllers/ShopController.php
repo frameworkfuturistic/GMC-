@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ShopRequest;
 use App\Repository\Shop\EloquentShopRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Created On-04-07-2022
@@ -15,9 +16,15 @@ class ShopController extends Controller
 {
     protected $eloquentShop;
 
-    public function __construct(EloquentShopRepository $eloquentShop)
+    public function __construct()
     {
-        $this->EloquentShop = $eloquentShop;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentShopRepository($user);
+            $this->EloquentShop = $obj;
+            return $next($request);
+        });
     }
     /**
      * Function for Shop Data and Details View

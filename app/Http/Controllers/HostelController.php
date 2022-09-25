@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Repository\Hostel\EloquentHostelRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Laravel\Ui\Presets\React;
 
 class HostelController extends Controller
 {
 
-    public function __construct(EloquentHostelRepository $eloquentHostel)
+    public function __construct()
     {
-        $this->EloquentHostel = $eloquentHostel;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentHostelRepository($user);
+            $this->EloquentHostel = $obj;
+            return $next($request);
+        });
     }
 
     function userView()

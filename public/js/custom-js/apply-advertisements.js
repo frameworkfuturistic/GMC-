@@ -13,6 +13,7 @@ function storeOTP(e){
 
     $.ajax({
         url: murl,
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
         type: "post",
         data: mdata,
         datatype: "json",

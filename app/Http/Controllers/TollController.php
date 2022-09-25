@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\Toll\EloquentTollRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class TollController extends Controller
 {
@@ -15,9 +16,15 @@ class TollController extends Controller
      *
      */
     protected $eloquentToll;
-    public function __construct(EloquentTollRepository $eloquentToll)
+    public function __construct()
     {
-        $this->EloquentToll = $eloquentToll;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentTollRepository($user);
+            $this->EloquentToll = $obj;
+            return $next($request);
+        });
     }
 
     /**
