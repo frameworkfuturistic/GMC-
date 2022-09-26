@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\AppHelper as TraitAppHelper;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 class DashboardController extends Controller
 {
@@ -13,15 +14,11 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $this->user_info = Auth::user()->role_id; // returns user
+            $this->user_info = Auth::user()->role_id ?? Config::get('constant-variable.VIRTUAL_ROLE');                                               // returns user
             $this->menuApp($this->user_info);
             return $next($request);
         });
     }
-    // public function __construct()
-    // {
-    //     $this->menuApp();
-    // }
 
     public function index()
     {

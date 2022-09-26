@@ -4,7 +4,11 @@
 active
 @endsection
 
+@section('pagecss')
+<link rel="stylesheet" type="text/css" href="css/preview-form-data.css">
+@endsection
 @section('app-content')
+<div id="preview_data" title="Preview Form Data" style="display:none;"></div>
 
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
@@ -31,7 +35,7 @@ active
                             <!-- form tag -->
 
                             <!-- form -->
-                            <form action="{{ url('rnc/addSelfAdvet') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('rnc/addSelfAdvet') }}" method="POST" enctype="multipart/form-data" id="formSubmit">
                                 @csrf
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
@@ -40,7 +44,7 @@ active
                                                 <td class="spin-label">License Year <span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <select class="spin-valuearea form-control" id="LicenseYear" name="LicenseYear">
+                                                    <select class="spin-valuearea form-control" id="LicenseYear" name="LicenseYear" required>
                                                         <option value="">Select One</option>
                                                         <option value="2018-19">2018-19</option>
                                                         <option value="2019-20">2019-20</option>
@@ -332,7 +336,7 @@ active
                                             </td>
                                         </tr colspan="4" class="spin-label">
                                         <tr>
-                                            <td><button class="btn btn-success"><i class="icon-file-archive-o"></i>
+                                            <td><button class="btn btn-success" type="submit" id="finalSubmit"><i class="icon-file-archive-o"></i>
                                                     Submit</button></td>
                                         </tr>
                                     </tbody>
@@ -353,3 +357,18 @@ active
 </div>
 <!-- form -->
 @endsection
+
+@section('pagescript')
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/custom-js/preview-form-data.js"></script>
+@endsection 
+
+@section('script')
+<script>
+
+$('#finalSubmit').on('click', function(e) {
+        e.preventDefault();
+        preview();
+    });
+</script>
+@endsection 

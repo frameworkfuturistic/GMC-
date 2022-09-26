@@ -745,6 +745,8 @@ class EloquentShopRepository implements ShopRepository
         try {
             // Getting first the Shop Payment ID
             $shopPayment = ShopPayment::find($id);
+
+            // Fetching Last Transactions from shop_payments
             if ($req->shopToggle == "true") {
                 $shopPayment->IsActive = 0;
                 $colString = "deactivated_by";
@@ -765,6 +767,19 @@ class EloquentShopRepository implements ShopRepository
             $log->$colString = auth()->user()->id;
             $log->save();
 
+            // Update Last Payment Transaction ID for Shops
+            $lastTranQuery="SELECT * FROM shop_payments 
+                            WHERE shopid=$shopPayment->ShopId
+                            AND IsActive='1'
+                            ORDER BY id DESC
+                            LIMIT 1";
+
+            $updateTran=DB::select($lastTranQuery);
+            $updatedTranID=$updateTran[0]->id;
+            $shop=Shop::find($shopPayment->ShopId);
+            $shop->LastTranID=$updatedTranID;
+            $shop->save();
+            
             DB::commit();
             return response()->json($msg);
         } catch (Exception $e) {

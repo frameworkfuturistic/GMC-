@@ -13,8 +13,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use DataTables;
-use Illuminate\Contracts\Auth\Guard;
+use Yajra\DataTables\DataTables;
 
 class EloquentSelfAdvetRepository implements SelfAdvetRepository
 {
