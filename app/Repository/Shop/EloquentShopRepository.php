@@ -745,12 +745,12 @@ class EloquentShopRepository implements ShopRepository
         try {
             // Getting first the Shop Payment ID
             $shopPayment = ShopPayment::find($id);
-            if ($req->toggle == "true") {
+            if ($req->shopToggle == "true") {
                 $shopPayment->IsActive = 0;
                 $colString = "deactivated_by";
                 $msg = ['message' => 'Successfully Deactivated The Transaction'];
             }
-            if ($req->toggle == "false") {
+            if ($req->shopToggle == "false") {
                 $shopPayment->IsActive = 1;
                 $colString = "activated_by";
                 $msg = ['message' => 'Successfully Activated The Transaction'];

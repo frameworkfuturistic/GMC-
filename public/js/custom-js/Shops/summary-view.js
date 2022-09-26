@@ -238,7 +238,7 @@ function showShopDataTable(data){
             "render": function ( data, type, row, meta ) {
                 if(row.userType==2){
                     return  '<label class="switch">' +
-                        '<input type="checkbox" id="toggle" name="toggle" onchange="functionShopDeactivation('+ data +')">' +
+                        '<input type="checkbox" id="shopToggle" name="shopToggle" onchange="functionShopDeactivation('+ data +')">' +
                         '<span class="slider round"></span>' +
                         '</label> ';
                 }
@@ -388,7 +388,7 @@ function functionDeactivation(id){
 // Function for shop Deactivation
 function functionShopDeactivation(id){
     let token = $('meta[name="csrf_token"]').attr('content');
-    var status=$('#toggle').is(":checked");
+    var status=$('#shopToggle').is(":checked");
     var murl = 'shops/payments/activation/'+id;
     $.ajax({
         type: "post",
@@ -397,7 +397,7 @@ function functionShopDeactivation(id){
         data: {
             "_method": 'post',
             "_token": token,
-            "toggle":status,
+            "shopToggle":status,
         },
         datatype: "json",
         success: function(result) {
