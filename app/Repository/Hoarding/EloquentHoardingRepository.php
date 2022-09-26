@@ -58,7 +58,7 @@ class EloquentHoardingRepository implements HoardingRepository
             'Illumination',
             'PropertyType'
         )
-            ->orderBy('HoardingID', 'DESC')
+            ->orderBy('id', 'DESC')
             ->get();
         $array = array(
             'licYears' => $licYear,
@@ -252,7 +252,7 @@ class EloquentHoardingRepository implements HoardingRepository
     {
         $name = Auth::user()->name;
         $hoarding = Hoarding::select(
-            'HoardingID',
+            'id',
             'RenewalID',
             'ApplicationDate',
             'HoardingNo',
@@ -267,7 +267,7 @@ class EloquentHoardingRepository implements HoardingRepository
         )
             ->where('CurrentUser', '=', $name)
             ->where('Pending', null)
-            ->orderByDesc('HoardingID')
+            ->orderByDesc('id')
             ->get();
         return view('admin.Hoarding.inbox', [
             'hoardings' => $hoarding,
@@ -294,7 +294,7 @@ class EloquentHoardingRepository implements HoardingRepository
             "workflow_tracks.TrackDate"
         )
             ->leftJoin("hoardings", "hoardings.HoardingNo", "=", "workflow_tracks.RenewalID")
-            ->where('hoardings.HoardingID', $id)
+            ->where('hoardings.id', $id)
             ->get();
 
         $licYear = ParamString::select('StringParameter')
@@ -340,7 +340,7 @@ class EloquentHoardingRepository implements HoardingRepository
     {
         $name = Auth::user()->name;
         $hoarding = Hoarding::select(
-            'HoardingID',
+            'id',
             'RenewalID',
             'ApplicationDate',
             'HoardingNo',
@@ -355,7 +355,7 @@ class EloquentHoardingRepository implements HoardingRepository
         )
             ->where('CurrentUser', '<>', $name)
             ->where('Pending', null)
-            ->orderByDesc('HoardingID')
+            ->orderByDesc('id')
             ->get();
         return view('admin.Hoarding.outbox', [
             'hoardings' => $hoarding,
@@ -382,7 +382,7 @@ class EloquentHoardingRepository implements HoardingRepository
             "workflow_tracks.TrackDate"
         )
             ->leftJoin("hoardings", "hoardings.HoardingNo", "=", "workflow_tracks.RenewalID")
-            ->where('hoardings.HoardingID', $id)
+            ->where('hoardings.id', $id)
             ->get();
 
         $licYear = ParamString::select('StringParameter')
@@ -429,7 +429,7 @@ class EloquentHoardingRepository implements HoardingRepository
     public function hoardingApproved()
     {
         $hoarding = Hoarding::select(
-            'HoardingID',
+            'id',
             'RenewalID',
             'ApplicationDate',
             'HoardingNo',
@@ -443,7 +443,7 @@ class EloquentHoardingRepository implements HoardingRepository
             'MaterialType'
         )
             ->where('Approved', '=', '-1')
-            ->orderByDesc('HoardingID')
+            ->orderByDesc('id')
             ->get();
         return view('admin.Hoarding.approved', [
             'hoardings' => $hoarding,
@@ -470,7 +470,7 @@ class EloquentHoardingRepository implements HoardingRepository
             "workflow_tracks.TrackDate"
         )
             ->leftJoin("hoardings", "hoardings.HoardingNo", "=", "workflow_tracks.RenewalID")
-            ->where('hoardings.HoardingID', $id)
+            ->where('hoardings.id', $id)
             ->get();
 
         $licYear = ParamString::select('StringParameter')
@@ -512,7 +512,7 @@ class EloquentHoardingRepository implements HoardingRepository
     public function hoardingRejected()
     {
         $hoarding = Hoarding::select(
-            'HoardingID',
+            'id',
             'RenewalID',
             'ApplicationDate',
             'HoardingNo',
@@ -526,7 +526,7 @@ class EloquentHoardingRepository implements HoardingRepository
             'MaterialType'
         )
             ->where('Rejected', '=', '-1')
-            ->orderByDesc('HoardingID')
+            ->orderByDesc('id')
             ->get();
         return view('admin.Hoarding.rejected', [
             'hoardings' => $hoarding,
@@ -544,7 +544,7 @@ class EloquentHoardingRepository implements HoardingRepository
             "workflow_tracks.TrackDate"
         )
             ->leftJoin("hoardings", "hoardings.HoardingNo", "=", "workflow_tracks.RenewalID")
-            ->where('hoardings.HoardingID', $id)
+            ->where('hoardings.id', $id)
             ->get();
         $array = array(
             'hoardings' => $hoarding,
