@@ -19,9 +19,9 @@ class EloquentVehicleRepository implements VehicleRepository
 {
     use TraitAppHelper;
 
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
     }
 
     public function view()

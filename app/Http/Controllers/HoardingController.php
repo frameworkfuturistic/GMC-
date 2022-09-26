@@ -4,97 +4,123 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repository\Hoarding\EloquentHoardingRepository;
+use Illuminate\Support\Facades\Config;
 
 class HoardingController extends Controller
 {
 
-    public function __construct(EloquentHoardingRepository $eloquentHoarding)
+    public function __construct()
     {
-        $this->EloquentHoarding=$eloquentHoarding;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentHoardingRepository($user);
+            $this->EloquentHoarding = $obj;
+            return $next($request);
+        });
     }
 
-    public function newHoarding(){
+    public function newHoarding()
+    {
         return $this->EloquentHoarding->newHoarding();
     }
 
-    public function lastBill(){
+    public function lastBill()
+    {
         return $this->EloquentHoarding->lastBill();
     }
 
-    public function hoardingPayment(){
+    public function hoardingPayment()
+    {
         return $this->EloquentHoarding->hoardingPayment();
     }
 
-    public function currentHoarding(){
+    public function currentHoarding()
+    {
         return $this->EloquentHoarding->currentHoarding();
     }
 
-    public function rejectedHoarding(){
+    public function rejectedHoarding()
+    {
         return $this->EloquentHoarding->rejectedHoarding();
     }
 
-    public function vendorProfile(){
+    public function vendorProfile()
+    {
         return $this->EloquentHoarding->vendorProfile();
     }
 
-    public function hoardingRules(){
+    public function hoardingRules()
+    {
         return $this->EloquentHoarding->hoardingRules();
     }
 
-    public function storeHoarding(Request $request){
+    public function storeHoarding(Request $request)
+    {
         return $this->EloquentHoarding->storeHoarding($request);
     }
 
     /* FOR ADMIN USED FUNCTIONS */
     // VIEW
-    public function hoardingInbox(){
+    public function hoardingInbox()
+    {
         return $this->EloquentHoarding->hoardingInbox();
     }
 
-    public function hoardingInboxByID($id){
+    public function hoardingInboxByID($id)
+    {
         return $this->EloquentHoarding->hoardingInboxByID($id);
     }
 
-    public function hoardingOutbox(){
+    public function hoardingOutbox()
+    {
         return $this->EloquentHoarding->hoardingOutbox();
     }
 
-    public function hoardingOutboxByID($id){
+    public function hoardingOutboxByID($id)
+    {
         return $this->EloquentHoarding->hoardingOutboxByID($id);
     }
 
-    public function hoardingPmt(){
+    public function hoardingPmt()
+    {
         return $this->EloquentHoarding->hoardingPmt();
     }
 
-    public function hoardingApproved(){
+    public function hoardingApproved()
+    {
         return $this->EloquentHoarding->hoardingApproved();
     }
 
-    public function hoardingApprovedByID($id){
+    public function hoardingApprovedByID($id)
+    {
         return $this->EloquentHoarding->hoardingApprovedByID($id);
     }
 
-    public function hoardingRejected(){
+    public function hoardingRejected()
+    {
         return $this->EloquentHoarding->hoardingRejected();
     }
 
-    public function hoardingRejectedByID($id){
+    public function hoardingRejectedByID($id)
+    {
         return $this->EloquentHoarding->hoardingRejectedByID($id);
     }
     // VIEW
 
-    public function editHoarding(Request $request, $id){
-        return $this->EloquentHoarding->editHoarding($request,$id);
+    public function editHoarding(Request $request, $id)
+    {
+        return $this->EloquentHoarding->editHoarding($request, $id);
     }
 
-    public function addComment(Request $request){
+    public function addComment(Request $request)
+    {
         return $this->EloquentHoarding->addComment($request);
     }
 
-    public function hoardingWorkflow(Request $request){
+    public function hoardingWorkflow(Request $request)
+    {
         return $this->EloquentHoarding->hoardingWorkflow($request);
     }
     /* FOR ADMIN USED FUNCTIONS */
-
 }

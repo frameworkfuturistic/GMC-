@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\DesignationRole\EloquentDesignationRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 /**
  * | Created On-05-09-2022
@@ -17,9 +18,15 @@ class DesignationRoleController extends Controller
 
     protected $eloquent_designation_role;
     // Initializing construct function for repository
-    public function __construct(EloquentDesignationRole $eloquent_designation_role)
+    public function __construct()
     {
-        $this->Repository = $eloquent_designation_role;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentDesignationRole($user);
+            $this->Repository = $obj;
+            return $next($request);
+        });
     }
 
     // Designation Role View

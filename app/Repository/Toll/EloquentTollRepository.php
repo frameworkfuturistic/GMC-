@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\AppHelper;
 use Yajra\DataTables\DataTables;
 use App\Exports\TollExport;
+use App\Models\Logs\TollPaymentLog;
 use App\Models\surveyLogin;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -21,9 +22,9 @@ class EloquentTollRepository implements TollRepository
     use AppHelper;
 
     // Initialization of construct function for sidebar menu
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
     }
     /**
      * Created On-07-07-2022
@@ -368,7 +369,9 @@ class EloquentTollRepository implements TollRepository
      */
     public function totalCollection(Request $request)
     {
+        $userType = auth()->user()->user_type;
         $collectionSummaryQuery = "SELECT 
+                                    $userType AS userType,
                                     p.id AS PaymentID,
                                     t.id,
                                     t.AreaName AS Area,
@@ -382,7 +385,7 @@ class EloquentTollRepository implements TollRepository
                             FROM toll_payments p
                             INNER JOIN tolls t ON t.id=p.TollId
                             INNER JOIN survey_logins l ON l.id=p.UserId
-                            WHERE p.PaymentDate BETWEEN DATE_FORMAT('$request->TollFrom','%Y-%m-%d') AND DATE_FORMAT('$request->TollTo','%Y-%m-%d')
+                            WHERE p.PaymentDate BETWEEN DATE_FORMAT('$request->TollFrom','%Y-%m-%d') AND DATE_FORMAT('$request->TollTo','%Y-%m-%d') AND p.IsActive=1
                             ORDER BY p.id DESC";
         $collectionSummary = DB::select($collectionSummaryQuery);
         return $collectionSummary;
@@ -506,6 +509,45 @@ class EloquentTollRepository implements TollRepository
 
             DB::commit();
             return back()->with('message', 'Payment Reflection Successful');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $e;
+        }
+    }
+
+    /**
+     * | For the Activation and Deactivation for the toll payments and creating logs
+     * | #colString > Column string value for the log table which determine transaction is activating or deactivating
+     * | toggle value 0 means the transaction is deactivating and value 1 means the transaction is activating
+     */
+    public function activateOrDeactivatePayment(Request $req, $id)
+    {
+        DB::beginTransaction();
+        try {
+            // Getting first the Shop Payment ID
+            $tollPayment = TollPayment::find($id);
+            if ($req->toggle == "true") {
+                $tollPayment->IsActive = 0;
+                $colString = "deactivated_by";
+                $msg = ['message' => 'Successfully Deactivated The Transaction'];
+            }
+            if ($req->toggle == "false") {
+                $tollPayment->IsActive = 1;
+                $colString = "activated_by";
+                $msg = ['message' => 'Successfully Activated The Transaction'];
+            }
+            $tollPayment->CreatedBy = auth()->user()->id;
+            $tollPayment->save();
+
+            // Creating Activation or Deactivation Log
+            $log = new TollPaymentLog();
+            $log->new_toll_payment_id = $tollPayment->id;
+            $log->ip_address = $req->ip();
+            $log->$colString = auth()->user()->id;
+            $log->save();
+
+            DB::commit();
+            return response()->json($msg);
         } catch (Exception $e) {
             DB::rollBack();
             return $e;

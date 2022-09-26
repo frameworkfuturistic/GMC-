@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\Designation\EloquentDesignationRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 /**
  *| Created By-Anshu Kumar
@@ -16,9 +17,15 @@ class DesignationController extends Controller
 {
     protected $eloquent_designation;
 
-    public function __construct(EloquentDesignationRepository $eloquent_designation)
+    public function __construct()
     {
-        $this->Repository = $eloquent_designation;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentDesignationRepository($user);
+            $this->Repository = $obj;
+            return $next($request);
+        });
     }
 
     // Designation Entry View

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repository\PrivateLand\EloquentPrivateLandRepository;
 use Illuminate\Http\Request;
 use App\Models\PrivateLand;
+use Illuminate\Support\Facades\Config;
 
 class PrivateLandController extends Controller
 {
@@ -12,9 +13,15 @@ class PrivateLandController extends Controller
 
     protected $eloquentPrivateLand;
 
-    public function __construct(EloquentPrivateLandRepository $eloquentPrivateLand)
+    public function __construct()
     {
-        $this->EloquentPrivateLand = $eloquentPrivateLand;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentPrivateLandRepository($user);
+            $this->EloquentPrivateLand = $obj;
+            return $next($request);
+        });
     }
 
     function userView()

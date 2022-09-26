@@ -6,17 +6,26 @@ AdminController is the controller of Self Advertisement field
 namespace App\Http\Controllers;
 
 use App\Repository\SelfAdvet\EloquentSelfAdvetRepository;
+use App\Repository\SelfAdvet\SelfAdvetRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Traits\AppHelper;
+use Illuminate\Support\Facades\Config;
 
 class AdminController extends Controller
 {
-
+    use AppHelper;
     protected $eloquentSelfAdvet;
 
-    public function __construct(EloquentSelfAdvetRepository $eloquentSelfAdvet)
+    public function __construct()
     {
-
-        $this->EloquentSelfAdvet = $eloquentSelfAdvet;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentSelfAdvetRepository($user);
+            $this->EloquentSelfAdvet = $obj;
+            return $next($request);
+        });
     }
 
     // User Interfaces Controller

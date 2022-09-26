@@ -368,7 +368,7 @@ button.dt-button.buttons-collection.buttons-page-length.pdfButton.btn-padding {
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #f32121;
   }
   
   input:focus + .slider {

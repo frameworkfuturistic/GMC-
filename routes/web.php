@@ -247,7 +247,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('export/tolls/toll-master', [TollController::class, 'exportToExcel']);
     Route::get('tolls/bills/toll-bill-payments', [TollController::class, 'tollBillPayments']);
     Route::post('tolls/bills/toll-bill-payments', [TollController::class, 'postTollBillPayments']);
-    Route::post('tolls/payments/activation/{id}',[TollController::class,'activateOrDeactivatePayment']);
+    Route::post('tolls/payments/activation/{id}', [TollController::class, 'activateOrDeactivatePayment'])->middleware('can:isAdmin');
 
     // Shops
     Route::get('rnc/AddShops', [ShopController::class, 'shopMasterView'])->name('shops.master');
@@ -260,6 +260,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('shopSummary', [ShopController::class, 'shopSummaryView']);
     Route::post('shops/totalshopcollection', [ShopController::class, 'totalShopCollection']);
     Route::get('export/shops/shop-master', [ShopController::class, 'exportToExcel']);
+    Route::post('shops/payments/activation/{id}', [ShopController::class, 'activationOrDeactivationPayment'])->middleware('can:isAdmin');
     // Shops
 
     /**

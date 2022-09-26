@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Repository\Dharmsala\EloquentDharmsalaRepository;
 use Illuminate\Http\Request;
-use App\Models\Dharmasala;
+use Illuminate\Support\Facades\Config;
 
 class DharmasalaController extends Controller
 {
 
-    public function __construct(EloquentDharmsalaRepository $eloquentDharmsala)
+    public function __construct()
     {
-        $this->EloquentDharmsala = $eloquentDharmsala;
+        $this->middleware(function ($request, $next) {
+            $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
+            $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
+            $obj = new EloquentDharmsalaRepository($user);
+            $this->EloquentDharmsala = $obj;
+            return $next($request);
+        });
     }
 
     function userView()

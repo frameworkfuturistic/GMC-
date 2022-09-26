@@ -95,11 +95,8 @@ class='active'
                             <h6><i class="icon-circle success"></i> <span class="grey darken-1">Completed</span></h6>
                         </li>
                     </ul>
-                    <div class="chartjs height-250" style="height: 250px;"><iframe class="chartjs-hidden-iframe"
-                            tabindex="-1"
-                            style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
-                        <canvas id="line-stacked-area" height="250" width="694"
-                            style="display: block; width: 694px; height: 250px;"></canvas>
+                    <div class="chartjs height-250" style="height: 250px;"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
+                        <canvas id="line-stacked-area" height="250" width="694" style="display: block; width: 694px; height: 250px;"></canvas>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -107,26 +104,22 @@ class='active'
                         <div class="col-xs-3 text-xs-center">
                             <span class="text-muted">Total Projects</span>
                             <h2 class="block font-weight-normal">18</h2>
-                            <progress class="progress progress-xs mt-2 progress-success" value="70"
-                                max="100"></progress>
+                            <progress class="progress progress-xs mt-2 progress-success" value="70" max="100"></progress>
                         </div>
                         <div class="col-xs-3 text-xs-center">
                             <span class="text-muted">Total Task</span>
                             <h2 class="block font-weight-normal">125</h2>
-                            <progress class="progress progress-xs mt-2 progress-success" value="40"
-                                max="100"></progress>
+                            <progress class="progress progress-xs mt-2 progress-success" value="40" max="100"></progress>
                         </div>
                         <div class="col-xs-3 text-xs-center">
                             <span class="text-muted">Completed Task</span>
                             <h2 class="block font-weight-normal">242</h2>
-                            <progress class="progress progress-xs mt-2 progress-success" value="60"
-                                max="100"></progress>
+                            <progress class="progress progress-xs mt-2 progress-success" value="60" max="100"></progress>
                         </div>
                         <div class="col-xs-3 text-xs-center">
                             <span class="text-muted">Total Revenue</span>
                             <h2 class="block font-weight-normal">$11,582</h2>
-                            <progress class="progress progress-xs mt-2 progress-success" value="90"
-                                max="100"></progress>
+                            <progress class="progress progress-xs mt-2 progress-success" value="90" max="100"></progress>
                         </div>
                     </div>
                 </div>
@@ -135,17 +128,14 @@ class='active'
         <div class="col-xl-4 col-lg-12">
             <div class="card card-inverse bg-info">
                 <div class="card-body">
-                    <div class="position-relative"><iframe class="chartjs-hidden-iframe" tabindex="-1"
-                            style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
+                    <div class="position-relative"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
                         <div class="chart-title position-absolute mt-2 ml-2 white">
                             <h1 class="display-4">84%</h1>
                             <span>Employees Satisfied</span>
                         </div>
-                        <canvas id="emp-satisfaction" class="height-400 block"
-                            style="display: block; width: 332px; height: 400px;" width="332" height="400"></canvas>
+                        <canvas id="emp-satisfaction" class="height-400 block" style="display: block; width: 332px; height: 400px;" width="332" height="400"></canvas>
                         <div class="chart-stats position-absolute position-bottom-0 position-right-0 mb-2 mr-3 white">
-                            <a href="#" class="btn bg-info bg-darken-3 mr-1 white">Statistics <i
-                                    class="icon-stats-bars"></i></a> for the last year.
+                            <a href="#" class="btn bg-info bg-darken-3 mr-1 white">Statistics <i class="icon-stats-bars"></i></a> for the last year.
                         </div>
                     </div>
                 </div>
@@ -165,8 +155,7 @@ class='active'
                         <div class="p-2 media-body">
                             <h5 class="deep-orange">New Users</h5>
                             <h5 class="text-bold-400">1,22,356</h5>
-                            <progress class="progress progress-sm progress-deep-orange mt-1 mb-0" value="45"
-                                max="100"></progress>
+                            <progress class="progress progress-sm progress-deep-orange mt-1 mb-0" value="45" max="100"></progress>
                         </div>
                     </div>
                 </div>

@@ -19,9 +19,9 @@ class EloquentHostelRepository implements HostelRepository
 {
     use TraitAppHelper;
 
-    public function __construct()
+    public function __construct($roleID)
     {
-        $this->menuApp();
+        $this->menuApp($roleID);
     }
 
     public function view()
@@ -82,7 +82,7 @@ class EloquentHostelRepository implements HostelRepository
         $hostel->NoOfBeds = $request->NoOfBeds;
         $hostel->NoOfRooms = $request->NoOfRooms;
         $hostel->NoOfFireExtinguishers = $request->NoOfFireExtinguishers;
-        $hostel->NoOfEntryGate = $request->EntryGatesNo;
+        $hostel->NoOfEntryGate = $request->NoOfEntryGate;
         $hostel->NoOfExitGate = $request->NoOfExitGate;
         $hostel->NoOfTwoWheelersParking = $request->NoOfTwoWheelersParking;
         $hostel->NoOfFourWheelersParking = $request->NoOfFourWheelersParking;
@@ -269,7 +269,7 @@ class EloquentHostelRepository implements HostelRepository
         $hostel->NoOfBeds = $request->NoOfBeds;
         $hostel->NoOfRooms = $request->NoOfRooms;
         $hostel->NoOfFireExtinguishers = $request->NoOfFireExtinguishers;
-        $hostel->NoOfEntryGate = $request->EntryGatesNo;
+        $hostel->NoOfEntryGate = $request->NoOfEntryGate;
         $hostel->NoOfExitGate = $request->NoOfExitGate;
         $hostel->NoOfTwoWheelersParking = $request->NoOfTwoWheelersParking;
         $hostel->NoOfFourWheelersParking = $request->NoOfFourWheelersParking;
