@@ -389,3 +389,25 @@ button.dt-button.buttons-collection.buttons-page-length.pdfButton.btn-padding {
   .slider.round:before {
     border-radius: 50%;
   }
+
+  /* Image/Pdf Preview */
+  .modal-dialog.modal-xl {
+    max-width: 1200px;
+}
+
+.iframe-container {
+    padding-bottom: 60%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.iframe-container iframe,
+.iframe-container object,
+.iframe-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

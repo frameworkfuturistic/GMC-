@@ -521,82 +521,77 @@ class="active"
                         <div class="col-md-3">
                             <div class="scroll">
                                 <label for="">Aadhar no Document Photo</label>
-                                <img src="{{$SelfAds->AadharPath}}" alt="" style="width:100%;" id="AadharPath" name="AadharPath" onclick="myfunction('first')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->AadharPath}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->AadharPath}}" alt="" style="width:100%;" id="AadharPath" name="AadharPath" onclick="myfunction('first')">
                                 <br>
                                 <label for="">Trade License Document Photo</label>
-                                <img src="{{$SelfAds->TradeLicensePath}}" alt="" style="width:100%;" id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->TradeLicensePath}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->TradeLicensePath}}" alt="" style="width:100%;" id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
                                 <br>
                                 <label for="">GPS Photo Path Document Photo</label>
-                                <img src="{{$SelfAds->GPSPhotoPath}}" alt="" style="width: 100%;" id="GPSPhotoPath" name="GPSPhotoPath" onclick="myfunction('third')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->GPSPhotoPath}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->GPSPhotoPath}}" alt="" style="width: 100%;" id="GPSPhotoPath" name="GPSPhotoPath" onclick="myfunction('third')">
                                 <br>
                                 <label for="">Holding No Path Document Photo</label>
-                                <img src="{{$SelfAds->HoldingNoPath}}" alt="" style="width: 100%;" id="HoldingNoPath" name="HoldingNoPath" onclick="myfunction('forth')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->HoldingNoPath}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->HoldingNoPath}}" alt="" style="width: 100%;" id="HoldingNoPath" name="HoldingNoPath" onclick="myfunction('forth')">
                                 <br>
                                 <label for="">GST Path Document Photo</label>
-                                <img src="{{$SelfAds->GSTPath}}" alt="" style="width: 100%;" id="GSTPath" name="GSTPath" onclick="myfunction('fifth')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->GSTPath}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->GSTPath}}" alt="" style="width: 100%;" id="GSTPath" name="GSTPath" onclick="myfunction('fifth')">
                                 <br>
                                 <label for="">Proceeding1Photo</label>
-                                <img src="{{$SelfAds->Proceeding1Photo}}" alt="" style="width: 100%;" id="Proceeding1Photo" name="Proceeding1Photo" onclick="myfunction('sixth')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->Proceeding1Photo}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->Proceeding1Photo}}" alt="" style="width: 100%;" id="Proceeding1Photo" name="Proceeding1Photo" onclick="myfunction('sixth')">
                                 <br>
                                 <label for="">Proceeding2Photo</label>
-                                <img src="{{$SelfAds->Proceeding2Photo}}" alt="" style="width: 100%;" id="Proceeding2Photo" name="Proceeding1Photo" onclick="myfunction('seventh')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->Proceeding2Photo}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->Proceeding2Photo}}" alt="" style="width: 100%;" id="Proceeding2Photo" name="Proceeding1Photo" onclick="myfunction('seventh')">
                                 <br>
                                 <label for="">Proceeding3Photo</label>
-                                <img src="{{$SelfAds->Proceeding3Photo}}" alt="" style="width: 100%;" id="Proceeding3Photo" name="Proceeding1Photo" onclick="myfunction('eighth')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->Proceeding3Photo}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->Proceeding3Photo}}" alt="" style="width: 100%;" id="Proceeding3Photo" name="Proceeding1Photo" onclick="myfunction('eighth')">
                                 <br>
                                 <label for="">extraDoc1</label>
-                                <img src="{{$SelfAds->extraDoc1}}" alt="" style="width: 100%;" id="extraDoc1" name="extraDoc1" onclick="myfunction('ninth')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->extraDoc1}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->extraDoc1}}" alt="" style="width: 100%;" id="extraDoc1" name="extraDoc1" onclick="myfunction('ninth')">
                                 <br>
                                 <label for="">extraDoc2</label>
-                                <img src="{{$SelfAds->extraDoc2}}" alt="" style="width: 100%;" id="extraDoc2" name="extraDoc2" onclick="myfunction('tenth')">
+                                &nbsp;
+                                <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->extraDoc2}}">
+                                    <i class="fa fa-eye"></i> Preview
+                                </a>
+                                <embed src="{{$SelfAds->extraDoc2}}" alt="" style="width: 100%;" id="extraDoc2" name="extraDoc2" onclick="myfunction('tenth')">
                             </div>
                         </div>
                         <!-- photos -->
-                        <!-- preview -->
-                        <div class="col-md-9">
-                            <div class="card-header card-bg mb-8">
-                                <div class="card-title my-card-title">Preview</div>
-                            </div>
-                            <a href="{{$SelfAds->AadharPath}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->AadharPath}}" alt="" id="first" href="#img1" style="width: 100%;">
-                            </a>
-
-                            <a href="{{$SelfAds->TradeLicensePath}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->TradeLicensePath}}" alt="" style="width:100%;" id="second">
-                            </a>
-                            <a href="{{$SelfAds->GPSPhotoPath}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->GPSPhotoPath}}" alt="" style="width: 100%;" id="third">
-                            </a>
-
-                            <a href="{{$SelfAds->HoldingNoPath}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->HoldingNoPath}}" alt="" style="width: 100%;" id="forth">
-                            </a>
-
-                            <a href="{{$SelfAds->GSTPath}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->GSTPath}}" alt="" style="width: 100%;" id="fifth">
-                            </a>
-
-                            <a href="{{$SelfAds->Proceeding1Photo}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->Proceeding1Photo}}" alt="" style="width: 100%;" id="sixth">
-                            </a>
-
-                            <a href="{{$SelfAds->Proceeding2Photo}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->Proceeding2Photo}}" alt="" style="width: 100%;" id="seventh">
-                            </a>
-
-                            <a href="{{$SelfAds->Proceeding3Photo}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->Proceeding3Photo}}" alt="" style="width: 100%;" id="eighth">
-                            </a>
-
-                            <a href="{{$SelfAds->extraDoc1}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->extraDoc1}}" alt="" style="width: 100%;" id="ninth">
-                            </a>
-
-                            <a href="{{$SelfAds->extraDoc2}}" data-toggle="lightbox">
-                                <img src="{{$SelfAds->extraDoc2}}" alt="" style="width: 100%;" id="tenth">
-                            </a>
-                        </div>
-                        <!-- preview -->
                     </div>
                 </div>
                 <!-- document tab -->
@@ -614,36 +609,12 @@ class="active"
 @endsection
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/preview-pdf.js"></script>
 <script>
-    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
-
     $(document).ready(function() {
         $('#datatable').DataTable();
-        displayNone();
         $("#advetInboxActive").addClass('active');
     });
-
-    function displayNone() {
-        document.getElementById("first").style.display = 'none';
-        document.getElementById("second").style.display = 'none';
-        document.getElementById("third").style.display = 'none';
-        document.getElementById("forth").style.display = 'none';
-        document.getElementById("fifth").style.display = 'none';
-        document.getElementById("sixth").style.display = 'none';
-        document.getElementById("seventh").style.display = 'none';
-        document.getElementById("eighth").style.display = 'none';
-        document.getElementById("ninth").style.display = 'none';
-        document.getElementById("tenth").style.display = 'none';
-    }
-
-    function myfunction(id) {
-        displayNone();
-        document.getElementById(id).style.display = 'block';
-    }
 
     function inputTools() {
         window.open('https://www.google.com/inputtools/try/', '_blank');

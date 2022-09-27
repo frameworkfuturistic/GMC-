@@ -20,7 +20,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="csrf_token" content="{{ csrf_token() }}" /> 
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="admin_dash/app-assets/css/bootstrap.css">
     <!-- font icons-->

@@ -1,9 +1,7 @@
 @extends('admin.app')
 
 @section('pagecss')
-input{
 
-}
 @endsection
 
 @section('heading')
@@ -32,22 +30,18 @@ class="active"
             <div class="card-block">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1"
-                            aria-expanded="true">Application Details</a>
+                        <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1" aria-expanded="true">Application Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2"
-                            aria-expanded="false">Workflow</a>
+                        <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2" aria-expanded="false">Workflow</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3"
-                            aria-expanded="false">Documents</a>
+                        <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3" aria-expanded="false">Documents</a>
                     </li>
                 </ul>
                 <div class="tab-content px-1 pt-1">
                     <!-- application details tab -->
-                    <div role="tabpanel" class="tab-pane active" id="tab1" aria-expanded="true"
-                        aria-labelledby="base-tab1">
+                    <div role="tabpanel" class="tab-pane active" id="tab1" aria-expanded="true" aria-labelledby="base-tab1">
                         <div class="row">
                             <!-- data form -->
                             <div class="col-md-9">
@@ -56,8 +50,7 @@ class="active"
                                         APPLICATION</div>
                                 </div>
                                 <!-- form -->
-                                <form action="{{url('rnc/updateSelfAdvet/'.$SelfAds->id)}}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{url('rnc/updateSelfAdvet/'.$SelfAds->id)}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <div class="table-responsive">
@@ -65,14 +58,13 @@ class="active"
                                             <tbody>
                                                 <input type="hidden" value="{{$SelfAds->id}}">
                                                 <tr>
-                                                    <td class="spin-label">License Year <span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">License Year <span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
                                                     <td>
-                                                        <select class="spin-valuearea form-control" id="LicenseYear"
-                                                            name="LicenseYear">
+                                                        <select class="spin-valuearea form-control" id="LicenseYear" name="LicenseYear">
                                                             <option value="{{$SelfAds->LicenseYear}}" selected>
-                                                                {{$SelfAds->LicenseYear}}</option>
+                                                                {{$SelfAds->LicenseYear}}
+                                                            </option>
                                                             <option value="">Select One</option>
                                                             <option value="2018-19">2018-19</option>
                                                             <option value="2019-20">2019-20</option>
@@ -82,112 +74,88 @@ class="active"
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">Applicant<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">Applicant<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
                                                     <td>
-                                                        <input class="spin-valuearea form-control text-box single-line"
-                                                            id="Applicant" name="Applicant" type="text"
-                                                            value="{{$SelfAds->Applicant}}">
+                                                        <input class="spin-valuearea form-control text-box single-line" id="Applicant" name="Applicant" type="text" value="{{$SelfAds->Applicant}}">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">Father<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">Father<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
 
                                                     <td>
-                                                        <input class="spin-valuearea form-control text-box single-line"
-                                                            value="{{$SelfAds->Father}}" id="Father" name="Father">
-                                                        <span class="field-validation-valid text-danger"
-                                                            data-valmsg-for="Father" data-valmsg-replace="true"></span>
+                                                        <input class="spin-valuearea form-control text-box single-line" value="{{$SelfAds->Father}}" id="Father" name="Father">
+                                                        <span class="field-validation-valid text-danger" data-valmsg-for="Father" data-valmsg-replace="true"></span>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">E-mail<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">E-mail<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
 
                                                     <td>
-                                                        <input class="spin-valuearea form-control text-box single-line"
-                                                            id="email" name="Email" type="Email"
-                                                            value="{{$SelfAds->Email}}">
-                                                        <span class="field-validation-valid text-danger"
-                                                            data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                                                        <input class="spin-valuearea form-control text-box single-line" id="email" name="Email" type="Email" value="{{$SelfAds->Email}}">
+                                                        <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">Residence Address<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">Residence Address<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
 
                                                     <td>
-                                                        <input class="spin-valuearea form-control text-box single-line"
-                                                            id="ResidenceAddress" name="ResidenceAddress" type="text"
-                                                            value="{{$SelfAds->ResidenceAddress}}">
+                                                        <input class="spin-valuearea form-control text-box single-line" id="ResidenceAddress" name="ResidenceAddress" type="text" value="{{$SelfAds->ResidenceAddress}}">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">Ward No<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
                                                     <td>
-                                                        <select class="spin-valuearea form-control" id="WardNo"
-                                                            name="WardNo">
+                                                        <select class="spin-valuearea form-control" id="WardNo" name="WardNo">
                                                             <option value="{{$SelfAds->WardNo}}">{{$SelfAds->WardNo}}
                                                             </option>
                                                             @foreach($wards as $ward)
                                                             <option value="{{$ward->StringParameter}}">
-                                                                {{$ward->StringParameter}}</option>
+                                                                {{$ward->StringParameter}}
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">Permanent Address<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">Permanent Address<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
                                                     <td>
-                                                        <input class="spin-valuearea form-control text-box single-line"
-                                                            id="PermanentAddress" name="PermanentAddress" type="text"
-                                                            value="{{$SelfAds->PermanentAddress}}">
+                                                        <input class="spin-valuearea form-control text-box single-line" id="PermanentAddress" name="PermanentAddress" type="text" value="{{$SelfAds->PermanentAddress}}">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">Ward No<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
                                                     <td>
-                                                        <select class="spin-valuearea form-control required"
-                                                            id="WardNo1" name="WardNo1">
+                                                        <select class="spin-valuearea form-control required" id="WardNo1" name="WardNo1">
                                                             <option value="{{$SelfAds->WardNo}}">{{$SelfAds->WardNo1}}
                                                             </option>
                                                             @foreach($wards as $ward)
                                                             <option value="{{$ward->StringParameter}}">
-                                                                {{$ward->StringParameter}}</option>
+                                                                {{$ward->StringParameter}}
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">Mobile<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">Mobile<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
 
                                                     <td>
-                                                        <input class="spin-valuearea form-control text-box single-line"
-                                                            id="MobileNo" name="MobileNo" type="text"
-                                                            value="{{$SelfAds->MobileNo}}">
+                                                        <input class="spin-valuearea form-control text-box single-line" id="MobileNo" name="MobileNo" type="text" value="{{$SelfAds->MobileNo}}">
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="spin-label">Aadhar No<span
-                                                            class="spin-separator spin-star">*</span></td>
+                                                    <td class="spin-label">Aadhar No<span class="spin-separator spin-star">*</span></td>
                                                     <td class="spin-separator">:</td>
                                                     <td>
-                                                        <input class="spin-valuearea form-control text-box single-line"
-                                                            id="AadharNo" name="AadharNo" type="text"
-                                                            value="{{$SelfAds->AadharNo}}">
+                                                        <input class="spin-valuearea form-control text-box single-line" id="AadharNo" name="AadharNo" type="text" value="{{$SelfAds->AadharNo}}">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -210,164 +178,139 @@ class="active"
                                     <table id="myTable" class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td class="spin-label">Entity Name <span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Entity Name <span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        value="{{$SelfAds->EntityName}}" id="Entityname"
-                                                        name="EntityName">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->EntityName}}" id="Entityname" name="EntityName">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Entity Address <span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Entity Address <span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        value="{{$SelfAds->EntityAddress}}" id="EntityAddress"
-                                                        name="EntityAddress">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->EntityAddress}}" id="EntityAddress" name="EntityAddress">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Ward No<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <select class="spin-valuearea form-control" id="WardNo"
-                                                        name="WardNo">
+                                                    <select class="spin-valuearea form-control" id="WardNo" name="WardNo">
                                                         <option value="{{$SelfAds->WardNo}}">{{$SelfAds->WardNo}}
                                                         </option>
                                                         @foreach($wards as $ward)
                                                         <option value="{{$ward->StringParameter}}">
-                                                            {{$ward->StringParameter}}</option>
+                                                            {{$ward->StringParameter}}
+                                                        </option>
                                                         @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Installation Location<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Installation Location<span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <select class="spin-valuearea form-control" id="InstallLocation"
-                                                        name="InstallLocation">
+                                                    <select class="spin-valuearea form-control" id="InstallLocation" name="InstallLocation">
                                                         <option value="{{$SelfAds->InstallLocation}}">
-                                                            {{$SelfAds->InstallLocation}}</option>
+                                                            {{$SelfAds->InstallLocation}}
+                                                        </option>
                                                         @foreach($locations as $location)
                                                         <option value="{{$location->StringParameter}}">
-                                                            {{$location->StringParameter}}</option>
+                                                            {{$location->StringParameter}}
+                                                        </option>
                                                         @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Brand Display Name <span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Brand Display Name <span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        value="{{$SelfAds->BrandDisplay}}" id="BrandDisplay"
-                                                        name="BrandDisplay">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->BrandDisplay}}" id="BrandDisplay" name="BrandDisplay">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Holding No <span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Holding No <span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        value="{{$SelfAds->HoldingNo}}" id="HoldingNo" name="HoldingNo">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->HoldingNo}}" id="HoldingNo" name="HoldingNo">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Trade License No <span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Trade License No <span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        value="{{$SelfAds->TradeLicense}}" id="TradeLicense"
-                                                        name="TradeLicense">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->TradeLicense}}" id="TradeLicense" name="TradeLicense">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">GST No. <span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">GST No. <span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control" value="{{$SelfAds->GSTNo}}"
-                                                        id="GSTNo" name="GSTNo">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->GSTNo}}" id="GSTNo" name="GSTNo">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Display Type <span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Display Type <span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <select class="spin-valuearea form-control" id="DisplayType"
-                                                        name="DisplayType">
+                                                    <select class="spin-valuearea form-control" id="DisplayType" name="DisplayType">
                                                         <option value="{{$SelfAds->DisplayType}}">
                                                             {{$SelfAds->DisplayType}}
                                                         </option>
                                                         @foreach($DisplayTypes as $DisplayType)
                                                         <option value="{{$DisplayType->StringParameter}}">
-                                                            {{$DisplayType->StringParameter}}</option>
+                                                            {{$DisplayType->StringParameter}}
+                                                        </option>
                                                         @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Display Area<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Display Area<span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        value="{{$SelfAds->DisplayArea}}" id="DisplayArea"
-                                                        name="DisplayArea">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->DisplayArea}}" id="DisplayArea" name="DisplayArea">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Longitude<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Longitude<span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        value="{{$SelfAds->Longitude}}" id="Longitude" name="Longitude">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->Longitude}}" id="Longitude" name="Longitude">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Latitude<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Latitude<span class="spin-separator spin-star">*</span></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        value="{{$SelfAds->Latitude}}" id="Latitude" name="Latitude">
+                                                    <input type="text" class="form-control" value="{{$SelfAds->Latitude}}" id="Latitude" name="Latitude">
                                                 </td>
                                             </tr>
                                             <tr>
-                                            <td class="spin-label">Amount<span class="spin-separator spin-star">*</span>
-                                            </td>
+                                                <td class="spin-label">Amount<span class="spin-separator spin-star">*</span>
+                                                </td>
 
-                                            <td>
-                                                <input type="text" class="form-control" id="amount" name="amount" value="{{$SelfAds->Amount}}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="spin-label">GST<span class="spin-separator spin-star">*</span>
-                                            </td>
+                                                <td>
+                                                    <input type="text" class="form-control" id="amount" name="amount" value="{{$SelfAds->Amount}}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="spin-label">GST<span class="spin-separator spin-star">*</span>
+                                                </td>
 
-                                            <td>
-                                                <input type="text" class="form-control" id="GST" name="GST" value="{{$SelfAds->GST}}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="spin-label">Net Amount<span class="spin-separator spin-star">*</span>
-                                            </td>
+                                                <td>
+                                                    <input type="text" class="form-control" id="GST" name="GST" value="{{$SelfAds->GST}}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="spin-label">Net Amount<span class="spin-separator spin-star">*</span>
+                                                </td>
 
-                                            <td>
-                                                <input type="text" class="form-control" id="total" name="total" value="{{$SelfAds->NetAmount}}">
-                                            </td>
-                                        </tr>
+                                                <td>
+                                                    <input type="text" class="form-control" id="total" name="total" value="{{$SelfAds->NetAmount}}">
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -386,72 +329,57 @@ class="active"
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
                                                         Aadhar Document</span>
-                                                    <input type="file" id="AadharPath" name="AadharPath"
-                                                        accept="application/pdf,image/*" style="width:100%;">
+                                                    <input type="file" id="AadharPath" name="AadharPath" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
                                                         Municipal Trade License Document</span>
-                                                    <input name="TradeLicensePath" id="TradeLicensePath" type="file"
-                                                        accept="application/pdf,image/*" style="width:100%;">
+                                                    <input name="TradeLicensePath" id="TradeLicensePath" type="file" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
                                                         Photograph with GPS</span>
-                                                    <input name="GPSPhotoPath" id="GPSPhotoPath" type="file"
-                                                        accept="application/pdf,image/*" style="width:100%;">
+                                                    <input name="GPSPhotoPath" id="GPSPhotoPath" type="file" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
                                                         Holding No</span>
-                                                    <input id="HoldingNoPath" name="HoldingNoPath" type="file"
-                                                        accept="application/pdf,image/*" style="width:100%;">
+                                                    <input id="HoldingNoPath" name="HoldingNoPath" type="file" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;">
-                                                    <span>Upload GST Document Photo</span><input id="GSTPath"
-                                                        name="GSTPath" type="file" accept="application/pdf,image/*"
-                                                        style="width:100%;">
+                                                    <span>Upload GST Document Photo</span><input id="GSTPath" name="GSTPath" type="file" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;">
                                                     <span>Upload Proceeding1 Photo</span>
-                                                    <input id="Proceeding1Photo" name="Proceeding1Photo" type="file"
-                                                        accept="application/pdf,image/*" style="width:100%;">
+                                                    <input id="Proceeding1Photo" name="Proceeding1Photo" type="file" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
-                                                        Proceeding2 Photo</span><input id="Proceeding2Photo"
-                                                        name="Proceeding2Photo" type="file"
-                                                        accept="application/pdf,image/*" style="width:100%;"></td>
+                                                        Proceeding2 Photo</span><input id="Proceeding2Photo" name="Proceeding2Photo" type="file" accept="application/pdf,image/*" style="width:100%;"></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
-                                                        Proceeding3 Photo</span><input id="Proceeding3Photo"
-                                                        name="Proceeding3Photo" type="file"
-                                                        accept="application/pdf,image/*" style="width:100%;">
+                                                        Proceeding3 Photo</span><input id="Proceeding3Photo" name="Proceeding3Photo" type="file" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
-                                                        Extra Document1</span><input id="ExtraDoc1" name="ExtraDoc1"
-                                                        type="file" accept="application/pdf,image/*"
-                                                        style="width:100%;">
+                                                        Extra Document1</span><input id="ExtraDoc1" name="ExtraDoc1" type="file" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
-                                                        Extra Document2</span><input id="ExtraDoc2" name="ExtraDoc2"
-                                                        type="file" accept="application/pdf,image/*"
-                                                        style="width:100%;">
+                                                        Extra Document2</span><input id="ExtraDoc2" name="ExtraDoc2" type="file" accept="application/pdf,image/*" style="width:100%;">
                                                 </td>
                                             </tr colspan="4" class="spin-label">
                                             <tr>
@@ -486,11 +414,9 @@ class="active"
                                     @method('POST')
                                     @csrf
                                     <div class="form-group mb-top">
-                                        <input type="hidden" value="{{$SelfAds->RenewalID}}" id="RenewalID"
-                                            name="RenewalID">
+                                        <input type="hidden" value="{{$SelfAds->RenewalID}}" id="RenewalID" name="RenewalID">
                                         <label for="complaintinput5">Comments</label>
-                                        <textarea id="comments" name="comments" rows="5" class="form-control round"
-                                            placeholder="comments"></textarea>
+                                        <textarea id="comments" name="comments" rows="5" class="form-control round" placeholder="comments"></textarea>
                                         <button type="submit" class="btn btn-success mb-top" id="commentTo">
                                             <i class="icon-check2"></i> Comment
                                         </button>
@@ -513,8 +439,7 @@ class="active"
                                                 <div class="post-comments">
                                                     <p class="meta">
                                                         <span class="CommentUser"><i class="icon-android-contact"></i>
-                                                            {{$comment->UserID}}</span> says : <i
-                                                            class="pull-right"></i>
+                                                            {{$comment->UserID}}</span> says : <i class="pull-right"></i>
                                                         <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
                                                     </p>
                                                     <p class="comment_color">
@@ -536,95 +461,82 @@ class="active"
                     <div class="tab-pane" id="tab3" aria-labelledby="base-tab3" aria-expanded="false">
                         <div class="row">
                             <!-- photos -->
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="scroll">
                                     <label for="">Aadhar no Document Photo</label>
-                                    <img src="{{$SelfAds->AadharPath}}" alt="" style="width:100%;" id="AadharPath"
-                                        name="AadharPath" onclick="myfunction('first')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->AadharPath}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->AadharPath}}" alt="" style="width:100%;" id="AadharPath" name="AadharPath" onclick="myfunction('first')">
                                     <br>
                                     <label for="">Trade License Document Photo</label>
-                                    <img src="{{$SelfAds->TradeLicensePath}}" alt="" style="width:100%;"
-                                        id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->TradeLicensePath}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->TradeLicensePath}}" alt="" style="width:100%;" id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
                                     <br>
                                     <label for="">GPS Photo Path Document Photo</label>
-                                    <img src="{{$SelfAds->GPSPhotoPath}}" alt="" style="width: 100%;" id="GPSPhotoPath"
-                                        name="GPSPhotoPath" onclick="myfunction('third')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->GPSPhotoPath}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->GPSPhotoPath}}" alt="" style="width: 100%;" id="GPSPhotoPath" name="GPSPhotoPath" onclick="myfunction('third')">
                                     <br>
                                     <label for="">Holding No Path Document Photo</label>
-                                    <img src="{{$SelfAds->HoldingNoPath}}" alt="" style="width: 100%;"
-                                        id="HoldingNoPath" name="HoldingNoPath" onclick="myfunction('forth')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->HoldingNoPath}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->HoldingNoPath}}" alt="" style="width: 100%;" id="HoldingNoPath" name="HoldingNoPath" onclick="myfunction('forth')">
                                     <br>
                                     <label for="">GST Path Document Photo</label>
-                                    <img src="{{$SelfAds->GSTPath}}" alt="" style="width: 100%;" id="GSTPath"
-                                        name="GSTPath" onclick="myfunction('fifth')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->GSTPath}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->GSTPath}}" alt="" style="width: 100%;" id="GSTPath" name="GSTPath" onclick="myfunction('fifth')">
                                     <br>
                                     <label for="">Proceeding1Photo</label>
-                                    <img src="{{$SelfAds->Proceeding1Photo}}" alt="" style="width: 100%;"
-                                        id="Proceeding1Photo" name="Proceeding1Photo" onclick="myfunction('sixth')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->Proceeding1Photo}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->Proceeding1Photo}}" alt="" style="width: 100%;" id="Proceeding1Photo" name="Proceeding1Photo" onclick="myfunction('sixth')">
                                     <br>
                                     <label for="">Proceeding2Photo</label>
-                                    <img src="{{$SelfAds->Proceeding2Photo}}" alt="" style="width: 100%;"
-                                        id="Proceeding2Photo" name="Proceeding1Photo" onclick="myfunction('seventh')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->Proceeding2Photo}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->Proceeding2Photo}}" alt="" style="width: 100%;" id="Proceeding2Photo" name="Proceeding1Photo" onclick="myfunction('seventh')">
                                     <br>
                                     <label for="">Proceeding3Photo</label>
-                                    <img src="{{$SelfAds->Proceeding3Photo}}" alt="" style="width: 100%;"
-                                        id="Proceeding3Photo" name="Proceeding1Photo" onclick="myfunction('eighth')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->Proceeding3Photo}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->Proceeding3Photo}}" alt="" style="width: 100%;" id="Proceeding3Photo" name="Proceeding1Photo" onclick="myfunction('eighth')">
                                     <br>
                                     <label for="">extraDoc1</label>
-                                    <img src="{{$SelfAds->extraDoc1}}" alt="" style="width: 100%;" id="extraDoc1"
-                                        name="extraDoc1" onclick="myfunction('ninth')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->extraDoc1}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->extraDoc1}}" alt="" style="width: 100%;" id="extraDoc1" name="extraDoc1" onclick="myfunction('ninth')">
                                     <br>
                                     <label for="">extraDoc2</label>
-                                    <img src="{{$SelfAds->extraDoc2}}" alt="" style="width: 100%;" id="extraDoc2"
-                                        name="extraDoc2" onclick="myfunction('tenth')">
+                                    &nbsp;
+                                    <a class="btn btn-danger btn-sm view-pdf" href="{{$SelfAds->extraDoc2}}">
+                                        Preview
+                                    </a>
+                                    <embed src="{{$SelfAds->extraDoc2}}" alt="" style="width: 100%;" id="extraDoc2" name="extraDoc2" onclick="myfunction('tenth')">
                                 </div>
                             </div>
                             <!-- photos -->
                             <!-- preview -->
-                            <div class="col-md-9">
-                                <div class="card-header card-bg mb-8">
-                                    <div class="card-title my-card-title">Preview</div>
-                                </div>
-                                <a href="{{$SelfAds->AadharPath}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->AadharPath}}" alt="" id="first" href="#img1"
-                                        style="width: 100%;">
-                                </a>
 
-                                <a href="{{$SelfAds->TradeLicensePath}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->TradeLicensePath}}" alt="" style="width:100%;" id="second">
-                                </a>
-                                <a href="{{$SelfAds->GPSPhotoPath}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->GPSPhotoPath}}" alt="" style="width: 100%;" id="third">
-                                </a>
-
-                                <a href="{{$SelfAds->HoldingNoPath}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->HoldingNoPath}}" alt="" style="width: 100%;" id="forth">
-                                </a>
-
-                                <a href="{{$SelfAds->GSTPath}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->GSTPath}}" alt="" style="width: 100%;" id="fifth">
-                                </a>
-
-                                <a href="{{$SelfAds->Proceeding1Photo}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->Proceeding1Photo}}" alt="" style="width: 100%;" id="sixth">
-                                </a>
-
-                                <a href="{{$SelfAds->Proceeding2Photo}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->Proceeding2Photo}}" alt="" style="width: 100%;" id="seventh">
-                                </a>
-
-                                <a href="{{$SelfAds->Proceeding3Photo}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->Proceeding3Photo}}" alt="" style="width: 100%;" id="eighth">
-                                </a>
-
-                                <a href="{{$SelfAds->extraDoc1}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->extraDoc1}}" alt="" style="width: 100%;" id="ninth">
-                                </a>
-
-                                <a href="{{$SelfAds->extraDoc2}}" data-toggle="lightbox">
-                                    <img src="{{$SelfAds->extraDoc2}}" alt="" style="width: 100%;" id="tenth">
-                                </a>
-                            </div>
                             <!-- preview -->
                         </div>
                     </div>
@@ -641,34 +553,12 @@ class="active"
 
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
-    integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/preview-pdf.js"></script>
 <script>
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
-
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#datatable').DataTable();
-        displayNone();
         $("#advetOutboxActive").addClass('active');
     });
-
-    function displayNone() {
-        document.getElementById("first").style.display = 'none';
-        document.getElementById("second").style.display = 'none';
-        document.getElementById("third").style.display = 'none';
-        document.getElementById("forth").style.display = 'none';
-        document.getElementById("fifth").style.display = 'none';
-        document.getElementById("sixth").style.display = 'none';
-        document.getElementById("seventh").style.display = 'none';
-        document.getElementById("eighth").style.display = 'none';
-        document.getElementById("ninth").style.display = 'none';
-        document.getElementById("tenth").style.display = 'none';
-    }
 
     function myfunction(id) {
         displayNone();
@@ -680,8 +570,8 @@ class="active"
     }
 
     // Comment Save Using Ajax
-    $(function () {
-        $('#commentTo').submit(function (e) {
+    $(function() {
+        $('#commentTo').submit(function(e) {
             var targetform = $('#commentTo');
             var murl = targetform.attr('action');
             var mdata = $("#commentTo").serialize();
@@ -692,7 +582,7 @@ class="active"
                 type: "post",
                 data: mdata,
                 datatype: "json",
-                success: function (mdata) {
+                success: function(mdata) {
                     // alert("Data Successfully Added");
                     Swal.fire(
                         'Good job!',
@@ -700,13 +590,12 @@ class="active"
                         'success'
                     )
                 },
-                error: function (error) {
+                error: function(error) {
                     alert(error);
                 },
             });
         });
     });
     // Comment Save Using Ajax
-
 </script>
 @endsection
