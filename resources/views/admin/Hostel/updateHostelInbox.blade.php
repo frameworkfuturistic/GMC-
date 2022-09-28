@@ -29,16 +29,13 @@ class="active"
         <div class="card-block">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1"
-                        aria-expanded="true">Application Details</a>
+                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1" aria-expanded="true">Application Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2"
-                        aria-expanded="false">Workflow</a>
+                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2" aria-expanded="false">Workflow</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3"
-                        aria-expanded="false">Documents</a>
+                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3" aria-expanded="false">Documents</a>
                 </li>
             </ul>
             <div class="tab-content px-1 pt-1">
@@ -52,56 +49,45 @@ class="active"
                                     APPLICATION</div>
                             </div>
                             <!-- form -->
-                            <form action="{{url('rnc/updatehostel/'.$hostel->id)}}" method="POST"
-                                enctype="multipart/form-data">
+                            <form action="{{url('rnc/updatehostel/'.$hostel->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td class="spin-label">Applicant<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Applicant<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input class="form-control" id="Applicant" name="Applicant"
-                                                        value="{{$hostel->Applicant}}">
+                                                    <input class="form-control" id="Applicant" name="Applicant" value="{{$hostel->Applicant}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Father<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Father<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input class="form-control" id="Father" name="Father" type="text"
-                                                        value="{{$hostel->Father}}">
+                                                    <input class="form-control" id="Father" name="Father" type="text" value="{{$hostel->Father}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">E-mail<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">E-mail<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input class="form-control" id="email" name="email" type="email"
-                                                        value="{{$hostel->Email}}">
+                                                    <input class="form-control" id="email" name="email" type="email" value="{{$hostel->Email}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Residence Address<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Residence Address<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input class="form-control" id="ResidenceAddress"
-                                                        name="ResidenceAddress" type="text"
-                                                        value="{{$hostel->ResidenceAddress}}">
+                                                    <input class="form-control" id="ResidenceAddress" name="ResidenceAddress" type="text" value="{{$hostel->ResidenceAddress}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Ward No<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <select class="form-control" id="WardNo" name="WardNo">
@@ -109,24 +95,21 @@ class="active"
                                                         <option value="">Select One</option>
                                                         @foreach($wards as $ward)
                                                         <option value="{{$ward->StringParameter}}">
-                                                            {{$ward->StringParameter}}</option>
+                                                            {{$ward->StringParameter}}
+                                                        </option>
                                                         @endforeach
                                                     </select>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Permanent Address<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Permanent Address<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input class="form-control" id="PermanentAddress"
-                                                        name="PermanentAddress" type="text"
-                                                        value="{{$hostel->PermanentAddress}}">
+                                                    <input class="form-control" id="PermanentAddress" name="PermanentAddress" type="text" value="{{$hostel->PermanentAddress}}">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="spin-label">Ward No<span
-                                                        class="spin-separator spin-star">*</span></td>
+                                                <td class="spin-label">Ward No<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
                                                     <select class="form-control" id="WardNo1" name="WardNo1">
@@ -135,11 +118,11 @@ class="active"
                                                         <option value="">Select One</option>
                                                         @foreach($wards as $ward)
                                                         <option value="{{$ward->StringParameter}}">
-                                                            {{$ward->StringParameter}}</option>
+                                                            {{$ward->StringParameter}}
+                                                        </option>
                                                         @endforeach
                                                     </select>
-                                                    <span class="field-validation-valid text-danger"
-                                                        data-valmsg-for="WardNo1" data-valmsg-replace="true"></span>
+                                                    <span class="field-validation-valid text-danger" data-valmsg-for="WardNo1" data-valmsg-replace="true"></span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -162,8 +145,7 @@ class="active"
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
-                                            <td class="spin-label">License Year<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-label">License Year<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
                                                 <input type="hidden" value="{{$hostel->id}}" id="id" name="id">
@@ -182,75 +164,70 @@ class="active"
                                             <td>Established Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                            <select class="form-control" id="EstablishedType" name="EstablishedType">
-                                                <option value="{{$hostel->EstablishedType}}">{{$hostel->EstablishedType}}</option>
-                                                <option value="">Select One</option>
-                                                @foreach($establishedTypes as $establishedType)
-                                                <option value="{{$establishedType->StringParameter}}">{{$establishedType->StringParameter}}</option>
-                                                @endforeach
-                                            </select>
+                                                <select class="form-control" id="EstablishedType" name="EstablishedType">
+                                                    <option value="{{$hostel->EstablishedType}}">{{$hostel->EstablishedType}}</option>
+                                                    <option value="">Select One</option>
+                                                    @foreach($establishedTypes as $establishedType)
+                                                    <option value="{{$establishedType->StringParameter}}">{{$establishedType->StringParameter}}</option>
+                                                    @endforeach
+                                                </select>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Entity Name<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="text" class="form-control" id="EntityName"
-                                                    name="EntityName" value="{{$hostel->EntityName}}">
+                                                <input type="text" class="form-control" id="EntityName" name="EntityName" value="{{$hostel->EntityName}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Entity Address<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="text" class="form-control" id="EntityAddress"
-                                                    name="EntityAddress" value="{{$hostel->EntityAddress}}">
+                                                <input type="text" class="form-control" id="EntityAddress" name="EntityAddress" value="{{$hostel->EntityAddress}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Holding No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="HoldingNo" name="HoldingNo"
-                                                    value="{{$hostel->HoldingNo}}">
+                                                <input class="form-control" type="text" id="HoldingNo" name="HoldingNo" value="{{$hostel->HoldingNo}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Trade License No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="LicenseNo" name="LicenseNo"
-                                                    value="{{$hostel->LicenseNo}}">
+                                                <input class="form-control" type="text" id="LicenseNo" name="LicenseNo" value="{{$hostel->LicenseNo}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Longitude<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="Longitude" name="Longitude"
-                                                    value="{{$hostel->Longitude}}">
+                                                <input class="form-control" type="text" id="Longitude" name="Longitude" value="{{$hostel->Longitude}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Latitude<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="Latitude" name="Latitude"
-                                                    value="{{$hostel->Latitude}}">
+                                                <input class="form-control" type="text" id="Latitude" name="Latitude" value="{{$hostel->Latitude}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Organization Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <select class="form-control" id="OrganizationType"
-                                                    name="OrganizationType">
+                                                <select class="form-control" id="OrganizationType" name="OrganizationType">
                                                     <option value="{{$hostel->OrganizationType}}">
-                                                        {{$hostel->OrganizationType}}</option>
+                                                        {{$hostel->OrganizationType}}
+                                                    </option>
                                                     <option value="">Select One</option>
                                                     @foreach($organizeTypes as $organizeType)
                                                     <option value="{{$organizeType->StringParameter}}">
-                                                        {{$organizeType->StringParameter}}</option>
+                                                        {{$organizeType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -265,7 +242,8 @@ class="active"
                                                     <option value="">Select One</option>
                                                     @foreach($deedTypes as $deedType)
                                                     <option value="{{$deedType->StringParameter}}">
-                                                        {{$deedType->StringParameter}}</option>
+                                                        {{$deedType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -274,14 +252,15 @@ class="active"
                                             <td>Water Supply Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <select class="form-control" id="WaterSupplyType"
-                                                    name="WaterSupplyType">
+                                                <select class="form-control" id="WaterSupplyType" name="WaterSupplyType">
                                                     <option value="{{$hostel->WaterSupplyType}}">
-                                                        {{$hostel->WaterSupplyType}}</option>
+                                                        {{$hostel->WaterSupplyType}}
+                                                    </option>
                                                     <option value="">Select One</option>
                                                     @foreach($supplyTypes as $supplyType)
                                                     <option value="{{$supplyType->StringParameter}}">
-                                                        {{$supplyType->StringParameter}}</option>
+                                                        {{$supplyType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -290,14 +269,15 @@ class="active"
                                             <td>Electricity Type<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <select class="form-control" id="ElectricityType"
-                                                    name="ElectricityType">
+                                                <select class="form-control" id="ElectricityType" name="ElectricityType">
                                                     <option value="{{$hostel->ElectricityType}}">
-                                                        {{$hostel->ElectricityType}}</option>
+                                                        {{$hostel->ElectricityType}}
+                                                    </option>
                                                     <option value="">Select One</option>
                                                     @foreach($electricityTypes as $electricityType)
                                                     <option value="{{$electricityType->StringParameter}}">
-                                                        {{$electricityType->StringParameter}}</option>
+                                                        {{$electricityType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -312,7 +292,8 @@ class="active"
                                                     <option value="">Select One</option>
                                                     @foreach($organizeTypes as $organizeType)
                                                     <option value="{{$organizeType->StringParameter}}">
-                                                        {{$organizeType->StringParameter}}</option>
+                                                        {{$organizeType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -326,7 +307,8 @@ class="active"
                                                     <option value="">Select One</option>
                                                     @foreach($lodgeTypes as $lodgeType)
                                                     <option value="{{$organizeType->StringParameter}}">
-                                                        {{$lodgeType->StringParameter}}</option>
+                                                        {{$lodgeType->StringParameter}}
+                                                    </option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -335,24 +317,21 @@ class="active"
                                             <td>No of CCTV Camera<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="number" id="CCTVCameraNo"
-                                                    name="CCTVCameraNo" value="{{$hostel->CCTVCameraNo}}">
+                                                <input class="form-control" type="number" id="CCTVCameraNo" name="CCTVCameraNo" value="{{$hostel->CCTVCameraNo}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>No of Beds<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="number" class="form-control" id="NoOfBeds" name="NoOfBeds"
-                                                    value="{{$hostel->NoOfBeds}}">
+                                                <input type="number" class="form-control" id="NoOfBeds" name="NoOfBeds" value="{{$hostel->NoOfBeds}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>No of Rooms<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input type="number" class="form-control" id="NoOfRooms"
-                                                    name="NoOfRooms" value="{{$hostel->NoOfRooms}}">
+                                                <input type="number" class="form-control" id="NoOfRooms" name="NoOfRooms" value="{{$hostel->NoOfRooms}}">
                                             </td>
                                         </tr>
                                         <tr>
@@ -360,61 +339,49 @@ class="active"
                                             </td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="number" id="NoOfFireExtinguishers"
-                                                    name="NoOfFireExtinguishers"
-                                                    value="{{$hostel->NoOfFireExtinguishers}}">
+                                                <input class="form-control" type="number" id="NoOfFireExtinguishers" name="NoOfFireExtinguishers" value="{{$hostel->NoOfFireExtinguishers}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>No of Entry Gates<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="EntryGatesNo"
-                                                    name="EntryGatesNo" value="{{$hostel->NoOfEntryGate}}">
+                                                <input class="form-control" type="text" id="EntryGatesNo" name="EntryGatesNo" value="{{$hostel->NoOfEntryGate}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>No of Exit Gates<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="NoOfExitGate"
-                                                    name="NoOfExitGate" value="{{$hostel->NoOfExitGate}}">
+                                                <input class="form-control" type="text" id="NoOfExitGate" name="NoOfExitGate" value="{{$hostel->NoOfExitGate}}">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>No of Two Wheelers Parking Space<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td>No of Two Wheelers Parking Space<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="NoOfTwoWheelersParking"
-                                                    name="NoOfTwoWheelersParking"
-                                                    value="{{$hostel->NoOfTwoWheelersParking}}">
+                                                <input class="form-control" type="text" id="NoOfTwoWheelersParking" name="NoOfTwoWheelersParking" value="{{$hostel->NoOfTwoWheelersParking}}">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>No of Four Wheelers Parking Space<span
-                                                    class="spin-separator spin-star">*</span></td>
+                                            <td>No of Four Wheelers Parking Space<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="NoOfFourWheelersParking"
-                                                    name="NoOfFourWheelersParking"
-                                                    value="{{$hostel->NoOfFourWheelersParking}}">
+                                                <input class="form-control" type="text" id="NoOfFourWheelersParking" name="NoOfFourWheelersParking" value="{{$hostel->NoOfFourWheelersParking}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Aadhar Card No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="AadharNo" name="AadharNo"
-                                                    value="{{$hostel->AadharNo}}">
+                                                <input class="form-control" type="text" id="AadharNo" name="AadharNo" value="{{$hostel->AadharNo}}">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>PAN Card No<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
                                             <td>
-                                                <input class="form-control" type="text" id="PANNo" name="PANNo"
-                                                    value="{{$hostel->PANNo}}">
+                                                <input class="form-control" type="text" id="PANNo" name="PANNo" value="{{$hostel->PANNo}}">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -435,65 +402,56 @@ class="active"
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload
                                                     Lodge/Hostel Frontage Photograph</span>
-                                                <input type="file" style="width:100%;" id="HostelFrontagePath"
-                                                    name="HostelFrontagePath">
+                                                <input type="file" style="width:100%;" id="HostelFrontagePath" name="HostelFrontagePath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Aadhar
                                                     No Photograph</span>
-                                                <input type="file" style="width:100%;" id="AadharNoPath"
-                                                    name="AadharNoPath">
+                                                <input type="file" style="width:100%;" id="AadharNoPath" name="AadharNoPath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Fire
                                                     Extinguishers Photograph</span>
-                                                <input type="file" style="width:100%;" id="FireExtinguishersPath"
-                                                    name="FireExtinguishersPath">
+                                                <input type="file" style="width:100%;" id="FireExtinguishersPath" name="FireExtinguishersPath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload CCTV
                                                     Camera Photograph</span>
-                                                <input type="file" style="width:100%;" id="CCTVCameraPath"
-                                                    name="CCTVCameraPath">
+                                                <input type="file" style="width:100%;" id="CCTVCameraPath" name="CCTVCameraPath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Name
                                                     Plate With Mobile No Photograph</span>
-                                                <input type="file" style="width:100%;" id="NamePlatePath"
-                                                    name="NamePlatePath">
+                                                <input type="file" style="width:100%;" id="NamePlatePath" name="NamePlatePath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Entry
                                                     and Exit Photograph</span>
-                                                <input type="file" style="width:100%;" id="EntryExitPath"
-                                                    name="EntryExitPath">
+                                                <input type="file" style="width:100%;" id="EntryExitPath" name="EntryExitPath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Building
                                                     Plan Photograph</span>
-                                                <input type="file" style="width:100%;" id="BuildingPlanPath"
-                                                    name="BuildingPlanPath">
+                                                <input type="file" style="width:100%;" id="BuildingPlanPath" name="BuildingPlanPath">
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Solid
                                                     Waste Photograph</span>
-                                                <input type="file" style="width:100%;" id="SolidWastePath"
-                                                    name="SolidWastePath">
+                                                <input type="file" style="width:100%;" id="SolidWastePath" name="SolidWastePath">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="spin-label" style="width:100%;"><span>Upload Holding
                                                     Tax Receipt Photograph</span>
-                                                <input type="file" style="width:100%;" id="HoldingTaxReceiptPath"
-                                                    name="HoldingTaxReceiptPath">
+                                                <input type="file" style="width:100%;" id="HoldingTaxReceiptPath" name="HoldingTaxReceiptPath">
                                             </td>
                                         </tr>
                                         <tr colspan="4" class="spin-label">
@@ -526,11 +484,9 @@ class="active"
                                 @method('POST')
                                 @csrf
                                 <div class="form-group mb-top">
-                                    <input type="hidden" value="{{$hostel->RenewalID}}" id="RenewalID"
-                                        name="RenewalID">
+                                    <input type="hidden" value="{{$hostel->RenewalID}}" id="RenewalID" name="RenewalID">
                                     <label for="complaintinput5">Comments</label>
-                                    <textarea id="comments" name="comments" rows="5" class="form-control round"
-                                        placeholder="comments"></textarea>
+                                    <textarea id="comments" name="comments" rows="5" class="form-control round" placeholder="comments"></textarea>
                                     <button type="submit" class="btn btn-success mb-top" id="commentTo">
                                         <i class="icon-check2"></i> Comment
                                     </button>
@@ -542,8 +498,7 @@ class="active"
                             </form>
                             <!-- comments -->
                             <!-- form -->
-                            <form class="form mb-top" method="POST"
-                                action="{{url('rnc/hostelWorkflow/'.$hostel->id)}}" id="forwardTo1">
+                            <form class="form mb-top" method="POST" action="{{url('rnc/hostelWorkflow/'.$hostel->id)}}" id="forwardTo1">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-body">
@@ -569,8 +524,7 @@ class="active"
 
                                     <div class="form-group">
                                         <label for="complaintinput2">Application Status</label>
-                                        <input type="text" class="form-control" id="AppStatus" name="AppStatus"
-                                            value="{{$hostel->ApplicationStatus}}">
+                                        <input type="text" class="form-control" id="AppStatus" name="AppStatus" value="{{$hostel->ApplicationStatus}}">
                                     </div>
 
                                     @if($hostel->CurrentUser==$workflowInitiator->Finisher)
@@ -609,9 +563,9 @@ class="active"
                             <div class="container bootstrap snippets bootdey">
                                 <div class="blog-comment">
                                     <h3 class="text-success">Comments</h3>
-                                        @foreach($comments as $comment)
-                                        <ul class="comments mb-top">
-                                            <li class="clearfix">
+                                    @foreach($comments as $comment)
+                                    <ul class="comments mb-top">
+                                        <li class="clearfix">
                                             <div class="post-comments">
                                                 <p class="meta">
                                                     <span class="CommentUser"><i class="icon-android-contact"></i> {{$comment->UserID}}</span> says : <i class="pull-right"></i>
@@ -621,9 +575,9 @@ class="active"
                                                     <i class="icon-edit2"></i> {{$comment->Remarks}}
                                                 </p>
                                             </div>
-                                            </li>
-                                        </ul>
-                                        @endforeach
+                                        </li>
+                                    </ul>
+                                    @endforeach
                                 </div>
                             </div>
                             </ul>
@@ -639,40 +593,31 @@ class="active"
                         <div class="col-md-3">
                             <div class="scroll">
                                 <label for="">Lodge/Hostel Frontage Photograph</label>
-                                <img src="{{$hostel->HostelFrontagePath}}" alt="" style="width:100%;" id="AadharPath"
-                                    name="AadharPath" onclick="myfunction('first')">
+                                <img src="{{$hostel->HostelFrontagePath}}" alt="" style="width:100%;" id="AadharPath" name="AadharPath" onclick="myfunction('first')">
                                 <br>
                                 <label for="">Aadhar Document Photo</label>
-                                <img src="{{$hostel->AadharNoPath}}" alt="" style="width:100%;" id="TradeLicensePath"
-                                    name="TradeLicensePath" onclick="myfunction('second')">
+                                <img src="{{$hostel->AadharNoPath}}" alt="" style="width:100%;" id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
                                 <br>
                                 <label for="">Fire Extinguisher Photo</label>
-                                <img src="{{$hostel->FireExtinguishersPath}}" alt="" style="width: 100%;"
-                                    id="hostelPhotoPath" name="hostelPhotoPath" onclick="myfunction('third')">
+                                <img src="{{$hostel->FireExtinguishersPath}}" alt="" style="width: 100%;" id="hostelPhotoPath" name="hostelPhotoPath" onclick="myfunction('third')">
                                 <br>
                                 <label for="">CCTV Camera Photo</label>
-                                <img src="{{$hostel->CCTVCameraPath}}" alt="" style="width: 100%;" id="OwnerBookPath"
-                                    name="OwnerBookPath" onclick="myfunction('forth')">
+                                <img src="{{$hostel->CCTVCameraPath}}" alt="" style="width: 100%;" id="OwnerBookPath" name="OwnerBookPath" onclick="myfunction('forth')">
                                 <br>
                                 <label for="">Name Plate With Mobile Document Photo</label>
-                                <img src="{{$hostel->NamePlatePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('fifth')">
+                                <img src="{{$hostel->NamePlatePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('fifth')">
                                 <br>
                                 <label for="">Entry Exit Document Photo</label>
-                                <img src="{{$hostel->EntryExitPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('sixth')">
+                                <img src="{{$hostel->EntryExitPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('sixth')">
                                 <br>
                                 <label for="">Building Plan Document Photo</label>
-                                <img src="{{$hostel->BuildingPlanPath}}" alt="" style="width: 100%;"
-                                    id="DrivingLicensePath" name="DrivingLicensePath" onclick="myfunction('seventh')">
+                                <img src="{{$hostel->BuildingPlanPath}}" alt="" style="width: 100%;" id="DrivingLicensePath" name="DrivingLicensePath" onclick="myfunction('seventh')">
                                 <br>
                                 <label for="">Solid Waste Usage Document Photo</label>
-                                <img src="{{$hostel->SolidWastePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('eighth')">
+                                <img src="{{$hostel->SolidWastePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('eighth')">
                                 <br>
                                 <label for="">Holding Tax Document Photo</label>
-                                <img src="{{$hostel->HoldingTaxReceiptPath}}" alt="" style="width: 100%;"
-                                    id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('ninth')">
+                                <img src="{{$hostel->HoldingTaxReceiptPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('ninth')">
                             </div>
                         </div>
                         <!-- photos -->
@@ -682,8 +627,7 @@ class="active"
                                 <div class="card-title my-card-title">Preview</div>
                             </div>
                             <a href="{{$hostel->HostelFrontagePath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->HostelFrontagePath}}" alt="" id="first" href="#img1"
-                                    style="width: 100%;">
+                                <img src="{{$hostel->HostelFrontagePath}}" alt="" id="first" href="#img1" style="width: 100%;">
                             </a>
 
                             <a href="{{$hostel->AadharNoPath}}" data-toggle="lightbox">
@@ -729,20 +673,18 @@ class="active"
 @endsection
 
 @section('pagescript')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
-    integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         // add active class
         $("#hostelInbox").addClass('active');
         $('#datatable').DataTable();
@@ -771,8 +713,8 @@ class="active"
     }
 
     // Forward User using Ajax
-    $(function () {
-        $('#forwardTo1').submit(function (e) {
+    $(function() {
+        $('#forwardTo1').submit(function(e) {
             var targetform = $('#forwardTo1');
             var murl = targetform.attr('action');
             var mdata = $("#forwardTo1").serialize();
@@ -784,7 +726,7 @@ class="active"
                 type: "post",
                 data: mdata,
                 datatype: "json",
-                success: function (mdata) {
+                success: function(mdata) {
                     $('#loaderbody').hide();
                     // alert("Data Successfully Added");
                     Swal.fire(
@@ -793,7 +735,7 @@ class="active"
                         'success'
                     )
                 },
-                error: function (error) {
+                error: function(error) {
                     alert(error);
                 },
             });
@@ -801,8 +743,8 @@ class="active"
     });
     // Forward User Using Ajax
     // Comment Save Using Ajax
-    $(function () {
-        $('#commentTo').submit(function (e) {
+    $(function() {
+        $('#commentTo').submit(function(e) {
             var targetform = $('#commentTo');
             var murl = targetform.attr('action');
             var mdata = $("#commentTo").serialize();
@@ -813,7 +755,7 @@ class="active"
                 type: "post",
                 data: mdata,
                 datatype: "json",
-                success: function (mdata) {
+                success: function(mdata) {
                     // alert("Data Successfully Added");
                     Swal.fire(
                         'Good job!',
@@ -821,13 +763,12 @@ class="active"
                         'success'
                     )
                 },
-                error: function (error) {
+                error: function(error) {
                     alert(error);
                 },
             });
         });
     });
     // Comment Save Using Ajax
-
 </script>
 @endsection

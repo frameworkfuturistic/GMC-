@@ -171,7 +171,6 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
             'locations' => $InstallLocation,
             'workflowInitiator' => $workflowInitiator,
             'comments' => $comments,
-
             'parents' => $this->parent,
             'childs' => $this->child,
         );
@@ -388,7 +387,7 @@ class EloquentPrivateLandRepository implements PrivateLandRepository
             $data = PrivateLand::where('Approved', '-1')
                 ->orderByDesc('id')
                 ->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $link = "rnc/updateLandApproved/" . $row['id'];

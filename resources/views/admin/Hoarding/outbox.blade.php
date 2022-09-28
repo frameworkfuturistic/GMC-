@@ -27,8 +27,8 @@ class="active"
         <div class="mb-top">
             <!-- table -->
             <div class="container table-responsive">
-            <table class="table table-responsive mb-0 display" id="datatable">
-                <thead class="">
+                <table class="table table-responsive mb-0 display" id="datatable">
+                    <thead class="">
                         <tr>
                             <th>Action</th>
                             <th>RenewalID</th>
@@ -44,23 +44,23 @@ class="active"
                         </tr>
                     </thead>
                     <tbody>
-                          @foreach($hoardings as $hoarding)
-                          <tr>
-                              <td>
-                                  <button class="btn btn-success btn-sm" onclick="window.location.replace('rnc/hoarding-outbox/{{$hoarding->HoardingID}}')"><i class="icon-pen"></i> Select</button>
-                              </td>
-                              <td>{{$hoarding->RenewalID}}</td>
-                              <td>{{$hoarding->ApplicationDate}}</td>
-                              <td>{{$hoarding->HoardingNo}}</td>
-                              <td>{{$hoarding->LicenseYear}}</td>
-                              <td>{{$hoarding->Location}}</td>
-                              <td>{{$hoarding->Longitude}}</td>
-                              <td>{{$hoarding->Latitude}}</td>
-                              <td>{{$hoarding->Length}}</td>
-                              <td>{{$hoarding->Width}}</td>
-                              <td>{{$hoarding->MaterialType}}</td>
-                          </tr>
-                          @endforeach
+                        @foreach($hoardings as $hoarding)
+                        <tr>
+                            <td>
+                                <button class="btn btn-success btn-sm" onclick="window.location.replace('rnc/hoarding-outbox/{{$hoarding->id}}')"><i class="icon-pen"></i> Select</button>
+                            </td>
+                            <td>{{$hoarding->RenewalID}}</td>
+                            <td>{{$hoarding->ApplicationDate}}</td>
+                            <td>{{$hoarding->HoardingNo}}</td>
+                            <td>{{$hoarding->LicenseYear}}</td>
+                            <td>{{$hoarding->Location}}</td>
+                            <td>{{$hoarding->Longitude}}</td>
+                            <td>{{$hoarding->Latitude}}</td>
+                            <td>{{$hoarding->Length}}</td>
+                            <td>{{$hoarding->Width}}</td>
+                            <td>{{$hoarding->MaterialType}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -83,7 +83,7 @@ class="active"
 @section('script')
 <!-- datatable -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // add active class
         $("#hoardingOutbox").addClass('active');
         $('#datatable').DataTable({
@@ -118,7 +118,6 @@ class="active"
             }
         });
     });
-
 </script>
 <!-- datatable -->
 @endsection

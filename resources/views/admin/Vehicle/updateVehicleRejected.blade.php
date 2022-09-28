@@ -12,8 +12,8 @@ class="active"
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        {{ session()->get('message') }}
-    </div>
+    {{ session()->get('message') }}
+</div>
 @endif
 <ul class="nav nav-pills nav-justified mb-8">
     <li class="nav-item col-md-4">
@@ -29,16 +29,13 @@ class="active"
         <div class="card-block">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1"
-                        aria-expanded="true">Application Details</a>
+                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1" aria-expanded="true">Application Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2"
-                        aria-expanded="false">Workflow</a>
+                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2" aria-expanded="false">Workflow</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3"
-                        aria-expanded="false">Documents</a>
+                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3" aria-expanded="false">Documents</a>
                 </li>
             </ul>
             <div class="tab-content px-1 pt-1">
@@ -53,7 +50,7 @@ class="active"
                             </div>
                             <!-- form -->
                             <form action="{{url('rnc/updateVehicle/'.$vehicle->id)}}" method="POST" enctype="multipart/form-data">
-                                @csrf 
+                                @csrf
                                 @method('put')
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
@@ -152,18 +149,18 @@ class="active"
                             <div class="table-responsive">
                                 <table id="myTable" class="table table-bordered">
                                     <tbody>
-                                            <tr>
-                                                <td class="spin-label">License From<span class="spin-separator spin-star">*</span></td>            
-                                                <td>
-                                                    <input type="date" class="form-control" id="LicenseFrom" name="LicenseFrom" required="" value="{{$vehicle->LicenseFrom}}">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="spin-label">License To<span class="spin-separator spin-star">*</span></td>            
-                                                <td>
-                                                    <input type="date" class="form-control" id="LicenseTo" name="LicenseTo" required="" value="{{$vehicle->LicenseTo}}">
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td class="spin-label">License From<span class="spin-separator spin-star">*</span></td>
+                                            <td>
+                                                <input type="date" class="form-control" id="LicenseFrom" name="LicenseFrom" required="" value="{{$vehicle->LicenseFrom}}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spin-label">License To<span class="spin-separator spin-star">*</span></td>
+                                            <td>
+                                                <input type="date" class="form-control" id="LicenseTo" name="LicenseTo" required="" value="{{$vehicle->LicenseTo}}">
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td class="spin-label">Entity Name <span class="spin-separator spin-star">*</span></td>
 
@@ -300,106 +297,44 @@ class="active"
                 <!-- application details tab -->
                 <!-- workflow tab -->
                 <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
-                        <div class="card-header card-bg">
-                            <div class="card-title my-card-title">Office Communication Workflow</div>
-                        </div>
-                            <div class="card-body">
-                                <!-- comments -->
-                                <div class="bootstrap snippets bootdey mb-top">
-                                    <div class="blog-comment">
-                                        <h3 class="text-success">Comments</h3>
-                                        @foreach($comments as $comment)
-                                        <ul class="comments mb-top">
-                                            <li class="clearfix">
-                                                <div class="post-comments">
-                                                    <p class="meta">
-                                                        <span class="CommentUser"><i class="icon-android-contact"></i>
-                                                            {{$comment->UserID}}</span> says : <i
-                                                            class="pull-right"></i>
-                                                        <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
-                                                    </p>
-                                                    <p class="comment_color">
-                                                        <i class="icon-edit2"></i> {{$comment->Remarks}}
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <!-- comments -->
-                            </div>
+                    <div class="card-header card-bg">
+                        <div class="card-title my-card-title">Office Communication Workflow</div>
                     </div>
-                    <!-- workflow tab -->
+                    <div class="card-body">
+                        <!-- comments -->
+                        <div class="bootstrap snippets bootdey mb-top">
+                            <div class="blog-comment">
+                                <h3 class="text-success">Comments</h3>
+                                @foreach($comments as $comment)
+                                <ul class="comments mb-top">
+                                    <li class="clearfix">
+                                        <div class="post-comments">
+                                            <p class="meta">
+                                                <span class="CommentUser"><i class="icon-android-contact"></i>
+                                                    {{$comment->UserID}}</span> says : <i class="pull-right"></i>
+                                                <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
+                                            </p>
+                                            <p class="comment_color">
+                                                <i class="icon-edit2"></i> {{$comment->Remarks}}
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- comments -->
+                    </div>
+                </div>
+                <!-- workflow tab -->
                 <!-- documents tab -->
                 <div class="tab-pane" id="tab3" aria-labelledby="base-tab3" aria-expanded="false">
                     <div class="row">
                         <!-- photos -->
                         <div class="col-md-3">
-                            <div class="scroll">
-                                <label for="">Aadhar no Document Photo</label>
-                                <img src="{{$vehicle->AadharPath}}" alt="" style="width:100%;" id="AadharPath"
-                                    name="AadharPath" onclick="myfunction('first')">
-                                <br>
-                                <label for="">Trade License Document Photo</label>
-                                <img src="{{$vehicle->TradeLicensePath}}" alt="" style="width:100%;"
-                                    id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
-                                <br>
-                                <label for="">Vehicle Document Photo</label>
-                                <img src="{{$vehicle->VehiclePhotoPath}}" alt="" style="width: 100%;" id="VehiclePhotoPath"
-                                    name="VehiclePhotoPath" onclick="myfunction('third')">
-                                <br>
-                                <label for="">Owner Book Document Photo</label>
-                                <img src="{{$vehicle->OwnerBookPath}}" alt="" style="width: 100%;" id="OwnerBookPath"
-                                    name="OwnerBookPath" onclick="myfunction('forth')">
-                                <br>
-                                <label for="">Driving License Document Photo</label>
-                                <img src="{{$vehicle->DrivingLicensePath}}" alt="" style="width: 100%;" id="DrivingLicensePath"
-                                    name="DrivingLicensePath" onclick="myfunction('fifth')">
-                                <br>
-                                <label for="">Insurance Document Photo</label>
-                                <img src="{{$vehicle->InsurancePhotoPath}}" alt="" style="width: 100%;" id="InsurancePhotoPath"
-                                name="InsurancePhotoPath" onclick="myfunction('sixth')">
-                                <br>
-                                <label for="">GST No Document Photo</label>
-                                <img src="{{$vehicle->GSTNoPhotoPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('seventh')">
-                            </div>
+                            @include('admin.Vehicle.upload-images')
                         </div>
                         <!-- photos -->
-                        <!-- preview -->
-                        <div class="col-md-9">
-                            <div class="card-header card-bg mb-8">
-                                <div class="card-title my-card-title">Preview</div>
-                            </div>
-                            <a href="{{$vehicle->AadharPath}}" data-toggle="lightbox">
-                                <img src="{{$vehicle->AadharPath}}" alt="" id="first" href="#img1" style="width: 100%;">
-                            </a>
-
-                            <a href="{{$vehicle->TradeLicensePath}}" data-toggle="lightbox">
-                                <img src="{{$vehicle->TradeLicensePath}}" alt="" style="width:100%;" id="second">
-                            </a>
-                            <a href="{{$vehicle->VehiclePhotoPath}}" data-toggle="lightbox">
-                                <img src="{{$vehicle->VehiclePhotoPath}}" alt="" style="width: 100%;" id="third">
-                            </a>
-                            
-                            <a href="{{$vehicle->OwnerBookPath}}" data-toggle="lightbox">
-                                <img src="{{$vehicle->OwnerBookPath}}" alt="" style="width: 100%;" id="forth">
-                            </a>
-                            
-                            <a href="{{$vehicle->DrivingLicensePath}}" data-toggle="lightbox">
-                                <img src="{{$vehicle->DrivingLicensePath}}" alt="" style="width: 100%;" id="fifth">
-                            </a>
-                            
-                            <a href="{{$vehicle->InsurancePhotoPath}}" data-toggle="lightbox">
-                                <img src="{{$vehicle->InsurancePhotoPath}}" alt="" style="width: 100%;" id="sixth">
-                            </a>
-                            
-                            <a href="{{$vehicle->GSTNoPhotoPath}}" data-toggle="lightbox">
-                                <img src="{{$vehicle->GSTNoPhotoPath}}" alt="" style="width: 100%;" id="seventh">
-                            </a>
-                        </div>
-                        <!-- preview -->
                     </div>
                 </div>
                 <!-- document tab -->
@@ -413,41 +348,22 @@ class="active"
 @endsection
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
-    integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/preview-pdf.js"></script>
 <script>
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#datatable').DataTable();
         // add active class
         $("#vehicleRejected").addClass('active');
-        displayNone();
         disableInputs();
     });
 
-    function displayNone() {
-        document.getElementById("first").style.display = 'none';
-        document.getElementById("second").style.display = 'none';
-        document.getElementById("third").style.display = 'none';
-        document.getElementById("forth").style.display = 'none';
-        document.getElementById("fifth").style.display = 'none';
-        document.getElementById("sixth").style.display = 'none';
-        document.getElementById("seventh").style.display = 'none';
+    function inputTools() {
+        window.open('https://www.google.com/inputtools/try/', '_blank');
     }
-
-    function myfunction(id) {
-        displayNone();
-        document.getElementById(id).style.display = 'block';
-    }
-
-    function inputTools(){
-        window.open('https://www.google.com/inputtools/try/','_blank');
-    }
-
 </script>
 @endsection
