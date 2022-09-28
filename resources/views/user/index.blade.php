@@ -107,7 +107,7 @@ active
         <div class="card text-xs-center">
             <div class="card-body">
                 <div class="card-block">
-                    <h4 class="card-title success">New Lodge/Hostel</h4>
+                    <h4 class="card-title success">Lodge/Hostel</h4>
                     <p class="lead">Application</p>
                     <img src="content/img/hostel.png" alt="" class="font_img">
                     <h6 class="card-title success">You can apply for Lodge/ Hostel</h6>
@@ -123,7 +123,7 @@ active
         <div class="card text-xs-center">
             <div class="card-body">
                 <div class="card-block">
-                    <h4 class="card-title success">New Dharmasala</h4>
+                    <h4 class="card-title success">Dharmasala</h4>
                     <p class="lead">Application</p>
                     <img src="content/img/multichannel.png" alt="" class="font_img">
                     <h6 class="card-title success">You can apply for Dharmasala</h6>
