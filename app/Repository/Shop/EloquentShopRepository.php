@@ -62,10 +62,10 @@ class EloquentShopRepository implements ShopRepository
      */
     public function shopSummaryView()
     {
-        $stmQuery = "select sum(Amount) as today_collection from toll_payments where PaymentDate=CURDATE();";
+        $stmQuery = "select sum(Amount) as today_collection from toll_payments where PaymentDate=CURDATE() AND IsActive=1;";
         $today_toll_total = DB::select($stmQuery);
 
-        $stmQuery1 = "select sum(Amount) as today_collection from shop_payments where PaymentDate=CURDATE();";
+        $stmQuery1 = "select sum(Amount) as today_collection from shop_payments where PaymentDate=CURDATE() AND IsActive=1;";
         $today_shop_total = DB::select($stmQuery1);
         $array = [
             'parents' => $this->parent,
