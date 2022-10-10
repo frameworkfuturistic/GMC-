@@ -768,18 +768,18 @@ class EloquentShopRepository implements ShopRepository
             $log->save();
 
             // Update Last Payment Transaction ID for Shops
-            $lastTranQuery="SELECT * FROM shop_payments 
+            $lastTranQuery = "SELECT * FROM shop_payments 
                             WHERE shopid=$shopPayment->ShopId
                             AND IsActive='1'
                             ORDER BY id DESC
                             LIMIT 1";
 
-            $updateTran=DB::select($lastTranQuery);
-            $updatedTranID=$updateTran[0]->id;
-            $shop=Shop::find($shopPayment->ShopId);
-            $shop->LastTranID=$updatedTranID;
+            $updateTran = DB::select($lastTranQuery);
+            $updatedTranID = $updateTran[0]->id;
+            $shop = Shop::find($shopPayment->ShopId);
+            $shop->LastTranID = $updatedTranID;
             $shop->save();
-            
+
             DB::commit();
             return response()->json($msg);
         } catch (Exception $e) {
