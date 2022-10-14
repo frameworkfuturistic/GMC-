@@ -25,6 +25,7 @@ class="active"
                 <table class="table table-hover" id="dataTable">
                     <thead>
                         <tr>
+                            <th>Action</th>
                             <th>ShopNo</th>
                             <th>Circle</th>
                             <th>Allottee</th>
@@ -94,6 +95,12 @@ class="active"
             },
             ajax: "{{ route('shops.master') }}",
             columns: [{
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+                {
                     data: 'ShopNo',
                     name: 'ShopNo'
                 },

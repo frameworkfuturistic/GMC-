@@ -48,6 +48,16 @@ class EloquentShopRepository implements ShopRepository
                 ->latest()
                 ->get();
             return Datatables::of($shop)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "shops/shop-update-view/" . $row['ID'];
+                    $btn = "<a class='btn btn-success btn-sm' href='$link' class='edit btn btn-primary btn-sm'>
+                            <i class='icon-pen'></i> Update
+                        </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
         $array = [
@@ -186,14 +196,34 @@ class EloquentShopRepository implements ShopRepository
         return response()->json('Successfully Saved the Shop', 200);
     }
 
+    // Get shop update view
+    public function shopUpdateView($id)
+    {
+        $shops = Shop::find($id);
+        $array = [
+            'parents' => $this->parent,
+            'childs' => $this->child,
+            'shop' => $shops
+        ];
+        return view('admin.Shops.shop-update-view')->with($array);
+    }
+
     /**
      * Edit Shops
      */
-    public function editShops(Request $request, $id)
+    public function editShops(Request $request)
     {
-        $shop = Shop::find($id);
-        $this->storing($shop, $request);
-        return response()->json('Successfully Updated the Shop', 200);
+        $request->validate([
+            "rate" => "numeric|required",
+            "arrear" => "numeric|required"
+        ]);
+
+        $shop = Shop::find($request->id);
+        $shop->Allottee = $request->allottee;
+        $shop->Rate = $request->rate;
+        $shop->Arrear = $request->arrear;
+        $shop->save();
+        return back()->with('message', 'Successfully Updated the Shop');
     }
 
     /**
