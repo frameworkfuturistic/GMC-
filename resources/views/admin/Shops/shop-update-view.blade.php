@@ -15,6 +15,13 @@ class="active"
     {{ session()->get('message') }}
 </div>
 @endif
+
+@if(session()->has('error'))
+<div class="alert alert-danger alert-dismissible fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{ session()->get('error') }}
+</div>
+@endif
 <div class="card">
     <div class="card-header">
         <div class="card-title">Update Shops</div>
@@ -37,11 +44,6 @@ class="active"
 
                     <label for="rate">Rate</label>
                     <input type="number" class="form-control" value="{{$shop->Rate}}" id="rate" name="rate" step="any">
-
-                    <br>
-
-                    <label for="arrear">Arrear</label>
-                    <input type="number" class="form-control" value="{{$shop->Arrear}}" id="arrear" name="arrear" step="any">
 
                     <br>
 

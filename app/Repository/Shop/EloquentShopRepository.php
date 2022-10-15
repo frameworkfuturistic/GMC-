@@ -5,6 +5,7 @@ namespace App\Repository\Shop;
 use App\Exports\ShopExport;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
+use App\Models\ShopMasterLog;
 use App\Models\ShopPayment;
 use App\Models\ShopPaymentLog;
 use App\Models\surveyLogin;
@@ -214,16 +215,29 @@ class EloquentShopRepository implements ShopRepository
     public function editShops(Request $request)
     {
         $request->validate([
-            "rate" => "numeric|required",
-            "arrear" => "numeric|required"
+            "rate" => "numeric|required"
         ]);
+        DB::beginTransaction();
+        try {
+            $shop = Shop::find($request->id);
+            $userId = auth()->user()->id;
+            // Creating Logs
+            $log = new ShopMasterLog();
+            $log->shop_id = $shop->ID;
+            $log->allottee = $shop->Allottee;
+            $log->rate = $shop->Rate;
+            $log->user_id = $userId;
+            $log->save();
 
-        $shop = Shop::find($request->id);
-        $shop->Allottee = $request->allottee;
-        $shop->Rate = $request->rate;
-        $shop->Arrear = $request->arrear;
-        $shop->save();
-        return back()->with('message', 'Successfully Updated the Shop');
+            $shop->Allottee = $request->allottee;
+            $shop->Rate = $request->rate;
+            $shop->save();
+            DB::commit();
+            return back()->with('message', 'Successfully Updated the Shop');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     /**
