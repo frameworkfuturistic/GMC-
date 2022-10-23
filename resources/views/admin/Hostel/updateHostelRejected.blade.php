@@ -12,8 +12,8 @@ class="active"
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        {{ session()->get('message') }}
-    </div>
+    {{ session()->get('message') }}
+</div>
 @endif
 <ul class="nav nav-pills nav-justified mb-8">
     <li class="nav-item col-md-4">
@@ -29,16 +29,13 @@ class="active"
         <div class="card-block">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1"
-                        aria-expanded="true">Application Details</a>
+                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1" aria-expanded="true">Application Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2"
-                        aria-expanded="false">Workflow</a>
+                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2" aria-expanded="false">Workflow</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3"
-                        aria-expanded="false">Documents</a>
+                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3" aria-expanded="false">Documents</a>
                 </li>
             </ul>
             <div class="tab-content px-1 pt-1">
@@ -136,21 +133,21 @@ class="active"
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <tbody>
-                                            <tr>
-                                                <td class="spin-label">License Year<span class="spin-separator spin-star">*</span></td>
-                                                <td class="spin-separator">:</td>
-                                                <td>
-                                                    <input type="hidden" value="{{$hostel->id}}" id="id" name="id">
-                                                    <select class="form-control" id="LicenseYear" name="LicenseYear">
-                                                        <option value="{{$hostel->LicenseYear}}">{{$hostel->LicenseYear}}</option>
-                                                        <option value="">Select One</option>
-                                                        <option value="2018-19">2018-19</option>
-                                                        <option value="2019-20">2019-20</option>
-                                                        <option value="2020-21">2020-21</option>
-                                                        <option value="2021-22">2021-22</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td class="spin-label">License Year<span class="spin-separator spin-star">*</span></td>
+                                            <td class="spin-separator">:</td>
+                                            <td>
+                                                <input type="hidden" value="{{$hostel->id}}" id="id" name="id">
+                                                <select class="form-control" id="LicenseYear" name="LicenseYear">
+                                                    <option value="{{$hostel->LicenseYear}}">{{$hostel->LicenseYear}}</option>
+                                                    <option value="">Select One</option>
+                                                    <option value="2018-19">2018-19</option>
+                                                    <option value="2019-20">2019-20</option>
+                                                    <option value="2020-21">2020-21</option>
+                                                    <option value="2021-22">2021-22</option>
+                                                </select>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>Entity Name<span class="spin-separator spin-star">*</span></td>
                                             <td class="spin-separator">:</td>
@@ -325,120 +322,44 @@ class="active"
                 <!-- application details tab -->
                 <!-- workflow tab -->
                 <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
-                        <div class="card-header card-bg">
-                            <div class="card-title my-card-title">Office Communication Workflow</div>
-                        </div>
-                            <div class="card-body">
-                                <!-- comments -->
-                                <div class="bootstrap snippets bootdey mb-top">
-                                    <div class="blog-comment">
-                                        <h3 class="text-success">Comments</h3>
-                                        @foreach($comments as $comment)
-                                        <ul class="comments mb-top">
-                                            <li class="clearfix">
-                                                <div class="post-comments">
-                                                    <p class="meta">
-                                                        <span class="CommentUser"><i class="icon-android-contact"></i>
-                                                            {{$comment->UserID}}</span> says : <i
-                                                            class="pull-right"></i>
-                                                        <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
-                                                    </p>
-                                                    <p class="comment_color">
-                                                        <i class="icon-edit2"></i> {{$comment->Remarks}}
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <!-- comments -->
-                            </div>
+                    <div class="card-header card-bg">
+                        <div class="card-title my-card-title">Office Communication Workflow</div>
                     </div>
-                    <!-- workflow tab -->
+                    <div class="card-body">
+                        <!-- comments -->
+                        <div class="bootstrap snippets bootdey mb-top">
+                            <div class="blog-comment">
+                                <h3 class="text-success">Comments</h3>
+                                @foreach($comments as $comment)
+                                <ul class="comments mb-top">
+                                    <li class="clearfix">
+                                        <div class="post-comments">
+                                            <p class="meta">
+                                                <span class="CommentUser"><i class="icon-android-contact"></i>
+                                                    {{$comment->UserID}}</span> says : <i class="pull-right"></i>
+                                                <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
+                                            </p>
+                                            <p class="comment_color">
+                                                <i class="icon-edit2"></i> {{$comment->Remarks}}
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- comments -->
+                    </div>
+                </div>
+                <!-- workflow tab -->
                 <!-- documents tab -->
                 <div class="tab-pane" id="tab3" aria-labelledby="base-tab3" aria-expanded="false">
                     <div class="row">
                         <!-- photos -->
                         <div class="col-md-3">
-                            <div class="scroll">
-                                <label for="">Lodge/Hostel Frontage Photograph</label>
-                                <img src="{{$hostel->HostelFrontagePath}}" alt="" style="width:100%;" id="AadharPath"
-                                    name="AadharPath" onclick="myfunction('first')">
-                                <br>
-                                <label for="">Aadhar Document Photo</label>
-                                <img src="{{$hostel->AadharNoPath}}" alt="" style="width:100%;"
-                                    id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
-                                <br>
-                                <label for="">Fire Extinguisher Photo</label>
-                                <img src="{{$hostel->FireExtinguishersPath}}" alt="" style="width: 100%;" id="hostelPhotoPath"
-                                    name="hostelPhotoPath" onclick="myfunction('third')">
-                                <br>
-                                <label for="">CCTV Camera Photo</label>
-                                <img src="{{$hostel->CCTVCameraPath}}" alt="" style="width: 100%;" id="OwnerBookPath"
-                                    name="OwnerBookPath" onclick="myfunction('forth')">
-                                <br>
-                                <label for="">Name Plate With Mobile Document Photo</label>
-                                <img src="{{$hostel->NamePlatePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('fifth')">
-                                    <br>
-                                    <label for="">Entry Exit Document Photo</label>
-                                <img src="{{$hostel->EntryExitPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                name="GSTNoPhotoPath" onclick="myfunction('sixth')">
-                                <br>
-                                <label for="">Building Plan Document Photo</label>
-                                <img src="{{$hostel->BuildingPlanPath}}" alt="" style="width: 100%;" id="DrivingLicensePath"
-                                    name="DrivingLicensePath" onclick="myfunction('seventh')">
-                                <br>
-                                <label for="">Solid Waste Usage Document Photo</label>
-                                <img src="{{$hostel->SolidWastePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('eighth')">
-                                    <br>
-                                    <label for="">Holding Tax Document Photo</label>
-                                <img src="{{$hostel->HoldingTaxReceiptPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                name="GSTNoPhotoPath" onclick="myfunction('ninth')">
-                            </div>
+                            @include('admin.Hostel.upload-images')
                         </div>
                         <!-- photos -->
-                        <!-- preview -->
-                        <div class="col-md-9">
-                            <div class="card-header card-bg mb-8">
-                                <div class="card-title my-card-title">Preview</div>
-                            </div>
-                            <a href="{{$hostel->HostelFrontagePath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->HostelFrontagePath}}" alt="" id="first" href="#img1" style="width: 100%;">
-                            </a>
-
-                            <a href="{{$hostel->AadharNoPath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->AadharNoPath}}" alt="" style="width:100%;" id="second">
-                            </a>
-                            <a href="{{$hostel->FireExtinguishersPath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->FireExtinguishersPath}}" alt="" style="width: 100%;" id="third">
-                            </a>
-
-                            <a href="{{$hostel->CCTVCameraPath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->CCTVCameraPath}}" alt="" style="width: 100%;" id="forth">
-                            </a>
-
-                            <a href="{{$hostel->NamePlatePath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->NamePlatePath}}" alt="" style="width: 100%;" id="fifth">
-                            </a>
-
-                            <a href="{{$hostel->EntryExitPath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->EntryExitPath}}" alt="" style="width: 100%;" id="sixth">
-                            </a>
-
-                            <a href="{{$hostel->BuildingPlanPath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->BuildingPlanPath}}" alt="" style="width: 100%;" id="seventh">
-                            </a>
-                            <a href="{{$hostel->SolidWastePath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->SolidWastePath}}" alt="" style="width: 100%;" id="eighth">
-                            </a>
-                            <a href="{{$hostel->HoldingTaxReceiptPath}}" data-toggle="lightbox">
-                                <img src="{{$hostel->HoldingTaxReceiptPath}}" alt="" style="width: 100%;" id="ninth">
-                            </a>
-                        </div>
-                        <!-- preview -->
                     </div>
                 </div>
                 <!-- document tab -->
@@ -452,43 +373,21 @@ class="active"
 @endsection
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
-    integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/preview-pdf.js"></script>
 <script>
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         // add active class
         $("#hostelRejected").addClass('active');
         $('#datatable').DataTable();
-        displayNone();
-        disableInputs();
     });
 
-    function displayNone() {
-        document.getElementById("first").style.display = 'none';
-        document.getElementById("second").style.display = 'none';
-        document.getElementById("third").style.display = 'none';
-        document.getElementById("forth").style.display = 'none';
-        document.getElementById("fifth").style.display = 'none';
-        document.getElementById("sixth").style.display = 'none';
-        document.getElementById("seventh").style.display = 'none';
-        document.getElementById("eighth").style.display = 'none';
-        document.getElementById("ninth").style.display = 'none';
+    function inputTools() {
+        window.open('https://www.google.com/inputtools/try/', '_blank');
     }
-
-    function myfunction(id) {
-        displayNone();
-        document.getElementById(id).style.display = 'block';
-    }
-
-    function inputTools(){
-        window.open('https://www.google.com/inputtools/try/','_blank');
-    }
-
 </script>
 @endsection

@@ -537,34 +537,7 @@ class="active"
                     <div class="row">
                         <!-- photos -->
                         <div class="col-md-3">
-                            <div class="scroll">
-                                <label for="">Lodge/Hostel Frontage Photograph</label>
-                                <img src="{{$hostel->HostelFrontagePath}}" alt="" style="width:100%;" id="AadharPath" name="AadharPath" onclick="myfunction('first')">
-                                <br>
-                                <label for="">Aadhar Document Photo</label>
-                                <img src="{{$hostel->AadharNoPath}}" alt="" style="width:100%;" id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
-                                <br>
-                                <label for="">Fire Extinguisher Photo</label>
-                                <img src="{{$hostel->FireExtinguishersPath}}" alt="" style="width: 100%;" id="hostelPhotoPath" name="hostelPhotoPath" onclick="myfunction('third')">
-                                <br>
-                                <label for="">CCTV Camera Photo</label>
-                                <img src="{{$hostel->CCTVCameraPath}}" alt="" style="width: 100%;" id="OwnerBookPath" name="OwnerBookPath" onclick="myfunction('forth')">
-                                <br>
-                                <label for="">Name Plate With Mobile Document Photo</label>
-                                <img src="{{$hostel->NamePlatePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('fifth')">
-                                <br>
-                                <label for="">Entry Exit Document Photo</label>
-                                <img src="{{$hostel->EntryExitPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('sixth')">
-                                <br>
-                                <label for="">Building Plan Document Photo</label>
-                                <img src="{{$hostel->BuildingPlanPath}}" alt="" style="width: 100%;" id="DrivingLicensePath" name="DrivingLicensePath" onclick="myfunction('seventh')">
-                                <br>
-                                <label for="">Solid Waste Usage Document Photo</label>
-                                <img src="{{$hostel->SolidWastePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('eighth')">
-                                <br>
-                                <label for="">Holding Tax Document Photo</label>
-                                <img src="{{$hostel->HoldingTaxReceiptPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath" name="GSTNoPhotoPath" onclick="myfunction('ninth')">
-                            </div>
+                            @include('admin.Hostel.upload-images')
                         </div>
                         <!-- photos -->
                     </div>
@@ -581,8 +554,7 @@ class="active"
 
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/preview-pdf.js"></script>
 <script>
     $(document).on('click', '[data-toggle="lightbox"]', function(event) {
         event.preventDefault();
@@ -593,25 +565,7 @@ class="active"
         // add active class
         $("#hostelOutbox").addClass('active');
         $('#datatable').DataTable();
-        displayNone();
     });
-
-    function displayNone() {
-        document.getElementById("first").style.display = 'none';
-        document.getElementById("second").style.display = 'none';
-        document.getElementById("third").style.display = 'none';
-        document.getElementById("forth").style.display = 'none';
-        document.getElementById("fifth").style.display = 'none';
-        document.getElementById("sixth").style.display = 'none';
-        document.getElementById("seventh").style.display = 'none';
-        document.getElementById("eighth").style.display = 'none';
-        document.getElementById("ninth").style.display = 'none';
-    }
-
-    function myfunction(id) {
-        displayNone();
-        document.getElementById(id).style.display = 'block';
-    }
 
     function inputTools() {
         window.open('https://www.google.com/inputtools/try/', '_blank');

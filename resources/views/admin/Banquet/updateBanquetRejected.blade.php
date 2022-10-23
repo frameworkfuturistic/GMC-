@@ -12,8 +12,8 @@ class="active"
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        {{ session()->get('message') }}
-    </div>
+    {{ session()->get('message') }}
+</div>
 @endif
 <ul class="nav nav-pills nav-justified mb-8">
     <li class="nav-item col-md-4">
@@ -29,16 +29,13 @@ class="active"
         <div class="card-block">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1"
-                        aria-expanded="true">Application Details</a>
+                    <a class="nav-link active" id="base-tab1" data-toggle="tab" aria-controls="tab1" href="#tab1" aria-expanded="true">Application Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2"
-                        aria-expanded="false">Workflow</a>
+                    <a class="nav-link" id="base-tab2" data-toggle="tab" aria-controls="tab2" href="#tab2" aria-expanded="false">Workflow</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3"
-                        aria-expanded="false">Documents</a>
+                    <a class="nav-link" id="base-tab3" data-toggle="tab" aria-controls="tab3" href="#tab3" aria-expanded="false">Documents</a>
                 </li>
             </ul>
             <div class="tab-content px-1 pt-1">
@@ -53,7 +50,7 @@ class="active"
                             </div>
                             <!-- form -->
                             <form action="{{url('rnc/updateBanquet/'.$banquet->id)}}" method="POST" enctype="multipart/form-data">
-                                @csrf 
+                                @csrf
                                 @method('put')
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
@@ -62,7 +59,7 @@ class="active"
                                                 <td class="spin-label">License Year<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input type="hidden" value="{{$banquet->id}}" id="id" name="id"> 
+                                                    <input type="hidden" value="{{$banquet->id}}" id="id" name="id">
                                                     <select class="form-control" id="licenseYear" name="licenseYear">
                                                         <option value="{{$banquet->licenseYear}}">{{$banquet->licenseYear}}</option>
                                                         <option value="">Select One</option>
@@ -338,142 +335,44 @@ class="active"
                 <!-- application details tab -->
                 <!-- workflow tab -->
                 <div class="tab-pane" id="tab2" aria-labelledby="base-tab2" aria-expanded="false">
-                        <div class="card-header card-bg">
-                            <div class="card-title my-card-title">Office Communication Workflow</div>
-                        </div>
-                            <div class="card-body">
-                                <!-- comments -->
-                                <div class="bootstrap snippets bootdey mb-top">
-                                    <div class="blog-comment">
-                                        <h3 class="text-success">Comments</h3>
-                                        @foreach($comments as $comment)
-                                        <ul class="comments mb-top">
-                                            <li class="clearfix">
-                                                <div class="post-comments">
-                                                    <p class="meta">
-                                                        <span class="CommentUser"><i class="icon-android-contact"></i>
-                                                            {{$comment->UserID}}</span> says : <i
-                                                            class="pull-right"></i>
-                                                        <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
-                                                    </p>
-                                                    <p class="comment_color">
-                                                        <i class="icon-edit2"></i> {{$comment->Remarks}}
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <!-- comments -->
-                            </div>
+                    <div class="card-header card-bg">
+                        <div class="card-title my-card-title">Office Communication Workflow</div>
                     </div>
-                    <!-- workflow tab -->
+                    <div class="card-body">
+                        <!-- comments -->
+                        <div class="bootstrap snippets bootdey mb-top">
+                            <div class="blog-comment">
+                                <h3 class="text-success">Comments</h3>
+                                @foreach($comments as $comment)
+                                <ul class="comments mb-top">
+                                    <li class="clearfix">
+                                        <div class="post-comments">
+                                            <p class="meta">
+                                                <span class="CommentUser"><i class="icon-android-contact"></i>
+                                                    {{$comment->UserID}}</span> says : <i class="pull-right"></i>
+                                                <i class="icon-android-stopwatch"></i> {{$comment->TrackDate}}
+                                            </p>
+                                            <p class="comment_color">
+                                                <i class="icon-edit2"></i> {{$comment->Remarks}}
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- comments -->
+                    </div>
+                </div>
+                <!-- workflow tab -->
                 <!-- documents tab -->
                 <div class="tab-pane" id="tab3" aria-labelledby="base-tab3" aria-expanded="false">
                     <div class="row">
                         <!-- photos -->
                         <div class="col-md-3">
-                            <div class="scroll">
-                                <label for="">Banquet/ Marriage Hall Frontage Photograph</label>
-                                <img src="{{$banquet->BanquetHallPath}}" alt="" style="width:100%;" id="AadharPath"
-                                    name="AadharPath" onclick="myfunction('first')">
-                                <br>
-                                <label for="">Aadhar Document Photo</label>
-                                <img src="{{$banquet->AadharPath}}" alt="" style="width:100%;"
-                                    id="TradeLicensePath" name="TradeLicensePath" onclick="myfunction('second')">
-                                <br>
-                                <label for="">Fire Extinguisher Photo</label>
-                                <img src="{{$banquet->FireExtinguishersPath}}" alt="" style="width: 100%;" id="banquetPhotoPath"
-                                    name="banquetPhotoPath" onclick="myfunction('third')">
-                                <br>
-                                <label for="">Composting Machine Document Photo</label>
-                                <img src="{{$banquet->CompostingMachinePath}}" alt="" style="width: 100%;" id="OwnerBookPath"
-                                    name="OwnerBookPath" onclick="myfunction('forth')">
-                                <br>
-                                <label for="">Building Plan Document Photo</label>
-                                <img src="{{$banquet->BuildingPlanPath}}" alt="" style="width: 100%;" id="DrivingLicensePath"
-                                    name="DrivingLicensePath" onclick="myfunction('fifth')">
-                                <br>
-                                <label for="">CCTV Camera Document Photo</label>
-                                <img src="{{$banquet->CCTVCameraPath}}" alt="" style="width: 100%;" id="InsurancePhotoPath"
-                                name="InsurancePhotoPath" onclick="myfunction('sixth')">
-                                <br>
-                                <label for="">Name Plate With Mobile Document Photo</label>
-                                <img src="{{$banquet->NamePlatePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('seventh')">
-                                <br>
-                                <label for="">Parking Document Photo</label>
-                                <img src="{{$banquet->ParkingPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('eighth')">
-                                    <br>
-                                    <br>
-                                <label for="">Entry Exit Document Photo</label>
-                                <img src="{{$banquet->EntryExitPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                name="GSTNoPhotoPath" onclick="myfunction('ninth')">
-                                <br>
-                                <label for="">IO Report Of Composting Machine Document Photo</label>
-                                <img src="{{$banquet->IOReportCompostingPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('tenth')">
-                                    <br>
-                                <label for="">Holding Tax Document Photo</label>
-                                <img src="{{$banquet->HoldingTaxPath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                name="GSTNoPhotoPath" onclick="myfunction('eleventh')">
-                                <br>
-                                <label for="">Solid Waste Usage Document Photo</label>
-                                <img src="{{$banquet->WaterUsageChargePath}}" alt="" style="width: 100%;" id="GSTNoPhotoPath"
-                                    name="GSTNoPhotoPath" onclick="myfunction('twelth')">
-                            </div>
+                            @include('admin.Banquet.upload-images')
                         </div>
                         <!-- photos -->
-                        <!-- preview -->
-                        <div class="col-md-9">
-                            <div class="card-header card-bg mb-8">
-                                <div class="card-title my-card-title">Preview</div>
-                            </div>
-                            <a href="{{$banquet->BanquetHallPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->BanquetHallPath}}" alt="" id="first" href="#img1" style="width: 100%;">
-                            </a>
-
-                            <a href="{{$banquet->AadharPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->AadharPath}}" alt="" style="width:100%;" id="second">
-                            </a>
-                            <a href="{{$banquet->FireExtinguishersPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->FireExtinguishersPath}}" alt="" style="width: 100%;" id="third">
-                            </a>
-                            
-                            <a href="{{$banquet->CompostingMachinePath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->CompostingMachinePath}}" alt="" style="width: 100%;" id="forth">
-                            </a>
-                            
-                            <a href="{{$banquet->BuildingPlanPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->BuildingPlanPath}}" alt="" style="width: 100%;" id="fifth">
-                            </a>
-                            
-                            <a href="{{$banquet->CCTVCameraPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->CCTVCameraPath}}" alt="" style="width: 100%;" id="sixth">
-                            </a>
-                            
-                            <a href="{{$banquet->NamePlatePath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->NamePlatePath}}" alt="" style="width: 100%;" id="seventh">
-                            </a>
-                            <a href="{{$banquet->ParkingPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->ParkingPath}}" alt="" style="width: 100%;" id="eighth">
-                            </a>
-                            <a href="{{$banquet->EntryExitPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->EntryExitPath}}" alt="" style="width: 100%;" id="ninth">
-                            </a>
-                            <a href="{{$banquet->IOReportCompostingPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->IOReportCompostingPath}}" alt="" style="width: 100%;" id="tenth">
-                            </a>
-                            <a href="{{$banquet->HoldingTaxPath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->HoldingTaxPath}}" alt="" style="width: 100%;" id="eleventh">
-                            </a>
-                            <a href="{{$banquet->WaterUsageChargePath}}" data-toggle="lightbox">
-                                <img src="{{$banquet->WaterUsageChargePath}}" alt="" style="width: 100%;" id="twelth">
-                            </a>
-                        </div>
-                        <!-- preview -->
                     </div>
                 </div>
                 <!-- document tab -->
@@ -487,46 +386,16 @@ class="active"
 @endsection
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
-    integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="js/preview-pdf.js"></script>
 <script>
-    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
-
-    $(document).ready(function () {
+    $(document).ready(function() {
         // add active class
         $("#banquetRejected").addClass('active');
         $('#datatable').DataTable();
-        displayNone();
-        disableInputs();
     });
 
-    function displayNone() {
-        document.getElementById("first").style.display = 'none';
-        document.getElementById("second").style.display = 'none';
-        document.getElementById("third").style.display = 'none';
-        document.getElementById("forth").style.display = 'none';
-        document.getElementById("fifth").style.display = 'none';
-        document.getElementById("sixth").style.display = 'none';
-        document.getElementById("seventh").style.display = 'none';
-        document.getElementById("eighth").style.display = 'none';
-        document.getElementById("ninth").style.display = 'none';
-        document.getElementById("tenth").style.display = 'none';
-        document.getElementById("eleventh").style.display = 'none';
-        document.getElementById("twelth").style.display = 'none';
+    function inputTools() {
+        window.open('https://www.google.com/inputtools/try/', '_blank');
     }
-
-    function myfunction(id) {
-        displayNone();
-        document.getElementById(id).style.display = 'block';
-    }
-
-    function inputTools(){
-        window.open('https://www.google.com/inputtools/try/','_blank');
-    }
-
 </script>
 @endsection

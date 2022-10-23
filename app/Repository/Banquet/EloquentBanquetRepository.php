@@ -447,7 +447,7 @@ class EloquentBanquetRepository implements BanquetRepository
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $link = "rnc/updateLandOutbox/" . $row['id'];
+                    $link = "rnc/udpateBanquetOutbox/" . $row['id'];
                     $btn = "<a href='$link'
                                 class='btn btn-success btn-sm'><i class='icon-pen'></i>
                                 Details
