@@ -261,6 +261,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('shops/totalshopcollection', [ShopController::class, 'totalShopCollection']);
     Route::get('export/shops/shop-master', [ShopController::class, 'exportToExcel']);
     Route::post('shops/payments/activation/{id}', [ShopController::class, 'activationOrDeactivationPayment'])->middleware('can:isAdmin');
+    Route::get('shops/shop-update-view/{id}', [ShopController::class, 'shopUpdateView'])->middleware('can:isAdmin');
     // Shops
 
     /**

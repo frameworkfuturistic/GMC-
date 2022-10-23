@@ -64,9 +64,9 @@ class ShopController extends Controller
      * Edit Shops
      */
 
-    public function editShops(Request $request, $id)
+    public function editShops(Request $request)
     {
-        return $this->EloquentShop->editShops($request, $id);
+        return $this->EloquentShop->editShops($request);
     }
 
     // Get Shop By ID
@@ -121,5 +121,11 @@ class ShopController extends Controller
     public function activationOrDeactivationPayment(Request $req, $id)
     {
         return $this->EloquentShop->activationOrDeactivationPayment($req, $id);
+    }
+
+    // Shop Update View
+    public function shopUpdateView($id)
+    {
+        return $this->EloquentShop->shopUpdateView($id);
     }
 }

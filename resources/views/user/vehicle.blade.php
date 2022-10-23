@@ -150,55 +150,55 @@ active
                                         <tr>
                                             <td class="spin-label">License From<span class="spin-separator spin-star">*</span></td>
                                             <td>
-                                                <input type="date" class="form-control" id="LicenseFrom" name="LicenseFrom" required>
+                                                <input type="date" class="form-control" id="LicenseFrom" name="LicenseFrom" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">License To<span class="spin-separator spin-star">*</span></td>
                                             <td>
-                                                <input type="date" class="form-control" id="LicenseTo" name="LicenseTo" required>
+                                                <input type="date" class="form-control" id="LicenseTo" name="LicenseTo" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Entity Name <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="EntityName" name="EntityName" required>
+                                                <input type="text" class="form-control" id="EntityName" name="EntityName" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Trade License No <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="TradeLicenseNo" name="TradeLicenseNo" required>
+                                                <input type="text" class="form-control" id="TradeLicenseNo" name="TradeLicenseNo" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">GST No <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="GSTNo" name="GSTNo" required>
+                                                <input type="text" class="form-control" id="GSTNo" name="GSTNo" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Vehicle No <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="VehicleNo" name="VehicleNo" required>
+                                                <input type="text" class="form-control" id="VehicleNo" name="VehicleNo" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Vehicle Name <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="VehicleName" name="VehicleName" required>
+                                                <input type="text" class="form-control" id="VehicleName" name="VehicleName" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Vehicle Type <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <select name="VehicleType" id="VehicleType" class="form-control" required>
+                                                <select name="VehicleType" id="VehicleType" class="form-control" >
                                                     <option value="">Select One</option>
                                                     @foreach($vehicleTypes as $vehicleType)
                                                     <option value="{{$vehicleType->StringParameter}}">{{$vehicleType->StringParameter}}</option>
@@ -210,42 +210,42 @@ active
                                             <td class="spin-label">Brand Displayed in Vehicle <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="BrandDisplay" name="BrandDisplay" required>
+                                                <input type="text" class="form-control" id="BrandDisplay" name="BrandDisplay" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Front Area(Sq ft) <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="number" class="form-control" id="FrontArea" name="FrontArea" required>
+                                                <input type="number" class="form-control" id="FrontArea" name="FrontArea" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Rear Area(Sq ft) <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="number" class="form-control" id="RearArea" name="RearArea" required>
+                                                <input type="number" class="form-control" id="RearArea" name="RearArea" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Side 1 Area(Sq ft) <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="number" class="form-control" id="Side1Area" name="Side1Area" required>
+                                                <input type="number" class="form-control" id="Side1Area" name="Side1Area" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Top Area(Sq ft) <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="number" class="form-control" id="TopArea" name="TopArea" required>
+                                                <input type="number" class="form-control" id="TopArea" name="TopArea" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Display Type <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <select name="DisplayType" id="DisplayType" class="form-control" required>
+                                                <select name="DisplayType" id="DisplayType" class="form-control" >
                                                     <option value="">Select One</option>
                                                     @foreach($DisplayTypes as $DisplayType)
                                                     <option value="{{$DisplayType->StringParameter}}">{{$DisplayType->StringParameter}}</option>
@@ -324,4 +324,19 @@ active
     </div>
 </div>
 <!-- form -->
-@endsection
+@endsection 
+
+@section('pagescript')
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/custom-js/preview-form-data.js"></script>
+@endsection 
+
+@section('script')
+<script>
+
+$('#finalSubmit').on('click', function(e) {
+        e.preventDefault();
+        preview();
+    });
+</script>
+@endsectio

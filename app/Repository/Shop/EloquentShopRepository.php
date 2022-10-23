@@ -5,6 +5,7 @@ namespace App\Repository\Shop;
 use App\Exports\ShopExport;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
+use App\Models\ShopMasterLog;
 use App\Models\ShopPayment;
 use App\Models\ShopPaymentLog;
 use App\Models\surveyLogin;
@@ -48,6 +49,16 @@ class EloquentShopRepository implements ShopRepository
                 ->latest()
                 ->get();
             return Datatables::of($shop)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $link = "shops/shop-update-view/" . $row['ID'];
+                    $btn = "<a class='btn btn-success btn-sm' href='$link' class='edit btn btn-primary btn-sm'>
+                            <i class='icon-pen'></i> Update
+                        </a>";
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
         $array = [
@@ -62,10 +73,10 @@ class EloquentShopRepository implements ShopRepository
      */
     public function shopSummaryView()
     {
-        $stmQuery = "select sum(Amount) as today_collection from toll_payments where PaymentDate=CURDATE();";
+        $stmQuery = "select sum(Amount) as today_collection from toll_payments where PaymentDate=CURDATE() AND IsActive=1;";
         $today_toll_total = DB::select($stmQuery);
 
-        $stmQuery1 = "select sum(Amount) as today_collection from shop_payments where PaymentDate=CURDATE();";
+        $stmQuery1 = "select sum(Amount) as today_collection from shop_payments where PaymentDate=CURDATE() AND IsActive=1;";
         $today_shop_total = DB::select($stmQuery1);
         $array = [
             'parents' => $this->parent,
@@ -186,14 +197,47 @@ class EloquentShopRepository implements ShopRepository
         return response()->json('Successfully Saved the Shop', 200);
     }
 
+    // Get shop update view
+    public function shopUpdateView($id)
+    {
+        $shops = Shop::find($id);
+        $array = [
+            'parents' => $this->parent,
+            'childs' => $this->child,
+            'shop' => $shops
+        ];
+        return view('admin.Shops.shop-update-view')->with($array);
+    }
+
     /**
      * Edit Shops
      */
-    public function editShops(Request $request, $id)
+    public function editShops(Request $request)
     {
-        $shop = Shop::find($id);
-        $this->storing($shop, $request);
-        return response()->json('Successfully Updated the Shop', 200);
+        $request->validate([
+            "rate" => "numeric|required"
+        ]);
+        DB::beginTransaction();
+        try {
+            $shop = Shop::find($request->id);
+            $userId = auth()->user()->id;
+            // Creating Logs
+            $log = new ShopMasterLog();
+            $log->shop_id = $shop->ID;
+            $log->allottee = $shop->Allottee;
+            $log->rate = $shop->Rate;
+            $log->user_id = $userId;
+            $log->save();
+
+            $shop->Allottee = $request->allottee;
+            $shop->Rate = $request->rate;
+            $shop->save();
+            DB::commit();
+            return back()->with('message', 'Successfully Updated the Shop');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -768,18 +812,18 @@ class EloquentShopRepository implements ShopRepository
             $log->save();
 
             // Update Last Payment Transaction ID for Shops
-            $lastTranQuery="SELECT * FROM shop_payments 
+            $lastTranQuery = "SELECT * FROM shop_payments 
                             WHERE shopid=$shopPayment->ShopId
                             AND IsActive='1'
                             ORDER BY id DESC
                             LIMIT 1";
 
-            $updateTran=DB::select($lastTranQuery);
-            $updatedTranID=$updateTran[0]->id;
-            $shop=Shop::find($shopPayment->ShopId);
-            $shop->LastTranID=$updatedTranID;
+            $updateTran = DB::select($lastTranQuery);
+            $updatedTranID = $updateTran[0]->id;
+            $shop = Shop::find($shopPayment->ShopId);
+            $shop->LastTranID = $updatedTranID;
             $shop->save();
-            
+
             DB::commit();
             return response()->json($msg);
         } catch (Exception $e) {
