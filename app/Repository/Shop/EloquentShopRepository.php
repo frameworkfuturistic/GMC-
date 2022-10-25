@@ -6,6 +6,7 @@ use App\Exports\ShopExport;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
 use App\Models\ShopMasterLog;
+use App\Models\ShopOldArrear;
 use App\Models\ShopPayment;
 use App\Models\ShopPaymentLog;
 use App\Models\surveyLogin;
@@ -829,6 +830,55 @@ class EloquentShopRepository implements ShopRepository
         } catch (Exception $e) {
             DB::rollBack();
             return $e;
+        }
+    }
+
+    /**
+     * | Initialization
+     * ----------------------------------------------------------------
+     * @var demand the generated demand
+     * @var amount the amount to be paid by shop owner
+     * @var shop the shop details by shop id
+     * @var oldArrear new Arrear to be append on ShopOldArrear table
+     * | Calculation 
+     * ----------------------------------------------------------------
+     * @var remainingArrear = @var demand - @var amount
+     */
+    public function shopOldArrear($req)
+    {
+        $req->validate([
+            'shopId' => 'required',
+            'amount' => 'required',
+            'demand' => 'required'
+        ]);
+        try {
+            DB::beginTransaction();
+            $demand = $req->demand;
+            $amount = $req->amount;
+
+            $shop = Shop::find($req->shopId);
+
+            if ($shop->OldArrear == 0 || $shop->OldArrear < 0) {
+                return response()->json([true, "This Shop has no remaining old arrear", ""]);
+            }
+
+            $oldArrear = new ShopOldArrear();
+            $oldArrear->shop_id = $shop->ID;
+            $oldArrear->demand = $req->demand;
+            $oldArrear->amount = $req->amount;
+            $oldArrear->collected_by = auth()->user()->id;
+            $oldArrear->save();
+
+            // Updating shop old arrear
+            $remainingArrear = $demand - $amount;
+            $shop->OldArrear = $remainingArrear;
+            $shop->save();
+
+            DB::commit();
+            return response()->json([true, "Payment Successfully Done", "Remaining Arrear $remainingArrear"]);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json([false, $e->getMessage(), ""]);
         }
     }
 }

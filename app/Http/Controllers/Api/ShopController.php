@@ -100,4 +100,9 @@ class ShopController extends Controller
         return $this->EloquentShop->totalShopCollection($request);
     }
 
+    // Shops Old Arrear Collection
+    public function shopOldArrear(Request $req)
+    {
+        return $this->EloquentShop->shopOldArrear($req);
+    }
 }

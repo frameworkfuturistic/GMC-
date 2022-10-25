@@ -63,6 +63,8 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
     Route::get('getshopcirclemarket', [ShopController::class, 'getShopCircleMarket']);
     Route::get('getshopdetails', [ShopController::class, 'getShopDetailsByCircle']);
     Route::post('shoppayment/{id}', [ShopController::class, 'shopPayment']);
+
+    Route::post('shops-old-arrear', [ShopController::class, 'shopOldArrear']);      // Shops Old Arrear
     // Shops
 
     // Tolls
