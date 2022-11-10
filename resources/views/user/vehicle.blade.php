@@ -4,7 +4,14 @@
 active
 @endsection
 
+
+@section('pagecss')
+<link rel="stylesheet" type="text/css" href="css/preview-form-data.css">
+@endsection
 @section('app-content')
+<div id="preview_data" title="Preview Form Data" style="Display:none;"></div>
+
+
 <!-- success Message -->
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
@@ -31,7 +38,7 @@ active
                             <!-- form tag -->
 
                             <!-- form -->
-                            <form action="{{ url('rnc/addVehicleAdvet') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('rnc/addVehicleAdvet') }}" method="POST" enctype="multipart/form-data" id="formSubmit">
                                 @csrf
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
@@ -40,7 +47,7 @@ active
                                                 <td class="spin-label">Applicant<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input type="text" class="form-control" id="applicant" name="applicant" required>
+                                                    <input type="text" class="form-control" id="Applicant" name="applicant" required>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -48,7 +55,7 @@ active
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input type="text" class="form-control" id="father" name="father" required>
+                                                    <input type="text" class="form-control" id="Father" name="father" required>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -56,7 +63,7 @@ active
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input type="email" class="form-control" id="email" name="email" required>
+                                                    <input type="email" class="form-control" id="Email" name="email" required>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -304,7 +311,7 @@ active
                                                     GST No Photograph</span><input id="GSTNoPhotoPath" name="GSTNoPhotoPath" type="file" accept="application/pdf,image/*" style="width:100%;"></td>
                                         </tr>
                                         <tr colspan="4" class="spin-label">
-                                            <td><button class="btn btn-success"><i class="icon-file-archive-o"></i>
+                                            <td><button class="btn btn-success" type="submit" id="finalsubmit"><i class="icon-file-archive-o"></i>
                                                     Submit</button></td>
                                         </tr>
                                     </tbody>
@@ -328,15 +335,15 @@ active
 
 @section('pagescript')
 <script src="js/jquery-ui.min.js"></script>
-<script src="js/custom-js/preview-form-data.js"></script>
+<script src="js/custom-js/vechile-form-data.js"></script>
 @endsection 
 
 @section('script')
 <script>
 
-$('#finalSubmit').on('click', function(e) {
+$('#finalsubmit').on('click', function(e) {
         e.preventDefault();
         preview();
     });
 </script>
-@endsectio
+@endsection

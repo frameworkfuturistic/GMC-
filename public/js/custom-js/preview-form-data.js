@@ -1,100 +1,101 @@
-function preview(){
+function preview() {  
+	    
         var license_year = $('#LicenseYear').val();
 		var license_year_label = "License Year";
-		var license_year_data = '<p><strong>' + license_year_label + '</strong> : ' + license_year + '</p>';
-
+		var license_year_data = `<div class="form-row"><div class="form-group col-md-6"><label> <strong> ${license_year_label}</strong> </label><input type="text" class="form-control" value="${license_year}" disabled /></div></div>`;
+	
+		
 		var applicant = $('#Applicant').val();
-		var applicant_label = "Applicant";
-		var applicant_data = '<p><strong>' + applicant_label + '</strong> : ' + applicant + '</p>';
+		var applicant_label = "applicant";
+		var applicant_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${applicant_label}<strong> </label><input type="text" class="form-control" value="${applicant}" disabled /></div></div>`;
 
 		var father = $('#Father').val();
 		var father_label = "Father";
-		var father_data = '<p><strong>' + father_label + '</strong> : ' + father + '</p>';
+		var father_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${father_label}</strong> </label><input type="text" class="form-control" value="${father}" disabled /></div></div>`;
 
 		var Email = $('#Email').val();
-		var Email_label = "Email";
-		var Email_data = '<p><strong>' + Email_label + '</strong> : ' + Email + '</p>';
+        var Email_label = "Email";
+        var Email_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Email_label}</strong> </label><input type="text" class="form-control" value="${Email }" disabled /></div></div>`;
 
 		var Residence_Address = $('#ResidenceAddress').val();
 		var Residence_Address_label = "Residence Address";
-		var Residence_Address_data = '<p><strong>' + Residence_Address_label+ '</strong> : ' + Residence_Address + '</p>';
+		var Residence_Address_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Residence_Address_label}</strong> </label><input type="text" class="form-control" value="${Residence_Address }" disabled /></div></div>`;
+	
+       var Ward_No = $('#WardNo').val();
+       var Ward_No_label = "Ward No";
+       var Ward_No_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Ward_No_label}</strong> </label><input type="text" class="form-control" value="${Ward_No }" disabled /></div></div>`;
 
-        var WardNO = $('#WardNo').val();
-		var WardNo_label = "Ward No";
-		var WardNo_data = '<p><strong>' + WardNo_label + '</strong> : ' + WardNO + '</p>';
-		
-		var Permanent_Address = $('#PermanentAddress').val();
-		var Permanent_Address_label = "Permanent Address";
-		var Permanent_Address_data = '<p><strong>' + Permanent_Address_label + '</strong> : ' + Permanent_Address+ '</p>';
+	   var Permanent_Address = $('#PermanentAddress').val();
+       var Permanent_Address_label = "Permanent Address";
+       var Permanent_Address_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Permanent_Address_label}</strong> </label><input type="text" class="form-control" value="${Permanent_Address }" disabled /></div></div>`;
 
-		var Mobile_No = $('#MobileNo').val();
+        var Mobile_No = $('#MobileNo').val();
 		var Mobile_No_label = "Mobile No";
-		var Mobile_No_data = '<p><strong>' + Mobile_No_label + '</strong> : ' + Mobile_No + '</p>';
- 
-        var Aadhar_No= $('#AadharNo').val();
+		var Mobile_No_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Mobile_No_label}</strong> </label><input type="text" class="form-control" value="${Mobile_No }" disabled /></div></div>`;
+
+		var Aadhar_No= $('#AadharNo').val();
 		var AadharNo_label = "Aadhar No";
-		var Aadhar_No_data = '<p><strong>' + AadharNo_label + '</strong> : ' + Aadhar_No + '</p>';  
+		var Aadhar_No_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${AadharNo_label}</strong> </label><input type="text" class="form-control" value="${Aadhar_No }" disabled /></div></div>`;
 
-        var EntityName= $('#EntityName').val();
-		var EntityName_label = "Entity Name";
-		var EntityName_data = '<p><strong>' + EntityName_label + '</strong> : ' + EntityName + '</p>';  
-
-		var EntityAddress= $('#EntityAddress').val();
-		var EntityAddress_label = "EntityAddress";
-		var EntityAddress_data = '<p><strong>' + EntityAddress_label + '</strong> : ' + EntityAddress + '</p>'; 
-
-		var WardNO = $('#WardNo').val();
-		var WardNo_label = "Ward No";
-		var WardNo_data = '<p><strong>' + WardNo_label + '</strong> : ' + WardNO + '</p>';
+		var Entity_Name = $('#EntityName').val();
+		var Entity_Name_label = "Entity Name";
+		var Entity_Name_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Entity_Name_label}</strong> </label><input type="text" class="form-control" value="${Entity_Name }" disabled /></div></div>`;
+	
+        var Entity_Address = $('#EntityAddress').val();
+        var Entity_Address_label = "Entity Address";
+        var Entity_Address_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Entity_Address_label}</strong></label><input type="text" class="form-control" value="${Entity_Address }" disabled /></div></div>`;
 		
+        var Ward_No = $('#WardNo').val();
+		var Ward_No_label = "Ward No";
+		var Ward_No_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Ward_No_label}</strong></label><input type="text" class="form-control" value="${Ward_No }" disabled /></div></div>`;
 
-		var InstallLocation= $('#InstallLocation').val();
-		var InstallLocation_label = "Install Location";
-		var InstallLocation_data = '<p><strong>' + InstallLocation_label + '</strong> : ' + InstallLocation + '</p>'; 
+		var Install_Location= $('#InstallLocation').val();
+		var Install_Location_label = "Install Location";
+		var Install_Location_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Install_Location_label}</strong></label><input type="text" class="form-control" value="${Install_Location }" disabled /></div></div>`;
 
-		var BrandDisplay= $('#BrandDisplay').val();
-		var BrandDisplay_label = "Brand Display";
-		var BrandDisplay_data = '<p><strong>' + BrandDisplay_label + '</strong> : ' + BrandDisplay + '</p>'; 
+        var Brand_Display= $('#BrandDisplay').val();
+		var Brand_Display_label = "Brand Display";
+		var Brand_Display_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong> ${Brand_Display_label}</strong></label><input type="text" class="form-control" value="${Brand_Display }" disabled /></div></div>`;
 
-		var HoldingNo= $('#HoldingNo').val();
-		var HoldingNo_label = "Holding No";
-		var HoldingNo_data = '<p><strong>' + HoldingNo_label + '</strong> : ' + HoldingNo+ '</p>'; 
+		var Holding_No = $('#HoldingNo').val();
+		var Holding_No_label = "Holding No";
+		var Holding_No_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong>${Holding_No_label}</strong></label><input type="text" class="form-control" value="${Holding_No }" disabled /></div></div>`
+		
+		var Trade_License= $('#TradeLicense').val();
+		var Trade_License_label = "Trade License";
+		var Trade_License_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong>${Trade_License_label}</strong></label><input type="text" class="form-control" value="${Trade_License }" disabled /></div></div>`
 
-		var TradeLicense= $('#TradeLicense').val();
-		var TradeLicense_label = "Trade License";
-		var TradeLicense_data = '<p><strong>' + TradeLicense_label + '</strong> : ' + TradeLicense + '</p>'; 
+		var GST_No= $('#GSTNo').val();
+		var GST_No_label = "GST No";
+		var GST_No_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong>${GST_No_label}</strong></label><input type="text" class="form-control" value="${GST_No }" disabled /></div></div>`
 
-		var GSTNo= $('#GSTNo').val();
-		var GSTNo_label = "GST No";
-		var GSTNo_data = '<p><strong>' + GSTNo_label + '</strong> : ' + GSTNo + '</p>'; 
+		var Display_Type= $('#DisplayType').val();
+		var Display_Type_label = "Display Type";
+		var Display_Type_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong>${Display_Type_label}</strong></label><input type="text" class="form-control" value="${Display_Type}" disabled /></div></div>`
 
-		var DisplayType= $('#DisplayType').val();
-		var DisplayType_label = "Display Type";
-		var DisplayType_data = '<p><strong>' + DisplayType_label + '</strong> : ' + DisplayType + '</p>'; 
-
-		var DisplayArea= $('#DisplayArea').val();
-		var DisplayArea_label = "Display Area";
-		var DisplayArea_data = '<p><strong>' + DisplayArea_label + '</strong> : ' + DisplayArea+ '</p>'; 
+		var Display_Area= $('#DisplayArea').val();
+		var Display_Area_label = "Display Area";
+		var Display_Area_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong>${Display_Area_label}</strong></label><input type="text" class="form-control" value="${Display_Area}" disabled /></div></div>`
 
 		var Longitude= $('#Longitude').val();
 		var Longitude_label = "Longitude";
-		var Longitude_data = '<p><strong>' + Longitude_label + '</strong> : ' + Longitude+ '</p>'; 
+		var Longitude_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong>${Longitude_label}</strong></label><input type="text" class="form-control" value="${Longitude}" disabled /></div></div>`
 
 		var Latitude= $('#Latitude').val();
 		var Latitude_label = "Latitude";
-		var Latitude_data = '<p><strong>' + Latitude_label + '</strong> : ' + Latitude + '</p>'; 
-
+		var Latitude_data = `<div class="form-row"><div class="form-group col-md-6"><label><strong>${Latitude_label}</strong></label><input type="text" class="form-control" value="${Latitude}" disabled /></div></div>`
+	 
 		// Final Table Data
-		var data = license_year_data + applicant_data + father_data + Email_data + Residence_Address_data + WardNo_data + Permanent_Address_data + Mobile_No_data  + 
-		Aadhar_No_data + EntityName_data + EntityAddress_data + WardNo_data + InstallLocation_data + BrandDisplay_data + HoldingNo_data +TradeLicense_data + GSTNo_data + DisplayType_data
-		+DisplayArea_data +Longitude_data +Latitude_data;
+		var data = license_year_data + applicant_data + father_data + Email_data + Residence_Address_data + Ward_No_data + Permanent_Address_data + Mobile_No_data  + Aadhar_No_data + Entity_Name_data + Entity_Address_data + Ward_No_data + Install_Location_data + Brand_Display_data + Holding_No_data +Trade_License_data + GST_No_data + Display_Type_data + Display_Area_data + Longitude_data + Latitude_data;
 		
+		
+	
 
 		$('#preview_data').html('');
 		$('#preview_data').append(data);
 		$('#preview_data').dialog({
 			resizable: false,
-			//height:140,
+			// height:140,
 			modal: true,
 			buttons: {
 				'Submit': function() {

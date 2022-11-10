@@ -4,6 +4,11 @@
 active
 @endsection
 
+@section('pagecss')
+<link rel="stylesheet" type="text/css" href="css/preview-form-data.css">
+@endsection
+@section('app-content')
+<div id="preview_data" title="Preview Form Data" style="Display:none;"></div>
 @section('app-content')
 <!-- Success Message -->
 @if(session()->has('message'))
@@ -31,7 +36,7 @@ active
                             <!-- form tag -->
 
                             <!-- form -->
-                            <form action="{{ url('rnc/addPrivateLand') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('rnc/addPrivateLand') }}" method="POST" enctype="multipart/form-data" id="formSubmit">
                                 @csrf
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
@@ -40,7 +45,7 @@ active
                                                 <td class="spin-label">Applicant<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input class="form-control" id="applicant" name="applicant" required>
+                                                    <input class="form-control" id="applicant" name="applicant" >
                                                 </td>
                                             </tr>
                                             <tr>
@@ -48,7 +53,7 @@ active
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input type="text" class="form-control" id="father" name="father" required>
+                                                    <input type="text" class="form-control" id="father" name="father" >
                                                 </td>
                                             </tr>
                                             <tr>
@@ -56,7 +61,7 @@ active
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input type="text" class="form-control" id="email" name="email" required>
+                                                    <input type="text" class="form-control" id="Email" name="Email" >
                                                 </td>
                                             </tr>
                                             <tr>
@@ -64,7 +69,7 @@ active
                                                 <td class="spin-separator">:</td>
 
                                                 <td>
-                                                    <input class="form-control" id="ResidenceAddress" name="ResidenceAddress" type="text" required>
+                                                    <input class="form-control" id="ResidenceAddress" name="ResidenceAddress" type="text" >
                                                 </td>
                                             </tr>
                                             <tr>
@@ -83,7 +88,7 @@ active
                                                 <td class="spin-label">Permanent Address<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input class="form-control" id="PermanentAddress" name="PermanentAddress" type="text" value="" required>
+                                                    <input class="form-control" id="PermanentAddress" name="PermanentAddress" type="text" value="">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -110,7 +115,7 @@ active
                                                 <td class="spin-label">Aadhar No<span class="spin-separator spin-star">*</span></td>
                                                 <td class="spin-separator">:</td>
                                                 <td>
-                                                    <input class="form-control" id="AadharNo" name="AadharNo" type="text" value="" required>
+                                                    <input class="form-control" id="AadharNo" name="AadharNo" type="text" value="" >
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -149,47 +154,47 @@ active
                                         <tr>
                                             <td class="spin-label">License From<span class="spin-separator spin-star">*</span></td>
                                             <td>
-                                                <input type="date" class="form-control" id="LicenseFrom" name="LicenseFrom" required>
+                                                <input type="date" class="form-control" id="LicenseFrom" name="LicenseFrom" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">License To<span class="spin-separator spin-star">*</span></td>
                                             <td>
-                                                <input type="date" class="form-control" id="LicenseTo" name="LicenseTo" required>
+                                                <input type="date" class="form-control" id="LicenseTo" name="LicenseTo" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Holding No<span class="spin-separator spin-star">*</span></td>
                                             <td>
-                                                <input type="text" class="form-control" id="HoldingNo" name="HoldingNo" required>
+                                                <input type="text" class="form-control" id="HoldingNo" name="HoldingNo" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Trade License No <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="TradeLicenseNo" name="TradeLicenseNo" required>
+                                                <input type="text" class="form-control" id="TradeLicenseNo" name="TradeLicenseNo" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">GST No <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="GSTNo" name="GSTNo" required>
+                                                <input type="text" class="form-control" id="GSTNo" name="GSTNo">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Entity Name <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="EntityName" name="EntityName" required>
+                                                <input type="text" class="form-control" id="EntityName" name="EntityName" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Entity Address <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="EntityAddress" name="EntityAddress" required>
+                                                <input type="text" class="form-control" id="EntityAddress" name="EntityAddress" >
                                             </td>
                                         </tr>
 
@@ -197,7 +202,7 @@ active
                                             <td class="spin-label">Brand Display Name <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="BrandDisplayName" name="BrandDisplayName" required>
+                                                <input type="text" class="form-control" id="BrandDisplayName" name="BrandDisplayName">
                                             </td>
                                         </tr>
 
@@ -205,7 +210,7 @@ active
                                             <td class="spin-label">Brand Display Address <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="BrandDisplayAddress" name="BrandDisplayAddress" required>
+                                                <input type="text" class="form-control" id="BrandDisplayAddress" name="BrandDisplayAddress" >
                                             </td>
                                         </tr>
 
@@ -213,7 +218,7 @@ active
                                             <td class="spin-label">Entity Ward No <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <select class="form-control" id="EntityWardNo" name="EntityWardNo" required>
+                                                <select class="form-control" id="EntityWardNo" name="EntityWardNo" >
                                                     <option value="">Select One</option>
                                                     @foreach($wards as $ward)
                                                     <option value="{{$ward->StringParameter}}">{{$ward->StringParameter}}</option>
@@ -225,14 +230,14 @@ active
                                             <td class="spin-label">Total Display Area <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="DisplayArea" name="DisplayArea" required>
+                                                <input type="text" class="form-control" id="DisplayArea" name="DisplayArea" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Display Type <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <select name="DisplayType" id="DisplayType" class="form-control" required>
+                                                <select name="DisplayType" id="DisplayType" class="form-control" >
                                                     <option value="">Select One</option>
                                                     @foreach($DisplayTypes as $DisplayType)
                                                     <option value="{{$DisplayType->StringParameter}}">{{$DisplayType->StringParameter}}</option>
@@ -245,14 +250,14 @@ active
                                             <td class="spin-label">No of Hoardings <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="NoOfHoarding" name="NoOfHoarding" required>
+                                                <input type="text" class="form-control" id="NoOfHoarding" name="NoOfHoarding" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="spin-label">Longitude <span class="spin-separator spin-star">*</span></td>
 
                                             <td>
-                                                <input type="text" class="form-control" id="Longitude" name="Longitude" required>
+                                                <input type="text" class="form-control" id="Longitude" name="Longitude" >
                                             </td>
                                         </tr>
                                         <tr>
@@ -323,7 +328,7 @@ active
                                             </td>
                                         </tr>
                                         <tr colspan="4" class="spin-label">
-                                            <td><button class="btn btn-success"><i class="icon-file-archive-o"></i>
+                                            <td><button class="btn btn-success" type="submit" id="finalSubmit"><i class="icon-file-archive-o"></i>
                                                     Submit</button></td>
                                         </tr>
                                     </tbody>
@@ -344,3 +349,18 @@ active
 </div>
 <!-- form -->
 @endsection
+
+@section('pagescript')
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/custom-js/land-form-data.js"></script>
+@endsection 
+
+@section('script')
+<script>
+
+$('#finalSubmit').on('click', function(e) {
+        e.preventDefault();
+        preview();
+    });
+</script>
+@endsection 

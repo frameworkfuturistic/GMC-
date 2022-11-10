@@ -8,7 +8,7 @@ active
 <link rel="stylesheet" type="text/css" href="css/preview-form-data.css">
 @endsection
 @section('app-content')
-<div id="preview_data" title="Preview Form Data" style="display:none;"></div>
+<div id="preview_data" title="Preview Form Data" style="Display:none;"></div>
 
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">

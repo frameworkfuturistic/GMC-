@@ -4,7 +4,12 @@
 active
 @endsection
 
+@section('pagecss')
+<link rel="stylesheet" type="text/css" href="css/preview-form-data.css">
+@endsection
 @section('app-content')
+<div id="preview_data" title="Preview Form Data" style="Display:none;"></div>
+
 <!-- success msg -->
 @if(session()->has('message'))
 <div class="alert alert-success alert-dismissible fade in">
@@ -30,7 +35,7 @@ active
                             <!-- form tag -->
 
                             <!-- form -->
-                            <form action="{{ url('rnc/addBanquet') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('rnc/addBanquet') }}" method="POST" enctype="multipart/form-data" id="formSubmit">
                                 @csrf
                                 <div class="table-responsive">
                                     <table id="myTable" class="table table-bordered">
@@ -435,7 +440,7 @@ active
                                             </td>
                                         </tr>
                                         <tr colspan="4" class="spin-label">
-                                            <td><button class="btn btn-success"><i class="icon-file-archive-o"></i>
+                                            <td><button class="btn btn-success" type="submit" id="finalSubmit"><i class="icon-file-archive-o"></i>
                                                     Submit</button></td>
                                         </tr>
                                     </tbody>
@@ -456,3 +461,20 @@ active
 </div>
 <!-- form -->
 @endsection
+
+
+
+@section('pagescript')
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/custom-js/banquet-form-data.js"></script>
+@endsection 
+
+@section('script')
+<script>
+
+$('#finalSubmit').on('click', function(e) {
+        e.preventDefault();
+        preview();
+    });
+</script>
+@endsection 
