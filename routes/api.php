@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\SurveyController;
+use App\Http\Controllers\Api\SwmController;
 use App\Http\Controllers\Api\TollController;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,4 +81,16 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
     Route::post('toll-payment/{id}', [TollController::class, 'tollPayment']);
     Route::post('save-toll', [TollController::class, 'saveToll']);
     Route::put('update-toll/{id}', [TollController::class, 'updateToll']);
+
+    /**
+     * | Survey SWM
+     * | Created On-03/12/2022 
+     * | Created By-Anshu Kumar
+     */
+    Route::controller(SwmController::class)->group(function () {
+        Route::post('swm/survey', 'store');                         // Save Survey SWM
+        Route::post('swm/survey', 'update');                          // Update Survey SWM
+        Route::post('swm/get-by-id', 'getSwmById');                  // Get Swm Survey by ID
+        Route::get('swm/get-all-surveys', 'getAllSurveys');          // Get Swm Surveys
+    });
 });

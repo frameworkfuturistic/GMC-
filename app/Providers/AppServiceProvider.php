@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repository\MRD\EloquentSelfAdvetRepository;
 use App\Repository\MRD\SelfAdvetRepository;
+use App\Repository\Survey\iSwmRepo;
+use App\Repository\Survey\SwmRepo;
 use Illuminate\Support\ServiceProvider;
 // use Opcodes\LogViewer\Facades\LogViewer;
 // use Opcodes\LogViewer\LogFile;
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(SelfAdvetRepository::class, EloquentSelfAdvetRepository::class);
+        $this->app->bind(iSwmRepo::class, SwmRepo::class);
         $this->app->register(\KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
     }
 

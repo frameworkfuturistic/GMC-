@@ -239,7 +239,7 @@ class EloquentSurveyRepository implements SurveyRepository
                 'hoardingLocation' => 'required',
                 'longitude' => 'required',
                 'latitude' => 'required',
-                'length' => 'required',
+                'hoardingLength' => 'required',
                 'width' => 'required',
                 'hoardingType' => 'required',
             ]);
@@ -422,7 +422,7 @@ class EloquentSurveyRepository implements SurveyRepository
         $surveyHoarding = surveyHoarding::find($request->id);
         // $tokenID = ['LoggedUserInfo' => surveyLogin::where('id', '=', session('LoggedUser'))->first()];
 
-        $surveyHoarding->hoardingLocation = $request->hoardingLocation;
+        $surveyHoarding->Location = $request->hoardingLocation;
         $surveyHoarding->Longitude = $request->longitude;
         $surveyHoarding->Latitude = $request->latitude;
         $surveyHoarding->Length = $request->length;
