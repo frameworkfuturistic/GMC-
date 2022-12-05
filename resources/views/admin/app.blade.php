@@ -221,17 +221,6 @@
                     </ul>
                 </li>
                 @endforeach
-                <!-- SETTINGS -->
-                @if(auth()->user()->user_type==2)
-                <li class="nav-item has-sub"><a href="#"><i class="icon-cog3"></i><span data-i18n="nav.content.main" class="menu-title">SETTING</span></a>
-                    <ul class="menu-content">
-                        <li @yield('usersActive') class="">
-                            <a href="rnc/add-users" data-i18n="nav.page_layouts.1_column" class="menu-item">Add Users</a>
-                        </li>
-                    </ul>
-                </li>
-                @endif
-                <!-- SETTINGS -->
             </ul>
         </div>
         <!-- /main menu content-->
@@ -250,6 +239,7 @@
                 <div class="loader"></div>
             </div>
             <!-- Loader -->
+
             @yield('app-content')
         </div>
     </div>

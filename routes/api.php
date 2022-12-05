@@ -89,7 +89,7 @@ Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum
      */
     Route::controller(SwmController::class)->group(function () {
         Route::post('swm/survey', 'store');                         // Save Survey SWM
-        Route::post('swm/survey', 'update');                          // Update Survey SWM
+        Route::post('swm/surveyUpd', 'update');                          // Update Survey SWM
         Route::post('swm/get-by-id', 'getSwmById');                  // Get Swm Survey by ID
         Route::get('swm/get-all-surveys', 'getAllSurveys');          // Get Swm Surveys
     });

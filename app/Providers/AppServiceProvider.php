@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repository\MRD\EloquentSelfAdvetRepository;
 use App\Repository\MRD\SelfAdvetRepository;
+use App\Repository\NoticesTcs\iNoticeTcRepo;
+use App\Repository\NoticesTcs\NoticeTcRepo;
 use App\Repository\Survey\iSwmRepo;
 use App\Repository\Survey\SwmRepo;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(SelfAdvetRepository::class, EloquentSelfAdvetRepository::class);
         $this->app->bind(iSwmRepo::class, SwmRepo::class);
+        $this->app->bind(iNoticeTcRepo::class, NoticeTcRepo::class);
         $this->app->register(\KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
     }
 

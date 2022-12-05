@@ -10,6 +10,7 @@ use App\Http\Controllers\DesignationRoleController;
 use App\Http\Controllers\DharmasalaController;
 use App\Http\Controllers\HoardingController;
 use App\Http\Controllers\HostelController;
+use App\Http\Controllers\NoticeAndTcController;
 use App\Http\Controllers\OTPController;
 use App\Http\Controllers\PrivateLandController;
 use App\Http\Controllers\ShopController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WorkflowController;
 use App\Models\Designation;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -297,4 +299,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     // Admin Interface Routes
 
+    // Controller for Notice Generation and Know Your TC
+    Route::controller(NoticeAndTcController::class)->group(function () {
+        Route::get('dashboard/illigal-notice', 'indexNotice');
+        Route::post('notice/generate-notice', 'generateNotice');
+        Route::get('dashboard/tc', 'knowYourTc');                                 // See Your TCs
+    });
 });

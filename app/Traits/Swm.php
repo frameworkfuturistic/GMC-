@@ -4,7 +4,7 @@ namespace App\Traits;
 
 /**
  * | Created On-03-12-2022 
- * | Created By-Anshu Kumar\
+ * | Created By-Anshu Kumar
  * | Trait for the SWM Survey
  */
 

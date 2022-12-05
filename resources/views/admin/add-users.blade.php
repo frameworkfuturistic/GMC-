@@ -36,15 +36,13 @@ class="active"
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" id="name" class="form-control" placeholder="Name"
-                                            name="name" required>
+                                        <input type="text" id="name" class="form-control" placeholder="Name" name="name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="name">Email</label>
-                                        <input type="email" id="email" class="form-control" placeholder="Email"
-                                            name="email" required>
+                                        <input type="email" id="email" class="form-control" placeholder="Email" name="email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -93,7 +91,7 @@ class="active"
 
 @section('script')
 <script>
-    $('#submit').submit(function () {
+    $('#submit').submit(function() {
         var getPass = document.getElementById('pass').value;
         var getPass1 = document.getElementById('Cpass').value;
         if (getPass != getPass1) {
@@ -107,6 +105,5 @@ class="active"
             return true;
         }
     });
-
 </script>
 @endsection

@@ -18,9 +18,9 @@ use Illuminate\Http\Request;
 class EloquentPermissionRepository implements PermissionRepository
 {
     use AppHelper;
-    public function __construct()
+    public function __construct($roleId)
     {
-        $this->menuApp();
+        $this->menuApp($roleId);
         $this->array = ['parents' => $this->parent, 'childs' => $this->child];
     }
 

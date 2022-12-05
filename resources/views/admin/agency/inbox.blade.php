@@ -27,8 +27,8 @@ class="active"
         <div class="mb-top">
             <!-- table -->
             <div class="container table-responsive">
-            <table class="table table-responsive mb-0 display" id="datatable">
-                <thead class="">
+                <table class="table table-responsive mb-0 display" id="datatable">
+                    <thead class="">
                         <tr>
                             <th>Action</th>
                             <th>RenewalID</th>
@@ -65,11 +65,10 @@ class="active"
                         </tr>
                     </thead>
                     <tbody>
-                         @foreach($agencies as $agency)
-                         <tr>
+                        @foreach($agencies as $agency)
+                        <tr>
                             <td scope="row">
-                                <button onclick="window.location.replace('rnc/updateInbox/{{$agency->id}}')"
-                                    class="btn btn-success btn-sm"><i class="icon-pen"></i>
+                                <button onclick="window.location.replace('rnc/updateInbox/{{$agency->id}}')" class="btn btn-success btn-sm"><i class="icon-pen"></i>
                                     Details
                                 </button>
                             </td>
@@ -87,17 +86,17 @@ class="active"
                             <td>{{$agency->GSTNo}}</td>
                             <td>{{$agency->RegistrationFee}}</td>
                             <td>@if($agency->Blacklisted=='-1')
-                                    True
+                                True
                                 @else
-                                    False
+                                False
                                 @endif
                             </td>
                             <td>{{$agency->PendingAmount}}</td>
                             <td>
                                 @if($agency->PendingCourtCase=='-1')
-                                    True
+                                True
                                 @else
-                                    False
+                                False
                                 @endif
                             </td>
                             <td>{{$agency->CurrentUser}}</td>
@@ -115,8 +114,8 @@ class="active"
                             <td>{{$agency->MRNo}}</td>
                             <td>{{$agency->PaymentDate}}</td>
                             <td>{{$agency->DraftDate}}</td>
-                         </tr>
-                         @endforeach
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -139,7 +138,7 @@ class="active"
 @section('script')
 <!-- datatable -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // add active class
         $("#agencyInbox").addClass('active');
         $('#datatable').DataTable({
@@ -174,7 +173,6 @@ class="active"
             }
         });
     });
-
 </script>
 <!-- datatable -->
 @endsection
