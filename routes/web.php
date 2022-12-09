@@ -38,6 +38,12 @@ Route::get('/', function () {
     return view('user.index');
 });
 
+Route::controller(NoticeAndTcController::class)->group(function () {
+    Route::get('users/know-your-TC', 'knowYourTc');                                 // See Your TCs
+});
+
+
+
 // Self Advertisement
 Route::get('rnc/user/selfAdvet', [AdminController::class, 'selfAdvet']);
 Route::post('rnc/addSelfAdvet', [AdminController::class, 'saveSelfAdvet']);
@@ -303,6 +309,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::controller(NoticeAndTcController::class)->group(function () {
         Route::get('dashboard/illigal-notice', 'indexNotice');
         Route::post('notice/generate-notice', 'generateNotice');
-        Route::get('dashboard/tc', 'knowYourTc');                                 // See Your TCs
+        // Route::get('dashboard/tc', 'knowYourTc');                                 // See Your TCs
     });
 });

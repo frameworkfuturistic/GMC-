@@ -1,16 +1,4 @@
-@extends('admin.app')
-
-@section('heading')
-Generate Illigal Notice
-@endsection
-
-@section('pagecss')
-
-@endsection
-
-@section('activeDash')
-class="active"
-@endsection
+@extends('user.app')
 
 @section('app-content')
 <div class="container">
@@ -19,7 +7,7 @@ class="active"
             <div class="card-block">
                 <!-- Table -->
                 <div class="">
-                    <table class="table table-stripe table-responsive mb-0 display" id="datatable">
+                    <table class="table table-hover table-responsive mb-0 display" id="datatable">
                         <thead class="">
                             <tr>
                                 <th>#</th>
@@ -47,11 +35,6 @@ class="active"
 </div>
 @endsection
 
-
 @section('script')
-<script>
-    $(document).ready(function() {
-        $("#dash2Active").addClass('active');
-    })
-</script>
+
 @endsection

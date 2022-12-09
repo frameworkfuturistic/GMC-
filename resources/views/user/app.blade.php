@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="admin_dash/app-assets/fonts/icomoon.css">
     <link rel="stylesheet" type="text/css" href="admin_dash/app-assets/fonts/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" type="text/css" href="admin_dash/app-assets/vendors/css/extensions/pace.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- END VENDOR CSS-->
     <!-- BEGIN ROBUST CSS-->
     <link rel="stylesheet" type="text/css" href="admin_dash/app-assets/css/bootstrap-extended.css">
@@ -73,7 +74,25 @@
                         <li class="nav-item hidden-sm-down"><a href="{{ url()->previous() }}" class="btn btn-success upgrade-to-pro">
                                 JAMSHEDPUR NOTIFIED AREA COMMITTEE, MARKETING SECTION</a>
                         </li>
-                        @yield('login-btn')
+
+                        <li class="nav-item fl-right">
+                            <a href="login" class="nav-item nav-link-expand btn btn-success" target="_blank">
+                                <i class="ficon icon-arrow-circle-right"> Login</i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item fl-right">
+                            <a href="http://indiaswm.in/" class="nav-item nav-link-expand btn btn-success" target="_blank">
+                                <i class="ficon icon-arrow-circle-right"> Solid Waste</i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item fl-right">
+                            <a href="/users/know-your-TC" class="nav-item nav-link-expand btn btn-success" target="_blank">
+                                <i class="ficon icon-users"> Know Your TC</i>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </div>

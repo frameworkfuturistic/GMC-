@@ -4,20 +4,6 @@
 active
 @endsection
 
-@section('login-btn')
-<li class="nav-item fl-right">
-    <a href="login" class="nav-item nav-link-expand btn btn-success" target="_blank">
-        <i class="ficon icon-arrow-circle-right"> Login</i>
-    </a>
-</li>
-
-<li class="nav-item fl-right">
-    <a href="http://indiaswm.in/" class="nav-item nav-link-expand btn btn-success" target="_blank">
-        <i class="ficon icon-arrow-circle-right"> Solid Waste</i>
-    </a>
-</li>
-@endsection
-
 @section('app-content')
 @if(session()->has('status'))
 <div class="alert alert-danger">
