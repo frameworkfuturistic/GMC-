@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgencyController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BanquetController;
 use App\Http\Controllers\DashboardController;
@@ -42,7 +43,9 @@ Route::controller(NoticeAndTcController::class)->group(function () {
     Route::get('users/know-your-TC', 'knowYourTc');                                 // See Your TCs
 });
 
-
+// Forget Password Reset
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 // Self Advertisement
 Route::get('rnc/user/selfAdvet', [AdminController::class, 'selfAdvet']);

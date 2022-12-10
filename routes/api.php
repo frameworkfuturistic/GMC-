@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ShopController;
 use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\SwmController;
 use App\Http\Controllers\Api\TollController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
@@ -23,6 +24,8 @@ Route::post('checkLogin', [SurveyController::class, 'checkLogin']);
 Route::post('saveSurveyUser', [SurveyController::class, 'saveSurveyUser']);
 // Forget Password
 Route::get('forgetPassword', [SurveyController::class, 'forgetPassword']);
+
+Route::post('password/email',  ForgotPasswordController::class);
 // Forget Password
 
 Route::group(['middleware' => ['cors', 'json.response', 'api.key', 'auth:sanctum']], function () {
