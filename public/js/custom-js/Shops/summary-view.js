@@ -61,7 +61,7 @@ function showTollDataTable(data){
             "render": function (data, type, row, meta ) {
                 if(row.userType==2){
                     return '<label class="switch">' +
-                        '<input type="checkbox" id="toggle" name="toggle" onchange="functionDeactivation('+ data +')">' +
+                        '<input type="checkbox" id="tollToggle" name="tollToggle" onchange="functionDeactivation('+ data +')">' +
                         '<span class="slider round"></span>' +
                         '</label> ';
                 }
@@ -360,7 +360,7 @@ function showShopDataTable(data){
 // Function used for deactivating the transactions for the tolls payments
 function functionDeactivation(id){
     let token = $('meta[name="csrf_token"]').attr('content');
-    var status=$('#toggle').is(":checked");
+    var status=$('#tollToggle').is(":checked");
     var murl = 'tolls/payments/activation/'+id;
     $.ajax({
         type: "post",
