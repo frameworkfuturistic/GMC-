@@ -10,21 +10,25 @@ NOTE:
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 
-.rmc_hoarding{
-	color: white;
-	margin: 0 70px;
+.mt-33 {
+    margin-top: 33px !important;
 }
-.mb-8{
-	margin-bottom:8px;
+
+.rmc_hoarding {
+    color: white;
+    margin: 0 70px;
 }
-.mb-top{
-	margin-top:10px;
+.mb-8 {
+    margin-bottom: 8px;
 }
-.card-bg{
-	background: #f1ebff;
+.mb-top {
+    margin-top: 10px;
 }
-.my-card-title{
-	color: #804dff !important;
+.card-bg {
+    background: #f1ebff;
+}
+.my-card-title {
+    color: #804dff !important;
 }
 .spin-label {
     width: 200px;
@@ -52,13 +56,13 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     border: 1px solid blueviolet;
 }
 .alert-success {
-    border-color: #37BC9B !important;
+    border-color: #37bc9b !important;
     background-color: #68d3b8 !important;
     color: #f2fffb !important;
 }
-.scroll{
-	height: 400px;
-	overflow-y: scroll;
+.scroll {
+    height: 400px;
+    overflow-y: scroll;
 }
 .nav.nav-pills.nav-justified .nav-link.active {
     border: none;
@@ -68,32 +72,32 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 
 /* datatable button css */
 button.dt-button.buttons-pdf.buttons-html5.pdfButton {
-    border-color: #37BC9B !important;
-    background-color: #37BC9B !important;
-    color: #FFFFFF !important;
+    border-color: #37bc9b !important;
+    background-color: #37bc9b !important;
+    color: #ffffff !important;
 }
 button.dt-button.buttons-copy.buttons-html5.copyButton {
-    border-color: #967ADC;
-    background-color: #967ADC;
-    color: #FFFFFF;
+    border-color: #967adc;
+    background-color: #967adc;
+    color: #ffffff;
 }
 button.dt-button.buttons-csv.buttons-html5.csvButton {
-    border-color: #37BC9B !important;
-    background-color: #37BC9B !important;
-    color: #FFFFFF !important;
+    border-color: #37bc9b !important;
+    background-color: #37bc9b !important;
+    color: #ffffff !important;
 }
 button.dt-button.buttons-excel.buttons-html5.excelButton {
-    border-color: #DA4453;
-    background-color: #DA4453;
-    color: #FFFFFF;
+    border-color: #da4453;
+    background-color: #da4453;
+    color: #ffffff;
 }
 button.dt-button.buttons-print.printButton {
-    border-color: #3BAFDA;
-    background-color: #3BAFDA;
-    color: #FFFFFF;
+    border-color: #3bafda;
+    background-color: #3bafda;
+    color: #ffffff;
 }
-.printButton:hover{
-    background: #3BAFDA !important;
+.printButton:hover {
+    background: #3bafda !important;
     border: #38a5a9 !important;
 }
 .btn-padding {
@@ -107,50 +111,50 @@ button.dt-button.buttons-print.printButton {
 }
 
 /* Previous Comments */
-body{
-    background:#eee;
+body {
+    background: #eee;
 }
 
 hr {
     margin-top: 20px;
     margin-bottom: 20px;
     border: 0;
-    border-top: 1px solid #FFFFFF;
+    border-top: 1px solid #ffffff;
 }
 .blog-comment::before,
 .blog-comment::after,
 .blog-comment-form::before,
-.blog-comment-form::after{
+.blog-comment-form::after {
     content: "";
-	display: table;
-	clear: both;
+    display: table;
+    clear: both;
 }
 
-.blog-comment{
+.blog-comment {
     padding-left: 5%;
 }
 
-.blog-comment ul{
-	list-style-type: none;
-	padding: 0;
+.blog-comment ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-.blog-comment img{
-	opacity: 1;
-	filter: Alpha(opacity=100);
-	-webkit-border-radius: 4px;
-	   -moz-border-radius: 4px;
-	  	 -o-border-radius: 4px;
-			border-radius: 4px;
+.blog-comment img {
+    opacity: 1;
+    filter: Alpha(opacity=100);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
 }
 
 .blog-comment img.avatar {
-	position: relative;
-	float: left;
-	margin-left: 0;
-	margin-top: 0;
-	width: 65px;
-	height: 65px;
+    position: relative;
+    float: left;
+    margin-left: 0;
+    margin-top: 0;
+    width: 65px;
+    height: 65px;
 }
 
 .blog-comment .post-comments {
@@ -167,38 +171,38 @@ hr {
 }
 
 .blog-comment .meta {
-	font-size: 13px;
-	/* color: #008765; */
-	padding-bottom: 8px;
-	margin-bottom: 10px !important;
-	border-bottom: 1px solid #37bc9b;
+    font-size: 13px;
+    /* color: #008765; */
+    padding-bottom: 8px;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid #37bc9b;
 }
 
-.blog-comment ul.comments ul{
-	list-style-type: none;
-	padding: 0;
-	margin-left: 85px;
+.blog-comment ul.comments ul {
+    list-style-type: none;
+    padding: 0;
+    margin-left: 85px;
 }
 
-.blog-comment-form{
-	padding-left: 15%;
-	padding-right: 15%;
-	padding-top: 40px;
+.blog-comment-form {
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 40px;
 }
 
 .blog-comment h3,
-.blog-comment-form h3{
-	/* margin-bottom: 40px; */
-	font-size: 26px;
-	line-height: 30px;
-	font-weight: 800;
+.blog-comment-form h3 {
+    /* margin-bottom: 40px; */
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 800;
 }
-.CommentUser{
+.CommentUser {
     font-size: 14px;
     color: #00c191;
     font-weight: 500;
 }
-.comment_color{
+.comment_color {
     color: #7349dd;
 }
 /* Previous Comments*/
@@ -212,7 +216,7 @@ hr {
     vertical-align: middle;
     border-radius: 4px;
 }
-.uploader input[type=file] {
+.uploader input[type="file"] {
     width: 100%;
     margin-top: 0;
     position: absolute;
@@ -244,7 +248,7 @@ hr {
     border-radius: 3px;
     text-align: left;
 }
-.uploader[class*=bg-] .action {
+.uploader[class*="bg-"] .action {
     background-color: inherit;
     border-color: inherit;
     color: inherit;
@@ -256,8 +260,9 @@ hr {
     margin-top: -8px;
     margin-left: -8px;
 }
-[class^="icon-"], [class*=" icon-"] {
-    font-family: 'icomoon';
+[class^="icon-"],
+[class*=" icon-"] {
+    font-family: "icomoon";
     speak: none;
     font-style: normal;
     font-weight: normal;
@@ -275,42 +280,50 @@ hr {
     -moz-osx-font-smoothing: grayscale;
 }
 .loaderbody {
-width: 100%;
-height: 100%;
-left: 0px;
-top: 0px;
-position : absolute;
-background-color:rgba(128,128,128,0.2);
-z-index : 2147483647;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background-color: rgba(128, 128, 128, 0.2);
+    z-index: 2147483647;
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 2s linear infinite;
-  position : fixed;
-  top : 50%;
-  left : 50%;
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
 }
 @-webkit-keyframes spin {
-0% { -webkit-transform: rotate(0deg); }
-100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 /* Loader */
 
-.mt-31{
+.mt-31 {
     margin-top: 31px;
 }
 
-.mt-15{
+.mt-15 {
     margin-top: 15px;
 }
 
@@ -323,27 +336,25 @@ button.dt-button.buttons-collection.buttons-page-length.pdfButton.btn-padding {
     background: crimson;
 }
 
-.fl-right{
+.fl-right {
     float: right !important;
     margin-left: 1px !important;
 }
-
-
 
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
-  }
-  
-  .switch input { 
+}
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  .slider {
+}
+
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -351,11 +362,11 @@ button.dt-button.buttons-collection.buttons-page-length.pdfButton.btn-padding {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  .slider:before {
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -363,35 +374,35 @@ button.dt-button.buttons-collection.buttons-page-length.pdfButton.btn-padding {
     left: 4px;
     bottom: 4px;
     background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  input:checked + .slider {
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
     background-color: #f32121;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
+}
 
-  /* Image/Pdf Preview */
-  .modal-dialog.modal-xl {
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Image/Pdf Preview */
+.modal-dialog.modal-xl {
     max-width: 1200px;
 }
 

@@ -273,6 +273,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('export/shops/shop-master', [ShopController::class, 'exportToExcel']);
     Route::post('shops/payments/activation/{id}', [ShopController::class, 'activationOrDeactivationPayment'])->middleware('can:isAdmin');
     Route::get('shops/shop-update-view/{id}', [ShopController::class, 'shopUpdateView'])->middleware('can:isAdmin');
+    Route::get('shops/tc-collections', [ShopController::class, 'tcCollectionsView']);
+    Route::post('shops/get-tc-collections', [ShopController::class, 'getTcCollections'])->name('shops.getTcCollections');
     // Shops
 
     /**

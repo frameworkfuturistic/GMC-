@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ShopRequest;
 use App\Repository\Shop\EloquentShopRepository;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Created On-04-07-2022
@@ -127,5 +130,28 @@ class ShopController extends Controller
     public function shopUpdateView($id)
     {
         return $this->EloquentShop->shopUpdateView($id);
+    }
+
+    // Tc Collections
+    public function tcCollectionsView()
+    {
+        return $this->EloquentShop->tcCollectionsView();
+    }
+
+    // Get Tc Collections
+    public function getTcCollections(Request $req)
+    {
+        try {
+            $todayDate = Carbon::now()->format('Y-m-d');
+            if (!$req->from)
+                $req->from = $todayDate;
+            if (!$req->to)
+                $req->to = $todayDate;
+
+            $collections = $this->EloquentShop->getTcCollections($req);
+            return $collections;
+        } catch (Exception $e) {
+            return response()->json([false, $e->getMessage(), ""]);
+        }
     }
 }

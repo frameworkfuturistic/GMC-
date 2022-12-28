@@ -13,6 +13,7 @@ use App\Models\surveyLogin;
 use App\Repository\Shop\ShopRepository;
 use App\Traits\AppHelper;
 use App\Traits\Shop as ShopTrait;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -630,120 +631,11 @@ class EloquentShopRepository implements ShopRepository
             DB::commit();
 
             return $this->getShopByID($id);
-
-            // $query = DB::select("
-            //         select * from survey_logins where id='$shop->UserId'
-            //         ");
-            // return response()->json([
-            //     'message' => 'Payment Successful',
-            //     'ShopNo' => $shop->ShopNo,
-            //     'circle' => $shop->Circle,
-            //     'Market' => $shop->Market,
-            //     'shop_id' => $shop->ID,
-            //     'shop_no' => $shop->ShopNo,
-            //     'present_occupier' => $shop->PresentOccupier,
-            //     'contact_no' => $shop->ContactNo,
-            //     'tran_id' => $sp->id,
-            //     'from' => $this->funMonthYear($paidFrom),
-            //     'to' => $this->funMonthYear($paidTo),
-            //     'daily_shop_fee' => $refRate,
-            //     'months' => $months,
-            //     'amount' => $request->Amount,
-            //     'tax_collector_name' => $query[0]->name,
-            //     'tax_collector_mobile' => $query[0]->mobile,
-            // ], 200);
-
         } catch (Exception $e) {
             DB::rollBack();
             return response()->json($e, 400);
         }
     }
-
-    // /**
-    //  * Shop Payments
-    //  */
-    // public function shopPayment(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'To' => 'required',
-    //         'Amount' => 'required|numeric|between:10,10000'
-    //     ]);
-
-    //     try {
-    //         $shop = Shop::find($id);
-    //         $mLastPaymentDate = $shop->LastPaymentDate;
-    //         if (!$mLastPaymentDate) {
-    //             return response()->json('This shop has no Last Payment Date', 400);
-    //         }
-    //         if ($mLastPaymentDate) {
-    //             $create = date_create($request->To);
-    //             $format = date_format($create, "Y-m-d");
-    //             if ($format > $mLastPaymentDate) {
-    //                 $Rate = $shop->Rate;
-    //                 $shop->UserId = auth()->user()->id;
-
-    //                 $arrear =  is_null($shop->Arrear) ? 0 : $shop->Arrear;
-
-    //                 $sp = new ShopPayment;
-    //                 $sp->ShopId = $shop->ID;
-
-    //                 $From = date_create($mLastPaymentDate);
-    //                 $sp->From = date_format($From, 'Y-m-d');
-    //                 $sp_from = date_format($From, 'M-Y');
-    //                 $To = date_create($request->To);
-    //                 $sp->To = date_format($To, 'Y-m-d');
-    //                 $sp_to = date_format($To, 'M-Y');
-    //                 $sp->Rate = $Rate;
-    //                 // Calculating Months
-    //                 $interval = date_diff($From, $To);
-    //                 $sp->Months = $interval->format("%m") + 1;
-
-    //                 // Calculating Amount
-    //                 $Rate = $shop->Rate;
-    //                 $demand = $sp->Months * $Rate;
-    //                 $net_demand = $demand + $arrear;
-
-    //                 $sp->Amount = $request->Amount;
-
-    //                 $shop->Arrear = $net_demand - $request->Amount;
-    //                 $shop->LastAmount = $request->Amount;
-    //                 $shop->LastPaymentDate = $sp->To;
-
-    //                 $sp->PmtMode = 'CASH';
-    //                 $sp->PaymentDate = date("Y-m-d H:i:s");
-    //                 $sp->UserId = auth()->user()->id;
-
-    //                 $shop->save();
-    //                 $sp->save();
-
-    //                 $query = DB::select("
-    //                 select * from survey_logins where id='$shop->UserId'
-    //                 ");
-    //                 return response()->json([
-    //                     'message' => 'Payment Successful',
-    //                     'circle' => $shop->Circle,
-    //                     'Market' => $shop->Market,
-    //                     'shop_id' => $shop->ID,
-    //                     'shop_no' => $shop->ShopNo,
-    //                     'present_occupier' => $shop->PresentOccupier,
-    //                     'contact_no' => $shop->ContactNo,
-    //                     'tran_id' => $sp->id,
-    //                     'from' => $sp_from,
-    //                     'to' => $sp_to,
-    //                     'daily_shop_fee' => $sp->Rate,
-    //                     'months' => $sp->Months,
-    //                     'amount' => $sp->Amount,
-    //                     'tax_collector_name' => $query[0]->name,
-    //                     'tax_collector_mobile' => $query[0]->mobile,
-    //                 ], 200);
-    //             } else {
-    //                 return response()->json('Date Should be after the Last Payment Date', 400);
-    //             }
-    //         }
-    //     } catch (Exception $e) {
-    //         return response()->json($e, 400);
-    //     }
-    // }
 
     /**
      * Total Shop Collection Amount Between Dates
@@ -880,5 +772,47 @@ class EloquentShopRepository implements ShopRepository
             DB::rollBack();
             return response()->json([false, $e->getMessage(), ""]);
         }
+    }
+
+    /**
+     * | View for Tc Collections
+     */
+    public function tcCollectionsView()
+    {
+        $todayDate = Carbon::now()->format('Y-m-d');
+        $metaReqs = [
+            'from' => $todayDate,
+            'to' => $todayDate
+        ];
+        $req = new Request($metaReqs);
+        $todayCollections = $this->getTcCollections($req);
+        $array = [
+            'parents' => $this->parent,
+            'childs' => $this->child,
+            'todayCollections' => $todayCollections
+        ];
+        return view('admin.Shops.tc-collections')->with($array);
+    }
+
+    /**
+     * | Get TC Collections by Date
+     */
+    public function getTcCollections($req)
+    {
+        $mQuery = "SELECT
+                        l.id, 
+                        l.name,
+                        l.mobile,
+                        l.designation,
+                        l.gender,
+                        IFNULL(SUM(t.Amount),0)+IFNULL(SUM(s.Amount),0) AS collection
+                        FROM survey_logins l 
+                        LEFT JOIN shop_payments s ON s.UserId=l.id
+                        LEFT JOIN toll_payments t ON t.PaymentDate=s.PaymentDate
+                        WHERE l.designation='TC' AND l.suspended =0
+                    AND 
+                    s.PaymentDate BETWEEN '$req->from' AND '$req->to'
+                GROUP BY l.id";
+        return DB::select($mQuery);
     }
 }
