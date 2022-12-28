@@ -800,19 +800,21 @@ class EloquentShopRepository implements ShopRepository
     public function getTcCollections($req)
     {
         $mQuery = "SELECT
-                        l.id, 
+                        s.UserId,
                         l.name,
                         l.mobile,
                         l.designation,
                         l.gender,
-                        IFNULL(SUM(t.Amount),0)+IFNULL(SUM(s.Amount),0) AS collection
-                        FROM survey_logins l 
-                        LEFT JOIN shop_payments s ON s.UserId=l.id
-                        LEFT JOIN toll_payments t ON t.PaymentDate=s.PaymentDate
-                        WHERE l.designation='TC' AND l.suspended =0
-                    AND 
-                    s.PaymentDate BETWEEN '$req->from' AND '$req->to'
-                GROUP BY l.id";
-        return DB::select($mQuery);
+                        ifnull(SUM(Amount),0) AS collection
+                        FROM (SELECT id,Userid,Amount,PaymentDate from shop_payments
+                                UNION ALL 
+                                SELECT id,UserId,Amount,PaymentDate FROM toll_payments) AS s
+                        JOIN survey_logins l ON l.id=s.UserId
+                                
+                        WHERE l.designation='TC' AND l.suspended =0 AND s.PaymentDate BETWEEN '$req->from' AND '$req->to'
+                        GROUP BY s.UserId   
+                    ";
+        $collection = DB::select($mQuery);
+        return $collection;
     }
 }
