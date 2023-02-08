@@ -27,9 +27,4 @@ trait AppHelper
 
         $this->child = DB::select($query);
     }
-    // public function menuApp()
-    // {
-    //     $this->parent = MenuMaster::all()->where('ParentSerial', '0');
-    //     $this->child = MenuMaster::all()->where('ParentSerial', '<>', '0');
-    // }
 }
