@@ -304,7 +304,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
      * Routes with workflow entries, modifications and workflow candidates
      * ---------------------------------------------------------------------------------------------------------------------
      */
-    Route::get('Workflow', [WorkflowController::class, 'workflowView']);
+    Route::get('Workflow', [WorkflowConctroller::class, 'workflowView']);
 
     // Admin Interface Routes
 
