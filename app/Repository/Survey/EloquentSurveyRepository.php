@@ -84,7 +84,7 @@ class EloquentSurveyRepository implements SurveyRepository
      */
     public function checkLogin(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
 
         $request->validate([
             'email' => 'required|email',

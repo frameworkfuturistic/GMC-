@@ -16,12 +16,15 @@ class WorkflowController extends Controller
 {
     use AppHelper;
     // Initializing Construct
+    protected $array;
+    protected $child;
+    protected $parent;
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
             $virtualRole = Config::get('constant-variable.VIRTUAL_ROLE');
             $user = auth()->user()->role_id ?? $virtualRole;            // variable -1 is for the users end
-            $this->menuApp($this->user_info);
+            $this->menuApp($user);
             $this->array = ['parents' => $this->parent, 'childs' => $this->child];
             return $next($request);
         });
