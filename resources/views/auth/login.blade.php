@@ -15,7 +15,7 @@
         <div class="container-fluid bg-green">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="img/JNAC.png" alt="" style="width: 100%;">
+                    <img src="img/login.jpeg" alt="" style="width: 100%;">
                 </div>
                 <div class="col-md-6">
                     <form method="POST" action="{{ route('login') }}" style="margin-top:50px;">

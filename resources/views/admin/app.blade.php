@@ -58,7 +58,7 @@
                 <ul class="nav navbar-nav">
                     <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a></li>
                     <li class="nav-item"><a href="rnc/dashboard" class="navbar-brand nav-link">
-                            <h3 class="rmc_hoarding brand-logo">JNAC</h3>
+                            <h3 class="rmc_hoarding brand-logo">GMC</h3>
                         </a></li>
                     <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x icon-icon-rotate-right-right"></i></a></li>
                 </ul>
@@ -248,7 +248,7 @@
 
 
     <footer class="footer footer-static footer-light navbar-border">
-        <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright &copy; 2022 <a href="" target="_blank" class="text-bold-800 grey darken-2">JNAC Jamshedpur Notified Area Committee</a>, All rights reserved.
+        <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright &copy; 2022 <a href="" target="_blank" class="text-bold-800 grey darken-2">GIRIDIH MUNICIPAL CORPORATION </a>, All rights reserved.
             </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i> <strong>Netwind Softlabs Pvt Ltd</strong></span></p>
     </footer>
 
